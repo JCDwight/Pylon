@@ -21,10 +21,6 @@ Window.fullscreen = False
 from kivy.app import App
 from kivy.uix.label import Label
 
-wimg = Image(source='jay.png')
-wimg = Image(source='newtonsquared.png')
-
-
 #User Class
 class User:
     def __init__(self):
@@ -40,6 +36,7 @@ class User:
         self.total_attended_weeks_consecutive = 0
         self.total_attended_hours = 0
         self.total_attended_minutes = 0
+        self.image = "blank.png"
     #Getters/Setters
     def Set_Access_Level(self, value):
         if (value >= 0) and (value < 5):
@@ -70,11 +67,38 @@ class User:
             self.total_checkins = value
     def Get_Total_Checkins(self):
         return self.total_checkins
+    def Set_Total_Attended_Days(self, value):
+        if (value >= 0):
+            self.total_attended_days = value
+    def Get_Total_Attended_Days(self):
+        return self.total_attended_days
+    def Set_Total_Attended_Days_Consecutive(self, value):
+        if (value >= 0):
+            self.total_attended_days_consecutive = value
+    def Get_Total_Attended_Days_Consecutive(self):
+        return self.total_attended_days_consecutive    
+    def Set_Total_Attended_Weeks_Consecutive(self, value):
+        if (value >= 0):
+            self.total_attended_weeks_consecutive = value
+    def Get_Total_Attended_Weeks_Consecutive(self):
+        return self.total_attended_weeks_consecutive
+    def Set_Total_Attended_Hours(self, value):
+        if (value >= 0):
+            self.total_attended_hours = value
+    def Get_Total_Attended_Hours(self):
+        return self.total_attended_hours
+    def Set_Total_Attended_Minutes(self, value):
+        if (value >= 0):
+            self.total_attended_minutes = value
+    def Get_Total_Attended_Minutes(self):
+        return self.total_attended_minutes
 
 class CheckinScreen(Screen):
+    pictureBox2 = ObjectProperty(None)
     pass
 
 class FirstSplashScreen(Screen):
+    pictureBox3 = ObjectProperty(None)
     pass
 
 class WindowManager(ScreenManager):
@@ -82,10 +106,6 @@ class WindowManager(ScreenManager):
 
 class MainWindow(Screen):
     flag1 = 0
-    pictureBox = ObjectProperty(None)
-    pictureBox2 = ObjectProperty(None)
-    pictureBox3 = ObjectProperty(None)
-
     def btn(self):
         print(Window.mouse_pos)
         if(self.flag1 == 0):
