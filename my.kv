@@ -1,0 +1,105 @@
+WindowManager:
+    MainWindow:
+    CheckinScreen:
+    FirstSplashScreen:
+    
+<MainWindow>:
+    name: "main"
+    pictureBox: pictureBox
+    
+    FloatLayout:
+        size: root.width, root.height
+        pos: 0, 0     
+        Widget:
+            size: root.width / 2, root.height
+            Image:
+                id: pictureBox
+                pos: 0, 0
+                size_hint_x: None
+                size_hint_y: None
+                source: 'jay.png'
+                size: 400, 480
+                allow_stretch: False
+                keep_ratio: False
+        Label:
+            size_hint_x: None
+            size_hint_y: None
+            text_size: self.size
+            halign: 'left'
+            valign: 'top'
+            font_name: "helvetica"
+            font_size: 30
+            text:"Check in time: 4:59pm"
+            size: root.width / 2, root.height / 2
+            pos: root.width / 2, root.height / 2
+        Button:
+            size_hint_x: None
+            size_hint_y: None
+            text:"OK"
+            font_name: "helvetica"
+            font_size: 80
+            size: root.width / 2, root.height / 2
+            pos: root.width / 2, 0
+            on_release: 
+                app.root.current = "checkin"
+                root.manager.transition.direction = "down"
+                
+<CheckinScreen>:
+    name: "checkin"
+    pictureBox: pictureBox2
+
+    FloatLayout:
+        size: root.width, root.height
+        pos: 0, 0
+        Widget:
+            size: root.width / 2, root.height
+            Image:
+                id: pictureBox2
+                pos: root.width / 2, 0
+                size_hint_x: None
+                size_hint_y: None
+                source: 'jay.png'
+                size: 400, 480
+                allow_stretch: False
+                keep_ratio: False
+        Label:
+            size_hint_x: None
+            size_hint_y: None
+
+            halign: 'left'
+            valign: 'top'
+            font_name: "helvetica"
+            font_size: 30
+            text:"Chuck Testa"
+            size: root.width / 2, root.height / 2
+            pos: root.width / 2 * 0, root.height / 2
+        Button:
+            size_hint_x: None
+            size_hint_y: None
+            text:"OK"
+            font_name: "helvetica"
+            font_size: 80
+            size: root.width / 2, root.height / 2
+            pos: root.width / 2 * 0, 0
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "up"
+
+<FirstSplashScreen>:
+    name: "firstsplash"
+    pictureBox: pictureBox3
+    
+    FloatLayout:
+        size: root.width, root.height
+        pos: 0, 0     
+        Widget:
+            size: root.width / 2, root.height
+            Image:
+                id: pictureBox3
+                pos: root.width / 2, 0
+                size_hint_x: None
+                size_hint_y: None
+                source: 'jay.png'
+                size: 800, 480
+                allow_stretch: False
+                keep_ratio: False
