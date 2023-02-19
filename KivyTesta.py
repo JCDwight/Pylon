@@ -12,14 +12,19 @@ from kivy.properties import ObjectProperty
 from kivy.animation import Animation
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.clock import Clock
+from kivy.app import App
+from kivy.uix.label import Label
+from datetime import datetime
+from functools import partial
 
 
 kivy.require('2.0.0') # replace with your current kivy version !
 
+#Change to true for deployment to touchscreen
 Window.fullscreen = False
 
-from kivy.app import App
-from kivy.uix.label import Label
+
 
 #User Class
 class User:
@@ -93,17 +98,25 @@ class User:
     def Get_Total_Attended_Minutes(self):
         return self.total_attended_minutes
 
+#
+#This class defines the behavior of the check in screen
 class CheckinScreen(Screen):
-    pictureBox2 = ObjectProperty(None)
-    pass
+    checkinScreenPictureBox = ObjectProperty(None)
+    def checkIn(self):
+        self.checkinScreenPictureBox = Image("testa.png")
 
+#This class defines the behavior of the splash screen
 class FirstSplashScreen(Screen):
-    pictureBox3 = ObjectProperty(None)
+    splashScreenPictureBox = ObjectProperty(None)
+
     pass
 
+#This class defines the behavior of the Window Manager
 class WindowManager(ScreenManager):
     pass
 
+
+#This class defines the behavior of the main(root) screen
 class MainWindow(Screen):
     flag1 = 0
     def btn(self):
@@ -117,11 +130,51 @@ class MainWindow(Screen):
             ani.start(self.pictureBox)
             self.flag1 = 0
 
-kv = Builder.load_file("my.kv")
+
+Builder.load_file("my.kv")
+
+#GLOBAL VARIABLES
+state_var = 0
+tagNumber = 0
+activityTimeStamp = 0
+lastActivityTimeStamp = 0
+
+#GLOBAL VARIABLES
+
+def MainLoop(dt):
+    #State Checker
+    if   (state_var == 0):
+        print ("Splash Screen")
+    elif (state_var == 1):
+        print ("Check in Screen")
+    activityTimeStamp = datetime.now()
+    print(activityTimeStamp)
+    print(lastActivityTimeStamp)
+    print(activityTimeStamp - lastActivityTimeStamp)
+
+
+def HIDCardSwipe(self, *largs):
+   
+    print(lastActivityTimeStamp)
+
+    sm.current = "main"
+    print("CHUCK")
+    tagNumber = 17
+    return tagNumber
+
+sm = ScreenManager()
 
 class MyApp(App):
+    global lastActivityTimeStamp
+    global activityTimeStamp
     def build(self):
-        return kv
+        sm.add_widget(FirstSplashScreen(name='firstsplash'))
+        sm.add_widget(MainWindow(name='main'))
+        sm.add_widget(CheckinScreen(name='checkin'))
+        sm.current = 'main'
+        Clock.schedule_interval(MainLoop,5)
+        Clock.schedule_once(partial(HIDCardSwipe,self),2)
+        return sm
 
 if __name__ == '__main__':
     MyApp().run()

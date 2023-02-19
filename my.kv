@@ -1,8 +1,57 @@
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+#: import RiseInTransition kivy.uix.screenmanager.RiseInTransition
+#: import CardTransition kivy.uix.screenmanager.CardTransition
+#: import WipeTransition kivy.uix.screenmanager.WipeTransition
+
 WindowManager:
-    MainWindow:
-    CheckinScreen:
     FirstSplashScreen:
-    
+    CheckinScreen:
+    MainWindow:
+
+                
+<CheckinScreen>:
+    name: "checkin"
+    checkinScreenPictureBox: pictureBoxCheckin
+
+    FloatLayout:
+        size: root.width, root.height
+        pos: 0, 0
+        Widget:
+            size: 0, root.height
+            Image:
+                id: pictureBoxCheckin
+                pos: 0, 0
+                size_hint_x: None
+                size_hint_y: None
+                source: 'jay.png'
+                size: 400, 480
+                allow_stretch: False
+                keep_ratio: False
+        Label:
+            id: checkinScreenLabel
+            size_hint_x: None
+            size_hint_y: None
+
+            halign: 'left'
+            valign: 'top'
+            font_name: "helvetica"
+            font_size: 30
+            text:"Check-in time: "
+            size: root.width / 2, root.height / 2
+            pos: root.width / 2, root.height / 2
+        Button:
+            id: checkinScreenButton
+            size_hint_x: None
+            size_hint_y: None
+            text:"OK"
+            font_name: "helvetica"
+            font_size: 80
+            size: root.width / 2, root.height / 2
+            pos: root.width / 2, 0
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "up"
+
 <MainWindow>:
     name: "main"
     
@@ -18,8 +67,10 @@ WindowManager:
             size: root.width / 2, root.height / 2
             pos: root.width / 2, 0
             on_release: 
+                app.root.transition = WipeTransition()
+                app.root.transition.direction = "down"
                 app.root.current = "checkin"
-                root.manager.transition.direction = "down"        
+                        
         Button:
             size_hint_x: None
             size_hint_y: None
@@ -30,60 +81,19 @@ WindowManager:
             pos: 0, 0
             on_release: 
                 app.root.current = "firstsplash"
-                root.manager.transition.direction = "down"
                 
-<CheckinScreen>:
-    name: "checkin"
-    pictureBox: pictureBoxCheckin
-
-    FloatLayout:
-        size: root.width, root.height
-        pos: 0, 0
-        Widget:
-            size: 0, root.height
-            Image:
-                id: pictureBox2
-                pos: 0, 0
-                size_hint_x: None
-                size_hint_y: None
-                source: 'jay.png'
-                size: 400, 480
-                allow_stretch: False
-                keep_ratio: False
-        Label:
-            size_hint_x: None
-            size_hint_y: None
-
-            halign: 'left'
-            valign: 'top'
-            font_name: "helvetica"
-            font_size: 30
-            text:"Check-in time: "
-            size: root.width / 2, root.height / 2
-            pos: root.width / 2, root.height / 2
-        Button:
-            size_hint_x: None
-            size_hint_y: None
-            text:"OK"
-            font_name: "helvetica"
-            font_size: 80
-            size: root.width / 2, root.height / 2
-            pos: root.width / 2, 0
-            on_release:
-                app.root.current = "main"
-                root.manager.transition.direction = "up"
-
 <FirstSplashScreen>:
     name: "firstsplash"
-    pictureBox: pictureBox3
+    splashScreenPictureBox: splashScreenPictureBox
     
     FloatLayout:
+        id: firstSplashScreenFloatLayout
         size: root.width, root.height
         pos: 0, 0     
         Widget:
             size: root.width / 2, root.height
             Image:
-                id: pictureBox3
+                id: splashScreenPictureBox
                 pos: 0, 0
                 size_hint_x: None
                 size_hint_y: None
