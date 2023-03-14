@@ -8,6 +8,7 @@ from kivy.uix.button import Button
 from kivy.uix.widget import Widget
 from kivy.uix.image import Image
 from kivy.core.window import Window
+from kivy.core.audio import SoundLoader
 from kivy.properties import ObjectProperty
 from kivy.animation import Animation
 from kivy.lang import Builder
@@ -24,7 +25,11 @@ kivy.require('2.0.0') # replace with your current kivy version !
 #Change to true for deployment to touchscreen
 Window.fullscreen = False
 
-
+sound = SoundLoader.load('PS1-Intro.wav')
+if sound:
+    print("Sound found at %s" % sound.source)
+    print("Sound is %.3f seconds" % sound.length)
+    sound.play()
 
 #User Class
 class User:
@@ -109,18 +114,17 @@ class CheckinScreen(Screen):
 class FirstSplashScreen(Screen):
     splashScreenPictureBox = ObjectProperty(None)
 
-    pass
 
 #This class defines the behavior of the Window Manager
 class WindowManager(ScreenManager):
-    pass
+    def SwapBetweenWindows(self):
+        self.current = 'checkin'
 
 
 #This class defines the behavior of the main(root) screen
 class MainWindow(Screen):
     flag1 = 0
     def btn(self):
-        print(Window.mouse_pos)
         if(self.flag1 == 0):
             ani = Animation(opacity=0,duration=0.25)
             ani.start(self.pictureBox)
@@ -133,46 +137,25 @@ class MainWindow(Screen):
 
 Builder.load_file("my.kv")
 
-#GLOBAL VARIABLES
-state_var = 0
-tagNumber = 0
-activityTimeStamp = 0
-lastActivityTimeStamp = 0
-
-#GLOBAL VARIABLES
-
-def MainLoop(dt):
-    #State Checker
-    if   (state_var == 0):
-        print ("Splash Screen")
-    elif (state_var == 1):
-        print ("Check in Screen")
-    activityTimeStamp = datetime.now()
-    print(activityTimeStamp)
-    print(lastActivityTimeStamp)
-    print(activityTimeStamp - lastActivityTimeStamp)
 
 
 def HIDCardSwipe(self, *largs):
-   
-    print(lastActivityTimeStamp)
-
-    sm.current = "main"
-    print("CHUCK")
-    tagNumber = 17
-    return tagNumber
-
-sm = ScreenManager()
+    sm.SwapBetweenWindows()
+    #sm.current = "checkin"
+    
+sm = WindowManager()
 
 class MyApp(App):
-    global lastActivityTimeStamp
-    global activityTimeStamp
+    def MainLoop(passin, *largs):
+        activityTimeStamp = datetime.now()
+        print('chuck testa')
+
     def build(self):
         sm.add_widget(FirstSplashScreen(name='firstsplash'))
         sm.add_widget(MainWindow(name='main'))
         sm.add_widget(CheckinScreen(name='checkin'))
-        sm.current = 'main'
-        Clock.schedule_interval(MainLoop,5)
+        sm.current = 'firstsplash'
+        Clock.schedule_interval(partial(self.MainLoop,'passin'),5)
         Clock.schedule_once(partial(HIDCardSwipe,self),2)
         return sm
 
