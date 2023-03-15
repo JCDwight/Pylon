@@ -1,3 +1,4 @@
+from winsound import PlaySound
 import kivy
 from kivy.app import App
 from kivy.uix.label import Label
@@ -18,6 +19,8 @@ from kivy.app import App
 from kivy.uix.label import Label
 from datetime import datetime
 from functools import partial
+import pandas 
+import time
 
 
 kivy.require('2.0.0') # replace with your current kivy version !
@@ -25,14 +28,12 @@ kivy.require('2.0.0') # replace with your current kivy version !
 #Change to true for deployment to touchscreen
 Window.fullscreen = False
 
-sound = SoundLoader.load('PS1-Intro.wav')
-if sound:
-    print("Sound found at %s" % sound.source)
-    print("Sound is %.3f seconds" % sound.length)
-    sound.play()
+
 
 #User Class
 class User:
+    checkins = []
+
     def __init__(self):
         self.first_name = ""
         self.access_level = 0
@@ -48,6 +49,7 @@ class User:
         self.total_attended_minutes = 0
         self.image = "blank.png"
     #Getters/Setters
+    #region 
     def Set_Access_Level(self, value):
         if (value >= 0) and (value < 5):
             self.access_level = value
@@ -102,8 +104,14 @@ class User:
             self.total_attended_minutes = value
     def Get_Total_Attended_Minutes(self):
         return self.total_attended_minutes
+    #endregion
+    #Loaders
+    #region
+    def LoadCheckins():
+        pass
+    #endregion
 
-#
+
 #This class defines the behavior of the check in screen
 class CheckinScreen(Screen):
     checkinScreenPictureBox = ObjectProperty(None)
@@ -115,7 +123,7 @@ class FirstSplashScreen(Screen):
     splashScreenPictureBox = ObjectProperty(None)
 
 
-#This class defines the behavior of the Window Manager
+#This class defines the behavior of the Screen Manager
 class WindowManager(ScreenManager):
     def SwapBetweenWindows(self):
         self.current = 'checkin'
@@ -134,10 +142,7 @@ class MainWindow(Screen):
             ani.start(self.pictureBox)
             self.flag1 = 0
 
-
-Builder.load_file("my.kv")
-
-
+#Builder.load_file("my.kv")
 
 def HIDCardSwipe(self, *largs):
     sm.SwapBetweenWindows()
@@ -145,17 +150,49 @@ def HIDCardSwipe(self, *largs):
     
 sm = WindowManager()
 
+#Sound Loaders
+#region Sound Loaders
+#Sound loaders.  Loading sounds at the beginning of the file allows them to be played in runtime with no delay
+#sound_ = SoundLoader.load("Audio\\.wav")
+#sound_PS1 = SoundLoader.load("Audio\\PS1-Intro.wav")
+#sound_JohnCena = SoundLoader.load("Audio\\JohnCena.wav")
+#sound_FlashSavioroftheUniverse = SoundLoader.load("Audio\\FlashSavioroftheUniverse.wav")
+#endregion
+
 class MyApp(App):
-    def MainLoop(passin, *largs):
-        activityTimeStamp = datetime.now()
-        print('chuck testa')
+    #START Application Variables
+    users = []
+    sounds = []
+    #END   Application Variables
+    def LoadSound(self):
+        #region
+        self.sounds.append(SoundLoader.load("Audio\\PS1-Intro.wav"))        
+        self.sounds.append(SoundLoader.load("Audio\\JohnCena.wav"))
+        self.sounds.append(SoundLoader.load("Audio\\FlashSavioroftheUniverse.wav"))
+        #endregion
+
+    def PlaySound(self):
+        selector = 0
+        if (self.sounds[selector]):
+            self.sounds[selector].play()
+            print("I got here")
+
+    def LoadUsers():
+        pass
+
+    def MainLoop(self, *largs):
+        print('Check testa')
+        flag = 0
+        self.PlaySound()
+        pass
 
     def build(self):
+        self.LoadSound()
         sm.add_widget(FirstSplashScreen(name='firstsplash'))
         sm.add_widget(MainWindow(name='main'))
         sm.add_widget(CheckinScreen(name='checkin'))
         sm.current = 'firstsplash'
-        Clock.schedule_interval(partial(self.MainLoop,'passin'),5)
+        Clock.schedule_interval(partial(self.MainLoop, self, 2),5)
         Clock.schedule_once(partial(HIDCardSwipe,self),2)
         return sm
 
