@@ -1,3 +1,5 @@
+from pickle import FALSE
+from tokenize import String
 from winsound import PlaySound
 import kivy
 from kivy.app import App
@@ -18,22 +20,22 @@ from kivy.clock import Clock
 from kivy.app import App
 from kivy.uix.label import Label
 from datetime import datetime
-from functools import partial
-import pandas 
 import time
-
+from functools import partial
+import pandas as pd
+import json
+import os
+import numpy as np
+import pprint as pp
 
 kivy.require('2.0.0') # replace with your current kivy version !
 
 #Change to true for deployment to touchscreen
 Window.fullscreen = False
 
-
-
 #User Class
 class User:
     checkins = []
-
     def __init__(self):
         self.first_name = ""
         self.access_level = 0
@@ -111,7 +113,6 @@ class User:
         pass
     #endregion
 
-
 #This class defines the behavior of the check in screen
 class CheckinScreen(Screen):
     checkinScreenPictureBox = ObjectProperty(None)
@@ -122,12 +123,10 @@ class CheckinScreen(Screen):
 class FirstSplashScreen(Screen):
     splashScreenPictureBox = ObjectProperty(None)
 
-
 #This class defines the behavior of the Screen Manager
 class WindowManager(ScreenManager):
     def SwapBetweenWindows(self):
         self.current = 'checkin'
-
 
 #This class defines the behavior of the main(root) screen
 class MainWindow(Screen):
@@ -142,48 +141,81 @@ class MainWindow(Screen):
             ani.start(self.pictureBox)
             self.flag1 = 0
 
-#Builder.load_file("my.kv")
-
 def HIDCardSwipe(self, *largs):
     sm.SwapBetweenWindows()
     #sm.current = "checkin"
     
 sm = WindowManager()
 
-#Sound Loaders
-#region Sound Loaders
-#Sound loaders.  Loading sounds at the beginning of the file allows them to be played in runtime with no delay
-#sound_ = SoundLoader.load("Audio\\.wav")
-#sound_PS1 = SoundLoader.load("Audio\\PS1-Intro.wav")
-#sound_JohnCena = SoundLoader.load("Audio\\JohnCena.wav")
-#sound_FlashSavioroftheUniverse = SoundLoader.load("Audio\\FlashSavioroftheUniverse.wav")
-#endregion
-
 class MyApp(App):
     #START Application Variables
-    users = []
-    sounds = []
+    users = []     #create a list to hold users
+    sounds = []    #create a list to hold loaded sounds
+    soundList = [] #create an empty list to hold the sound list
+    soundTime = 0  #Variable for tracking song length
     #END   Application Variables
     def LoadSound(self):
         #region
-        self.sounds.append(SoundLoader.load("Audio\\PS1-Intro.wav"))        
-        self.sounds.append(SoundLoader.load("Audio\\JohnCena.wav"))
-        self.sounds.append(SoundLoader.load("Audio\\FlashSavioroftheUniverse.wav"))
+        noFile = False #Set noFile to false, if we can not load the file we will set this to true
+        path = "Audio\\" #Folder in the root directory that holds all our audio files
+        dir_list = os.listdir(path) #Use the OS library to scan the directory for all files and store them in dir_list
+        try: #Use exception handling in case the file does not exist
+            loadFile = pd.read_json('DataBases/audioFiles.json') #Try to load audioFiles.json
+        except: #If no file exists, we set noFile to true and will create one with the scanned directory.  This should only happen once on first run.
+            noFile = True
+                                #A file already exists, so we need to load in any new files to the end of the list
+        if (noFile == False):   #if we loaded them in the dir_list order it would change a user's selected file
+            fallThrough = False
+            newlist = loadFile.values.tolist()    #load previous file names
+            for g in newlist:
+                g = str(g)            #g starts as a list, we need to convert it to a string
+                g = g.replace('[','') #Byproducts of converting from JSONs to Dataframes are brackets and pops ( [ ] and ' ')
+                g = g.replace(']','') #We can use the built in replace function to remove them
+                g = g.replace("'",'') #Will potentially revist as there's probably a better way to do this
+                self.soundList.append(g)
+            for f in dir_list:
+                flagged = False
+                for g in newlist:
+                    g = str(g) #g starts as a list, we need to convert it to a string
+                    g = g.replace('[','') #Byproducts of converting from JSONs to Dataframes are brackets and pops ( [ ] and ' ')
+                    g = g.replace(']','') #We can use the built in replace function to remove them
+                    g = g.replace("'",'') #Will potentially revist as there's probably a better way to do this
+                    if ((f == g) and (flagged == False)): #If the files in the scanned dir_list match the old list, flag and skip
+                        fallThrough = False 
+                        flagged = True
+                    else:
+                        fallThrough = True #If they don't match, slag fallthrough so we add it to the list
+                if ((fallThrough) and (flagged == False)): #Add new sound to list
+                    self.soundList.append(f)   
+            dataFrame = pd.DataFrame(self.soundList)       #Convert the list into a dataframe
+            dataFrame.to_json('DataBases/audioFiles.json') #Convert the dataframe to a persistant JSON
+        else:
+            for f in dir_list: #No file exists, so just dump the scanned directory files into a list, should happen 1x
+                print(f)
+                self.soundList.append(f)
+            dataFrame = pd.DataFrame(self.soundList)        #Convert the list into a dataframe
+            dataFrame.to_json('DataBases/audioFiles.json')  #Convert the dataframe to a persistant JSON
+        print("Loading Files in:'", path, "':")
+        for f in dir_list:                                  #Load the files in the dir_list and print when they load
+            self.sounds.append(SoundLoader.load(path + f))
+            print('Loaded: ' + f)
         #endregion
 
-    def PlaySound(self):
-        selector = 0
-        if (self.sounds[selector]):
+    def PlaySound(self, selector):
+        t = round(time.time() * 1000)
+        print (t)
+        print(self.sounds[selector].length)
+        if ((self.sounds[selector]) and ((t - self.sounds[selector].length) > t - self.soundTime)): #trying to figure out timing
             self.sounds[selector].play()
-            print("I got here")
+            print('Got in')
+            self.soundTime = round(time.time() * 1000)
+            pass
 
     def LoadUsers():
         pass
 
     def MainLoop(self, *largs):
-        print('Check testa')
-        flag = 0
-        self.PlaySound()
+        self.PlaySound(1)
         pass
 
     def build(self):
@@ -192,7 +224,7 @@ class MyApp(App):
         sm.add_widget(MainWindow(name='main'))
         sm.add_widget(CheckinScreen(name='checkin'))
         sm.current = 'firstsplash'
-        Clock.schedule_interval(partial(self.MainLoop, self, 2),5)
+        Clock.schedule_interval(partial(self.MainLoop, self, 2),0.1)
         Clock.schedule_once(partial(HIDCardSwipe,self),2)
         return sm
 
