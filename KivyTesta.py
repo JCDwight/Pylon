@@ -1,4 +1,5 @@
 from pickle import FALSE
+from telnetlib import SE
 from tokenize import String
 from winsound import PlaySound
 import kivy
@@ -111,6 +112,9 @@ class User:
     #region
     def LoadCheckins():
         pass
+    def SaveCheckins():
+        path = ''
+        pass
     #endregion
 
 #This class defines the behavior of the check in screen
@@ -152,7 +156,10 @@ class MyApp(App):
     users = []     #create a list to hold users
     sounds = []    #create a list to hold loaded sounds
     soundList = [] #create an empty list to hold the sound list
-    soundTime = 0  #Variable for tracking song length
+    soundTime = 0  #Variable for tracking song length, initialized to 0.
+    playingSound = 0
+    debugCounter = 0
+    debugTimer = 0
     #END   Application Variables
     def LoadSound(self):
         #region
@@ -184,8 +191,8 @@ class MyApp(App):
                         fallThrough = False 
                         flagged = True
                     else:
-                        fallThrough = True #If they don't match, slag fallthrough so we add it to the list
-                if ((fallThrough) and (flagged == False)): #Add new sound to list
+                        fallThrough = True #If they don't match, fallthrough so we add it to the list
+                if ((fallThrough) and (flagged == False)): #Add new sound to list if fallThrough == True and Flagged(As a match) == False
                     self.soundList.append(f)   
             dataFrame = pd.DataFrame(self.soundList)       #Convert the list into a dataframe
             dataFrame.to_json('DataBases/audioFiles.json') #Convert the dataframe to a persistant JSON
@@ -196,35 +203,39 @@ class MyApp(App):
             dataFrame = pd.DataFrame(self.soundList)        #Convert the list into a dataframe
             dataFrame.to_json('DataBases/audioFiles.json')  #Convert the dataframe to a persistant JSON
         print("Loading Files in:'", path, "':")
-        for f in dir_list:                                  #Load the files in the dir_list and print when they load
+        for f in self.soundList:                                  #Load the files in the soundList and print when they load
             self.sounds.append(SoundLoader.load(path + f))
             print('Loaded: ' + f)
         #endregion
 
     def PlaySound(self, selector):
         t = round(time.time() * 1000)
-        print (t)
-        print(self.sounds[selector].length)
-        if ((self.sounds[selector]) and ((t - self.sounds[selector].length) > t - self.soundTime)): #trying to figure out timing
-            self.sounds[selector].play()
-            print('Got in')
-            self.soundTime = round(time.time() * 1000)
-            pass
+        #    If self.sounds[selector] exists, AND The length of the playing sound is less than the current time sound has been playing, then play the new sound
+        if ((self.sounds[selector]) and ((self.sounds[self.playingSound].length * 1000) < t - self.soundTime)): 
+            self.sounds[selector].play() #Plays the selected sound
+            self.playingSound = selector #Save the current selected song as our playing sound, since we made it in here, and the sound is playing
+            self.soundTime = round(time.time() * 1000) #get the time, round it, and multiply it by 1000 to convert to milliseconds
 
     def LoadUsers():
         pass
 
+    def ChuckDebugger(self):
+        if (self.debugCounter % 80 == 0):
+            print("Chuck: " + str(self.debugCounter) + "    Time per 80 frames: " + str(time.time() - self.debugTimer))
+            self.debugTimer = time.time()
+        self.debugCounter = self.debugCounter + 1
+
     def MainLoop(self, *largs):
-        self.PlaySound(1)
+        self.ChuckDebugger()
         pass
 
     def build(self):
-        self.LoadSound()
+        self.LoadSound() #Load all the sound files now, so they play smoothly later
         sm.add_widget(FirstSplashScreen(name='firstsplash'))
         sm.add_widget(MainWindow(name='main'))
         sm.add_widget(CheckinScreen(name='checkin'))
         sm.current = 'firstsplash'
-        Clock.schedule_interval(partial(self.MainLoop, self, 2),0.1)
+        Clock.schedule_interval(partial(self.MainLoop, self, 2),0.00018)
         Clock.schedule_once(partial(HIDCardSwipe,self),2)
         return sm
 
