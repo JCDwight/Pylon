@@ -1,7 +1,7 @@
 from pickle import FALSE
 from telnetlib import SE
 from tokenize import String
-from winsound import PlaySound
+#from winsound import PlaySound
 import kivy
 from kivy.app import App
 from kivy.uix.label import Label
