@@ -209,9 +209,14 @@ class MyApp(App):
             dataFrame = pd.DataFrame(self.soundList)        #Convert the list into a dataframe
             dataFrame.to_json('DataBases/audioFiles.json')  #Convert the dataframe to a persistant JSON
         print("Loading Files in:'", path, "':")
-        for f in self.soundList:                                  #Load the files in the soundList and print when they load
-            self.sounds.append(SoundLoader.load(path + f))
-            print('Loaded: ' + f)
+        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+            for f in self.soundList:                                  #Load the files in the soundList and print when they load
+                self.sounds.append(SoundLoader.load("//Audio/" + f))
+                print('Loaded: ' + f)
+        else:
+            for f in self.soundList:                                  #Load the files in the soundList and print when they load
+                self.sounds.append(SoundLoader.load(path + f))
+                print('Loaded: ' + f)
         #endregion
 
     def PlaySound(self, selector):
