@@ -211,7 +211,7 @@ class MyApp(App):
         print("Loading Files in:'", path, "':")
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
             for f in self.soundList:                                  #Load the files in the soundList and print when they load
-                self.sounds.append(SoundLoader.load("//Audio/" + f))
+                self.sounds.append(SoundLoader.load("Audio/" + f))
                 print('Loaded: ' + f)
         else:
             for f in self.soundList:                                  #Load the files in the soundList and print when they load
