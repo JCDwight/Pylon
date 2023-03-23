@@ -166,11 +166,12 @@ class MyApp(App):
         #
         noFile = False #Set noFile to false, if we can not load the file we will set this to true
         print (plat.platform())
+        dir_list = 0
+        path = "Audio\\" #Folder in the root directory that holds all our audio files
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-            path = "Audio\\"
+            dir_list = os.listdir("Audio") #Use the OS library to scan the directory for all files and store them in dir_list
         elif plat.platform()[0] == "W" or plat.platform()[0] == "w":
-            path = "Audio\\" #Folder in the root directory that holds all our audio files
-        dir_list = os.listdir(path) #Use the OS library to scan the directory for all files and store them in dir_list
+            dir_list = os.listdir(path) #Use the OS library to scan the directory for all files and store them in dir_list
         try: #Use exception handling in case the file does not exist
             loadFile = pd.read_json('DataBases/audioFiles.json') #Try to load audioFiles.json
         except: #If no file exists, we set noFile to true and will create one with the scanned directory.  This should only happen once on first run.
