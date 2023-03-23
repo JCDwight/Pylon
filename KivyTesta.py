@@ -166,7 +166,7 @@ class MyApp(App):
         noFile = False #Set noFile to false, if we can not load the file we will set this to true
         print (plat.platform())
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-            path = "/Audio/"
+            path = "//Audio/"
         elif plat.platform()[0] == "W" or plat.platform()[0] == "w":
             path = "Audio\\" #Folder in the root directory that holds all our audio files
         dir_list = os.listdir(path) #Use the OS library to scan the directory for all files and store them in dir_list
