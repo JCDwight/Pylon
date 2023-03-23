@@ -1,7 +1,6 @@
 from pickle import FALSE
 from telnetlib import SE
 from tokenize import String
-#from winsound import PlaySound
 import kivy
 from kivy.app import App
 from kivy.uix.label import Label
@@ -28,6 +27,7 @@ import json
 import os
 import numpy as np
 import pprint as pp
+import platform as plat
 
 kivy.require('2.0.0') # replace with your current kivy version !
 
@@ -164,7 +164,11 @@ class MyApp(App):
     def LoadSound(self):
         #region
         noFile = False #Set noFile to false, if we can not load the file we will set this to true
-        path = "Audio\\" #Folder in the root directory that holds all our audio files
+        print (plat.platform())
+        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+            path = "/Audio/"
+        elif plat.platform()[0] == "W" or plat.platform()[0] == "w":
+            path = "Audio\\" #Folder in the root directory that holds all our audio files
         dir_list = os.listdir(path) #Use the OS library to scan the directory for all files and store them in dir_list
         try: #Use exception handling in case the file does not exist
             loadFile = pd.read_json('DataBases/audioFiles.json') #Try to load audioFiles.json
@@ -227,6 +231,7 @@ class MyApp(App):
 
     def MainLoop(self, *largs):
         self.ChuckDebugger()
+        self.PlaySound(1)
         pass
 
     def build(self):
