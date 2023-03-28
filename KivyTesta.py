@@ -28,6 +28,8 @@ import os
 import numpy as np
 import pprint as pp
 import platform as plat
+import playsound as ps
+import threading
 
 kivy.require('2.0.0') # replace with your current kivy version !
 
@@ -208,24 +210,27 @@ class MyApp(App):
                 self.soundList.append(f)
             dataFrame = pd.DataFrame(self.soundList)        #Convert the list into a dataframe
             dataFrame.to_json('DataBases/audioFiles.json')  #Convert the dataframe to a persistant JSON
-        print("Loading Files in:'", path, "':")
-        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-            for f in self.soundList:                                  #Load the files in the soundList and print when they load
-                self.sounds.append(SoundLoader.load("Audio/" + f))
-                print('Loaded: ' + f)
-        else:
-            for f in self.soundList:                                  #Load the files in the soundList and print when they load
-                self.sounds.append(SoundLoader.load(path + f))
-                print('Loaded: ' + f)
+        #print("Loading Files in:'", path, "':")
+        #if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+        #    for f in self.soundList:                                  #Load the files in the soundList and print when they load
+        #        self.sounds.append(SoundLoader.load("Audio/" + f))
+        #        print('Loaded: ' + f)
+        #else:
+        #    for f in self.soundList:                                  #Load the files in the soundList and print when they load
+        #        self.sounds.append(SoundLoader.load(path + f))
+        #        print('Loaded: ' + f)
         #endregion
 
     def PlaySound(self, selector):
+        #region
         t = round(time.time() * 1000)
         #    If self.sounds[selector] exists, AND The length of the playing sound is less than the current time sound has been playing, then play the new sound
-        if ((self.sounds[selector]) and ((self.sounds[self.playingSound].length * 1000) < t - self.soundTime)): 
-            self.sounds[selector].play() #Plays the selected sound
-            self.playingSound = selector #Save the current selected song as our playing sound, since we made it in here, and the sound is playing
-            self.soundTime = round(time.time() * 1000) #get the time, round it, and multiply it by 1000 to convert to milliseconds
+#       if ((self.sounds[selector]) and ((self.sounds[self.playingSound].length * 1000) < t - self.soundTime)): 
+        #self.sounds[selector].play() #Plays the selected sound
+        ps.playsound("Audio//" + self.soundList[selector], False)
+        self.playingSound = selector #Save the current selected song as our playing sound, since we made it in here, and the sound is playing
+        self.soundTime = round(time.time() * 1000) #get the time, round it, and multiply it by 1000 to convert to milliseconds
+        #endregion
 
     def LoadUsers():
         pass
@@ -236,19 +241,23 @@ class MyApp(App):
             self.debugTimer = time.time()
         self.debugCounter = self.debugCounter + 1
 
+    def SoundPlayerSound(self, *largs):
+        self.PlaySound(2)
+
+
     def MainLoop(self, *largs):
+        #self.PlaySound(2)
         self.ChuckDebugger()
-        self.PlaySound(1)
         pass
 
     def build(self):
-        self.LoadSound() #Load all the sound files now, so they play smoothly later
+        self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.
         sm.add_widget(FirstSplashScreen(name='firstsplash'))
         sm.add_widget(MainWindow(name='main'))
         sm.add_widget(CheckinScreen(name='checkin'))
         sm.current = 'firstsplash'
         Clock.schedule_interval(partial(self.MainLoop, self, 2),0.00018)
-        Clock.schedule_once(partial(HIDCardSwipe,self),2)
+
         return sm
 
 if __name__ == '__main__':
