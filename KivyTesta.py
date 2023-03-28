@@ -227,6 +227,7 @@ class MyApp(App):
         #    If self.sounds[selector] exists, AND The length of the playing sound is less than the current time sound has been playing, then play the new sound
         if ((self.sounds[selector]) and ((self.sounds[self.playingSound].length * 1000) < t - self.soundTime)): 
             self.sounds[selector].play() #Plays the selected sound
+            print("Playing")
         #ps.playsound("Audio//" + self.soundList[selector], False)
         self.playingSound = selector #Save the current selected song as our playing sound, since we made it in here, and the sound is playing
         self.soundTime = round(time.time() * 1000) #get the time, round it, and multiply it by 1000 to convert to milliseconds
@@ -256,7 +257,7 @@ class MyApp(App):
         sm.add_widget(MainWindow(name='main'))
         sm.add_widget(CheckinScreen(name='checkin'))
         sm.current = 'firstsplash'
-        Clock.schedule_interval(partial(self.MainLoop, self, 2),14)#0.00018)
+        Clock.schedule_interval(partial(self.MainLoop, self, 2),1)#0.00018)
 
         return sm
 
