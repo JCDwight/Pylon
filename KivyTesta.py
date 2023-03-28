@@ -211,23 +211,23 @@ class MyApp(App):
             dataFrame = pd.DataFrame(self.soundList)        #Convert the list into a dataframe
             dataFrame.to_json('DataBases/audioFiles.json')  #Convert the dataframe to a persistant JSON
         #print("Loading Files in:'", path, "':")
-        #if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-        #    for f in self.soundList:                                  #Load the files in the soundList and print when they load
-        #        self.sounds.append(SoundLoader.load("Audio/" + f))
-        #        print('Loaded: ' + f)
-        #else:
-        #    for f in self.soundList:                                  #Load the files in the soundList and print when they load
-        #        self.sounds.append(SoundLoader.load(path + f))
-        #        print('Loaded: ' + f)
+        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+            for f in self.soundList:                                  #Load the files in the soundList and print when they load
+                self.sounds.append(SoundLoader.load("Audio/" + f))
+                print('Loaded: ' + f)
+        else:
+            for f in self.soundList:                                  #Load the files in the soundList and print when they load
+                self.sounds.append(SoundLoader.load(path + f))
+                print('Loaded: ' + f)
         #endregion
 
     def PlaySound(self, selector):
         #region
         t = round(time.time() * 1000)
         #    If self.sounds[selector] exists, AND The length of the playing sound is less than the current time sound has been playing, then play the new sound
-#       if ((self.sounds[selector]) and ((self.sounds[self.playingSound].length * 1000) < t - self.soundTime)): 
-        #self.sounds[selector].play() #Plays the selected sound
-        ps.playsound("Audio//" + self.soundList[selector], False)
+        if ((self.sounds[selector]) and ((self.sounds[self.playingSound].length * 1000) < t - self.soundTime)): 
+            self.sounds[selector].play() #Plays the selected sound
+        #ps.playsound("Audio//" + self.soundList[selector], False)
         self.playingSound = selector #Save the current selected song as our playing sound, since we made it in here, and the sound is playing
         self.soundTime = round(time.time() * 1000) #get the time, round it, and multiply it by 1000 to convert to milliseconds
         #endregion
@@ -246,7 +246,7 @@ class MyApp(App):
 
 
     def MainLoop(self, *largs):
-        self.PlaySound(2)
+        self.PlaySound(5)
         self.ChuckDebugger()
         pass
 
@@ -256,7 +256,7 @@ class MyApp(App):
         sm.add_widget(MainWindow(name='main'))
         sm.add_widget(CheckinScreen(name='checkin'))
         sm.current = 'firstsplash'
-        Clock.schedule_interval(partial(self.MainLoop, self, 2),20)#0.00018)
+        Clock.schedule_interval(partial(self.MainLoop, self, 2),14)#0.00018)
 
         return sm
 
