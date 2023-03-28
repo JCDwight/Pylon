@@ -237,7 +237,7 @@ class MyApp(App):
 
     def ChuckDebugger(self):
         if (self.debugCounter % 80 == 0):
-            print("Chuck: " + str(self.debugCounter) + "    Time per 80 frames: " + str(time.time() - self.debugTimer))
+            print("Chuck: " + str(self.debugCounter) + "    Time per 800 frames: " + str(time.time() - self.debugTimer))
             self.debugTimer = time.time()
         self.debugCounter = self.debugCounter + 1
 
