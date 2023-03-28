@@ -246,7 +246,7 @@ class MyApp(App):
 
 
     def MainLoop(self, *largs):
-        #self.PlaySound(2)
+        self.PlaySound(2)
         self.ChuckDebugger()
         pass
 
@@ -256,7 +256,7 @@ class MyApp(App):
         sm.add_widget(MainWindow(name='main'))
         sm.add_widget(CheckinScreen(name='checkin'))
         sm.current = 'firstsplash'
-        Clock.schedule_interval(partial(self.MainLoop, self, 2),0.00018)
+        Clock.schedule_interval(partial(self.MainLoop, self, 2),20)#0.00018)
 
         return sm
 
