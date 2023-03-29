@@ -252,8 +252,9 @@ class MyApp(App):
 
     def ReadSerial(self, *largs):
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-            ser.open()
-            print(ser.readline())
+            #ser.open()
+            #print(ser.readline())
+            pass
 
     def MainLoop(self, *largs):
         #self.PlaySound(5)
