@@ -32,7 +32,7 @@ import playsound as ps
 import threading
 import serial
 
-ser = serial.Serial('/dev/serial', 500000)
+ser = serial.Serial('/dev/serial/by-id$/usb-Arduino__www.arduino.cc__0042_9503830343135190D021-if00', 500000)
 print(ser.name) 
 
 kivy.require('2.0.0') # replace with your current kivy version !
