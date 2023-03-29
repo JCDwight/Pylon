@@ -228,7 +228,7 @@ class MyApp(App):
         #region
         t = round(time.time() * 1000)
         #    If self.sounds[selector] exists, AND The length of the playing sound is less than the current time sound has been playing, then play the new sound
-        print (self.sounds)
+        #print (self.sounds)
         if ((self.sounds[selector]) and ((self.sounds[self.playingSound].length * 1000) < t - self.soundTime)): 
             self.sounds[selector].play() #Plays the selected sound
             print("Playing")
