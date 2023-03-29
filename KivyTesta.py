@@ -46,7 +46,6 @@ class User:
         self.birthday_day = 0
         self.birthday_month = 0
         self.birthday_year = 0
-        self.gender = 0
         self.total_checkins = 0
         self.total_attended_days = 0
         self.total_attended_days_consecutive = 0
@@ -118,7 +117,7 @@ class User:
     def SaveCheckins():
         path = ''
         pass
-    #endregion
+
 
 #This class defines the behavior of the check in screen
 class CheckinScreen(Screen):
@@ -256,7 +255,7 @@ class MyApp(App):
             pass
 
     def MainLoop(self, *largs):
-        #self.PlaySound(5)
+        self.PlaySound(5)
         self.ChuckDebugger()
         pass
 
