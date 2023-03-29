@@ -33,7 +33,8 @@ import threading
 import serial
 
 if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-    #ser = serial.Serial('/dev/ttyACM0', 500000) 
+    #ser = serial.Serial('/dev/ttyACM0', 500000)
+    pass
 
 kivy.require('2.0.0') # replace with your current kivy version !
 
