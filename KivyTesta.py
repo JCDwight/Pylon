@@ -28,7 +28,7 @@ import os
 import numpy as np
 import pprint as pp
 import platform as plat
-import playsound as ps
+#import playsound as ps
 import threading
 import serial
 
