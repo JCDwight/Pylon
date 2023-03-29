@@ -163,8 +163,14 @@ class MyApp(App):
     debugCounter = 0
     debugTimer = 0
     if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+        print('Got to Linux Serial Opening')
         ser = serial.Serial('/dev/ttyACM0', 500000)
-        pass
+        ser.close()
+    if plat.platform()[0] == "W" or plat.platform()[0] == "w":
+        print('Got to Windows Serial Opening')
+        ser = serial.Serial('COM8', 500000)
+        ser.close()
+
     #END   Application Variables
     def LoadSound(self):
         #region
@@ -250,10 +256,11 @@ class MyApp(App):
         self.PlaySound(2)
 
     def ReadSerial(self, *largs):
-        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-            self.ser.open()
-            print(self.ser.readline())
-            pass
+        #if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+        self.ser.open()
+        print(self.ser.read(24))
+        self.ser.close()
+            #pass
 
     def MainLoop(self, *largs):
         self.PlaySound(5)
@@ -267,7 +274,7 @@ class MyApp(App):
         sm.add_widget(CheckinScreen(name='checkin'))
         sm.current = 'firstsplash'
         Clock.schedule_interval(partial(self.MainLoop, self, 2),1)#0.00018)
-        #Clock.schedule_interval(partial(self.ReadSerial, self), 0.01)
+        Clock.schedule_interval(partial(self.ReadSerial, self), 0.01)
 
         return sm
 
