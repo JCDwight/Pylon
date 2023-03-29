@@ -163,7 +163,7 @@ class MyApp(App):
     debugCounter = 0
     debugTimer = 0
     if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-        #ser = serial.Serial('/dev/ttyACM0', 500000)
+        ser = serial.Serial('/dev/ttyACM0', 500000)
         pass
     #END   Application Variables
     def LoadSound(self):
@@ -251,8 +251,8 @@ class MyApp(App):
 
     def ReadSerial(self, *largs):
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-            #ser.open()
-            #print(ser.readline())
+            self.ser.open()
+            print(self.ser.readline())
             pass
 
     def MainLoop(self, *largs):
