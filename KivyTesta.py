@@ -32,10 +32,6 @@ import playsound as ps
 import threading
 import serial
 
-if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-    #ser = serial.Serial('/dev/ttyACM0', 500000)
-    pass
-
 kivy.require('2.0.0') # replace with your current kivy version !
 
 #Change to true for deployment to touchscreen
@@ -167,6 +163,9 @@ class MyApp(App):
     playingSound = 0
     debugCounter = 0
     debugTimer = 0
+    if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+        #ser = serial.Serial('/dev/ttyACM0', 500000)
+        pass
     #END   Application Variables
     def LoadSound(self):
         #region
