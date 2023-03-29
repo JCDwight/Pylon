@@ -261,13 +261,13 @@ class MyApp(App):
         pass
 
     def build(self):
-        self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.
+        #self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.
         sm.add_widget(FirstSplashScreen(name='firstsplash'))
         sm.add_widget(MainWindow(name='main'))
         sm.add_widget(CheckinScreen(name='checkin'))
         sm.current = 'firstsplash'
-        Clock.schedule_interval(partial(self.MainLoop, self, 2),1)#0.00018)
-        Clock.schedule_interval(partial(self.ReadSerial, self), 0.01)
+        #Clock.schedule_interval(partial(self.MainLoop, self, 2),1)#0.00018)
+        #Clock.schedule_interval(partial(self.ReadSerial, self), 0.01)
 
         return sm
 
