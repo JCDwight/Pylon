@@ -30,6 +30,10 @@ import pprint as pp
 import platform as plat
 import playsound as ps
 import threading
+import serial
+
+ser = serial.Serial('/dev/serial', 500000)
+print(ser.name) 
 
 kivy.require('2.0.0') # replace with your current kivy version !
 
@@ -196,7 +200,7 @@ class MyApp(App):
                     g = g.replace(']','') #We can use the built in replace function to remove them
                     g = g.replace("'",'') #Will potentially revist as there's probably a better way to do this
                     if ((f == g) and (flagged == False)): #If the files in the scanned dir_list match the old list, flag and skip
-                        fallThrough = False 
+                        fallThrough = False
                         flagged = True
                     else:
                         fallThrough = True #If they don't match, fallthrough so we add it to the list
@@ -212,7 +216,7 @@ class MyApp(App):
             dataFrame.to_json('DataBases/audioFiles.json')  #Convert the dataframe to a persistant JSON
         #print("Loading Files in:'", path, "':")
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-            for f in self.soundList:                                  #Load the files in the soundList and print when they load
+            for f in self.soundList:                                  #Load the files in the soundList and print when they load(Linux)
                 self.sounds.append(SoundLoader.load("Audio/" + f))
                 print('Loaded: ' + f)
         else:
@@ -245,9 +249,13 @@ class MyApp(App):
     def SoundPlayerSound(self, *largs):
         self.PlaySound(2)
 
+    def ReadSerial(self, *largs):
+        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+            ser.open()
+            print(ser.readline())
 
     def MainLoop(self, *largs):
-        self.PlaySound(5)
+        #self.PlaySound(5)
         self.ChuckDebugger()
         pass
 
@@ -258,6 +266,7 @@ class MyApp(App):
         sm.add_widget(CheckinScreen(name='checkin'))
         sm.current = 'firstsplash'
         Clock.schedule_interval(partial(self.MainLoop, self, 2),1)#0.00018)
+        Clock.schedule_interval(partial(self.ReadSerial, self), 0.01)
 
         return sm
 
