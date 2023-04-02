@@ -257,7 +257,7 @@ class MyApp(App):
 
     def ReadSerial(self, *largs):
         #if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-        print(self.ser.read(24))
+        print(self.ser.read(24,1))
             #pass
 
     def MainLoop(self, *largs):
@@ -272,8 +272,7 @@ class MyApp(App):
         sm.add_widget(CheckinScreen(name='checkin'))
         sm.current = 'firstsplash'
         Clock.schedule_interval(partial(self.MainLoop, self, 2),1)#0.00018)
-        Clock.schedule_interval(partial(self.ReadSerial, self), 0.01)
-
+        Clock.schedule_interval(partial(self.ReadSerial, self), 1)
         return sm
 
 if __name__ == '__main__':
