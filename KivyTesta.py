@@ -260,8 +260,9 @@ class MyApp(App):
         if self.ser.isOpen():
             try:
                 print("Got to ReadSerial Try command")
-                input_data = self.ser.readline().strip().decode("utf-8")
-                print(input_data)
+                if (self.ser.inWaiting() > 0):
+                    data_str = self.ser.read(self.ser.inWaiting()).decode('ascii')
+                    print(data_str)
             except UnicodeDecodeError as e:
                 print(e)
 
