@@ -263,7 +263,7 @@ class MyApp(App):
             #pass
 
     def MainLoop(self, *largs):
-        self.PlaySound(5)
+        #self.PlaySound(5)
         self.ChuckDebugger()
         pass
 
