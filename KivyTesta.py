@@ -257,9 +257,7 @@ class MyApp(App):
 
     def ReadSerial(self, *largs):
         #if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-        self.ser.open()
         print(self.ser.read(24))
-        self.ser.close()
             #pass
 
     def MainLoop(self, *largs):
