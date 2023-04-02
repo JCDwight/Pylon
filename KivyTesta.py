@@ -256,11 +256,12 @@ class MyApp(App):
         self.PlaySound(2)
 
     def ReadSerial(self, *largs):
-        #if plat.platform()[0] == "L" or plat.platform()[0] == "l":
         if self.ser.isOpen():
-		try:
-			input_data=ser.readline().strip().decode("utf-8")
-			print(input_data)   
+            try:
+                input_data = self.ser.readline().strip().decode("utf-8")
+                print(input_data)
+            except UnicodeDecodeError as e:
+                print(e)
 
 
     def MainLoop(self, *largs):
