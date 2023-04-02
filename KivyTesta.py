@@ -256,8 +256,10 @@ class MyApp(App):
         self.PlaySound(2)
 
     def ReadSerial(self, *largs):
+        print("Got to ReadSerial")
         if self.ser.isOpen():
             try:
+                print("Got to ReadSerial Try command")
                 input_data = self.ser.readline().strip().decode("utf-8")
                 print(input_data)
             except UnicodeDecodeError as e:
