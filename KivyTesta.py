@@ -165,11 +165,11 @@ class MyApp(App):
     if plat.platform()[0] == "L" or plat.platform()[0] == "l":
         print('Got to Linux Serial Opening')
         ser = serial.Serial('/dev/ttyACM0', 500000)
-        ser.close()
+
     if plat.platform()[0] == "W" or plat.platform()[0] == "w":
         print('Got to Windows Serial Opening')
         ser = serial.Serial('COM8', 500000)
-        ser.close()
+
 
     #END   Application Variables
     def LoadSound(self):
