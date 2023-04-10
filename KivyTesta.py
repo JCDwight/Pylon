@@ -31,6 +31,7 @@ import platform as plat
 #import playsound as ps
 import threading
 import serial
+from cryptography.fernet import Fernet
 
 kivy.require('2.0.0') # replace with your current kivy version !
 
@@ -162,6 +163,7 @@ class MyApp(App):
     playingSound = 0
     debugCounter = 0
     debugTimer = 0
+    #END   Application Variables
     if plat.platform()[0] == "L" or plat.platform()[0] == "l":
         print('Got to Linux Serial Opening')
         ser = serial.Serial('/dev/ttyACM0', 500000)
@@ -170,8 +172,26 @@ class MyApp(App):
         print('Got to Windows Serial Opening')
         ser = serial.Serial('COM8', 500000)
 
+    def encrypt_dataframe(df, key):
+        #Encrypts a pandas DataFrame using the Fernet encryption library.
+        # Convert the DataFrame to bytes
+        data = df.to_csv(index=False).encode()
+        # Create a Fernet object with the key
+        f = Fernet(key)
+        # Encrypt the data
+        encrypted_data = f.encrypt(data)
+        return encrypted_data
 
-    #END   Application Variables
+    def decrypt_dataframe(encrypted_data, key):
+        #Decrypts a pandas DataFrame using the Fernet encryption library.
+        # Create a Fernet object with the key
+        f = Fernet(key)
+        # Decrypt the data
+        decrypted_data = f.decrypt(encrypted_data)
+        # Convert the decrypted data to a DataFrame
+        df = pd.read_csv(pd.compat.StringIO(decrypted_data.decode()))
+        return df
+
     def LoadSound(self):
         #region
         #
@@ -275,8 +295,6 @@ class MyApp(App):
     def build(self):
         self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.
         sm.add_widget(FirstSplashScreen(name='firstsplash'))
-        sm.add_widget(MainWindow(name='main'))
-        sm.add_widget(CheckinScreen(name='checkin'))
         sm.current = 'firstsplash'
         Clock.schedule_interval(partial(self.MainLoop, self, 2),1)#0.00018)
         Clock.schedule_interval(partial(self.ReadSerial, self), 1)
