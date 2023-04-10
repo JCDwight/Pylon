@@ -119,17 +119,6 @@ class User:
         path = ''
         pass
 
-
-#This class defines the behavior of the check in screen
-class CheckinScreen(Screen):
-    checkinScreenPictureBox = ObjectProperty(None)
-    def checkIn(self):
-        self.checkinScreenPictureBox = Image("testa.png")
-
-#This class defines the behavior of the splash screen
-class FirstSplashScreen(Screen):
-    splashScreenPictureBox = ObjectProperty(None)
-
 #This class defines the behavior of the Screen Manager
 class WindowManager(ScreenManager):
     def SwapBetweenWindows(self):
@@ -154,7 +143,7 @@ def HIDCardSwipe(self, *largs):
     
 sm = WindowManager()
 
-class MyApp(App):
+class Monolith(App):
     #START Application Variables
     users = []     #create a list to hold users
     sounds = []    #create a list to hold loaded sounds
@@ -170,7 +159,7 @@ class MyApp(App):
 
     if plat.platform()[0] == "W" or plat.platform()[0] == "w":
         print('Got to Windows Serial Opening')
-        ser = serial.Serial('COM8', 500000)
+        #ser = serial.Serial('COM8', 500000)
 
     def encrypt_dataframe(df, key):
         #Encrypts a pandas DataFrame using the Fernet encryption library.
@@ -286,19 +275,40 @@ class MyApp(App):
             except UnicodeDecodeError as e:
                 print(e)
 
-
     def MainLoop(self, *largs):
-        #self.PlaySound(5)
-        self.ChuckDebugger()
+        if (self.xcount == 5):
+            self.xcount = 1
+            anim = Animation(pos=(800,00),duration=2)
+            anim.start(self.img)
+
+    def SplashScreen(self):
         pass
 
     def build(self):
         self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.
-        sm.add_widget(FirstSplashScreen(name='firstsplash'))
-        sm.current = 'firstsplash'
-        Clock.schedule_interval(partial(self.MainLoop, self, 2),1)#0.00018)
-        Clock.schedule_interval(partial(self.ReadSerial, self), 1)
-        return sm
+        self.window = FloatLayout()
+        self.img = Image(source="Jay.png", pos=(-200,0))
+        my_string = "Check in SuccessfulIn this example, we create a MyFloatLayout class that inherits from FloatLayout. In the __init__ method of this class, we create a Label widget with some text and set the halign property to 'center' to center the text horizontally."
+        lowercase = my_string.lower()
+        self.label1 = Label(text=lowercase)
+        self.label1.pos = (200,00)
+        self.label1.font_size = 25
+        self.label1.width = 400
+        self.label1.halign = 'center'
+        self.label1.font_name = 'LiberationSans-Regular.ttf'
+        self.label1.text_size = (self.label1.width, None)
+        self.label2 = Label(text="Time:")
+        self.label2.pos = (200,150)
+        self.label2.font_size = 25
+        self.xcount = 0
+        self.window.add_widget(self.img)
+        self.window.add_widget(self.label1)
+        #self.window.add_widget(self.label2)
+        #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
+        Clock.schedule_interval(partial(self.MainLoop, self, 2),0.00018)
+        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+            Clock.schedule_interval(partial(self.ReadSerial, self), 1)
+        return self.window
 
 if __name__ == '__main__':
-    MyApp().run()
+    Monolith().run()
