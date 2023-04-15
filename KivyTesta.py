@@ -332,7 +332,7 @@ class Monolith(App):
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
         Clock.schedule_once(partial(self.MainLoop, self, 10),10)
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-            Clock.schedule_interval(partial(self.ReadSerial, self), 1)
+            #Clock.schedule_interval(partial(self.ReadSerial, self), 1)
         #Clock.schedule_once(partial(self.CheckInScreen,self), 9)
         return self.window
 
