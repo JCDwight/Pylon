@@ -349,7 +349,7 @@ class Monolith(App):
         
         self.BuildElements()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
-        Clock.schedule_interval(partial(self.MainLoop, self, 10),1)
+        Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
         #Clock.schedule_once(partial(self.CheckInScreen,self), 9)
         return self.window
 
