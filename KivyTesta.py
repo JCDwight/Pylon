@@ -314,6 +314,10 @@ class Monolith(App):
         #region
         self.window = FloatLayout()
         self.img = Image(source="Images\\FIRSTNewton2Logo.png", pos=(0,0))
+        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+            self.img.source = 'Images/FIRSTNewton2Logo.png'
+        elif plat.platform()[0] == "W" or plat.platform()[0] == "w":
+            self.img.source = 'Images\\FIRSTNewton2Logo.png'        
         self.label1 = Label(text="")
         self.label1.pos = (-1000, 0)
         self.label1.font_size = 25
