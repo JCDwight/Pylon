@@ -185,7 +185,6 @@ class Monolith(App):
         #region
         #
         noFile = False #Set noFile to false, if we can not load the file we will set this to true
-        print (plat.platform())
         dir_list = 0
         path = "Audio\\" #Folder in the root directory that holds all our audio files
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
@@ -194,36 +193,20 @@ class Monolith(App):
             dir_list = os.listdir(path) #Use the OS library to scan the directory for all files and store them in dir_list
         try: #Use exception handling in case the file does not exist
             loadFile = pd.read_json('DataBases/audioFiles.json') #Try to load audioFiles.json
-            print("FILE")
         except: #If no file exists, we set noFile to true and will create one with the scanned directory.  This should only happen once on first run.
             noFile = True
-            print("NO FILE")
                                 #A file already exists, so we need to load in any new files to the end of the list
         if (noFile == False):   #if we loaded them in the dir_list order it would change a user's selected file
             fallThrough = False
-            print("LoadFile: \n" + str(loadFile))
-            print("Loadfile type:" + str(type(loadFile)))
             newlist = []
-            print('Range(len) of loadfile: ' + str(len(loadFile)))
-            loadFileColumns = loadFile.columns
-            print (loadFileColumns)
             for g in range(len(loadFile)):
-                print('G index for loadFile: ' + str(g))
-                print('loadFile[' + str(g) + ']: ' + str(loadFile[0][g]))
                 newlist.append(loadFile[0][g])
-                #print('Newlist[g]: ' + str(newlist[g]))
-            #newlist = loadFile.values.tolist()    #load previous file names
-            #print("NewList:" + str(newlist))
             for g in range(len(newlist)):
                 listItem = newlist[g]
-                print("List item: " + str(listItem))
-                print("NewList[g]: " + str(newlist[g]))
-                print("G(Index): " + str(g))
                 listItem = str(listItem)            #g starts as a list, we need to convert it to a string
                 listItem = listItem.replace('[','') #Byproducts of converting from JSONs to Dataframes are brackets and pops ( [ ] and ' ')
                 listItem = listItem.replace(']','') #We can use the built in replace function to remove them
                 listItem = listItem.replace("'",'') #Will potentially revist as there's probably a better way to do this
-                print("G in NewList: " + str(listItem))
                 self.soundList.append(listItem)
             for f in range(len(dir_list)):
                 flagged = False
@@ -233,16 +216,13 @@ class Monolith(App):
                     listItem = listItem.replace('[','') #Byproducts of converting from JSONs to Dataframes are brackets and pops ( [ ] and ' ')
                     listItem = listItem.replace(']','') #We can use the built in replace function to remove them
                     listItem = listItem.replace("'",'') #Will potentially revist as there's probably a better way to do this
-                    print('dir_list[' + str(f) + ']: ' + str(dir_list[f]) + ' == listItem: ' + str(listItem))
                     if ((dir_list[f] == listItem) and (flagged == False)): #If the files in the scanned dir_list match the old list, flag and skip
-                        print('FLAGGED: ' + str(listItem))
                         fallThrough = False
                         flagged = True
                         break
                     else:
                         fallThrough = True #If they don't match, fallthrough so we add it to the list
                 if ((fallThrough) and (flagged == False)): #Add new sound to list if fallThrough == True and Flagged(As a match) == False
-                    print('Appending: ' + str(dir_list[f]))
                     self.soundList.append(dir_list[f])
             #print(self.soundList)
             dataFrame = pd.DataFrame(self.soundList)       #Convert the list into a dataframe
@@ -253,15 +233,13 @@ class Monolith(App):
                 self.soundList.append(f)
             dataFrame = pd.DataFrame(self.soundList)        #Convert the list into a dataframe
             dataFrame.to_json('DataBases/audioFiles.json')  #Convert the dataframe to a persistant JSON
-        #print("Loading Files in:'", path, "':")
-        print("SoundList: \n" + str(self.soundList))
+        print("Loading Files in:'", path, "':")
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
             for f in self.soundList:                                  #Load the files in the soundList and print when they load(Linux)
                 self.sounds.append(SoundLoader.load("Audio/" + f))
                 print('Loaded: ' + f)
         else:
             for f in range(len(self.soundList)):                                  #Load the files in the soundList and print when they load
-                print('F: ' + str(f))
                 self.sounds.append(SoundLoader.load(path + self.soundList[f]))
                 print('Loaded: ' + path + self.soundList[f])
         #endregion
@@ -273,7 +251,6 @@ class Monolith(App):
         #print (self.sounds)
         if ((self.sounds[selector]) and ((self.sounds[self.playingSound].length * 1000) < t - self.soundTime)): 
             self.sounds[selector].play() #Plays the selected sound
-            print("Playing")
         #ps.playsound("Audio//" + self.soundList[selector], False)
         self.playingSound = selector #Save the current selected song as our playing sound, since we made it in here, and the sound is playing
         self.soundTime = round(time.time() * 1000) #get the time, round it, and multiply it by 1000 to convert to milliseconds
@@ -302,16 +279,17 @@ class Monolith(App):
     def MainLoop(self, *largs):
         if (self.xcount == 0):
             self.xcount = 1
-            self.CheckInScreen('Tejas', 10, "Images\\creepymiitejas.png",9)
+            self.CheckInScreen('Martin', 10, "Images\\Chargedup.png",6)
 
     def SplashScreen(self, *largs):
         self.label1.pos = (-1000,0)
         self.label2.pos = (-1000,0)
         self.img.pos = (0,0)
-        self.img.source = 'newtonsquared-black.png'
+        self.img.source = 'Images\\FIRSTNewton2Logo.png'
 
     def CheckInScreen(self, name, checkInTime, imageFilePath,soundNum):
         self.PlaySound(soundNum)
+        print('Playing: ' + str(self.soundList[soundNum]))
         self.label1.text = name + ' checked in'
         self.label1.pos = (200, 150)
         self.label1.font_size = 25
@@ -329,7 +307,7 @@ class Monolith(App):
     def BuildElements(self):
         #region
         self.window = FloatLayout()
-        self.img = Image(source="newtonsquared-black.png", pos=(0,0))
+        self.img = Image(source="Images\\FIRSTNewton2Logo.png", pos=(0,0))
         self.label1 = Label(text="")
         self.label1.pos = (-1000, 0)
         self.label1.font_size = 25
@@ -352,7 +330,7 @@ class Monolith(App):
         
         self.BuildElements()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
-        Clock.schedule_once(partial(self.MainLoop, self, 10),5)
+        Clock.schedule_once(partial(self.MainLoop, self, 10),10)
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
             Clock.schedule_interval(partial(self.ReadSerial, self), 1)
         #Clock.schedule_once(partial(self.CheckInScreen,self), 9)
