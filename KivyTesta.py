@@ -279,7 +279,7 @@ class Monolith(App):
     def MainLoop(self, *largs):
         if (self.xcount == 0):
             self.xcount = 1
-            self.CheckInScreen('Martin', 10, "Images\\Chargedup.png",25)
+            self.CheckInScreen('Martin', 10, "Images\\Chargedup.png",33)
 
     def SplashScreen(self, *largs):
         self.label1.pos = (-1000,0)
