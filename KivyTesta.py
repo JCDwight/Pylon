@@ -275,8 +275,10 @@ class Monolith(App):
                 if (self.ser.inWaiting() > 0):
                     data_str = self.ser.read(self.ser.inWaiting()).decode('ascii')
                     print(data_str)
+                    return data_str
             except UnicodeDecodeError as e:
                 print(e)
+                return "0"
 
     def MainLoop(self, *largs):
         if (self.xcount == 0):
@@ -285,6 +287,9 @@ class Monolith(App):
                 self.CheckInScreen('Martin', 10, "Images/Chargedup.png",1)
             else:
                 self.CheckInScreen('Martin', 10, "Images/Chargedup.png",3)
+        data = self.ReadSerial()
+        if(data == "01000000011000110100010011"):
+            self.CheckInScreen('Jay', 10, "testa.png", 1)
 
 
     def SplashScreen(self, *largs):
@@ -343,9 +348,7 @@ class Monolith(App):
         
         self.BuildElements()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
-        Clock.schedule_once(partial(self.MainLoop, self, 10),0)
-        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-            Clock.schedule_interval(partial(self.ReadSerial, self), 1)
+        Clock.schedule_once(partial(self.MainLoop, self, 10),1)
         #Clock.schedule_once(partial(self.CheckInScreen,self), 9)
         return self.window
 
