@@ -268,13 +268,14 @@ class Monolith(App):
         self.debugCounter = self.debugCounter + 1
 
     def ReadSerial(self, *largs):
-        print("Got to ReadSerial")
         if self.ser.isOpen():
             try:
-                print("Got to ReadSerial Try command")
                 if (self.ser.inWaiting() > 0):
                     data_str = self.ser.read(self.ser.inWaiting()).decode('ascii')
+                    print("______________________________________")
+                    print("Data:")
                     print(data_str)
+                    print("______________________________________")
                     return data_str
             except UnicodeDecodeError as e:
                 print(e)
