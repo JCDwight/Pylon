@@ -288,7 +288,7 @@ class Monolith(App):
         if(data == "01000000011000110100010011"):
             self.CheckInScreen('Jay', 10, "testa.png", 14)
             self.ser.write(b'3')
-        else
+        else:
             self.ser.write(b'4')
 
 
