@@ -283,10 +283,6 @@ class Monolith(App):
     def MainLoop(self, *largs):
         if (self.xcount == 0):
             self.xcount = 1
-            if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-                self.CheckInScreen('Martin', 10, "Images/Chargedup.png",1)
-            else:
-                self.CheckInScreen('Martin', 10, "Images/Chargedup.png",3)
         data = self.ReadSerial()
         if(data == "01000000011000110100010011"):
             self.CheckInScreen('Jay', 10, "testa.png", 1)
