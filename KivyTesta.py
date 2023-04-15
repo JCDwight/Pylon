@@ -287,7 +287,7 @@ class Monolith(App):
         data = self.ReadSerial()
         if(data == "01000000011000110100010011"):
             self.CheckInScreen('Jay', 10, "testa.png", 1)
-            self.ser.write(b'4')
+            self.ser.write(b'3')
 
 
     def SplashScreen(self, *largs):
