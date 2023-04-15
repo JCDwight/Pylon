@@ -111,7 +111,6 @@ class User:
         return self.total_attended_minutes
     #endregion
     #Loaders
-    #region
     def LoadCheckins():
         pass
     def SaveCheckins():
@@ -279,7 +278,7 @@ class Monolith(App):
     def MainLoop(self, *largs):
         if (self.xcount == 0):
             self.xcount = 1
-            self.CheckInScreen('Martin', 10, "Images\\Chargedup.png",33)
+            self.CheckInScreen('Martin', 10, "Images\\Chargedup.png",3)
 
     def SplashScreen(self, *largs):
         self.label1.pos = (-1000,0)
