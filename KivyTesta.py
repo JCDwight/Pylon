@@ -282,14 +282,15 @@ class Monolith(App):
                 return "0"
 
     def MainLoop(self, *largs):
-        if (self.xcount == 0):
-            self.xcount = 1
-        data = self.ReadSerial()
-        if(data == "01000000011000110100010011"):
-            self.CheckInScreen('Jay', 10, "testa.png", 14)
-            self.ser.write(b'3')
-        # else:
-        #     self.ser.write(b'4')
+        if (self.ser.inWaiting() > 0):
+            if (self.xcount == 0):
+                self.xcount = 1
+            data = self.ReadSerial()
+            if(data == "01000000011000110100010011"):
+                self.CheckInScreen('Jay', 10, "testa.png", 14)
+                self.ser.write(b'3')
+            else:
+                self.ser.write(b'4')
 
 
     def SplashScreen(self, *largs):
