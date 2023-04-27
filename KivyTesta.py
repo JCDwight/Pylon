@@ -31,6 +31,7 @@ import platform as plat
 import threading
 import serial
 from cryptography.fernet import Fernet
+import random
 
 kivy.require('2.0.0') # replace with your current kivy version !
 FULL_SCREEN = 1
@@ -288,7 +289,7 @@ class Monolith(App):
             if (self.scanLock == 0):
                 data = self.ReadSerial()
                 if(data == "01000000001010010000001110"):
-                    self.CheckInScreen('Jay', 10, "Images/jay.png", 56)
+                    self.CheckInScreen('Jay', 10, "Images/jay.png", random.randint(0, 56)
                     self.ser.write(b'3')
                     Clock.schedule_once(partial(self.SplashScreen,self), 10)
                     self.scanLock = 1
