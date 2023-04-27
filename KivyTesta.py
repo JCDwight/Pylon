@@ -33,7 +33,7 @@ import serial
 from cryptography.fernet import Fernet
 
 kivy.require('2.0.0') # replace with your current kivy version !
-FULL_SCREEN = 0
+FULL_SCREEN = 1
 #Change to true for deployment to touchscreen
 if (plat.platform()[0] == "L" or plat.platform()[0] == "l") and FULL_SCREEN == 1:
     Window.fullscreen = True
@@ -288,7 +288,7 @@ class Monolith(App):
             time.sleep(0.1)
             data = self.ReadSerial()
             if(data == "01000000001010010000001110"):
-                self.CheckInScreen('Jay', 10, "Images/jay.png", 22)
+                self.CheckInScreen('Jay', 10, "Images/jay.png", 23)
                 self.ser.write(b'3')
             else:
                 self.ser.write(b'4')
