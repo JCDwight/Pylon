@@ -279,6 +279,7 @@ class Monolith(App):
     def MainLoop(self, *largs):
         if (self.xcount == 0):
             self.xcount = 1
+            print('Got past xcount')
             self.CheckInScreen('Martin', 10, "Images\\Chargedup.png",6)
 
     def SplashScreen(self, *largs):
