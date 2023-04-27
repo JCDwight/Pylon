@@ -154,6 +154,7 @@ class Monolith(App):
     debugCounter = 0
     debugTimer = 0
     scannedTag = 0
+    scanLock = 0
     #END   Application Variables
     if plat.platform()[0] == "L" or plat.platform()[0] == "l":
         print('Got to Linux Serial Opening')
@@ -285,16 +286,20 @@ class Monolith(App):
         if (self.ser.inWaiting() > 0):
             if (self.xcount == 0):
                 self.xcount = 1
-            time.sleep(0.1)
-            data = self.ReadSerial()
-            if(data == "01000000001010010000001110"):
-                self.CheckInScreen('Jay', 10, "Images/jay.png", 23)
-                self.ser.write(b'3')
-            else:
-                self.ser.write(b'4')
+            #time.sleep(0.1)
+            if (self.scanLock == 0):
+                data = self.ReadSerial()
+                if(data == "01000000001010010000001110"):
+                    self.CheckInScreen('Jay', 10, "Images/jay.png", 56)
+                    self.ser.write(b'3')
+                    Clock.schedule_once(partial(self.SplashScreen,self), 10)
+                    self.scanLock = 1
+                else:
+                    self.ser.write(b'4')
 
 
     def SplashScreen(self, *largs):
+        self.scanLock = 0
         self.label1.pos = (-1000,0)
         self.label2.pos = (-1000,0)
         self.img.pos = (0,0)
