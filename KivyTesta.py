@@ -316,6 +316,7 @@ class Monolith(App):
         self.label2.text = "Time: \n\n" + datetime.datetime.now().strftime("%I:%M %p\n %B %d, %Y")
         self.label2.pos = (200,-50)
         self.label2.halign = 'center'
+        self.label2.font_name = 'Aurebesh.ttf'
         self.label2.font_size = 25
         self.img.pos = (-200,0)
         self.img.source = imageFilePath
