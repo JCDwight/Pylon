@@ -33,9 +33,12 @@ import serial
 from cryptography.fernet import Fernet
 
 kivy.require('2.0.0') # replace with your current kivy version !
-
+FULL_SCREEN = 0
 #Change to true for deployment to touchscreen
-Window.fullscreen = False
+if (plat.platform()[0] == "L" or plat.platform()[0] == "l") and FULL_SCREEN == 1:
+    Window.fullscreen = True
+elif (plat.platform()[0] == "W" or plat.platform()[0] == "w"):
+    Window.fullscreen = False
 
 #User Class
 class User:
@@ -111,7 +114,6 @@ class User:
         return self.total_attended_minutes
     #endregion
     #Loaders
-    #region
     def LoadCheckins():
         pass
     def SaveCheckins():
@@ -266,27 +268,40 @@ class Monolith(App):
         self.debugCounter = self.debugCounter + 1
 
     def ReadSerial(self, *largs):
-        print("Got to ReadSerial")
         if self.ser.isOpen():
             try:
-                print("Got to ReadSerial Try command")
                 if (self.ser.inWaiting() > 0):
                     data_str = self.ser.read(self.ser.inWaiting()).decode('ascii')
+                    print("______________________________________")
+                    print("Data:")
                     print(data_str)
+                    print("______________________________________")
+                    return data_str
             except UnicodeDecodeError as e:
                 print(e)
+                return "0"
 
     def MainLoop(self, *largs):
-        if (self.xcount == 0):
-            self.xcount = 1
-            print('Got past xcount')
-            self.CheckInScreen('Martin', 10, "Images\\Chargedup.png",6)
+        if (self.ser.inWaiting() > 0):
+            if (self.xcount == 0):
+                self.xcount = 1
+            time.sleep(0.1)
+            data = self.ReadSerial()
+            if(data == "01000000011000110100010011"):
+                self.CheckInScreen('Jay', 10, "testa.png", 14)
+                self.ser.write(b'3')
+            else:
+                self.ser.write(b'4')
+
 
     def SplashScreen(self, *largs):
         self.label1.pos = (-1000,0)
         self.label2.pos = (-1000,0)
         self.img.pos = (0,0)
-        self.img.source = 'Images\\FIRSTNewton2Logo.png'
+        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+            self.img.source = 'Images/FIRSTNewton2Logo.png'
+        elif plat.platform()[0] == "W" or plat.platform()[0] == "w":
+            self.img.source = 'Images\\FIRSTNewton2Logo.png'
 
     def CheckInScreen(self, name, checkInTime, imageFilePath,soundNum):
         self.PlaySound(soundNum)
@@ -309,6 +324,10 @@ class Monolith(App):
         #region
         self.window = FloatLayout()
         self.img = Image(source="Images\\FIRSTNewton2Logo.png", pos=(0,0))
+        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+            self.img.source = 'Images/FIRSTNewton2Logo.png'
+        elif plat.platform()[0] == "W" or plat.platform()[0] == "w":
+            self.img.source = 'Images\\FIRSTNewton2Logo.png'        
         self.label1 = Label(text="")
         self.label1.pos = (-1000, 0)
         self.label1.font_size = 25
@@ -331,9 +350,7 @@ class Monolith(App):
         
         self.BuildElements()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
-        Clock.schedule_once(partial(self.MainLoop, self, 10),10)
-        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-            Clock.schedule_interval(partial(self.ReadSerial, self), 1)
+        Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
         #Clock.schedule_once(partial(self.CheckInScreen,self), 9)
         return self.window
 
