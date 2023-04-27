@@ -288,7 +288,7 @@ class Monolith(App):
             time.sleep(0.1)
             data = self.ReadSerial()
             if(data == "01000000001010010000001110"):
-                self.CheckInScreen('Jay', 10, "Images/jay.png", 14)
+                self.CheckInScreen('Jay', 10, "Images/jay.png", 22)
                 self.ser.write(b'3')
             else:
                 self.ser.write(b'4')
