@@ -284,9 +284,7 @@ class Monolith(App):
 
     def MainLoop(self, *largs):
         if (self.ser.inWaiting() > 0):
-            if (self.xcount == 0):
-                self.xcount = 1
-            #time.sleep(0.1)
+            time.sleep(0.1)
             if (self.scanLock == 0):
                 data = self.ReadSerial()
                 if(data == "01000000001010010000001110"):
