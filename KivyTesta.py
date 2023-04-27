@@ -311,12 +311,18 @@ class Monolith(App):
         self.label1.font_size = 25
         self.label1.width = 400
         self.label1.halign = 'center'
-        self.label1.font_name = 'Aurebesh.ttf'
+        if (name == 'Jay'):
+            self.label1.font_name = 'Aurebesh.ttf'
+            self.label2.font_name = 'Aurebesh.ttf'
+        else:
+            self.label1.font_name = 'LiberationSans-Regular.ttf'
+            self.label2.font_name = 'LiberationSans-Regular.ttf'
+
         self.label1.text_size = (self.label1.width, None)
         self.label2.text = "Time: \n\n" + datetime.datetime.now().strftime("%I:%M %p\n %B %d, %Y")
         self.label2.pos = (200,-50)
         self.label2.halign = 'center'
-        self.label2.font_name = 'Aurebesh.ttf'
+
         self.label2.font_size = 25
         self.img.pos = (-200,0)
         self.img.source = imageFilePath
@@ -351,7 +357,8 @@ class Monolith(App):
         
         self.BuildElements()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
-        Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
+        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+            Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
         #Clock.schedule_once(partial(self.CheckInScreen,self), 9)
         return self.window
 
