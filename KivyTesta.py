@@ -311,7 +311,7 @@ class Monolith(App):
         self.label1.font_size = 25
         self.label1.width = 400
         self.label1.halign = 'center'
-        self.label1.font_name = 'LiberationSans-Regular.ttf'
+        self.label1.font_name = 'Aurebesh.ttf'
         self.label1.text_size = (self.label1.width, None)
         self.label2.text = "Time: \n\n" + datetime.datetime.now().strftime("%I:%M %p\n %B %d, %Y")
         self.label2.pos = (200,-50)
