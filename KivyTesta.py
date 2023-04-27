@@ -276,7 +276,7 @@ class Monolith(App):
                     data_str = self.ser.read(self.ser.inWaiting()).decode('ascii')
                     print("______________________________________")
                     print("Data:")
-                    print(data_str)
+                    print(hex(data_str))
                     print("______________________________________")
                     return data_str
             except UnicodeDecodeError as e:
