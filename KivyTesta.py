@@ -323,10 +323,10 @@ class Monolith(App):
                         Clock.schedule_once(partial(self.SplashScreen,self), 10)
                         self.scanLock = 1
                         print(self.user_settings_df)
-            else:
-                self.ser.write(b'4')
-                self.PlaySound(57)
-                self.ser.flush()
+                    else:
+                        self.ser.write(b'4')
+                        self.PlaySound(57)
+                        self.ser.flush()
 
 
     def SplashScreen(self, *largs):
