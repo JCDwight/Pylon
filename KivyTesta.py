@@ -296,7 +296,7 @@ class Monolith(App):
             if (self.scanLock == 0):
                 data = self.ReadSerial()
                 if(data == "01000000001010010000001110"):
-                    self.CheckInScreen('Jay', 10, "Images/jay.png", random.randint(0,56))
+                    self.CheckInScreen('Jay', 10, "Images/jay.png", random.randint(58,69))
                     self.ser.write(b'3')
                     self.debugCounter = self.debugCounter + 1
                     Clock.schedule_once(partial(self.SplashScreen,self), 10)
