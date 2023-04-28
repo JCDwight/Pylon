@@ -156,36 +156,34 @@ class Monolith(App):
     debugTimer = 0
     scannedTag = 0
     scanLock = 0
-    users_df = pd.DataFrame(columns=['Name', 'ID', 'CIT', 'COT'])
+    users_df = pd.DataFrame(columns=['ID', 'CIT', 'COT'])
     user_settings_df = pd.DataFrame(columns=['Name', 'ID', 'S', 'P', 'C'])
 
     #END   Application Variables
 
     if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-        print('Got to Linux Serial Opening')
+        print('Opening serial port...')
         ser = serial.Serial('/dev/ttyACM0', 500000)
 
     if plat.platform()[0] == "W" or plat.platform()[0] == "w":
-        print('Got to Windows Serial Opening')
+        print('Opening serial port...')
         #ser = serial.Serial('COM8', 500000)
 
     def add_user_settings(self, name, ident, s, p, c):
-        print('Got to add user settings (2)')
         self.user_settings_df = self.user_settings_df.append({'Name': name, 'ID': ident, 'S': s, 'P': p, 'C': c}, ignore_index=True)
 
     def add_predefined_users(self):
-        print('Got to predefined users(1)')
-        self.add_user_settings('Jay','16819214',1,'Jay.png','Orange')
-        self.add_user_settings('Jackson',       '01000000011000110100010101',-1,'Default.png','Green')
-        self.add_user_settings('Liam',          '01000000011000110100100101',-1,'Default.png','Green')
-        self.add_user_settings('Luke',          '01000000011000110010011001',-1,'Default.png','Green')
-        self.add_user_settings('Ibrahim',       '01000000011000110010001101',-1,'Default.png','Green')
-        self.add_user_settings('Ryan',          '01000000011000110001110001',-1,'Default.png','Green')
-        self.add_user_settings('Rebagrace',     '01000000011000110100001101',-1,'Default.png','Green')
-        self.add_user_settings('Coach Larry',   '01000000001010010000000001',-1,'Default.png','Green')
-        self.add_user_settings('Coach Harrison','01000000001010000101111100',-1,'Default.png','Green')
-        self.add_user_settings('Coach Tim',     '00101000011100111110011111',-1,'Default.png','Green')
-        self.add_user_settings('Cole',          '01000000011000110001100101',-1,'Default.png','Green')
+        self.add_user_settings('Coach Jay',     '16819214',1,'Jay.png','Orange')
+        self.add_user_settings('Jackson',       '16878869',-1,'Default.png','Green')
+        self.add_user_settings('Liam',          '16878885',-1,'Default.png','Green')
+        self.add_user_settings('Luke',          '16878745',-1,'Default.png','Green')
+        self.add_user_settings('Ibrahim',       '16878733',-1,'Default.png','Green')
+        self.add_user_settings('Ryan',          '16878705',-1,'Default.png','Green')
+        self.add_user_settings('Rebagrace',     '16878861',-1,'Default.png','Green')
+        self.add_user_settings('Coach Larry',   '16819201',-1,'Default.png','Green')
+        self.add_user_settings('Coach Harrison','16818556',-1,'Default.png','Green')
+        self.add_user_settings('Coach Tim',     '16818556',-1,'Default.png','Green')
+        self.add_user_settings('Cole',          '16878693',-1,'Default.png','Green')
         #self.add_user_settings('','',-1,'Default.png','Green')
 
 
@@ -312,18 +310,20 @@ class Monolith(App):
             time.sleep(0.1)
             if (self.scanLock == 0):
                 data = self.ReadSerial()
-                if(data == "01000000001010010000001110"):
-                    self.CheckInScreen('Jay', 10, "Images/jay.png", random.randint(58,69))
-                    self.ser.write(b'3')
-                    self.debugCounter = self.debugCounter + 1
-                    Clock.schedule_once(partial(self.SplashScreen,self), 10)
-                    self.scanLock = 1
-                    self.add_predefined_users()
-                    print(self.user_settings_df)
-                else:
-                    self.ser.write(b'4')
-                    self.PlaySound(57)
-                    self.ser.flush()
+                data = int(data, 2)
+                for u in self.user_settings_df:
+                    if(data == u['ID']):
+                        self.CheckInScreen(u['Name'], "Images/" + u['P'], u['S'], u['C'])
+                self.ser.write(b'3')
+                self.debugCounter = self.debugCounter + 1
+                Clock.schedule_once(partial(self.SplashScreen,self), 10)
+                self.scanLock = 1
+                self.add_predefined_users()
+                print(self.user_settings_df)
+            else:
+                self.ser.write(b'4')
+                self.PlaySound(57)
+                self.ser.flush()
 
 
     def SplashScreen(self, *largs):
@@ -336,9 +336,11 @@ class Monolith(App):
         elif plat.platform()[0] == "W" or plat.platform()[0] == "w":
             self.img.source = 'Images\\FIRSTNewton2Logo.png'
 
-    def CheckInScreen(self, name, checkInTime, imageFilePath,soundNum):
+    def CheckInScreen(self, name, imageFilePath, soundNum, color):
         if (soundNum > -1):
             self.PlaySound(soundNum)
+        else:
+            self.PlaySound(random.randint(58,69))
         print('Playing: ' + str(self.soundList[soundNum]))
         self.label1.text = name + ' checked in'
         self.label1.pos = (200, 150)
