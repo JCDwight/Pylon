@@ -302,6 +302,7 @@ class Monolith(App):
                     self.scanLock = 1
                 else:
                     self.ser.write(b'4')
+                    self.PlaySound(57)
 
 
     def SplashScreen(self, *largs):
