@@ -308,6 +308,7 @@ class Monolith(App):
 
     def SplashScreen(self, *largs):
         self.scanLock = 0
+        self.ser.flush()
         self.label1.pos = (-1000,0)
         self.label2.pos = (-1000,0)
         self.img.pos = (0,0)
@@ -317,7 +318,8 @@ class Monolith(App):
             self.img.source = 'Images\\FIRSTNewton2Logo.png'
 
     def CheckInScreen(self, name, checkInTime, imageFilePath,soundNum):
-        self.PlaySound(soundNum)
+        if (soundNum > -1):
+            self.PlaySound(soundNum)
         print('Playing: ' + str(self.soundList[soundNum]))
         self.label1.text = name + ' checked in'
         self.label1.pos = (200, 150)
