@@ -311,23 +311,27 @@ class Monolith(App):
             if (self.scanLock == 0):
                 data = self.ReadSerial()
                 data = int(data, 2)
-                print('Printing User_Settings_DF: ')
-                print(self.user_settings_df)
-                for i in range(len(self.user_settings_df)):
-                    print('Data: ' + str(data))
-                    print('vs')
-                    print('user settings ID: ' + str(self.user_settings_df.loc[i,'ID']))                   
+                for i in range(len(self.user_settings_df)):                 
                     if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
                         self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'])
                         self.ser.write(b'3')
                         Clock.schedule_once(partial(self.SplashScreen,self), 10)
                         self.scanLock = 1
-                        print(self.user_settings_df)
-                    else:
-                        self.ser.write(b'4')
-                        self.PlaySound(57)
                         self.ser.flush()
-
+                else:
+                    self.ser.write(b'4')
+                    self.PlaySound(57)
+                    self.ser.flush()
+                if (str(data) == ('16858416')):
+                    pass
+                if (str(data) == ('16858425')):
+                    pass
+                if (str(data) == ('16558422')):
+                    pass
+                if (str(data) == ('16878687')):
+                    pass
+                if (str(data) == ('16878770')):
+                    pass
 
     def SplashScreen(self, *largs):
         self.ser.flush()
