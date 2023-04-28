@@ -271,12 +271,6 @@ class Monolith(App):
     def LoadUsers():
         pass
 
-    def ChuckDebugger(self):
-        if (self.debugCounter % 80 == 0):
-            print("Chuck: " + str(self.debugCounter) + "    Time per 800 frames: " + str(time.time() - self.debugTimer))
-            self.debugTimer = time.time()
-        self.debugCounter = self.debugCounter + 1
-
     def ReadSerial(self, *largs):
         if self.ser.isOpen():
             try:
@@ -297,8 +291,9 @@ class Monolith(App):
             if (self.scanLock == 0):
                 data = self.ReadSerial()
                 if(data == "01000000001010010000001110"):
-                    self.CheckInScreen('Jay', 10, "Images/jay.png", random.randint(0, 56))
+                    self.CheckInScreen('Jay', 10, "Images/jay.png", self.debugCounter)
                     self.ser.write(b'3')
+                    self.debugCounter = self.debugCounter + 1
                     Clock.schedule_once(partial(self.SplashScreen,self), 10)
                     self.scanLock = 1
                 else:
