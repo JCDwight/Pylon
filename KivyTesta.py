@@ -321,7 +321,6 @@ class Monolith(App):
                 else:
                     self.ser.write(b'4')
                     self.PlaySound(57)
-                    self.ser.flush()
                 if (str(data) == ('16858416')):
                     pass
                 if (str(data) == ('16858425')):
