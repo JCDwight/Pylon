@@ -253,6 +253,7 @@ class Monolith(App):
             for f in range(len(self.soundList)):                                  #Load the files in the soundList and print when they load
                 self.sounds.append(SoundLoader.load(path + self.soundList[f]))
                 print('Loaded: ' + path + self.soundList[f])
+        self.PlaySound(7)
         #endregion
 
     def PlaySound(self, selector):
