@@ -268,7 +268,8 @@ class Monolith(App):
             for f in range(len(self.soundList)):                                  #Load the files in the soundList and print when they load
                 self.sounds.append(SoundLoader.load(path + self.soundList[f]))
                 print('Loaded: ' + path + self.soundList[f])
-        self.PlaySound(7)
+        if (FULL_SCREEN == 1):
+            self.PlaySound(7)
         #endregion
 
     def UnlockScan(self, *largs):
@@ -317,7 +318,6 @@ class Monolith(App):
                         self.ser.write(b'3')
                         Clock.schedule_once(partial(self.SplashScreen,self), 10)
                         self.scanLock = 1
-                        self.ser.flush()
                 else:
                     self.ser.write(b'4')
                     self.PlaySound(57)
