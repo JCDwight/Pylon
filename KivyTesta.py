@@ -314,8 +314,9 @@ class Monolith(App):
                 data = int(data, 2)
                 for i in range(len(self.user_settings_df)):                 
                     if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
-                        self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'])
                         self.ser.write(b'3')
+                        time.sleep(0.1)
+                        self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'])
                         Clock.schedule_once(partial(self.SplashScreen,self), 10)
                         self.scanLock = 1
                 else:
