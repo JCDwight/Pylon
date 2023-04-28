@@ -172,6 +172,9 @@ class Monolith(App):
     def add_user_settings(self, name, ident, s, p, c):
         self.user_settings_df.append({'Name': name, 'ID': ident, 'S': s, 'P': p, 'C': c})
 
+    def add_predefined_users(self):
+        self.add_user_settings('Jay','16819214',1,'Jay.png','Orange')
+
     def encrypt_dataframe(df, key):
         #Encrypts a pandas DataFrame using the Fernet encryption library.
         # Convert the DataFrame to bytes
@@ -301,6 +304,8 @@ class Monolith(App):
                     self.debugCounter = self.debugCounter + 1
                     Clock.schedule_once(partial(self.SplashScreen,self), 10)
                     self.scanLock = 1
+                    self.add_predefined_users()
+                    print(self.user_settings_df)
                 else:
                     self.ser.write(b'4')
                     self.PlaySound(57)
