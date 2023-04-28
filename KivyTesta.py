@@ -318,7 +318,7 @@ class Monolith(App):
                     print('vs')
                     print('user settings ID: ' + str(self.user_settings_df.loc[i,'ID']))                   
                     if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
-                        self.CheckInScreen(self.user_settings_df.loc[i,'Name'], "Images/" + self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'])
+                        self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'])
                         self.ser.write(b'3')
                         Clock.schedule_once(partial(self.SplashScreen,self), 10)
                         self.scanLock = 1
@@ -364,7 +364,8 @@ class Monolith(App):
 
         self.label2.font_size = 25
         self.img.pos = (-200,0)
-        self.img.source = imageFilePath
+        self.img.source = "Images/" + imageFilePath
+        print (self.img.source)
 
     def BuildElements(self):
         #region
