@@ -256,6 +256,9 @@ class Monolith(App):
         self.PlaySound(7)
         #endregion
 
+    def UnlockScan(self):
+        self.scanLock = 0
+
     def PlaySound(self, selector):
         #region
         t = round(time.time() * 1000)
@@ -265,6 +268,8 @@ class Monolith(App):
             self.sounds[selector].play() #Plays the selected sound
         #ps.playsound("Audio//" + self.soundList[selector], False)
         self.playingSound = selector #Save the current selected song as our playing sound, since we made it in here, and the sound is playing
+        self.scanLock = 1
+        Clock.schedule_once(partial(self.UnlockScan), self.sounds[self.playingSound].length)
         self.soundTime = round(time.time() * 1000) #get the time, round it, and multiply it by 1000 to convert to milliseconds
         #endregion
 
