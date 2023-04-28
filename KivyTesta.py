@@ -173,7 +173,7 @@ class Monolith(App):
         self.user_settings_df = self.user_settings_df.append({'Name': name, 'ID': ident, 'S': s, 'P': p, 'C': c}, ignore_index=True)
 
     def add_predefined_users(self):
-        self.add_user_settings('Coach Jay',     '16819214',1,'Jay.png','Orange')
+        self.add_user_settings('Coach Jay',     '16819214', 1,'Jay.png'    ,'Orange')
         self.add_user_settings('Jackson',       '16878869',-1,'Default.png','Green')
         self.add_user_settings('Liam',          '16878885',-1,'Default.png','Green')
         self.add_user_settings('Luke',          '16878745',-1,'Default.png','Green')
@@ -314,12 +314,10 @@ class Monolith(App):
                 for u in self.user_settings_df:
                     if(data == u['ID']):
                         self.CheckInScreen(u['Name'], "Images/" + u['P'], u['S'], u['C'])
-                self.ser.write(b'3')
-                self.debugCounter = self.debugCounter + 1
-                Clock.schedule_once(partial(self.SplashScreen,self), 10)
-                self.scanLock = 1
-                self.add_predefined_users()
-                print(self.user_settings_df)
+                        self.ser.write(b'3')
+                        Clock.schedule_once(partial(self.SplashScreen,self), 10)
+                        self.scanLock = 1
+                        print(self.user_settings_df)
             else:
                 self.ser.write(b'4')
                 self.PlaySound(57)
@@ -389,9 +387,9 @@ class Monolith(App):
         #endregion
 
     def build(self):
-        self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.
-        
+        self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.        
         self.BuildElements()
+        self.add_predefined_users()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
