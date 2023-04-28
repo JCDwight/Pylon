@@ -312,6 +312,7 @@ class Monolith(App):
                 data = self.ReadSerial()
                 data = int(data, 2)
                 for u in self.user_settings_df:
+                    print(u)
                     if(data == u['ID']):
                         self.CheckInScreen(u['Name'], "Images/" + u['P'], u['S'], u['C'])
                         self.ser.write(b'3')
