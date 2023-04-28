@@ -280,23 +280,24 @@ class Monolith(App):
         if self.ser.isOpen():
             try:
                 if (self.ser.inWaiting() > 0):
-                    data_str = self.ser.read(self.ser.inWaiting()).decode('ascii')
-                    print("______________________________________")
-                    print("Data:")
-                    print(int(data_str, 2))
-                    print("______________________________________")
-                    return data_str
+                    if (self.ser.inWaiting() == 26):
+                        data_str = self.ser.read(self.ser.inWaiting()).decode('ascii')
+                        print("______________________________________")
+                        print("Data:")
+                        print(int(data_str, 2))
+                        print("______________________________________")
+                        return data_str
             except UnicodeDecodeError as e:
                 print(e)
                 return "0"
 
     def MainLoop(self, *largs):
-        if (self.ser.inWaiting() > 0):
+        if (self.ser.inWaiting() > 10):
             time.sleep(0.1)
             if (self.scanLock == 0):
                 data = self.ReadSerial()
                 if(data == "01000000001010010000001110"):
-                    self.CheckInScreen('Jay', 10, "Images/jay.png", self.debugCounter)
+                    self.CheckInScreen('Jay', 10, "Images/jay.png", random.Random(0,56))
                     self.ser.write(b'3')
                     self.debugCounter = self.debugCounter + 1
                     Clock.schedule_once(partial(self.SplashScreen,self), 10)
