@@ -280,13 +280,12 @@ class Monolith(App):
         if self.ser.isOpen():
             try:
                 if (self.ser.inWaiting() > 0):
-                    if (self.ser.inWaiting() == 26):
-                        data_str = self.ser.read(self.ser.inWaiting()).decode('ascii')
-                        print("______________________________________")
-                        print("Data:")
-                        print(int(data_str, 2))
-                        print("______________________________________")
-                        return data_str
+                    data_str = self.ser.read(self.ser.inWaiting()).decode('ascii')
+                    print("______________________________________")
+                    print("Data:")
+                    print(int(data_str, 2))
+                    print("______________________________________")
+                    return data_str
             except UnicodeDecodeError as e:
                 print(e)
                 return "0"
