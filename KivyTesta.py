@@ -173,7 +173,7 @@ class Monolith(App):
         self.user_settings_df = self.user_settings_df.append({'Name': name, 'ID': ident, 'S': s, 'P': p, 'C': c}, ignore_index=True)
 
     def add_predefined_users(self):
-        self.add_user_settings('Coach Jay',     '16819214', 1,'Jay.png'    ,'Orange')
+        self.add_user_settings('Coach Jay',     '16819214', 1,'jay.png'    ,'Orange')
         self.add_user_settings('Jackson',       '16878869',-1,'Default.png','Green')
         self.add_user_settings('Liam',          '16878885',-1,'Default.png','Green')
         self.add_user_settings('Luke',          '16878745',-1,'Default.png','Green')
