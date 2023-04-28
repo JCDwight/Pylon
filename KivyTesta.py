@@ -177,11 +177,18 @@ class Monolith(App):
     def add_predefined_users(self):
         print('Got to predefined users(1)')
         self.add_user_settings('Jay','16819214',1,'Jay.png','Orange')
-        self.add_user_settings('Jay','26819214',1,'Jay.png','Orange')
-        self.add_user_settings('Jay','36819214',1,'Jay.png','Orange')
-        self.add_user_settings('Jay','46819214',1,'Jay.png','Orange')
-        self.add_user_settings('Jay','56819214',1,'Jay.png','Orange')
-        self.add_user_settings('Jay','66819214',1,'Jay.png','Orange')
+        self.add_user_settings('Jackson',       '01000000011000110100010101',-1,'Default.png','Green')
+        self.add_user_settings('Liam',          '01000000011000110100100101',-1,'Default.png','Green')
+        self.add_user_settings('Luke',          '01000000011000110010011001',-1,'Default.png','Green')
+        self.add_user_settings('Ibrahim',       '01000000011000110010001101',-1,'Default.png','Green')
+        self.add_user_settings('Ryan',          '01000000011000110001110001',-1,'Default.png','Green')
+        self.add_user_settings('Rebagrace',     '01000000011000110100001101',-1,'Default.png','Green')
+        self.add_user_settings('Coach Larry',   '01000000001010010000000001',-1,'Default.png','Green')
+        self.add_user_settings('Coach Harrison','01000000001010000101111100',-1,'Default.png','Green')
+        self.add_user_settings('Coach Tim',     '00101000011100111110011111',-1,'Default.png','Green')
+        self.add_user_settings('Cole',          '01000000011000110001100101',-1,'Default.png','Green')
+        #self.add_user_settings('','',-1,'Default.png','Green')
+
 
     def encrypt_dataframe(df, key):
         #Encrypts a pandas DataFrame using the Fernet encryption library.
