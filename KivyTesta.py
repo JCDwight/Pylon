@@ -307,7 +307,6 @@ class Monolith(App):
 
 
     def SplashScreen(self, *largs):
-        self.scanLock = 0
         self.ser.flush()
         self.label1.pos = (-1000,0)
         self.label2.pos = (-1000,0)
