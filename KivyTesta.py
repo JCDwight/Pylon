@@ -313,15 +313,13 @@ class Monolith(App):
                 data = int(data, 2)
                 print('Printing User_Settings_DF: ')
                 print(self.user_settings_df)
-                for u in self.user_settings_df:
-                    print('Printing u: ')
-                    print(u)
-                    #if(data == u['ID']):
-                    #    self.CheckInScreen(u['Name'], "Images/" + u['P'], u['S'], u['C'])
-                    #    self.ser.write(b'3')
-                    #    Clock.schedule_once(partial(self.SplashScreen,self), 10)
-                    #    self.scanLock = 1
-                    #    print(self.user_settings_df)
+                for i in range(len(self.user_settings_df)):
+                    if(data == self.user_settings_df.loc[i,'ID']):
+                        self.CheckInScreen(self.user_settings_df.loc[i,'Name'], "Images/" + self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'])
+                        self.ser.write(b'3')
+                        Clock.schedule_once(partial(self.SplashScreen,self), 10)
+                        self.scanLock = 1
+                        print(self.user_settings_df)
             else:
                 self.ser.write(b'4')
                 self.PlaySound(57)
