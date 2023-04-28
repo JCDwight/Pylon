@@ -177,6 +177,11 @@ class Monolith(App):
     def add_predefined_users(self):
         print('Got to predefined users(1)')
         self.add_user_settings('Jay','16819214',1,'Jay.png','Orange')
+        self.add_user_settings('Jay','26819214',1,'Jay.png','Orange')
+        self.add_user_settings('Jay','36819214',1,'Jay.png','Orange')
+        self.add_user_settings('Jay','46819214',1,'Jay.png','Orange')
+        self.add_user_settings('Jay','56819214',1,'Jay.png','Orange')
+        self.add_user_settings('Jay','66819214',1,'Jay.png','Orange')
 
     def encrypt_dataframe(df, key):
         #Encrypts a pandas DataFrame using the Fernet encryption library.
