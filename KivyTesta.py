@@ -156,7 +156,11 @@ class Monolith(App):
     debugTimer = 0
     scannedTag = 0
     scanLock = 0
+    users_df = pd.DataFrame(columns=['Name', 'ID', 'CIT', 'COT'])
+    user_settings_df = pd.DataFrame(columns=['Name', 'ID', 'S', 'P', 'C'])
+
     #END   Application Variables
+
     if plat.platform()[0] == "L" or plat.platform()[0] == "l":
         print('Got to Linux Serial Opening')
         ser = serial.Serial('/dev/ttyACM0', 500000)
@@ -164,6 +168,9 @@ class Monolith(App):
     if plat.platform()[0] == "W" or plat.platform()[0] == "w":
         print('Got to Windows Serial Opening')
         #ser = serial.Serial('COM8', 500000)
+
+    def add_user_settings(self, name, ident, s, p, c):
+        self.user_settings_df.append({'Name': name, 'ID': ident, 'S': s, 'P': p, 'C': c})
 
     def encrypt_dataframe(df, key):
         #Encrypts a pandas DataFrame using the Fernet encryption library.
