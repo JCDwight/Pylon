@@ -170,7 +170,7 @@ class Monolith(App):
         #ser = serial.Serial('COM8', 500000)
 
     def add_user_settings(self, name, ident, s, p, c):
-        self.user_settings_df.append({'Name': name, 'ID': ident, 'S': s, 'P': p, 'C': c})
+        self.user_settings_df.append({'Name': name, 'ID': ident, 'S': s, 'P': p, 'C': c}, ignore_index=True)
 
     def add_predefined_users(self):
         self.add_user_settings('Jay','16819214',1,'Jay.png','Orange')
