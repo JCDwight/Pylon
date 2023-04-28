@@ -319,8 +319,9 @@ class Monolith(App):
                         Clock.schedule_once(partial(self.SplashScreen,self), 10)
                         self.scanLock = 1
                 else:
-                    self.ser.write(b'4')
+                    self.ser.write(b'3')
                     self.PlaySound(57)
+
                 if (str(data) == ('16858416')):
                     pass
                 if (str(data) == ('16858425')):
