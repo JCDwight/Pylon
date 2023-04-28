@@ -170,9 +170,11 @@ class Monolith(App):
         #ser = serial.Serial('COM8', 500000)
 
     def add_user_settings(self, name, ident, s, p, c):
+        print('Got to add user settings (2)')
         self.user_settings_df.append({'Name': name, 'ID': ident, 'S': s, 'P': p, 'C': c}, ignore_index=True)
 
     def add_predefined_users(self):
+        print('Got to predefined users(1)')
         self.add_user_settings('Jay','16819214',1,'Jay.png','Orange')
 
     def encrypt_dataframe(df, key):
