@@ -314,6 +314,12 @@ class Monolith(App):
                 print('Printing User_Settings_DF: ')
                 print(self.user_settings_df)
                 for i in range(len(self.user_settings_df)):
+                    print('Data: ' + data)
+                    print('vs')
+                    print('user settings ID: ' + str(self.user_settings_df.loc[i,'ID']))                    
+                    print(str(data))
+                    print('vs')
+                    print('user settings ID: ' + str(self.user_settings_df.loc[i,'ID']))
                     if(data == str(self.user_settings_df.loc[i,'ID'])):
                         self.CheckInScreen(self.user_settings_df.loc[i,'Name'], "Images/" + self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'])
                         self.ser.write(b'3')
