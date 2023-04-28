@@ -314,9 +314,6 @@ class Monolith(App):
                 data = int(data, 2)
                 for i in range(len(self.user_settings_df)):                 
                     if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
-                        self.ser.write(b'3')
-                        print('Got to ser write 3')
-                        time.sleep(0.1)
                         self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'])
                         Clock.schedule_once(partial(self.SplashScreen,self), 10)
                         self.scanLock = 1
@@ -350,6 +347,7 @@ class Monolith(App):
             self.PlaySound(soundNum)
         else:
             self.PlaySound(random.randint(58,69))
+        self.ser.write(b'3')
         print('Playing: ' + str(self.soundList[soundNum]))
         self.label1.text = name + ' checked in'
         self.label1.pos = (200, 150)
