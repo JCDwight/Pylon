@@ -364,7 +364,9 @@ class Monolith(App):
 
         self.label2.font_size = 25
         self.img.pos = (-200,0)
+        print(imageFilePath)
         imageFilePath = "Images/" + imageFilePath
+        print(imageFilePath)
         self.img.source = imageFilePath
         print (self.img.source)
 
