@@ -314,9 +314,9 @@ class Monolith(App):
                 print('Printing User_Settings_DF: ')
                 print(self.user_settings_df)
                 for i in range(len(self.user_settings_df)):
-                    print('Data: ' + data)
+                    print('Data: ' + str(data))
                     print('vs')
-                    print('user settings ID: ' + str(self.user_settings_df.loc[i,'ID']))                    
+                    print('user settings ID: ' + self.user_settings_df.loc[i,'ID'])                    
                     print(str(data))
                     print('vs')
                     print('user settings ID: ' + str(self.user_settings_df.loc[i,'ID']))
