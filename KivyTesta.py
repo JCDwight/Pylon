@@ -156,7 +156,7 @@ class Monolith(App):
     debugTimer = 0
     scannedTag = 0
     scanLock = 0
-    users_df = pd.DataFrame(columns=['ID', 'CIT', 'COT'])
+    users_df = pd.DataFrame(columns=['ID', 'CIOT', 'CIOO'])
     user_settings_df = pd.DataFrame(columns=['Name', 'ID', 'S', 'P', 'C'])
 
     #END   Application Variables
@@ -354,7 +354,7 @@ class Monolith(App):
         self.label1.font_size = 25
         self.label1.width = 400
         self.label1.halign = 'center'
-        if (name == 'Jay'):
+        if (name == 'Coach Jay'):
             self.label1.font_name = 'Aurebesh.ttf'
             self.label2.font_name = 'Aurebesh.ttf'
         else:
