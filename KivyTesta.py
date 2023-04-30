@@ -158,6 +158,8 @@ class Monolith(App):
     scanLock = 0
     users_df = pd.DataFrame(columns=['ID', 'CIOT', 'CIOO'])
     user_settings_df = pd.DataFrame(columns=['Name', 'ID', 'S', 'P', 'C'])
+    encryption_key = 0
+    encrypted_data = 0
 
     #END   Application Variables
 
@@ -319,7 +321,7 @@ class Monolith(App):
                         Clock.schedule_once(partial(self.SplashScreen,self), 10)
                         self.scanLock = 1
                 else:
-                    self.ser.write(b'1')
+                    self.ser.write(b'4')
                     self.PlaySound(57)
 
                 if (str(data) == ('16858416')):
@@ -331,8 +333,9 @@ class Monolith(App):
                 if (str(data) == ('16878687')):
                     pass
                 if (str(data) == ('16878770')):
-                    pass
-
+                    for i in len(self.users_df):
+                        print(self.users_df[i])
+                    
     def SplashScreen(self, *largs):
         self.label1.pos = (-1000,0)
         self.label2.pos = (-1000,0)
@@ -373,7 +376,6 @@ class Monolith(App):
     def AddCheckInOut(self):
         pass
 
-
     def BuildElements(self):
         #region
         self.window = FloatLayout()
@@ -399,10 +401,56 @@ class Monolith(App):
         self.window.add_widget(self.label2)
         #endregion
 
+    #Method encrypts the user check in dataframe, then saves it to a file
+    def Encrypt_and_Save(self):
+        #Convert dataframe to binary format
+        df_bytes = self.users_df.to
+        #Create a Fernet encryption object
+        fernet = Fernet(self.encryption_key)
+        #Encrypt the binary data
+        encrypted_data = fernet.encrypt(df_bytes)
+        #Save the encrypted data to a file
+        with open('checkins.chk', 'wb') as file:
+            file.write(encrypted_data)
+
+    def Just_Save(self):
+        self.users_df.to_csv('checkins.csv', index=False)
+
+    def Just_Load(self):
+        self.users_df = pd.read_csv('checkins.csv')
+        print("Checkin Dataframe: ")
+        print(self.users_df)
+
+    #Method Loads the encrypted file, then decrypts it and stores that info in the user check in dataframe
+    def Load_and_Decrypt(self):
+        #Load the encrypted data from file
+        with open('checkins.chk', 'rb') as file:
+            encrypted_data = file.read()
+        #Create a Fernet encryption object using the key
+        fernet = Fernet(self.encryption_key)
+        #Decrypt the binary data
+        decrypted_data = fernet.decrypt(encrypted_data)
+        #Convert the decrypted data to a pandas DataFrame
+        self.users_df = pd.read_pickle(decrypted_data)
+        return self.users_df
+
+    def Setup(self):
+        #Loads encryption key into memory for future encrypting/decrypting
+        with open('encryption_key.bin', 'rb') as file:
+            self.encryption_key = file.read()
+        self.Just_Load()
+        #self.users_df = self.users_df.append({'ID': '16819214', 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)
+        print(self.users_df)
+        self.Just_Save()
+        self.Just_Load()
+        print(self.users_df)
+
+
     def build(self):
         self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.        
         self.BuildElements()
         self.add_predefined_users()
+        self.Setup()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
