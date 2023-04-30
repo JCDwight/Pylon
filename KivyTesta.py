@@ -321,20 +321,20 @@ class Monolith(App):
                         Clock.schedule_once(partial(self.SplashScreen,self), 10)
                         self.scanLock = 1
                 else:
-                    self.ser.write(b'4')
-                    self.PlaySound(57)
-
-                if (str(data) == ('16858416')):
-                    pass
-                if (str(data) == ('16858425')):
-                    pass
-                if (str(data) == ('16558422')):
-                    pass
-                if (str(data) == ('16878687')):
-                    pass
-                if (str(data) == ('16878770')):
-                    print(str(self.users_df))
-                    
+                    if (str(data) == ('16858416')):
+                        pass
+                    elif (str(data) == ('16858425')):
+                        pass
+                    elif (str(data) == ('16558422')):
+                        self.PlaySound(72)
+                    elif (str(data) == ('16878687')):
+                        self.PlaySound(73)
+                    elif (str(data) == ('16878770')):
+                        print(str(self.users_df))
+                        self.PlaySound(74)
+                    else:
+                        self.ser.write(b'4')
+                        self.PlaySound(57)                    
     def SplashScreen(self, *largs):
         self.label1.pos = (-1000,0)
         self.label2.pos = (-1000,0)
