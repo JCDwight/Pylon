@@ -344,7 +344,7 @@ class Monolith(App):
 
     def CheckInScreen(self, name, imageFilePath, soundNum, color):
         self.ser.write(b'3')
-        time.sleep(2)
+        time.sleep(1)
         if (soundNum > -1):
             self.PlaySound(soundNum)
         else:
