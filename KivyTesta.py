@@ -311,7 +311,6 @@ class Monolith(App):
             time.sleep(0.1)
             if (self.scanLock == 0):
                 data = self.ReadSerial()
-                data = "16878861"
                 data = int(data, 2)
                 for i in range(len(self.user_settings_df)):                 
                     if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
@@ -320,7 +319,7 @@ class Monolith(App):
                         Clock.schedule_once(partial(self.SplashScreen,self), 10)
                         self.scanLock = 1
                 else:
-                    self.ser.write(b'4')
+                    self.ser.write(b'1')
                     self.PlaySound(57)
 
                 if (str(data) == ('16858416')):
@@ -361,19 +360,18 @@ class Monolith(App):
         else:
             self.label1.font_name = 'LiberationSans-Regular.ttf'
             self.label2.font_name = 'LiberationSans-Regular.ttf'
-
         self.label1.text_size = (self.label1.width, None)
         self.label2.text = "Time: \n\n" + datetime.datetime.now().strftime("%I:%M %p\n %B %d, %Y")
         self.label2.pos = (200,-50)
         self.label2.halign = 'center'
-
         self.label2.font_size = 25
         self.img.pos = (-200,0)
-        print(imageFilePath)
         imageFilePath = "Images/" + imageFilePath
-        print(imageFilePath)
         self.img.source = imageFilePath
-        print (self.img.source)
+
+    def AddCheckInOut(self):
+
+
 
     def BuildElements(self):
         #region
