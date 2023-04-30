@@ -347,6 +347,7 @@ class Monolith(App):
             self.PlaySound(soundNum)
         else:
             self.PlaySound(random.randint(58,69))
+        time.sleep(0.3)
         self.ser.write(b'3')
         print('Playing: ' + str(self.soundList[soundNum]))
         self.label1.text = name + ' checked in'
