@@ -436,6 +436,7 @@ class Monolith(App):
     def Add_Checkinorout(self, ID):
         ins = 0
         outs = 0
+        print(len(self.users_df))
         for i in len(self.users_df):
             if (self.users_df.loc(i,'CIOO') == 1):
                 ins = ins + 1
