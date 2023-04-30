@@ -186,6 +186,8 @@ class Monolith(App):
         self.add_user_settings('Coach Harrison','16818556',-1,'Default.png','Green')
         self.add_user_settings('Coach Tim',     '16818556',-1,'Default.png','Green')
         self.add_user_settings('Cole',          '16878693',-1,'Default.png','Green')
+        self.add_user_settings('Martin',        '16858425', 6,'Chargedup.png','Cyan')
+        
         #self.add_user_settings('','',-1,'Default.png','Green')
 
 
