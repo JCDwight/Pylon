@@ -382,10 +382,6 @@ class Monolith(App):
         imageFilePath = "Images/" + imageFilePath
         self.img.source = imageFilePath
 
-
-    def AddCheckInOut(self):
-        pass
-
     def BuildElements(self):
         #region
         self.window = FloatLayout()
@@ -432,7 +428,18 @@ class Monolith(App):
         print(self.users_df)
 
     def Add_Checkinorout(self, ID):
-        self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)
+        ins = 0
+        outs = 0
+        for i in len(self.users_df):
+            if (self.users_df.loc(i,'CIOO') == 1):
+                ins = ins + 1
+            elif(self.users_df.loc(i,'CIOO')):
+                outs = outs + 1
+        if (ins >= outs):
+            self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 2}, ignore_index=True)
+        else:
+            self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)            
+        self.Just_Save()
 
     #Method Loads the encrypted file, then decrypts it and stores that info in the user check in dataframe
     def Load_and_Decrypt(self):
@@ -453,11 +460,6 @@ class Monolith(App):
             self.encryption_key = file.read()
         self.Just_Load()
         #self.users_df = self.users_df.append({'ID': '16819214', 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)
-        print(self.users_df)
-        self.Just_Save()
-        self.Just_Load()
-        print(self.users_df)
-
 
     def build(self):
         self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.        
