@@ -333,8 +333,7 @@ class Monolith(App):
                 if (str(data) == ('16878687')):
                     pass
                 if (str(data) == ('16878770')):
-                    for i in len(self.users_df):
-                        print(self.users_df[i])
+                    print(str(self.users_df))
                     
     def SplashScreen(self, *largs):
         self.label1.pos = (-1000,0)
