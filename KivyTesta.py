@@ -177,7 +177,7 @@ class Monolith(App):
     def add_predefined_users(self):
         self.add_user_settings('Coach Jay',     '16819214', 1,'jay.png'    ,'Orange')
         self.add_user_settings('Jackson',       '16878869',-1,'Default.png','Green')
-        self.add_user_settings('Liam',          '16878885',-1,'Default.png','Green')
+        self.add_user_settings('Liam',          '16878885',-1,'Default.png','Blue')
         self.add_user_settings('Luke',          '16878745',-1,'Default.png','Green')
         self.add_user_settings('Ibrahim',       '16878733',-1,'Default.png','Green')
         self.add_user_settings('Ryan',          '16878705',-1,'Default.png','Green')
@@ -190,7 +190,8 @@ class Monolith(App):
         self.add_user_settings('Coach Shelly',  '10497184',10,'shelly.png','Gold')
         self.add_user_settings('Evan',          '16878758',2,'EvaninFTCBox.png','Red')
         self.add_user_settings('Coach Renee',   '10497178',8,'renee.png','Yellow')
-        
+        self.add_user_settings('Aryan',         '16878794',4,'thisthing.png','Blue')
+                
         #self.add_user_settings('','',-1,'Default.png','Green')
 
 
