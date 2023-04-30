@@ -320,7 +320,9 @@ class Monolith(App):
                         self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'])
                         Clock.schedule_once(partial(self.SplashScreen,self), 10)
                         self.scanLock = 1
-                    elif (str(data) == ('16858422')):
+                        break
+                else:
+                    if(str(data) == ('16858422')):
                         self.PlaySound(72)
                     elif (str(data) == ('16878687')):
                         print(str(self.user_settings_df))
