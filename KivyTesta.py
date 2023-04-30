@@ -311,6 +311,7 @@ class Monolith(App):
             time.sleep(0.1)
             if (self.scanLock == 0):
                 data = self.ReadSerial()
+                data = "16878861"
                 data = int(data, 2)
                 for i in range(len(self.user_settings_df)):                 
                     if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
