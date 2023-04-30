@@ -328,7 +328,7 @@ class Monolith(App):
                 for i in range(len(self.user_settings_df)):                 
                     if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
                         print("In here")
-                        self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'])
+                        self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'], self.user_settings_df.loc[i,'ID'])
                         Clock.schedule_once(partial(self.SplashScreen,self), 10)
                         self.scanLock = 1
                         break
@@ -343,7 +343,8 @@ class Monolith(App):
                         self.PlaySound(74)
                     else:
                         self.ser.write(b'4')
-                        self.PlaySound(57)                    
+                        self.PlaySound(57)       
+
     def SplashScreen(self, *largs):
         self.label1.pos = (-1000,0)
         self.label2.pos = (-1000,0)
@@ -353,14 +354,14 @@ class Monolith(App):
         elif plat.platform()[0] == "W" or plat.platform()[0] == "w":
             self.img.source = 'Images\\FIRSTNewton2Logo.png'
 
-    def CheckInScreen(self, name, imageFilePath, soundNum, color):
+    def CheckInScreen(self, name, imageFilePath, soundNum, color, ID):
         self.ser.write(b'3')
         time.sleep(1)
         if (soundNum > -1):
             self.PlaySound(soundNum)
         else:
             self.PlaySound(random.randint(58,69))
-
+        self.Add_Checkinorout(ID)
         print('Playing: ' + str(self.soundList[soundNum]))
         self.label1.text = name + ' checked in'
         self.label1.pos = (200, 150)
