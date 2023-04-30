@@ -438,9 +438,9 @@ class Monolith(App):
         outs = 0
         print(len(self.users_df))
         for i in len(self.users_df):
-            if (self.users_df.loc(i,'CIOO') == 1):
+            if (self.users_df.loc[i,'CIOO'] == 1):
                 ins = ins + 1
-            elif(self.users_df.loc(i,'CIOO')):
+            elif(self.users_df.loc[i,'CIOO']):
                 outs = outs + 1
         if (ins >= outs):
             self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 2}, ignore_index=True)
