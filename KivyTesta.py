@@ -343,12 +343,13 @@ class Monolith(App):
             self.img.source = 'Images\\FIRSTNewton2Logo.png'
 
     def CheckInScreen(self, name, imageFilePath, soundNum, color):
+        self.ser.write(b'3')
+        time.sleep(2)
         if (soundNum > -1):
             self.PlaySound(soundNum)
         else:
             self.PlaySound(random.randint(58,69))
-        time.sleep(0.3)
-        self.ser.write(b'3')
+
         print('Playing: ' + str(self.soundList[soundNum]))
         self.label1.text = name + ' checked in'
         self.label1.pos = (200, 150)
