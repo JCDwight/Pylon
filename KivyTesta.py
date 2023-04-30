@@ -192,7 +192,7 @@ class Monolith(App):
         self.add_user_settings('Coach Renee',   '10497178',8,'renee.png','Yellow')
         self.add_user_settings('Aryan',         '16878794',4,'thisthing.png','Blue')
         self.add_user_settings('Keita',         '16878838',-1,'Default.png','Green')
-        #self.add_user_settings('',         '',-1,'Default.png','Green')
+        self.add_user_settings('Annabelle',     '16878841',-1,'Default.png','Pink')
         
         #self.add_user_settings('','',-1,'Default.png','Green')
 
@@ -379,6 +379,7 @@ class Monolith(App):
         imageFilePath = "Images/" + imageFilePath
         self.img.source = imageFilePath
 
+
     def AddCheckInOut(self):
         pass
 
@@ -426,6 +427,9 @@ class Monolith(App):
         self.users_df = pd.read_csv('checkins.csv')
         print("Checkin Dataframe: ")
         print(self.users_df)
+
+    def Add_Checkinorout(self, ID):
+        self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)
 
     #Method Loads the encrypted file, then decrypts it and stores that info in the user check in dataframe
     def Load_and_Decrypt(self):
