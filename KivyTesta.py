@@ -370,7 +370,7 @@ class Monolith(App):
         self.img.source = imageFilePath
 
     def AddCheckInOut(self):
-
+        pass
 
 
     def BuildElements(self):
