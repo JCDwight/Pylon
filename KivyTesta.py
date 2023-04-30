@@ -438,7 +438,7 @@ class Monolith(App):
         outs = 0
         print(len(self.users_df))
         print(self.users_df)
-        for i in len(self.users_df):
+        for i in range(len(self.users_df)):
             if (self.users_df.loc[i,'CIOO'] == 1):
                 ins = ins + 1
             elif(self.users_df.loc[i,'CIOO']):
