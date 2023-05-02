@@ -433,7 +433,7 @@ class Monolith(App):
         try:
             self.users_df = pd.read_csv('checkins.csv')
         except:
-            self.users_df = self.users_df.append({'ID': "00000000", 'CIOT': "0000", 'CIOO':0}, ignore_index=True)
+            self.users_df = self.users_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':0}, ignore_index=True)
         print("Checkin Dataframe: ")
         print(self.users_df)
 
