@@ -197,7 +197,7 @@ class Monolith(App):
         self.add_user_settings('Ted',           '16878757',20,'Default.png','Green')
         self.add_user_settings('Coach Craig',   '16818550', 0,'Default.png','Green')
         self.add_user_settings('Susan',         '16858448',-1,'Default.png','Green')
-        self.add_user_settings('Ty',            '10518941',-1,'Default.png','Green')    
+        self.add_user_settings('Ty',            '10518941',75,'Tytaco.png','Orange')    
         self.add_user_settings('Emma',          '16858354',-1,'Default.png','Green')
         self.add_user_settings('Vikas',         '16878849',-1,'Default.png','Green')
         self.add_user_settings('Coach Joe',     '10604432',-1,'Default.png','Purple')
