@@ -430,7 +430,10 @@ class Monolith(App):
         self.users_df.to_csv('checkins.csv', index=False)
 
     def Just_Load(self):
-        self.users_df = pd.read_csv('checkins.csv')
+        try:
+            self.users_df = pd.read_csv('checkins.csv')
+        except:
+            self.users_df = {'ID': "00000000", 'CIOT':"0000", 'CIOO':0}
         print("Checkin Dataframe: ")
         print(self.users_df)
 
