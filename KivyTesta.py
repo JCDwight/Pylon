@@ -433,7 +433,8 @@ class Monolith(App):
         try:
             self.users_df = pd.read_csv('checkins.csv')
         except:
-            self.users_df = {'ID': "00000000", 'CIOT':"0000", 'CIOO':0}
+            self.users_df = {'ID': "00000000", 'CIOT':"0000", 'CIOO':0,
+                             'ID': "00000000", 'CIOT':"0000", 'CIOO':0}
         print("Checkin Dataframe: ")
         print(self.users_df)
 
