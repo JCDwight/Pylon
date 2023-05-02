@@ -367,7 +367,11 @@ class Monolith(App):
             self.PlaySound(soundNum)
         else:
             self.PlaySound(random.randint(58,69))
-        self.Add_Checkinorout(ID)
+        if (self.Add_Checkinorout(ID) == 1):
+            self.label1.text = name + ' checked in!'
+        else:
+            self.label1.text = name + ' checked out!'
+
         print('Playing: ' + str(self.soundList[soundNum]))
         self.label1.text = name + ' checked in'
         self.label1.pos = (200, 150)
@@ -440,6 +444,7 @@ class Monolith(App):
     def Add_Checkinorout(self, ID):
         ins = 0
         outs = 0
+        inorout = 0
         print(len(self.users_df))
         print(self.users_df)
         for i in range(len(self.users_df)):
@@ -449,9 +454,12 @@ class Monolith(App):
                 outs = outs + 1
         if (ins >= outs):
             self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 2}, ignore_index=True)
+            inorout = 2
         else:
             self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)            
+            inorout = 1
         self.Just_Save()
+        return inorout
 
     #Method Loads the encrypted file, then decrypts it and stores that info in the user check in dataframe
     def Load_and_Decrypt(self):
