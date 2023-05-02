@@ -188,14 +188,14 @@ class Monolith(App):
         self.add_user_settings('Cole',          '16878693',-1,'Default.png','Green')
         self.add_user_settings('Martin',        '16858425', 6,'Chargedup.png','Cyan')
         self.add_user_settings('Coach Shelly',  '10497184',10,'shelly.png','Gold')
-        self.add_user_settings('Evan',          '16878758',2,'EvaninFTCBox.png','Red')
-        self.add_user_settings('Coach Renee',   '10497178',8,'renee.png','Yellow')
-        self.add_user_settings('Aryan',         '16878794',4,'thisthing.png','Blue')
+        self.add_user_settings('Evan',          '16878758', 2,'EvaninFTCBox.png','Red')
+        self.add_user_settings('Coach Renee',   '10497178', 8,'renee.png','Yellow')
+        self.add_user_settings('Aryan',         '16878794', 4,'thisthing.png','Blue')
         self.add_user_settings('Keita',         '16878838',-1,'Default.png','Green')
         self.add_user_settings('Annabelle',     '16878841',-1,'Default.png','Purple')
         self.add_user_settings('Austin',        '16878724',-1,'Default.png','Gold')
         self.add_user_settings('Ted',           '16878757',20,'Default.png','Green')
-        self.add_user_settings('Coach Craig',   '16818550',-1,'Default.png','Green')
+        self.add_user_settings('Coach Craig',   '16818550', 0,'Default.png','Green')
         self.add_user_settings('Susan',         '16858448',-1,'Default.png','Green')
         self.add_user_settings('Ty',            '10518941',-1,'Default.png','Green')    
         self.add_user_settings('Emma',          '16858354',-1,'Default.png','Green')
@@ -467,7 +467,6 @@ class Monolith(App):
         with open('encryption_key.bin', 'rb') as file:
             self.encryption_key = file.read()
         self.Just_Load()
-        #self.users_df = self.users_df.append({'ID': '16819214', 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)
 
     def build(self):
         self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.        
