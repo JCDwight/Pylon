@@ -303,7 +303,8 @@ class Monolith(App):
         #ps.playsound("Audio//" + self.soundList[selector], False)
         self.playingSound = selector #Save the current selected song as our playing sound, since we made it in here, and the sound is playing
         self.scanLock = 1
-        Clock.schedule_once(partial(self.UnlockScan,self), self.sounds[self.playingSound].length)
+        print(str(self.sounds[self.playingSound].length))
+        Clock.schedule_once(partial(self.UnlockScan,self), self.sounds[self.playingSound].length + 1)
         self.soundTime = round(time.time() * 1000) #get the time, round it, and multiply it by 1000 to convert to milliseconds
         #endregion
 
