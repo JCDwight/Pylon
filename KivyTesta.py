@@ -356,9 +356,9 @@ class Monolith(App):
         self.label2.pos = (-1000,0)
         self.img.pos = (0,0)
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-            self.img.source = 'Images/FIRSTNewton2Logo.png'
+            self.img.source = 'Images/FIRSTNewton2Logo-Instructions.png'
         elif plat.platform()[0] == "W" or plat.platform()[0] == "w":
-            self.img.source = 'Images\\FIRSTNewton2Logo.png'
+            self.img.source = 'Images\\FIRSTNewton2Logo-Instructions.png'
 
     def CheckInScreen(self, name, imageFilePath, soundNum, color, ID):
         self.ser.write(b'3')
@@ -392,11 +392,11 @@ class Monolith(App):
     def BuildElements(self):
         #region
         self.window = FloatLayout()
-        self.img = Image(source="Images\\FIRSTNewton2Logo.png", pos=(0,0))
+        self.img = Image(source="Images\\FIRSTNewton2Logo-Instructions.png", pos=(0,0))
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
-            self.img.source = 'Images/FIRSTNewton2Logo.png'
+            self.img.source = 'Images/FIRSTNewton2Logo-Instructions.png'
         elif plat.platform()[0] == "W" or plat.platform()[0] == "w":
-            self.img.source = 'Images\\FIRSTNewton2Logo.png'        
+            self.img.source = 'Images\\FIRSTNewton2Logo-Instructions.png'        
         self.label1 = Label(text="")
         self.label1.pos = (-1000, 0)
         self.label1.font_size = 25
