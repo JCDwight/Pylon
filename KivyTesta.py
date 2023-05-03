@@ -328,9 +328,10 @@ class Monolith(App):
 
     def MainLoop(self, *largs):
         if (self.ser.inWaiting() > 10):
-            print("Got to if serial waiting")
+            print("Got to if serial waiting, scanlock: " + str(self.scanLock))
             time.sleep(0.1)
             if (self.scanLock == 0):
+                print("Got past scan lock")
                 data = self.ReadSerial()
                 data = int(data, 2)
                 for i in range(len(self.user_settings_df)):                 
