@@ -373,7 +373,6 @@ class Monolith(App):
             self.label1.text = name + ' checked out!'
 
         print('Playing: ' + str(self.soundList[soundNum]))
-        self.label1.text = name + ' checked in'
         self.label1.pos = (200, 150)
         self.label1.font_size = 25
         self.label1.width = 400
