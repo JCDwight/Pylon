@@ -364,6 +364,7 @@ class Monolith(App):
         self.ser.write(b'3')
         time.sleep(1)
         inorout = self.Add_Checkinorout(ID)
+        print("In(1) or out(2): " + str(inorout))
         if (soundNum > -1 and inorout == 1):
             self.PlaySound(soundNum)
         elif(soundNum < 0 and inorout == 1):
