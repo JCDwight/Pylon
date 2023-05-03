@@ -358,6 +358,7 @@ class Monolith(App):
         self.label1.pos = (-1000,0)
         self.label2.pos = (-1000,0)
         self.img.pos = (0,0)
+        self.scanLock = 0
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
             self.img.source = 'Images/FIRSTNewton2Logo-Instructions.png'
         elif plat.platform()[0] == "W" or plat.platform()[0] == "w":
