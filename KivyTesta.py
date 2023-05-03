@@ -305,7 +305,7 @@ class Monolith(App):
         self.playingSound = selector #Save the current selected song as our playing sound, since we made it in here, and the sound is playing
         self.scanLock = 1
         print("Length of song: " + str(self.sounds[self.playingSound].length))
-        Clock.schedule_once(partial(self.UnlockScan,self), self.sounds[self.playingSound].length + 1)
+        Clock.schedule_once(partial(self.SplashScreen,self), self.sounds[self.playingSound].length + 1)
         self.soundTime = round(time.time() * 1000) #get the time, round it, and multiply it by 1000 to convert to milliseconds
         #endregion
 
@@ -359,6 +359,7 @@ class Monolith(App):
         self.label2.pos = (-1000,0)
         self.img.pos = (0,0)
         self.scanLock = 0
+        print("Unlocked scan")
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
             self.img.source = 'Images/FIRSTNewton2Logo-Instructions.png'
         elif plat.platform()[0] == "W" or plat.platform()[0] == "w":
