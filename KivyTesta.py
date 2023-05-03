@@ -34,7 +34,7 @@ from cryptography.fernet import Fernet
 import random
 
 kivy.require('2.0.0') # replace with your current kivy version !
-FULL_SCREEN = 0
+FULL_SCREEN = 1
 #Change to true for deployment to touchscreen
 if (plat.platform()[0] == "L" or plat.platform()[0] == "l") and FULL_SCREEN == 1:
     Window.fullscreen = True
