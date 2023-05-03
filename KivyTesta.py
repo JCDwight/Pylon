@@ -363,11 +363,12 @@ class Monolith(App):
     def CheckInScreen(self, name, imageFilePath, soundNum, color, ID):
         self.ser.write(b'3')
         time.sleep(1)
-        if (soundNum > -1):
+        inorout = self.Add_Checkinorout(ID)
+        if (soundNum > -1 and inorout == 1):
             self.PlaySound(soundNum)
         else:
             self.PlaySound(random.randint(58,69))
-        if (self.Add_Checkinorout(ID) == 1):
+        if (inorout == 1):
             self.label1.text = name + ' checked in!'
         else:
             self.label1.text = name + ' checked out!'
