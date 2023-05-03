@@ -291,6 +291,7 @@ class Monolith(App):
         #endregion
 
     def UnlockScan(self, *largs):
+        print("Unlocked scan")
         self.scanLock = 0
 
     def PlaySound(self, selector):
@@ -336,7 +337,7 @@ class Monolith(App):
                     if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
                         print("In here")
                         self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'], self.user_settings_df.loc[i,'ID'])
-                        Clock.schedule_once(partial(self.SplashScreen,self), 10)
+                        #Clock.schedule_once(partial(self.SplashScreen,self), 10)
                         self.scanLock = 1
                         break
                 else:
