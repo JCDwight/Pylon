@@ -327,6 +327,7 @@ class Monolith(App):
 
     def MainLoop(self, *largs):
         if (self.ser.inWaiting() > 10):
+            print("Got to if serial waiting")
             time.sleep(0.1)
             if (self.scanLock == 0):
                 data = self.ReadSerial()
