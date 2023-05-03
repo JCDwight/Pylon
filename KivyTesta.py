@@ -333,15 +333,12 @@ class Monolith(App):
 
     def MainLoop(self, *largs):
         if (self.ser.inWaiting() > 10):
-            print("Got to if serial waiting, scanlock: " + str(self.scanLock))
             time.sleep(0.1)
             if (self.scanLock == 0):
-                print("Got past scan lock")
                 data = self.ReadSerial()
                 data = int(data, 2)
                 for i in range(len(self.user_settings_df)):                 
                     if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
-                        print("In here")
                         self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'], self.user_settings_df.loc[i,'ID'])
                         #Clock.schedule_once(partial(self.SplashScreen,self), 10)
                         self.scanLock = 1
@@ -460,10 +457,11 @@ class Monolith(App):
         print(len(self.users_df))
         print(self.users_df)
         for i in range(len(self.users_df)):
-            if (self.users_df.loc[i,'CIOO'] == 1):
-                ins = ins + 1
-            elif(self.users_df.loc[i,'CIOO']):
-                outs = outs + 1
+            if (self.users_df.loc[i,'ID'] == ID):
+                if (self.users_df.loc[i,'CIOO'] == 1):
+                    ins = ins + 1
+                elif(self.users_df.loc[i,'CIOO']):
+                    outs = outs + 1
         if ((ins == 0 and outs == 0)):
             inorout = 1
         else:
