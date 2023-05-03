@@ -462,6 +462,7 @@ class Monolith(App):
             self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)            
             inorout = 1
         self.Just_Save()
+        self.ser.flush()
         return inorout
 
     #Method Loads the encrypted file, then decrypts it and stores that info in the user check in dataframe
