@@ -34,7 +34,7 @@ from cryptography.fernet import Fernet
 import random
 
 kivy.require('2.0.0') # replace with your current kivy version !
-FULL_SCREEN = 1
+FULL_SCREEN = 0
 #Change to true for deployment to touchscreen
 if (plat.platform()[0] == "L" or plat.platform()[0] == "l") and FULL_SCREEN == 1:
     Window.fullscreen = True
@@ -459,14 +459,17 @@ class Monolith(App):
                 ins = ins + 1
             elif(self.users_df.loc[i,'CIOO']):
                 outs = outs + 1
-        if (ins > outs):
-            self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 2}, ignore_index=True)
-            inorout = 2
-            Clock.schedule_once(partial(self.SplashScreen,self), 5)
-            #Clock.schedule_once(partial(self.UnlockScan,self), self.sounds[self.playingSound].length + 1)
-        else:
-            self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)            
+        if ((ins == 0 and outs == 0)):
             inorout = 1
+        else:
+            if (ins > outs):
+                self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 2}, ignore_index=True)
+                inorout = 2
+                Clock.schedule_once(partial(self.SplashScreen,self), 5)
+                #Clock.schedule_once(partial(self.UnlockScan,self), self.sounds[self.playingSound].length + 1)
+            else:
+                self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)            
+                inorout = 1
         self.Just_Save()
         self.ser.flush()
         return inorout
