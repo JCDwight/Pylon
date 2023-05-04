@@ -360,6 +360,7 @@ class Monolith(App):
         self.label1.pos = (-1000,0)
         self.label2.pos = (-1000,0)
         self.img.pos = (0,0)
+        self.ser.flush()
         self.scanLock = 0
         print("Unlocked scan")
         if plat.platform()[0] == "L" or plat.platform()[0] == "l":
@@ -370,9 +371,9 @@ class Monolith(App):
     def CheckInScreen(self, name, imageFilePath, soundNum, color, ID):
         self.ser.write(b'3')
         time.sleep(1)
+        self.ser.flush()
         print("got before add")
         inorout = self.Add_Checkinorout(ID)
-        print("In(1) or out(2): " + str(inorout))
         if (soundNum > -1 and inorout == 1):
             self.PlaySound(soundNum)
         elif(soundNum < 0 and inorout == 1):
