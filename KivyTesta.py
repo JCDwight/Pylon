@@ -36,90 +36,20 @@ import random
 kivy.require('2.0.0') # replace with your current kivy version !
 FULL_SCREEN = 1
 #Change to true for deployment to touchscreen
-if (plat.platform()[0] == "L" or plat.platform()[0] == "l") and FULL_SCREEN == 1:
-    Window.fullscreen = True
-elif (plat.platform()[0] == "W" or plat.platform()[0] == "w"):
-    Window.fullscreen = False
 
-#User Class
-class User:
-    checkins = []
-    def __init__(self):
-        self.first_name = ""
-        self.access_level = 0
-        self.birthday_day = 0
-        self.birthday_month = 0
-        self.birthday_year = 0
-        self.total_checkins = 0
-        self.total_attended_days = 0
-        self.total_attended_days_consecutive = 0
-        self.total_attended_weeks_consecutive = 0
-        self.total_attended_hours = 0
-        self.total_attended_minutes = 0
-        self.image = "blank.png"
-    #Getters/Setters
-    #region 
-    def Set_Access_Level(self, value):
-        if (value >= 0) and (value < 5):
-            self.access_level = value
-    def Get_Access_Level(self):
-        return self.access_level
-    def Set_Birthday_Day(self,value):
-        if (value > 0) and (value < 32):
-            self.birthday_day = value
-    def Get_Birthday_Day(self):
-        return self.birthday_day
-    def Set_Birthday_Month(self, value):
-        if (value > 0) and (value < 13):
-            self.birthday_month = value
-    def Get_Birthday_Month(self):
-        return self.birthday_month
-    def Set_Birthday_Year(self,value):
-        if (value > 1900) and (value < 3000):
-            self.birthday_year = value
-    def Get_Birthday_Year(self):
-        return self.birthday_year
-    def Set_Gender(self, value):
-        self.gender = value
-    def Get_Gender(self):
-        return self.gender
-    def Set_Total_Checkins(self, value):
-        if (value >= 0):
-            self.total_checkins = value
-    def Get_Total_Checkins(self):
-        return self.total_checkins
-    def Set_Total_Attended_Days(self, value):
-        if (value >= 0):
-            self.total_attended_days = value
-    def Get_Total_Attended_Days(self):
-        return self.total_attended_days
-    def Set_Total_Attended_Days_Consecutive(self, value):
-        if (value >= 0):
-            self.total_attended_days_consecutive = value
-    def Get_Total_Attended_Days_Consecutive(self):
-        return self.total_attended_days_consecutive    
-    def Set_Total_Attended_Weeks_Consecutive(self, value):
-        if (value >= 0):
-            self.total_attended_weeks_consecutive = value
-    def Get_Total_Attended_Weeks_Consecutive(self):
-        return self.total_attended_weeks_consecutive
-    def Set_Total_Attended_Hours(self, value):
-        if (value >= 0):
-            self.total_attended_hours = value
-    def Get_Total_Attended_Hours(self):
-        return self.total_attended_hours
-    def Set_Total_Attended_Minutes(self, value):
-        if (value >= 0):
-            self.total_attended_minutes = value
-    def Get_Total_Attended_Minutes(self):
-        return self.total_attended_minutes
-    #endregion
-    #Loaders
-    def LoadCheckins():
-        pass
-    def SaveCheckins():
-        path = ''
-        pass
+def CheckPlatform():
+    #Checks the platform the program is running on.  Linux = 1, Windows = 2, everything else is 3
+    if (plat.platform()[0] == "L" or plat.platform()[0] == "l") and FULL_SCREEN == 1:
+        return 1
+    elif (plat.platform()[0] == "W" or plat.platform()[0] == "w"):
+        return 2
+    else:
+        return 3
+
+if ((CheckPlatform() == 1) and (FULL_SCREEN == 1)):
+    Window.fullscreen = True
+elif (CheckPlatform() == 2):
+    Window.fullscreen = False
 
 #This class defines the behavior of the Screen Manager
 class WindowManager(ScreenManager):
@@ -163,72 +93,56 @@ class Monolith(App):
 
     #END   Application Variables
 
-    if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+    if (CheckPlatform() == 1):
         print('Opening serial port...')
         ser = serial.Serial('/dev/ttyACM0', 500000)
 
-    if plat.platform()[0] == "W" or plat.platform()[0] == "w":
+    if (CheckPlatform() == 2):
         print('Opening serial port...')
         #ser = serial.Serial('COM8', 500000)
 
     def add_user_settings(self, name, ident, s, p, c):
         self.user_settings_df = self.user_settings_df.append({'Name': name, 'ID': ident, 'S': s, 'P': p, 'C': c}, ignore_index=True)
 
-    def add_predefined_users(self):
-        self.add_user_settings('Coach Jay',     '16819214', 1,'jay.png'    ,'Orange')
-        self.add_user_settings('Jackson',       '16878869',-1,'Default.png','Green')
-        self.add_user_settings('Liam',          '16878885',-1,'Default.png','Blue')
-        self.add_user_settings('Luke',          '16878745',-1,'Default.png','Green')
-        self.add_user_settings('Ibrahim',       '16878733',-1,'Default.png','Green')
-        self.add_user_settings('Ryan',          '16878705',-1,'Default.png','Green')
-        self.add_user_settings('Rebagrace',     '16878861',-1,'Default.png','Green')
-        self.add_user_settings('Coach Larry',   '16819201',-1,'Default.png','Green')
-        self.add_user_settings('Coach Harrison','16818556',-1,'Default.png','Green')
-        self.add_user_settings('Coach Tim',     '16818556',-1,'Default.png','Green')
-        self.add_user_settings('Cole',          '16878693',-1,'Default.png','Green')
-        self.add_user_settings('Martin',        '16858425', 6,'Chargedup.png','Cyan')
-        self.add_user_settings('Coach Shelly',  '10497184',10,'shelly.png','Gold')
+    def add_rogue_user(self):
+        pass
+
+    #Intercept Rogue Checkins - Ah ah ah!  You didn't say the magioc word!
+    def RogueCheckin(self):
+        pass
+
+    def add_predefined_users(self): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
+        self.add_user_settings('Coach Jay',     '16819214', 1,'jay.png'         ,'Orange')
+        self.add_user_settings('Chuck Testa',   '10101010', 1,'ChuckTesta.png'  ,'Orange')
+        self.add_user_settings('Jackson',       '16878869',-1,'Default.png'     ,'Green')
+        self.add_user_settings('Liam',          '16878885',-1,'Default.png'     ,'Blue')
+        self.add_user_settings('Luke',          '16878745',-1,'Default.png'     ,'Green')
+        self.add_user_settings('Ibrahim',       '16878733',-1,'Default.png'     ,'Green')
+        self.add_user_settings('Ryan',          '16878705',-1,'Default.png'     ,'Green')
+        self.add_user_settings('Rebagrace',     '16878861',-1,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Larry',   '16819201',-1,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Harrison','16818556',-1,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Tim',     '16818556',-1,'Default.png'     ,'Green')
+        self.add_user_settings('Cole',          '16878693',-1,'Default.png'     ,'Green')
+        self.add_user_settings('Martin',        '16858425', 6,'Chargedup.png'   ,'Cyan')
+        self.add_user_settings('Coach Shelly',  '10497184',10,'shelly.png'      ,'Gold')
         self.add_user_settings('Evan',          '16878758', 2,'EvaninFTCBox.png','Red')
-        self.add_user_settings('Coach Renee',   '10497178', 8,'renee.png','Yellow')
-        self.add_user_settings('Aryan',         '16878794', 4,'thisthing.png','Blue')
-        self.add_user_settings('Keita',         '16878838',-1,'Default.png','Green')
-        self.add_user_settings('Annabelle',     '16878841',-1,'Default.png','Purple')
-        self.add_user_settings('Austin',        '16878724',-1,'Default.png','Gold')
-        self.add_user_settings('Ted',           '16878757',20,'Default.png','Green')
-        self.add_user_settings('Coach Craig',   '16818550', 0,'Default.png','Green')
-        self.add_user_settings('Susan',         '16858448',-1,'Default.png','Green')
-        self.add_user_settings('Ty',            '10518941',75,'Tytaco.png','Orange')    
-        self.add_user_settings('Emma',          '16858354',-1,'Default.png','Green')
-        self.add_user_settings('Vikas',         '16878849',-1,'Default.png','Green')
-        self.add_user_settings('Coach Joe',     '10604432',-1,'Default.png','Purple')
-        self.add_user_settings('Daniel',        '16878711',-1,'Default.png','Purple')
-        self.add_user_settings('Chris',         '16878807',-1,'Default.png','Purple')
-        self.add_user_settings('Coach Robert',  '10497089',-1,'Default.png','Blue')
-        self.add_user_settings('Coach Charles', '50444699',-1,'Default.png','Cyan')
-
-
-        #self.add_user_settings('','',-1,'Default.png','Green')
-
-
-    def encrypt_dataframe(df, key):
-        #Encrypts a pandas DataFrame using the Fernet encryption library.
-        # Convert the DataFrame to bytes
-        data = df.to_csv(index=False).encode()
-        # Create a Fernet object with the key
-        f = Fernet(key)
-        # Encrypt the data
-        encrypted_data = f.encrypt(data)
-        return encrypted_data
-
-    def decrypt_dataframe(encrypted_data, key):
-        #Decrypts a pandas DataFrame using the Fernet encryption library.
-        # Create a Fernet object with the key
-        f = Fernet(key)
-        # Decrypt the data
-        decrypted_data = f.decrypt(encrypted_data)
-        # Convert the decrypted data to a DataFrame
-        df = pd.read_csv(pd.compat.StringIO(decrypted_data.decode()))
-        return df
+        self.add_user_settings('Coach Renee',   '10497178', 8,'renee.png'       ,'Yellow')
+        self.add_user_settings('Aryan',         '16878794', 4,'thisthing.png'   ,'Blue')
+        self.add_user_settings('Keita',         '16878838',-1,'Default.png'     ,'Green')
+        self.add_user_settings('Annabelle',     '16878841',-1,'Default.png'     ,'Purple')
+        self.add_user_settings('Austin',        '16878724',-1,'Default.png'     ,'Gold')
+        self.add_user_settings('Ted',           '16878757',20,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Craig',   '16818550', 0,'Default.png'     ,'Green')
+        self.add_user_settings('Susan',         '16858448',-1,'Default.png'     ,'Green')
+        self.add_user_settings('Ty',            '10518941',75,'Tytaco.png'      ,'Orange')    
+        self.add_user_settings('Emma',          '16858354',-1,'Default.png'     ,'Green')
+        self.add_user_settings('Vikas',         '16878849',-1,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Joe',     '10604432',-1,'Default.png'     ,'Purple')
+        self.add_user_settings('Daniel',        '16878711',-1,'Default.png'     ,'Purple')
+        self.add_user_settings('Chris',         '16878807',-1,'Default.png'     ,'Purple')
+        self.add_user_settings('Coach Robert',  '10497089',-1,'Default.png'     ,'Blue')
+        self.add_user_settings('Coach Charles', '50444699',-1,'Default.png'     ,'Cyan')
 
     def LoadSound(self):
         #region
@@ -236,9 +150,9 @@ class Monolith(App):
         noFile = False #Set noFile to false, if we can not load the file we will set this to true
         dir_list = 0
         path = "Audio\\" #Folder in the root directory that holds all our audio files
-        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+        if (CheckPlatform() == 1):
             dir_list = os.listdir("Audio") #Use the OS library to scan the directory for all files and store them in dir_list
-        elif plat.platform()[0] == "W" or plat.platform()[0] == "w":
+        elif (CheckPlatform() == 2):
             dir_list = os.listdir(path) #Use the OS library to scan the directory for all files and store them in dir_list
         try: #Use exception handling in case the file does not exist
             loadFile = pd.read_json('DataBases/audioFiles.json') #Try to load audioFiles.json
@@ -283,7 +197,7 @@ class Monolith(App):
             dataFrame = pd.DataFrame(self.soundList)        #Convert the list into a dataframe
             dataFrame.to_json('DataBases/audioFiles.json')  #Convert the dataframe to a persistant JSON
         print("Loading Files in:'", path, "':")
-        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+        if (CheckPlatform() == 1):
             for f in self.soundList:                                  #Load the files in the soundList and print when they load(Linux)
                 self.sounds.append(SoundLoader.load("Audio/" + f))
                 print('Loaded: ' + f)
@@ -329,43 +243,18 @@ class Monolith(App):
                     return data_str
             except UnicodeDecodeError as e:
                 print(e)
-                return "0"
-
-    def MainLoop(self, *largs):
-        if (self.ser.inWaiting() > 10):
-            time.sleep(0.1)
-            if (self.scanLock == 0):
-                data = self.ReadSerial()
-                data = int(data, 2)
-                for i in range(len(self.user_settings_df)):                 
-                    if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
-                        self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'], self.user_settings_df.loc[i,'ID'])
-                        #Clock.schedule_once(partial(self.SplashScreen,self), 10)
-                        self.scanLock = 1
-                        break
-                else:
-                    if(str(data) == ('16858422')):
-                        self.PlaySound(72)
-                    elif (str(data) == ('16878687')):
-                        print(str(self.user_settings_df))
-                        self.PlaySound(73)
-                    elif (str(data) == ('16878770')):
-                        print(str(self.users_df))
-                        self.PlaySound(74)
-                    else:
-                        self.ser.write(b'4')
-                        self.PlaySound(57)       
+                return "0"   
 
     def SplashScreen(self, *largs):
         self.label1.pos = (-1000,0)
         self.label2.pos = (-1000,0)
         self.img.pos = (0,0)
-        self.ser.flush()
         self.scanLock = 0
         print("Unlocked scan")
-        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+        if (CheckPlatform() == 1):
+            self.ser.flush()
             self.img.source = 'Images/FIRSTNewton2Logo-Instructions.png'
-        elif plat.platform()[0] == "W" or plat.platform()[0] == "w":
+        elif (CheckPlatform() == 1):
             self.img.source = 'Images\\FIRSTNewton2Logo-Instructions.png'
 
     def CheckInScreen(self, name, imageFilePath, soundNum, color, ID):
@@ -407,9 +296,9 @@ class Monolith(App):
         #region
         self.window = FloatLayout()
         self.img = Image(source="Images\\FIRSTNewton2Logo-Instructions.png", pos=(0,0))
-        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+        if (CheckPlatform() == 1):
             self.img.source = 'Images/FIRSTNewton2Logo-Instructions.png'
-        elif plat.platform()[0] == "W" or plat.platform()[0] == "w":
+        else:
             self.img.source = 'Images\\FIRSTNewton2Logo-Instructions.png'        
         self.label1 = Label(text="")
         self.label1.pos = (-1000, 0)
@@ -427,18 +316,6 @@ class Monolith(App):
         self.window.add_widget(self.label1)
         self.window.add_widget(self.label2)
         #endregion
-
-    #Method encrypts the user check in dataframe, then saves it to a file
-    def Encrypt_and_Save(self):
-        #Convert dataframe to binary format
-        df_bytes = self.users_df.to
-        #Create a Fernet encryption object
-        fernet = Fernet(self.encryption_key)
-        #Encrypt the binary data
-        encrypted_data = fernet.encrypt(df_bytes)
-        #Save the encrypted data to a file
-        with open('checkins.chk', 'wb') as file:
-            file.write(encrypted_data)
 
     def Just_Save(self):
         self.users_df.to_csv('checkins.csv', index=False)
@@ -478,6 +355,9 @@ class Monolith(App):
         self.ser.flush()
         return inorout
 
+    def Simulate_Checkinorout(self,ID):
+        pass
+
     #Method Loads the encrypted file, then decrypts it and stores that info in the user check in dataframe
     def Load_and_Decrypt(self):
         #Load the encrypted data from file
@@ -491,6 +371,32 @@ class Monolith(App):
         self.users_df = pd.read_pickle(decrypted_data)
         return self.users_df
 
+    def MainLoop(self, *largs):
+        if (self.ser.inWaiting() > 10):
+            time.sleep(0.1)
+            if (self.scanLock == 0):
+                data = self.ReadSerial()
+                data = int(data, 2)
+                for i in range(len(self.user_settings_df)):                 
+                    if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
+                        self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'], self.user_settings_df.loc[i,'ID'])
+                        #Clock.schedule_once(partial(self.SplashScreen,self), 10)
+                        self.scanLock = 1
+                        break
+                else:
+                    if(str(data) == ('16858422')):
+                        self.PlaySound(72)
+                    elif (str(data) == ('16878687')):
+                        print(str(self.user_settings_df))
+                        self.PlaySound(73)
+                    elif (str(data) == ('16878770')):
+                        print(str(self.users_df))
+                        self.PlaySound(74)
+                    else:
+                        self.ser.write(b'4')
+                        self.RogueCheckin()
+                        self.PlaySound(57)    
+
     def Setup(self):
         #Loads encryption key into memory for future encrypting/decrypting
         with open('encryption_key.bin', 'rb') as file:
@@ -503,7 +409,7 @@ class Monolith(App):
         self.add_predefined_users()
         self.Setup()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
-        if plat.platform()[0] == "L" or plat.platform()[0] == "l":
+        if (CheckPlatform() == 1):
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
         #Clock.schedule_once(partial(self.CheckInScreen,self), 9)
         return self.window
