@@ -34,7 +34,7 @@ from cryptography.fernet import Fernet
 import random
 
 kivy.require('2.0.0') # replace with your current kivy version !
-FULL_SCREEN = 1
+FULL_SCREEN = 0
 #Change to true for deployment to touchscreen
 
 def CheckPlatform():
@@ -257,10 +257,15 @@ class Monolith(App):
         elif (CheckPlatform() == 1):
             self.img.source = 'Images\\FIRSTNewton2Logo-Instructions.png'
 
+    def Simulate_Checkinorout(self,ID):
+        pass
+
     def CheckInScreen(self, name, imageFilePath, soundNum, color, ID):
-        self.ser.write(b'3')
+        if (CheckPlatform() == 1):
+            self.ser.write(b'3')
         time.sleep(1)
-        self.ser.flush()
+        if (CheckPlatform() == 1):
+            self.ser.flush()
         print("got before add")
         inorout = self.Add_Checkinorout(ID)
         if (soundNum > -1 and inorout == 1):
@@ -311,7 +316,6 @@ class Monolith(App):
         self.label2.pos = (-1000,150)
         self.label2.font_size = 25
         self.label3 = Label(text="")
-        self.xcount = 0
         self.window.add_widget(self.img)
         self.window.add_widget(self.label1)
         self.window.add_widget(self.label2)
@@ -355,21 +359,6 @@ class Monolith(App):
         self.ser.flush()
         return inorout
 
-    def Simulate_Checkinorout(self,ID):
-        pass
-
-    #Method Loads the encrypted file, then decrypts it and stores that info in the user check in dataframe
-    def Load_and_Decrypt(self):
-        #Load the encrypted data from file
-        with open('checkins.chk', 'rb') as file:
-            encrypted_data = file.read()
-        #Create a Fernet encryption object using the key
-        fernet = Fernet(self.encryption_key)
-        #Decrypt the binary data
-        decrypted_data = fernet.decrypt(encrypted_data)
-        #Convert the decrypted data to a pandas DataFrame
-        self.users_df = pd.read_pickle(decrypted_data)
-        return self.users_df
 
     def MainLoop(self, *largs):
         if (self.ser.inWaiting() > 10):
