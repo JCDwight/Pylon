@@ -30,7 +30,6 @@ import platform as plat
 #import playsound as ps
 import threading
 import serial
-from cryptography.fernet import Fernet
 import random
 
 kivy.require('2.0.0') # replace with your current kivy version !
@@ -88,7 +87,7 @@ class Monolith(App):
     scanLock = 0
     users_df = pd.DataFrame(columns=['ID', 'CIOT', 'CIOO'])
     user_settings_df = pd.DataFrame(columns=['Name', 'ID', 'S', 'P', 'C'])
-    unauthorized_users_df = pd.DataFrame(columns=['ID', 'CIOT', 'Attempts'])
+    unauthorized_users_df = pd.DataFrame(columns=['ID', 'CIOT'])
     encryption_key = 0
     encrypted_data = 0
 
@@ -144,7 +143,7 @@ class Monolith(App):
         self.add_user_settings('Chris',         '16878807',-1,'Default.png'     ,'Purple')
         self.add_user_settings('Coach Robert',  '10497089',-1,'Default.png'     ,'Blue')
         self.add_user_settings('Coach Charles', '50444699',-1,'Default.png'     ,'Cyan')
-        self.add_user_settings('Coach Kevin',   '44094159',-1,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Kevin',   '44094159',-1,'UndercoverBrother.png','Green')
 
 
     def LoadSound(self):
@@ -322,15 +321,19 @@ class Monolith(App):
         self.window.add_widget(self.label2)
         #endregion
 
-    def Just_Save(self):
-        self.users_df.to_csv('checkins.csv', index=False)
+    def Just_Save(self, path):
+        self.users_df.to_csv(path, index=False)
         #print("Saved checkins")
 
     def Just_Load(self, path):
         try:
             self.users_df = pd.read_csv(path)
         except:
-            self.users_df = self.users_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':0}, ignore_index=True)
+            if (path == 'checkins.csv'):
+                self.users_df = self.users_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':0}, ignore_index=True)
+            elif (path == 'unauthorized.csv'):
+                self.unauthorized_users_df = self.unauthorized_users_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970"}, ignore_index=True)
+
         #print("Checkin Dataframe: ")
         #print(self.users_df)
 
@@ -361,10 +364,9 @@ class Monolith(App):
                 print("Added check-in")
                 self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)            
                 inorout = 1
-        self.Just_Save()
+        self.Just_Save('checkins.csv')
         self.ser.flush()
         return inorout
-
 
     def MainLoop(self, *largs):
         if (self.ser.inWaiting() > 10):
@@ -389,14 +391,31 @@ class Monolith(App):
                         self.PlaySound(74)
                     else:
                         self.ser.write(b'4')
-                        self.RogueCheckin()
-                        self.PlaySound(57)    
+                        self.unauthorized_users_df = self.unauthorized_users_df.append({'ID': str(data), 'CIOT': datetime.datetime.now().strftime("%I:%M %p\n %B %d, %Y")})
+                        unauthorizedcheckins = 0
+                        for checkin in self.unauthorized_users_df:
+                            if(checkin['ID'] == str(data)):
+                                unauthorizedcheckins = unauthorizedcheckins + 1
+                        if(unauthorizedcheckins > 0 and unauthorizedcheckins < 5):
+                            self.PlaySound(57)
+                        elif(unauthorizedcheckins < 10):
+                            pass
+                        elif(unauthorizedcheckins < 11):
+                            pass
+                        elif(unauthorizedcheckins < 12):
+                            pass
+                        elif(unauthorizedcheckins < 13):
+                            pass
+                        elif(unauthorizedcheckins < 14):
+                            pass
+                        elif(unauthorizedcheckins < 15):
+                            pass
+                        elif(unauthorizedcheckins < 16):
+                            pass
 
     def Setup(self):
-        #Loads encryption key into memory for future encrypting/decrypting
-        with open('encryption_key.bin', 'rb') as file:
-            self.encryption_key = file.read()
         self.Just_Load('checkins.csv')
+        self.Just_Load('unauthorized.csv')
 
     def build(self):
         self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.        
