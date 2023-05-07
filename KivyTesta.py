@@ -39,12 +39,9 @@ FULL_SCREEN = 00
 
 def CheckPlatform():
     #Checks the platform the program is running on.  Linux = 1, Windows = 2, everything else is 3
-    print(plat.platform()[0])
     if (plat.platform()[0] == "L" or plat.platform()[0] == "l"):
-        print("Got to linux")
         return 1
     elif (plat.platform()[0] == "W" or plat.platform()[0] == "w"):
-        print("Got to windows")
         return 2
     else:
         return 3
@@ -156,12 +153,9 @@ class Monolith(App):
         dir_list = 0
         path = "Audio\\" #Folder in the root directory that holds all our audio files
         if (CheckPlatform() == 1):
-            print("Got to check 1")
             dir_list = os.listdir("Audio") #Use the OS library to scan the directory for all files and store them in dir_list
         elif (CheckPlatform() == 2):
-            print("Got to check 2")
             dir_list = os.listdir(path) #Use the OS library to scan the directory for all files and store them in dir_list
-        print(dir_list)
         try: #Use exception handling in case the file does not exist
             loadFile = pd.read_json('DataBases/audioFiles.json') #Try to load audioFiles.json
         except: #If no file exists, we set noFile to true and will create one with the scanned directory.  This should only happen once on first run.
@@ -200,7 +194,6 @@ class Monolith(App):
             dataFrame.to_json('DataBases/audioFiles.json') #Convert the dataframe to a persistant JSON
         else:
             for f in dir_list: #No file exists, so just dump the scanned directory files into a list, should happen 1x
-                print(f)
                 self.soundList.append(f)
             dataFrame = pd.DataFrame(self.soundList)        #Convert the list into a dataframe
             dataFrame.to_json('DataBases/audioFiles.json')  #Convert the dataframe to a persistant JSON
@@ -231,7 +224,7 @@ class Monolith(App):
         #ps.playsound("Audio//" + self.soundList[selector], False)
         self.playingSound = selector #Save the current selected song as our playing sound, since we made it in here, and the sound is playing
         self.scanLock = 1
-        print("Length of song: " + str(self.sounds[self.playingSound].length))
+        print("Length of audio file: " + str(self.sounds[self.playingSound].length))
         Clock.schedule_once(partial(self.SplashScreen,self), self.sounds[self.playingSound].length + 1)
         self.soundTime = round(time.time() * 1000) #get the time, round it, and multiply it by 1000 to convert to milliseconds
         #endregion
@@ -274,7 +267,6 @@ class Monolith(App):
         time.sleep(1)
         if (CheckPlatform() == 1):
             self.ser.flush()
-        print("got before add")
         inorout = self.Add_Checkinorout(ID)
         if (soundNum > -1 and inorout == 1):
             self.PlaySound(soundNum)
@@ -331,7 +323,7 @@ class Monolith(App):
 
     def Just_Save(self):
         self.users_df.to_csv('checkins.csv', index=False)
-        print("Saved checkins")
+        #print("Saved checkins")
 
     def Just_Load(self):
         try:
