@@ -391,37 +391,38 @@ class Monolith(App):
                         self.PlaySound(74)
                     else:
                         self.ser.write(b'4')
-                        self.unauthorized_users_df = self.unauthorized_users_df.append({'ID': str(data), 'CIOT': datetime.datetime.now().strftime("%I:%M %p\n %B %d, %Y")})
-                        unauthorizedcheckins = 0
-                        for checkin in self.unauthorized_users_df:
-                            if(checkin['ID'] == str(data)):
-                                unauthorizedcheckins = unauthorizedcheckins + 1
-                        if(unauthorizedcheckins > 0 and unauthorizedcheckins < 5):
-                            self.PlaySound(57)
-                        elif(unauthorizedcheckins < 10):
-                            pass
-                        elif(unauthorizedcheckins < 11):
-                            pass
-                        elif(unauthorizedcheckins < 12):
-                            pass
-                        elif(unauthorizedcheckins < 13):
-                            pass
-                        elif(unauthorizedcheckins < 14):
-                            pass
-                        elif(unauthorizedcheckins < 15):
-                            pass
-                        elif(unauthorizedcheckins < 16):
-                            pass
+                        #self.unauthorized_users_df = self.unauthorized_users_df.append({'ID': str(data), 'CIOT': datetime.datetime.now().strftime("%I:%M %p\n %B %d, %Y")})
+                        #unauthorizedcheckins = 0
+                        #for checkin in self.unauthorized_users_df:
+                        #    if(checkin['ID'] == str(data)):
+                        #        unauthorizedcheckins = unauthorizedcheckins + 1
+                        #if(unauthorizedcheckins > 0 and unauthorizedcheckins < 5):
+                        self.PlaySound(57)
+                        #elif(unauthorizedcheckins < 10):
+                        #    pass
+                        #elif(unauthorizedcheckins < 11):
+                        #    pass
+                        #elif(unauthorizedcheckins < 12):
+                        #    pass
+                        #elif(unauthorizedcheckins < 13):
+                        #    pass
+                        #elif(unauthorizedcheckins < 14):
+                        #    pass
+                        #elif(unauthorizedcheckins < 15):
+                        #    pass
+                        #elif(unauthorizedcheckins < 16):
+                        #    pass
 
     def Setup(self):
         self.Just_Load('checkins.csv')
-        self.Just_Load('unauthorized.csv')
+        #self.Just_Load('unauthorized.csv')
 
     def build(self):
         self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.        
         self.BuildElements()
         self.add_predefined_users()
         self.Setup()
+        print("")
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
         if (CheckPlatform() == 1):
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
