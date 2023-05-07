@@ -34,7 +34,7 @@ from cryptography.fernet import Fernet
 import random
 
 kivy.require('2.0.0') # replace with your current kivy version !
-FULL_SCREEN = 0
+FULL_SCREEN = 00
 #Change to true for deployment to touchscreen
 
 def CheckPlatform():
