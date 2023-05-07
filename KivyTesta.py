@@ -146,7 +146,7 @@ class Monolith(App):
         self.add_user_settings('Chris',         '16878807',-1,'Default.png'     ,'Purple')
         self.add_user_settings('Coach Robert',  '10497089',-1,'Default.png'     ,'Blue')
         self.add_user_settings('Coach Charles', '50444699',-1,'Default.png'     ,'Cyan')
-        self.add_user_settings('Coach Kevin',   '50444699',-1,'Default.png'     ,'Cyan')
+        self.add_user_settings('Coach Kevin',   '12345678',-1,'Default.png'     ,'Cyan')
 
 
     def LoadSound(self):
@@ -354,6 +354,8 @@ class Monolith(App):
                 elif(self.users_df.loc[i,'CIOO']):
                     outs = outs + 1
         if ((ins == 0 and outs == 0)):
+            print("Added check-in")
+            self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)            
             inorout = 1
         else:
             if (ins > outs):
