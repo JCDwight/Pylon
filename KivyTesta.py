@@ -40,7 +40,7 @@ FULL_SCREEN = 00
 def CheckPlatform():
     #Checks the platform the program is running on.  Linux = 1, Windows = 2, everything else is 3
     print(plat.platform()[0])
-    if (plat.platform()[0] == "L" or plat.platform()[0] == "l") and FULL_SCREEN == 1:
+    if (plat.platform()[0] == "L" or plat.platform()[0] == "l"):
         print("Got to linux")
         return 1
     elif (plat.platform()[0] == "W" or plat.platform()[0] == "w"):
