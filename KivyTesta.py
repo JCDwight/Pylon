@@ -331,6 +331,7 @@ class Monolith(App):
 
     def Just_Save(self):
         self.users_df.to_csv('checkins.csv', index=False)
+        print("Saved checkins")
 
     def Just_Load(self):
         try:
