@@ -88,6 +88,7 @@ class Monolith(App):
     scanLock = 0
     users_df = pd.DataFrame(columns=['ID', 'CIOT', 'CIOO'])
     user_settings_df = pd.DataFrame(columns=['Name', 'ID', 'S', 'P', 'C'])
+    unauthorized_users_df = pd.DataFrame(columns=['ID', 'CIOT', 'Attempts'])
     encryption_key = 0
     encrypted_data = 0
 
@@ -325,9 +326,9 @@ class Monolith(App):
         self.users_df.to_csv('checkins.csv', index=False)
         #print("Saved checkins")
 
-    def Just_Load(self):
+    def Just_Load(self, path):
         try:
-            self.users_df = pd.read_csv('checkins.csv')
+            self.users_df = pd.read_csv(path)
         except:
             self.users_df = self.users_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':0}, ignore_index=True)
         #print("Checkin Dataframe: ")
@@ -395,7 +396,7 @@ class Monolith(App):
         #Loads encryption key into memory for future encrypting/decrypting
         with open('encryption_key.bin', 'rb') as file:
             self.encryption_key = file.read()
-        self.Just_Load()
+        self.Just_Load('checkins.csv')
 
     def build(self):
         self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.        
