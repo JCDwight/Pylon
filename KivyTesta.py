@@ -154,6 +154,7 @@ class Monolith(App):
             dir_list = os.listdir("Audio") #Use the OS library to scan the directory for all files and store them in dir_list
         elif (CheckPlatform() == 2):
             dir_list = os.listdir(path) #Use the OS library to scan the directory for all files and store them in dir_list
+        print(dir_list)
         try: #Use exception handling in case the file does not exist
             loadFile = pd.read_json('DataBases/audioFiles.json') #Try to load audioFiles.json
         except: #If no file exists, we set noFile to true and will create one with the scanned directory.  This should only happen once on first run.
