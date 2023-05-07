@@ -146,6 +146,8 @@ class Monolith(App):
         self.add_user_settings('Chris',         '16878807',-1,'Default.png'     ,'Purple')
         self.add_user_settings('Coach Robert',  '10497089',-1,'Default.png'     ,'Blue')
         self.add_user_settings('Coach Charles', '50444699',-1,'Default.png'     ,'Cyan')
+        self.add_user_settings('Coach Kevin',   '50444699',-1,'Default.png'     ,'Cyan')
+
 
     def LoadSound(self):
         #region
@@ -335,15 +337,15 @@ class Monolith(App):
             self.users_df = pd.read_csv('checkins.csv')
         except:
             self.users_df = self.users_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':0}, ignore_index=True)
-        print("Checkin Dataframe: ")
-        print(self.users_df)
+        #print("Checkin Dataframe: ")
+        #print(self.users_df)
 
     def Add_Checkinorout(self, ID):
         ins = 0
         outs = 0
         inorout = 0
-        print(len(self.users_df))
-        print(self.users_df)
+        #print(len(self.users_df))
+        #print(self.users_df)
         for i in range(len(self.users_df)):
             if (str(self.users_df.loc[i,'ID']) == str(ID)):
                 if (self.users_df.loc[i,'CIOO'] == 1):
