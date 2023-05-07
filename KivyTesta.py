@@ -146,7 +146,7 @@ class Monolith(App):
         self.add_user_settings('Chris',         '16878807',-1,'Default.png'     ,'Purple')
         self.add_user_settings('Coach Robert',  '10497089',-1,'Default.png'     ,'Blue')
         self.add_user_settings('Coach Charles', '50444699',-1,'Default.png'     ,'Cyan')
-        self.add_user_settings('Coach Kevin',   '44094159',-1,'Default.png'     ,'Cyan')
+        self.add_user_settings('Coach Kevin',   '44094159',-1,'Default.png'     ,'Green')
 
 
     def LoadSound(self):
