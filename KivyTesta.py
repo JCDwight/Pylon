@@ -358,10 +358,12 @@ class Monolith(App):
         else:
             if (ins > outs):
                 self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 2}, ignore_index=True)
+                print("Added check-out")
                 inorout = 2
                 Clock.schedule_once(partial(self.SplashScreen,self), 4)
                 #Clock.schedule_once(partial(self.UnlockScan,self), self.sounds[self.playingSound].length + 1)
             else:
+                print("Added check-in")
                 self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)            
                 inorout = 1
         self.Just_Save()
