@@ -151,8 +151,10 @@ class Monolith(App):
         dir_list = 0
         path = "Audio\\" #Folder in the root directory that holds all our audio files
         if (CheckPlatform() == 1):
+            print("Got to check 1")
             dir_list = os.listdir("Audio") #Use the OS library to scan the directory for all files and store them in dir_list
         elif (CheckPlatform() == 2):
+            print("Got to check 2")
             dir_list = os.listdir(path) #Use the OS library to scan the directory for all files and store them in dir_list
         print(dir_list)
         try: #Use exception handling in case the file does not exist
