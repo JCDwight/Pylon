@@ -414,7 +414,7 @@ class Monolith(App):
         self.Just_Load('checkins.csv')
         #self.Just_Load('unauthorized.csv')
 
-    def CheckEveryoneOut(self):
+    def CheckEveryoneOut(self,*largs):
         hour = datetime.datetime.now().strftime("%H")
         print(type(hour))
         print(hour)
