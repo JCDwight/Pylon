@@ -146,7 +146,6 @@ class Monolith(App):
         self.add_user_settings('Coach Kevin',   '44094159',79,'UndercoverBrother.png','Green')
         self.add_user_settings('Alex',          '16878715',-1,'Default.png',    'Purple')
 
-
     def LoadSound(self):
         #region
         #
@@ -415,15 +414,20 @@ class Monolith(App):
         self.Just_Load('checkins.csv')
         #self.Just_Load('unauthorized.csv')
 
+    def CheckEveryoneOut(self):
+        hour = datetime.datetime.now().strftime("%H")
+        print(type(hour))
+        print(hour)
+
     def build(self):
         self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.        
         self.BuildElements()
         self.add_predefined_users()
         self.Setup()
-        print("")
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
         if (CheckPlatform() == 1):
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
+            Clock.schedule_interval(partial(self.CheckEveryoneOut, self), 3)
         #Clock.schedule_once(partial(self.CheckInScreen,self), 9)
         return self.window
 
