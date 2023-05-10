@@ -416,6 +416,7 @@ class Monolith(App):
 
     def CheckEveryoneOut(self,*largs):
         hour = datetime.datetime.now().strftime("%H")
+        hour = int(hour)
         print(type(hour))
         print(hour)
 
