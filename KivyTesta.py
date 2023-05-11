@@ -90,6 +90,7 @@ class Monolith(App):
     unauthorized_users_df = pd.DataFrame(columns=['ID', 'CIOT'])
     encryption_key = 0
     encrypted_data = 0
+    clean_up = 1
 
     #END   Application Variables
 
@@ -414,11 +415,43 @@ class Monolith(App):
         self.Just_Load('checkins.csv')
         #self.Just_Load('unauthorized.csv')
 
-    def CheckEveryoneOut(self,*largs):
+    def CheckEveryoneOut(self):
+        numcolumns = self.users_df.shape[1]
+        id_list = []
+        exclude_list = []
+        exclude = 0
+        in_id_list = 0
+        if (self.clean_up == 1):
+            for i in range(numcolumns, -1, -1):
+                if (self.users_df.loc[i,'CIOO'] == 1):
+                    if (len(id_list) > 0):
+                        for j in range(len(id_list)):
+                            if (self.users_df.loc[i,'ID'] == id_list[j]):
+                                break
+                        else:
+                            if (len(exclude_list) > 0):
+                                for e in range(len(exclude_list)):
+                                    if (str(self.users_df.loc[i,'ID']) == str(exclude_list[e])):
+                                        exclude = 1
+                            if (exclude == 0):
+                                id_list.append(self.users_df.loc[i,'ID'])
+                elif (self.users_df.loc[i,'CIOO'] == 2):
+                    if (len(id_list) > 0):
+                        for j in range(len(id_list)):
+                            if (str(self.users_df.loc[i,'ID']) == str(id_list[j])):
+                                in_id_list = 1
+                                break
+                        if(in_id_list == 0):
+                            exclude_list.append(str(self.users_df.loc[i,'ID']))
+            for i in len(id_list):
+                self.users_df = self.users_df.append({'ID': id_list[i], 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 2}, ignore_index=True)
+            self.clean_up = 0
+
+    def CheckTime(self,*largs):
         hour = datetime.datetime.now().strftime("%H")
         hour = int(hour)
-        print(type(hour))
-        print(hour)
+        if (hour > 22):
+            self.CheckEveryoneOut()
 
     def build(self):
         self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.        
@@ -428,7 +461,7 @@ class Monolith(App):
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
         if (CheckPlatform() == 1):
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
-            Clock.schedule_interval(partial(self.CheckEveryoneOut, self), 3)
+            Clock.schedule_interval(partial(self.CheckTime, self), 3)
         #Clock.schedule_once(partial(self.CheckInScreen,self), 9)
         return self.window
 
