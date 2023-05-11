@@ -452,8 +452,10 @@ class Monolith(App):
     def CheckTime(self,*largs):
         hour = datetime.datetime.now().strftime("%H")
         hour = int(hour)
-        if (hour > 22):
+        if ((hour > 22) and (hour < 24)):
             self.CheckEveryoneOut()
+        if ((hour > 2) and (hour < 4)):
+            self.clean_up = 1
 
     def build(self):
         self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.        
