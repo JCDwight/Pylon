@@ -34,7 +34,6 @@ import serial
 import random
 
 kivy.require('2.0.0') # replace with your current kivy version !
-Config.set('graphics', 'show_cursor', 0)
 FULL_SCREEN = 00
 #Change to true for deployment to touchscreen
 
@@ -49,7 +48,6 @@ def CheckPlatform():
 
 if ((CheckPlatform() == 1) and (FULL_SCREEN == 1)):
     Window.fullscreen = True
-    Window.show_cursor = False
 elif (CheckPlatform() == 2):
     Window.fullscreen = False
 
@@ -386,7 +384,7 @@ class Monolith(App):
                         self.PlaySound(72)
                     elif (str(data) == ('16878687')):
                         print(str(self.user_settings_df))
-                        self.PlaySound(73)
+                        self.PlaySound(78)
                     elif (str(data) == ('16858416')):
                         self.PlaySound(79)
                     elif (str(data) == ('16878770')):
