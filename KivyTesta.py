@@ -418,35 +418,56 @@ class Monolith(App):
         #self.Just_Load('unauthorized.csv')
 
     def CheckEveryoneOut(self):
-        numcolumns = self.users_df.shape[1]
+        numcolumns = self.users_df.shape[0] - 1
+        print("self.users_df.shape[1]" + str(self.users_df.shape[0]))
         id_list = []
+        id_list.append("00000000")
+        print("ID List in the beginning: " + str(id_list))
         exclude_list = []
+        exclude_list.append("00000000")
         exclude = 0
-        in_id_list = 0
         if (self.clean_up == 1):
             for i in range(numcolumns, -1, -1):
+                print("In loop: " + str(i) + " ID: " + str(self.users_df.loc[i,'ID']))
+                exclude = 0
                 if (self.users_df.loc[i,'CIOO'] == 1):
                     if (len(id_list) > 0):
                         for j in range(len(id_list)):
-                            if (self.users_df.loc[i,'ID'] == id_list[j]):
+                            if (i == 85):
+                                print("User DF ID: " + str(self.users_df.loc[i,'ID']) + " VS id_list: " + str(id_list[j]))
+                            if (str(self.users_df.loc[i,'ID']) == str(id_list[j])):
+                                print("Broke out because self.users_df.loc[i,'ID'] == id_list[j]")
                                 break
                         else:
+                            print("No breakout, checking exclude list")
                             if (len(exclude_list) > 0):
                                 for e in range(len(exclude_list)):
+                                    if (i == 85):
+                                        print("User DF ID: " + str(self.users_df.loc[i,'ID']) + " VS exclude_list: " + str(exclude_list[e]))
                                     if (str(self.users_df.loc[i,'ID']) == str(exclude_list[e])):
+                                        print("On excluded list")
                                         exclude = 1
                             if (exclude == 0):
-                                id_list.append(self.users_df.loc[i,'ID'])
+                                id_list.append(str(self.users_df.loc[i,'ID']))
+                                print("Appended: self.users_df.loc[i,'ID'] : " + str(self.users_df.loc[i,'ID']) + " to the id_list")
                 elif (self.users_df.loc[i,'CIOO'] == 2):
                     if (len(id_list) > 0):
+                        in_id_list = 0
                         for j in range(len(id_list)):
                             if (str(self.users_df.loc[i,'ID']) == str(id_list[j])):
                                 in_id_list = 1
                                 break
                         if(in_id_list == 0):
                             exclude_list.append(str(self.users_df.loc[i,'ID']))
-            for i in len(id_list):
-                self.users_df = self.users_df.append({'ID': id_list[i], 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 2}, ignore_index=True)
+            print("len(id_list) :" + str(len(id_list)))
+            if (len(id_list) > 0):
+                for i in range(len(id_list)):
+                    if(str(id_list[i]) != "00000000"):
+                        name = ""
+                        for q in range(self.user_settings_df.shape[0]):
+                            if(str(self.user_settings_df.loc[q,'ID']) == str(id_list[i])):
+                                name = self.user_settings_df.loc[q,'Name']       
+                        self.users_df = self.users_df.append({'ID': id_list[i], 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 2}, ignore_index=True)
             self.clean_up = 0
 
     def CheckTime(self,*largs):
