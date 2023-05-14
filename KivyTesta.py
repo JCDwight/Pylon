@@ -377,6 +377,12 @@ class Monolith(App):
         except subprocess.CalledProcessError as e:
             print(f'Error: {e.output.decode()}')
 
+    def Print_Checkins_With_Names(self):
+        for i in range(self.users_df.shape[0]):
+            for j in range(self.user_settings_df.shape[0]):
+                if (str(self.users_df.loc[i,'ID']) == str(self.user_settings_df.loc[j,'ID'])): 
+                    print(str(self.user_settings_df.loc[j,'Name']) + ' - ' + str(self.users_df.loc[i,'CIOT']) + ' - ' + str(self.users_df.loc[i,'CIOO']))
+
     def MainLoop(self, *largs):
         if (self.ser.inWaiting() > 10):
             time.sleep(0.1)
@@ -398,7 +404,8 @@ class Monolith(App):
                     elif (str(data) == ('16858416')):
                         self.PlaySound(79)
                     elif (str(data) == ('16878770')):
-                        print(str(self.users_df))
+                        #print(str(self.users_df))
+                        self.Print_Checkins_With_Names()
                         self.PlaySound(78)
                     else:
                         self.ser.write(b'4')
