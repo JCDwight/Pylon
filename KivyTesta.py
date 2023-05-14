@@ -144,7 +144,7 @@ class Monolith(App):
         self.add_user_settings('Chris',         '16878807',-1,'Default.png'     ,'Purple')
         self.add_user_settings('Coach Robert',  '10497089',-1,'Default.png'     ,'Blue')
         self.add_user_settings('Coach Charles', '50444699',-1,'Default.png'     ,'Cyan')
-        self.add_user_settings('Coach Kevin',   '44094159',79,'UndercoverBrother.png','Green')
+        self.add_user_settings('Coach Kevin',   '44094159',80,'UndercoverBrother.png','Green')
         self.add_user_settings('Alex',          '16878715',-1,'Default.png',    'Purple')
 
     def LoadSound(self):
@@ -384,6 +384,8 @@ class Monolith(App):
                     elif (str(data) == ('16878687')):
                         print(str(self.user_settings_df))
                         self.PlaySound(73)
+                    elif (str(data) == ('16858416')):
+                        self.PlaySound(79)
                     elif (str(data) == ('16878770')):
                         print(str(self.users_df))
                         self.PlaySound(74)
