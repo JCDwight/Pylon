@@ -486,9 +486,11 @@ class Monolith(App):
     def CheckTime(self,*largs):
         hour = datetime.datetime.now().strftime("%H")
         hour = int(hour)
-        if ((hour > 22) and (hour < 24)):
+        min = datetime.datetime.now().strftime("%M")
+        min = int(min)
+        if ((hour == 23) and (min == 45)):
             self.CheckEveryoneOut()
-        if ((hour > 2) and (hour < 4)):
+        if ((hour == 1) and (min == 5)):
             self.clean_up = 1
 
     def build(self):
@@ -499,7 +501,7 @@ class Monolith(App):
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
         if (CheckPlatform() == 1):
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
-            Clock.schedule_interval(partial(self.CheckTime, self), 3600)
+            Clock.schedule_interval(partial(self.CheckTime, self), 20)
         #Clock.schedule_once(partial(self.CheckInScreen,self), 9)
         return self.window
 
