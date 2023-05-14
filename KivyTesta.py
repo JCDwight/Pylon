@@ -19,6 +19,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.clock import Clock
 from kivy.app import App
 from kivy.uix.label import Label
+from kivy.config import Config
 from datetime import datetime
 import time
 import datetime
@@ -33,6 +34,7 @@ import serial
 import random
 
 kivy.require('2.0.0') # replace with your current kivy version !
+Config.set('graphics', 'show_cursor', 0)
 FULL_SCREEN = 00
 #Change to true for deployment to touchscreen
 
