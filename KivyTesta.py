@@ -36,7 +36,7 @@ import random
 import sys
 
 kivy.require('2.0.0') # replace with your current kivy version !
-FULL_SCREEN = 00
+FULL_SCREEN = 1
 #Change to true for deployment to touchscreen
 
 def CheckPlatform():
