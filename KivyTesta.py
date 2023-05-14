@@ -49,6 +49,7 @@ def CheckPlatform():
 
 if ((CheckPlatform() == 1) and (FULL_SCREEN == 1)):
     Window.fullscreen = True
+    Window.show_cursor = False
 elif (CheckPlatform() == 2):
     Window.fullscreen = False
 
