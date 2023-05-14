@@ -400,9 +400,6 @@ class Monolith(App):
                     elif (str(data) == ('16878770')):
                         print(str(self.users_df))
                         self.PlaySound(78)
-                        self.git_pull()
-                        time.sleep(5)
-                        sys.exit(0)
                     else:
                         self.ser.write(b'4')
                         #self.unauthorized_users_df = self.unauthorized_users_df.append({'ID': str(data), 'CIOT': datetime.datetime.now().strftime("%I:%M %p\n %B %d, %Y")})
