@@ -21,6 +21,7 @@ from kivy.app import App
 from kivy.uix.label import Label
 from kivy.config import Config
 from datetime import datetime
+import subprocess
 import time
 import datetime
 from functools import partial
@@ -32,6 +33,7 @@ import platform as plat
 import threading
 import serial
 import random
+import sys
 
 kivy.require('2.0.0') # replace with your current kivy version !
 FULL_SCREEN = 00
@@ -366,6 +368,13 @@ class Monolith(App):
         self.Just_Save('checkins.csv')
         self.ser.flush()
         return inorout
+    
+    def git_pull():
+        try:
+            output = subprocess.check_output(['git', 'pull'], stderr=subprocess.STDOUT)
+            print(output.decode())
+        except subprocess.CalledProcessError as e:
+            print(f'Error: {e.output.decode()}')
 
     def MainLoop(self, *largs):
         if (self.ser.inWaiting() > 10):
@@ -390,6 +399,9 @@ class Monolith(App):
                     elif (str(data) == ('16878770')):
                         print(str(self.users_df))
                         self.PlaySound(78)
+                        self.git_pull()
+                        time.sleep(5)
+                        sys.exit(0)
                     else:
                         self.ser.write(b'4')
                         #self.unauthorized_users_df = self.unauthorized_users_df.append({'ID': str(data), 'CIOT': datetime.datetime.now().strftime("%I:%M %p\n %B %d, %Y")})
