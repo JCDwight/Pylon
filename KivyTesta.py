@@ -34,6 +34,7 @@ import threading
 import serial
 import random
 import sys
+import shutil
 
 kivy.require('2.0.0') # replace with your current kivy version !
 FULL_SCREEN = 0
@@ -483,6 +484,10 @@ class Monolith(App):
                         self.users_df = self.users_df.append({'ID': id_list[i], 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 2}, ignore_index=True)
             self.clean_up = 0
 
+    def CopyFile(self, source_file, destination_file):     
+        # Copy the file
+        shutil.copy2(source_file, destination_file)
+
     def CheckTime(self,*largs):
         hour = datetime.datetime.now().strftime("%H")
         hour = int(hour)
@@ -490,6 +495,10 @@ class Monolith(App):
         min = int(min)
         if ((hour == 23) and (min == 45)):
             self.CheckEveryoneOut()
+        if ((hour == 23) and (min == 55)):
+            self.CopyFile('checkins.csv','/Backups/checkins-' + str(datetime.datetime.now().strftime("%Y-%m-%d") + ".csv"))
+            self.users_df = {'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':0}
+            self.Just_Save('checkins.csv')
         if ((hour == 1) and (min == 5)):
             self.clean_up = 1
 
