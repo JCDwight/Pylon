@@ -83,7 +83,7 @@ class Monolith(App):
     sounds = []    #create a list to hold loaded sounds
     soundList = [] #create an empty list to hold the sound list
     soundTime = 0  #Variable for tracking song length, initialized to 0.
-    playingSound = 0
+    playingSound = 1
     debugCounter = 0
     debugTimer = 0
     scannedTag = 0
