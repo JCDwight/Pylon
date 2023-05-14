@@ -404,7 +404,10 @@ class Monolith(App):
         for i in range(self.users_df.shape[0]):
             for j in range(self.user_settings_df.shape[0]):
                 if (str(self.users_df.loc[i,'ID']) == str(self.user_settings_df.loc[j,'ID'])): 
-                    print(str(self.user_settings_df.loc[j,'Name']) + ' - ' + str(self.users_df.loc[i,'CIOT']) + ' - ' + str(self.users_df.loc[i,'CIOO']))
+                    if (self.users_df.loc[i,'CIOO']) == 1:
+                        print(str(self.user_settings_df.loc[j,'Name']) + ' - ' + str(self.users_df.loc[i,'CIOT']) + ' - ' + "In")
+                    if (self.users_df.loc[i,'CIOO']) == 2:
+                        print(str(self.user_settings_df.loc[j,'Name']) + ' - ' + str(self.users_df.loc[i,'CIOT']) + ' - ' + "Out")
 
     def MainLoop(self, *largs):
         if (self.ser.inWaiting() > 10):
