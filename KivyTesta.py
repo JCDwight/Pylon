@@ -35,6 +35,9 @@ import serial
 import random
 import sys
 import shutil
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
+from google.oauth2 import service_account
 
 kivy.require('2.0.0') # replace with your current kivy version !
 FULL_SCREEN = 0
@@ -322,6 +325,26 @@ class Monolith(App):
         self.window.add_widget(self.label1)
         self.window.add_widget(self.label2)
         #endregion
+
+    def upload_picture_to_drive(picture_path, drive_folder_id):
+        credentials = service_account.Credentials.from_service_account_file('credentials.json', scopes=['https://www.googleapis.com/auth/drive'])
+
+        drive_service = build('drive', 'v3', credentials=credentials)
+        
+        file_metadata = {
+            'name': 'picture.jpg',
+            'parents': [drive_folder_id]
+        }
+
+        media = MediaFileUpload(picture_path, mimetype='image/jpeg')
+
+        file = drive_service.files().create(
+            body=file_metadata,
+            media_body=media,
+            fields='id'
+        ).execute()
+
+        print('Picture uploaded. File ID:', file.get('id'))
 
     def Just_Save(self, path):
         self.users_df.to_csv(path, index=False)
