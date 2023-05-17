@@ -434,7 +434,7 @@ class Monolith(App):
                     elif (str(data) == ('16878770')):
                         #print(str(self.users_df))
                         self.Print_Checkins_With_Names()
-                        self.PlaySound(78)
+                        #self.PlaySound(78)
                     else:
                         self.ser.write(b'4')
                         #self.unauthorized_users_df = self.unauthorized_users_df.append({'ID': str(data), 'CIOT': datetime.datetime.now().strftime("%I:%M %p\n %B %d, %Y")})
