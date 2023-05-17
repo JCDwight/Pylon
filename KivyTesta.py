@@ -99,6 +99,7 @@ class Monolith(App):
     encrypted_data = 0
     clean_up = 1
     backedup = 0
+    sound_on = True
 
     #END   Application Variables
 
@@ -226,18 +227,19 @@ class Monolith(App):
 
     def PlaySound(self, selector):
         #region
-        t = round(time.time() * 1000)
-        #    If self.sounds[selector] exists, AND The length of the playing sound is less than the current time sound has been playing, then play the new sound
-        #print (self.sounds)
-        if ((self.sounds[selector]) and ((self.sounds[self.playingSound].length * 1000) < t - self.soundTime)): 
-            self.sounds[selector].play() #Plays the selected sound
-        #ps.playsound("Audio//" + self.soundList[selector], False)
-        self.playingSound = selector #Save the current selected song as our playing sound, since we made it in here, and the sound is playing
-        self.scanLock = 1
-        print("Length of audio file: " + str(self.sounds[self.playingSound].length))
-        Clock.schedule_once(partial(self.SplashScreen,self), self.sounds[self.playingSound].length + 1)
-        self.soundTime = round(time.time() * 1000) #get the time, round it, and multiply it by 1000 to convert to milliseconds
-        #endregion
+        if (self.sound_on):
+            t = round(time.time() * 1000)
+            #    If self.sounds[selector] exists, AND The length of the playing sound is less than the current time sound has been playing, then play the new sound
+            #print (self.sounds)
+            if ((self.sounds[selector]) and ((self.sounds[self.playingSound].length * 1000) < t - self.soundTime)): 
+                self.sounds[selector].play() #Plays the selected sound
+            #ps.playsound("Audio//" + self.soundList[selector], False)
+            self.playingSound = selector #Save the current selected song as our playing sound, since we made it in here, and the sound is playing
+            self.scanLock = 1
+            print("Length of audio file: " + str(self.sounds[self.playingSound].length))
+            Clock.schedule_once(partial(self.SplashScreen,self), self.sounds[self.playingSound].length + 1)
+            self.soundTime = round(time.time() * 1000) #get the time, round it, and multiply it by 1000 to convert to milliseconds
+            #endregion
 
     def ReadSerial(self, *largs):
         if self.ser.isOpen():
@@ -430,7 +432,10 @@ class Monolith(App):
                         print(str(self.user_settings_df))
                         self.PlaySound(73)
                     elif (str(data) == ('16858416')):
-                        self.PlaySound(79)
+                        if (self.sound_on):
+                            self.sound_on = False
+                        else:
+                            self.sound_on = True
                     elif (str(data) == ('16878770')):
                         #print(str(self.users_df))
                         self.Print_Checkins_With_Names()
