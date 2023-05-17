@@ -516,6 +516,7 @@ class Monolith(App):
 
     def CopyFile(self, source_file, destination_file):     
         # Copy the file
+        print("Copying: " + str(source_file) + " to " + str(destination_file))
         shutil.copy2(source_file, destination_file)
 
     def CheckTime(self,*largs):
@@ -523,13 +524,16 @@ class Monolith(App):
         hour = int(hour)
         min = datetime.datetime.now().strftime("%M")
         min = int(min)
+        print (str(hour) + ":" + str(min))
         if ((hour == 23) and (min == 45)):
+            print("Checking everyone out")
             self.CheckEveryoneOut()
         if ((hour == 23) and (min == 55)):
             self.CopyFile('checkins.csv','/Backups/checkins-' + str(datetime.datetime.now().strftime("%Y-%m-%d") + ".csv"))
             self.users_df = {'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':0}
             self.Just_Save('checkins.csv')
         if ((hour == 1) and (min == 5)):
+            print("Switching Self clean up back to 1")
             self.clean_up = 1
 
     def build(self):
