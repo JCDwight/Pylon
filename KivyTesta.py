@@ -98,6 +98,7 @@ class Monolith(App):
     encryption_key = 0
     encrypted_data = 0
     clean_up = 1
+    backedup = 0
 
     #END   Application Variables
 
@@ -527,13 +528,15 @@ class Monolith(App):
         if ((hour == 23) and (min == 45)):
             print("Checking everyone out")
             self.CheckEveryoneOut()
-        if ((hour == 23) and (min == 55)):
+        if ((hour == 23) and (min == 55) and (self.backedup == 0)):
             self.CopyFile('checkins.csv','/Backups/checkins-' + str(datetime.datetime.now().strftime("%Y-%m-%d") + ".csv"))
             self.users_df = {'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':0}
             self.Just_Save('checkins.csv')
+            self.backedup = 1
         if ((hour == 1) and (min == 5)):
             print("Switching Self clean up back to 1")
             self.clean_up = 1
+            self.backedup = 0
 
     def build(self):
         self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.        
