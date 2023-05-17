@@ -524,7 +524,6 @@ class Monolith(App):
         hour = int(hour)
         min = datetime.datetime.now().strftime("%M")
         min = int(min)
-        print (str(hour) + ":" + str(min))
         if ((hour == 23) and (min == 45)):
             print("Checking everyone out")
             self.CheckEveryoneOut()
