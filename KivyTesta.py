@@ -35,9 +35,11 @@ import serial
 import random
 import sys
 import shutil
-from googleapiclient.discovery import build
-from googleapiclient.http import MediaFileUpload
-from google.oauth2 import service_account
+import csv
+
+#from googleapiclient.discovery import build
+#from googleapiclient.http import MediaFileUpload
+#from google.oauth2 import service_account
 
 kivy.require('2.0.0') # replace with your current kivy version !
 FULL_SCREEN = 1
@@ -115,48 +117,56 @@ class Monolith(App):
     def add_rogue_user(self):
         pass
 
-    #Intercept Rogue Checkins - Ah ah ah!  You didn't say the magioc word!
-    def RogueCheckin(self):
-        pass
+    def save_list_to_csv(self,file_path, data):
+        with open(file_path, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(data)
+
+    def load_csv_to_list(self,file_path):
+        with open(file_path, 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            data = list(reader)[0]
+        return data
 
     def add_predefined_users(self): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
         self.add_user_settings('Coach Jay',     '16819214', 1,'jay.png'         ,'Orange')
-        self.add_user_settings('Chuck Testa',   '10101010', 1,'ChuckTesta.png'  ,'Orange')
-        self.add_user_settings('Jackson',       '16878869',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Liam',          '16878885',-1,'Default.png'     ,'Blue')
-        self.add_user_settings('Luke',          '16878745',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Ibrahim',       '16878733',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Ryan',          '16878705',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Rebagrace',     '16878861',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Coach Larry',   '16819201',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Coach Harrison','16818556',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Coach Tim',     '16818556',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Cole',          '16878693',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Martin',        '16858425', 6,'Chargedup.png'   ,'Cyan')
-        self.add_user_settings('Coach Shelly',  '10497184',10,'shelly.png'      ,'Gold')
-        self.add_user_settings('Evan',          '16878758', 2,'EvaninFTCBox.png','Red')
-        self.add_user_settings('Coach Renee',   '10497178', 8,'renee.png'       ,'Yellow')
-        self.add_user_settings('Aryan',         '16878794', 4,'thisthing.png'   ,'Blue')
-        self.add_user_settings('Keita',         '16878838',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Annabelle',     '16878841',-1,'Default.png'     ,'Purple')
-        self.add_user_settings('Austin',        '16878724',-1,'Default.png'     ,'Gold')
-        self.add_user_settings('Ted',           '16878757',20,'Default.png'     ,'Green')
-        self.add_user_settings('Coach Craig',   '16818550', 0,'Default.png'     ,'Green')
-        self.add_user_settings('Susan',         '16858448',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Ty',            '10518941',75,'Tytaco.png'      ,'Orange')    
-        self.add_user_settings('Emma',          '16858354',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Vikas',         '16878849',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Coach Joe',     '10604432',-1,'Default.png'     ,'Purple')
-        self.add_user_settings('Megan',         '16878711',-1,'Default.png'     ,'Purple')
-        self.add_user_settings('Chris',         '16878807',-1,'Default.png'     ,'Purple')
-        self.add_user_settings('Coach Robert',  '10497089',-1,'Default.png'     ,'Blue')
-        self.add_user_settings('Coach Charles', '50444699',-1,'Default.png'     ,'Cyan')
-        self.add_user_settings('Coach Kevin',   '44094159',80,'UndercoverBrother.png','Red/Yellow/Green')
-        self.add_user_settings('Alex',          '16878715',-1,'Default.png',    'Purple')
+        self.add_user_settings('Chuck Testa',   '10101010', 2,'ChuckTesta.png'  ,'Orange')
+        self.add_user_settings('Jackson',       '16878869', 3,'Default.png'     ,'Green')
+        self.add_user_settings('Liam',          '16878885', 4,'Default.png'     ,'Blue')
+        self.add_user_settings('Luke',          '16878745', 5,'Default.png'     ,'Green')
+        self.add_user_settings('Ibrahim',       '16878733', 6,'Default.png'     ,'Green')
+        self.add_user_settings('Ryan',          '16878705', 7,'Default.png'     ,'Green')
+        self.add_user_settings('Rebagrace',     '16878861', 8,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Larry',   '16819201', 9,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Harrison','16818556',10,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Tim',     '16818556',11,'Default.png'     ,'Green')
+        self.add_user_settings('Cole',          '16878693',12,'Default.png'     ,'Green')
+        self.add_user_settings('Martin',        '16858425',13,'Chargedup.png'   ,'Cyan')
+        self.add_user_settings('Coach Shelly',  '10497184',14,'shelly.png'      ,'Gold')
+        self.add_user_settings('Evan',          '16878758',15,'EvaninFTCBox.png','Red')
+        self.add_user_settings('Coach Renee',   '10497178',16,'renee.png'       ,'Yellow')
+        self.add_user_settings('Aryan',         '16878794',17,'thisthing.png'   ,'Blue')
+        self.add_user_settings('Keita',         '16878838',18,'Default.png'     ,'Green')
+        self.add_user_settings('Annabelle',     '16878841',19,'Default.png'     ,'Purple')
+        self.add_user_settings('Austin',        '16878724',20,'Default.png'     ,'Gold')
+        self.add_user_settings('Ted',           '16878757',21,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Craig',   '16818550',22,'Default.png'     ,'Green')
+        self.add_user_settings('Susan',         '16858448',23,'Default.png'     ,'Green')
+        self.add_user_settings('Ty',            '10518941',24,'Tytaco.png'      ,'Orange')    
+        self.add_user_settings('Emma',          '16858354',25,'Default.png'     ,'Green')
+        self.add_user_settings('Vikas',         '16878849',26,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Joe',     '10604432',27,'Default.png'     ,'Purple')
+        self.add_user_settings('Megan',         '16878711',28,'Default.png'     ,'Purple')
+        self.add_user_settings('Chris',         '16878807',29,'Default.png'     ,'Purple')
+        self.add_user_settings('Coach Robert',  '10497089',30,'Default.png'     ,'Blue')
+        self.add_user_settings('Coach Charles', '50444699',31,'Default.png'     ,'Cyan')
+        self.add_user_settings('Coach Kevin',   '44094159',32,'UndercoverBrother.png','Red/Yellow/Green')
+        self.add_user_settings('Alex',          '16878715',33,'Default.png',    'Purple')
 
     def LoadSound(self):
         #region
         #
+        loadFile = []
         noFile = False #Set noFile to false, if we can not load the file we will set this to true
         dir_list = 0
         path = "Audio\\" #Folder in the root directory that holds all our audio files
@@ -165,7 +175,7 @@ class Monolith(App):
         elif (CheckPlatform() == 2):
             dir_list = os.listdir(path) #Use the OS library to scan the directory for all files and store them in dir_list
         try: #Use exception handling in case the file does not exist
-            loadFile = pd.read_json('DataBases/audioFiles.json') #Try to load audioFiles.json
+            loadFile = self.load_csv_to_list('DataBases/audioFiles.csv') #Try to load audioFiles.csv
         except: #If no file exists, we set noFile to true and will create one with the scanned directory.  This should only happen once on first run.
             noFile = True
                                 #A file already exists, so we need to load in any new files to the end of the list
@@ -173,22 +183,17 @@ class Monolith(App):
             fallThrough = False
             newlist = []
             for g in range(len(loadFile)):
-                newlist.append(loadFile[0][g])
+                newlist.append(loadFile[g])
             for g in range(len(newlist)):
                 listItem = newlist[g]
                 listItem = str(listItem)            #g starts as a list, we need to convert it to a string
-                listItem = listItem.replace('[','') #Byproducts of converting from JSONs to Dataframes are brackets and pops ( [ ] and ' ')
-                listItem = listItem.replace(']','') #We can use the built in replace function to remove them
-                listItem = listItem.replace("'",'') #Will potentially revist as there's probably a better way to do this
                 self.soundList.append(listItem)
             for f in range(len(dir_list)):
                 flagged = False
                 for g in range(len(newlist)):
                     listItem = newlist[g]
                     listItem = str(listItem)            #g starts as a list, we need to convert it to a string
-                    listItem = listItem.replace('[','') #Byproducts of converting from JSONs to Dataframes are brackets and pops ( [ ] and ' ')
-                    listItem = listItem.replace(']','') #We can use the built in replace function to remove them
-                    listItem = listItem.replace("'",'') #Will potentially revist as there's probably a better way to do this
+
                     if ((dir_list[f] == listItem) and (flagged == False)): #If the files in the scanned dir_list match the old list, flag and skip
                         fallThrough = False
                         flagged = True
@@ -197,14 +202,11 @@ class Monolith(App):
                         fallThrough = True #If they don't match, fallthrough so we add it to the list
                 if ((fallThrough) and (flagged == False)): #Add new sound to list if fallThrough == True and Flagged(As a match) == False
                     self.soundList.append(dir_list[f])
-            #print(self.soundList)
-            dataFrame = pd.DataFrame(self.soundList)       #Convert the list into a dataframe
-            dataFrame.to_json('DataBases/audioFiles.json') #Convert the dataframe to a persistant JSON
+            self.save_list_to_csv('Databases/audioFiles.csv',self.soundList)
         else:
             for f in dir_list: #No file exists, so just dump the scanned directory files into a list, should happen 1x
                 self.soundList.append(f)
-            dataFrame = pd.DataFrame(self.soundList)        #Convert the list into a dataframe
-            dataFrame.to_json('DataBases/audioFiles.json')  #Convert the dataframe to a persistant JSON
+            self.save_list_to_csv('Databases/audioFiles.csv',self.soundList)
         print("Loading Files in:'", path, "':")
         if (CheckPlatform() == 1):
             for f in self.soundList:                                  #Load the files in the soundList and print when they load(Linux)
@@ -215,7 +217,7 @@ class Monolith(App):
                 self.sounds.append(SoundLoader.load(path + self.soundList[f]))
                 print('Loaded: ' + path + self.soundList[f])
         if (FULL_SCREEN == 1):
-            self.PlaySound(7)
+            self.PlaySound(random.randint(1,50))
         #endregion
 
     def UnlockScan(self, *largs):
