@@ -64,6 +64,7 @@ def server():
   while True:
     data = s.recv(1024).decode('utf-8')
     print("8. Received")
+    print(str(data))
     if not data:
       print("9. No data, breaking.")
       break
