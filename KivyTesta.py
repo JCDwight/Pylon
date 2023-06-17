@@ -43,6 +43,29 @@ kivy.require('2.0.0') # replace with your current kivy version !
 FULL_SCREEN = 0
 #Change to true for deployment to touchscreen
 
+import socket
+
+def server():
+  host = socket.gethostname()   # get local machine name
+  port = 8080  # Make sure it's within the > 1024 $$ <65535 range
+  
+  s = socket.socket()
+  s.bind((host, port))
+  
+  s.listen(1)
+  client_socket, address = s.accept()
+  print("Connection from: " + str(address))
+  while True:
+    data = s.recv(1024).decode('utf-8')
+    if not data:
+      break
+    print('From online user: ' + data)
+    data = data.upper()
+    s.send(data.encode('utf-8'))
+  s.close()
+  print("Hit server end")
+  
+
 def CheckPlatform():
     #Checks the platform the program is running on.  Linux = 1, Windows = 2, everything else is 3
     if (plat.platform()[0] == "L" or plat.platform()[0] == "l"):
@@ -553,6 +576,7 @@ class Monolith(App):
         if (CheckPlatform() == 1):
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
             Clock.schedule_interval(partial(self.CheckTime, self), 20)
+            Clock.schedule_interval(partial(server()),5)
         #Clock.schedule_once(partial(self.CheckInScreen,self), 9)
         return self.window
 
