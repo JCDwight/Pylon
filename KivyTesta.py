@@ -97,11 +97,6 @@ class MainWindow(Screen):
             ani = Animation(opacity=1,duration=0.25)
             ani.start(self.pictureBox)
             self.flag1 = 0
-
-def HIDCardSwipe(self, *largs):
-    sm.SwapBetweenWindows()
-    #sm.current = "checkin"
-    
 sm = WindowManager()
 
 class Monolith(App):
