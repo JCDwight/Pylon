@@ -46,6 +46,7 @@ FULL_SCREEN = 0
 import socket
 
 def server():
+  print("Started running server")
   host = socket.gethostname()   # get local machine name
   port = 8080  # Make sure it's within the > 1024 $$ <65535 range
   
