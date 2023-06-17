@@ -46,25 +46,33 @@ FULL_SCREEN = 0
 import socket
 
 def server():
-  print("Started running server")
+  print("1. Started running server")
   host = socket.gethostname()   # get local machine name
+  print("2. Got host")
   port = 8080  # Make sure it's within the > 1024 $$ <65535 range
+  print("3. Created port")
   
   s = socket.socket()
+  print("4. Got socket")
   s.bind((host, port))
+  print("5. Bound socket")
   
   s.listen(1)
+  print("6. Finished listening")
   client_socket, address = s.accept()
-  print("Connection from: " + str(address))
+  print("7. Connection from: " + str(address))
   while True:
     data = s.recv(1024).decode('utf-8')
+    print("8. Received")
     if not data:
+      print("9. No data, breaking.")
       break
     print('From online user: ' + data)
     data = data.upper()
     s.send(data.encode('utf-8'))
+    print("9. Sent data")
   s.close()
-  print("Hit server end")
+  print("10. Hit server end")
   
 
 def CheckPlatform():
