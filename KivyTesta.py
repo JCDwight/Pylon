@@ -38,42 +38,32 @@ import shutil
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 from google.oauth2 import service_account
+import socket
 
 kivy.require('2.0.0') # replace with your current kivy version !
 FULL_SCREEN = 0
 #Change to true for deployment to touchscreen
 
-import socket
+def start_server(host='192.168.215.98', port=8080):
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind((host, port))
+    server_socket.listen(1)
+    print(f"Server started! Listening at {host}:{port}")
 
-def server():
-  print("1. Started running server")
-  host = socket.gethostname()   # get local machine name
-  print("2. Got host")
-  port = 8080  # Make sure it's within the > 1024 $$ <65535 range
-  print("3. Created port")
-  
-  s = socket.socket()
-  print("4. Got socket")
-  s.bind((host, port))
-  print("5. Bound socket")
-  
-  s.listen(1)
-  print("6. Finished listening")
-  client_socket, address = s.accept()
-  print("7. Connection from: " + str(address))
-  while True:
-    data = s.recv(1024).decode('utf-8')
-    print("8. Received")
-    print(str(data))
-    if not data:
-      print("9. No data, breaking.")
-      break
-    print('From online user: ' + data)
-    data = data.upper()
-    s.send(data.encode('utf-8'))
-    print("9. Sent data")
-  s.close()
-  print("10. Hit server end")
+    while True:
+        conn, address = server_socket.accept()
+        print(f"Connection from {address}")
+        while True:
+            data = conn.recv(1024)
+            if not data:
+                break
+            print(f"Received data: {data.decode('utf-8')}")
+            response = "Message received!"
+            conn.send(response.encode('utf-8'))
+        conn.close()
+
+# start the server
+
   
 
 def CheckPlatform():
@@ -577,11 +567,11 @@ class Monolith(App):
         self.BuildElements()
         self.add_predefined_users()
         self.Setup()
+        start_server()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
         if (CheckPlatform() == 1):
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
             Clock.schedule_interval(partial(self.CheckTime, self), 20)
-            Clock.schedule_interval(partial(server()),5)
         #Clock.schedule_once(partial(self.CheckInScreen,self), 9)
         return self.window
 
