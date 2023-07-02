@@ -55,12 +55,13 @@ def handle_client(conn):
         print(str(rdata))
         if rdata == b"update":
             rnd = random.randint(1,3)
+            rndnum = random.randint(0,60)
             if (rnd == 1):
-                response = "1,RED"
+                response = str(rndnum)+ ",RED"
             if (rnd == 3):
-                response = "1,GREEN"
+                response = str(rndnum)+ ",GREEN"
             if (rnd == 2):
-                response = "1,BLUE"
+                response = str(rndnum)+ ",BLUE"
             conn.send(response.encode('utf-8'))
     conn.close()
 
