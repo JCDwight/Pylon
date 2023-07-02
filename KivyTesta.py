@@ -580,7 +580,7 @@ class Monolith(App):
         self.BuildElements()
         self.add_predefined_users()
         self.Setup()
-        start_server()
+        #start_server()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
         if (CheckPlatform() == 1):
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
