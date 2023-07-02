@@ -48,6 +48,7 @@ FULL_SCREEN = 0
 update_MPIB = ""
 
 def handle_client(conn):
+    global update_MPIB
     while True:
         data = conn.recv(1024)
         if not data:
@@ -131,7 +132,6 @@ class Monolith(App):
     users_df = pd.DataFrame(columns=['ID', 'CIOT', 'CIOO'])
     user_settings_df = pd.DataFrame(columns=['Name', 'ID', 'MPIB', 'S', 'P', 'C'])
     unauthorized_users_df = pd.DataFrame(columns=['ID', 'CIOT'])
-    update_MPIB = True
     encryption_key = 0
     encrypted_data = 0
     clean_up = 1
@@ -308,6 +308,7 @@ class Monolith(App):
         pass
 
     def CheckInScreen(self, name, imageFilePath, soundNum, color, ID, MPIB):
+        global update_MPIB
         if (CheckPlatform() == 1):
             self.ser.write(b'3')
         time.sleep(1)
@@ -322,7 +323,6 @@ class Monolith(App):
             self.label1.text = name + ' checked in!'
         else:
             self.label1.text = name + ' checked out!'
-
         print('Playing: ' + str(self.soundList[soundNum]))
         self.label1.pos = (200, 150)
         self.label1.font_size = 25
@@ -343,7 +343,6 @@ class Monolith(App):
         imageFilePath = "Images/" + imageFilePath
         self.img.source = imageFilePath
         update_MPIB = str(MPIB) + ",GREEN"
-
 
     def BuildElements(self):
         #region
