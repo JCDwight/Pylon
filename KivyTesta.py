@@ -59,7 +59,7 @@ def handle_client(conn):
             pass
         if rdata == b"update":
             rnd = random.randint(1,4)
-            rndnum = random.randint(0,39)
+            rndnum = random.randint(0,59)
             if (rnd == 1):
                 response = str(rndnum)+ ",RED"
             if (rnd == 3):
