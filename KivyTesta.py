@@ -45,41 +45,9 @@ kivy.require('2.0.0') # replace with your current kivy version !
 FULL_SCREEN = 0
 #Change to true for deployment to touchscreen
 
-def handle_client(conn):
-    while True:
-        data = conn.recv(1024)
-        if not data:
-            break
-        print(f"Received data: {data.decode('utf-8')}")
-        rdata = data
-        print(str(rdata))
-        if rdata == b"update":
-            rnd = random.randint(1,4)
-            rndnum = random.randint(0,39)
-            if (rnd == 1):
-                response = str(rndnum)+ ",RED"
-            if (rnd == 3):
-                response = str(rndnum)+ ",GREEN"
-            if (rnd == 2):
-                response = str(rndnum)+ ",BLUE"
-            if (rnd == 4):
-                response = str(rndnum)+ ",YELLOW"
-            conn.send(response.encode('utf-8'))
-    conn.close()
+update_MPIB = True
 
-def start_server(host='192.168.213.38', port=8080):
-    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # This line enables port reusage:
-    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    server_socket.bind((host, port))
-    server_socket.listen(1)
-    print(f"Server started!! Listening at {host}:{port}")
 
-    while True:
-        conn, address = server_socket.accept()
-        print(f"Connection from {address}")
-        client_thread = threading.Thread(target=handle_client, args=(conn,))
-        client_thread.start()
 
 
 
@@ -132,8 +100,9 @@ class Monolith(App):
     scannedTag = 0
     scanLock = 0
     users_df = pd.DataFrame(columns=['ID', 'CIOT', 'CIOO'])
-    user_settings_df = pd.DataFrame(columns=['Name', 'ID', 'S', 'P', 'C'])
+    user_settings_df = pd.DataFrame(columns=['Name', 'ID', 'MPIB', 'S', 'P', 'C'])
     unauthorized_users_df = pd.DataFrame(columns=['ID', 'CIOT'])
+    update_MPIB = True
     encryption_key = 0
     encrypted_data = 0
     clean_up = 1
@@ -150,51 +119,87 @@ class Monolith(App):
         print('Opening serial port...')
         #ser = serial.Serial('COM8', 500000)
 
-    def add_user_settings(self, name, ident, s, p, c):
-        self.user_settings_df = self.user_settings_df.append({'Name': name, 'ID': ident, 'S': s, 'P': p, 'C': c}, ignore_index=True)
+    def add_user_settings(self, name, ident, MPIBID, s, p, c):
+        self.user_settings_df = self.user_settings_df.append({'Name': name, 'ID': ident,'MPIB': MPIBID, 'S': s, 'P': p, 'C': c}, ignore_index=True)
 
     def add_rogue_user(self):
         pass
 
-    #Intercept Rogue Checkins - Ah ah ah!  You didn't say the magioc word!
-    def RogueCheckin(self):
-        pass
+def handle_client(self,conn):
+    while True:
+        data = conn.recv(1024)
+        if not data:
+            break
+        print(f"Received data: {data.decode('utf-8')}")
+        rdata = data
+        print(str(rdata))
+        if (update_MPIB):
+            pass
+        if rdata == b"update":
+            rnd = random.randint(1,4)
+            rndnum = random.randint(0,39)
+            if (rnd == 1):
+                response = str(rndnum)+ ",RED"
+            if (rnd == 3):
+                response = str(rndnum)+ ",GREEN"
+            if (rnd == 2):
+                response = str(rndnum)+ ",BLUE"
+            if (rnd == 4):
+                response = str(rndnum)+ ",YELLOW"
+            if (rnd == 5):
+                response = str(rndnum)+ ",PURPLE"
+            conn.send(response.encode('utf-8'))
+    conn.close()
+
+    def start_server(self,host='192.168.213.38', port=8080):
+        server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # This line enables port reusage:
+        server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        server_socket.bind((host, port))
+        server_socket.listen(1)
+        print(f"Server started!! Listening at {host}:{port}")
+
+        while True:
+            conn, address = server_socket.accept()
+            print(f"Connection from {address}")
+            client_thread = threading.Thread(target=handle_client, args=(conn,))
+            client_thread.start()
 
     def add_predefined_users(self): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
-        self.add_user_settings('Coach Jay',     '16819214', 1,'jay.png'         ,'Orange')
-        self.add_user_settings('Chuck Testa',   '10101010', 1,'ChuckTesta.png'  ,'Orange')
-        self.add_user_settings('Jackson',       '16878869',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Liam',          '16878885',-1,'Default.png'     ,'Blue')
-        self.add_user_settings('Luke',          '16878745',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Ibrahim',       '16878733',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Ryan',          '16878705',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Rebagrace',     '16878861',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Coach Larry',   '16819201',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Coach Harrison','16818556',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Coach Tim',     '16818556',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Cole',          '16878693',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Martin',        '16858425', 6,'Chargedup.png'   ,'Cyan')
-        self.add_user_settings('Coach Shelly',  '10497184',10,'shelly.png'      ,'Gold')
-        self.add_user_settings('Evan',          '16878758', 2,'EvaninFTCBox.png','Red')
-        self.add_user_settings('Coach Renee',   '10497178', 8,'renee.png'       ,'Yellow')
-        self.add_user_settings('Aryan',         '16878794', 4,'thisthing.png'   ,'Blue')
-        self.add_user_settings('Keita',         '16878838',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Annabelle',     '16878841',-1,'Default.png'     ,'Purple')
-        self.add_user_settings('Austin',        '16878724',-1,'Default.png'     ,'Gold')
-        self.add_user_settings('Ted',           '16878757',20,'Default.png'     ,'Green')
-        self.add_user_settings('Coach Craig',   '16818550', 0,'Default.png'     ,'Green')
-        self.add_user_settings('Susan',         '16858448',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Ty',            '10518941',75,'Tytaco.png'      ,'Orange')    
-        self.add_user_settings('Emma',          '16858354',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Vikas',         '16878849',-1,'Default.png'     ,'Green')
-        self.add_user_settings('Coach Joe',     '10604432',-1,'Default.png'     ,'Purple')
-        self.add_user_settings('Megan',         '16878711',-1,'Default.png'     ,'Purple')
-        self.add_user_settings('Chris',         '16878807',-1,'Default.png'     ,'Purple')
-        self.add_user_settings('Coach Robert',  '10497089',-1,'Default.png'     ,'Blue')
-        self.add_user_settings('Coach Charles', '50444699',-1,'Default.png'     ,'Cyan')
-        self.add_user_settings('Coach Kevin',   '44094159',80,'UndercoverBrother.png','Red/Yellow/Green')
-        self.add_user_settings('Alex',          '16878715',-1,'Default.png',    'Purple')
-        self.add_user_settings('Nathan',        '16878802',-1,'Default.png',    'Red')
+        self.add_user_settings('Coach Jay',     '16819214', 13, 1,'jay.png'         ,'Orange')
+        self.add_user_settings('Chuck Testa',   '10101010', 79, 1,'ChuckTesta.png'  ,'Orange')
+        self.add_user_settings('Jackson',       '16878869', 78,-1,'Default.png'     ,'Green')
+        self.add_user_settings('Liam',          '16878885', 28,-1,'Default.png'     ,'Blue')
+        self.add_user_settings('Luke',          '16878745', 00,-1,'Default.png'     ,'Green')
+        self.add_user_settings('Ibrahim',       '16878733', 77,-1,'Default.png'     ,'Green')
+        self.add_user_settings('Ryan',          '16878705', 31,-1,'Default.png'     ,'Green')
+        self.add_user_settings('Rebagrace',     '16878861', 30,-1,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Larry',   '16819201', 3,-1,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Harrison','16818556', 00,-1,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Tim',     '16818556', 2,-1,'Default.png'     ,'Green')
+        self.add_user_settings('Cole',          '16878693', 76,-1,'Default.png'     ,'Green')
+        self.add_user_settings('Martin',        '16858425', 29, 6,'Chargedup.png'   ,'Cyan')
+        self.add_user_settings('Coach Shelly',  '10497184', 12,10,'shelly.png'      ,'Gold')
+        self.add_user_settings('Evan',          '16878758', 26, 2,'EvaninFTCBox.png','Red')
+        self.add_user_settings('Coach Renee',   '10497178', 10, 8,'renee.png'       ,'Yellow')
+        self.add_user_settings('Aryan',         '16878794', 23, 4,'thisthing.png'   ,'Blue')
+        self.add_user_settings('Keita',         '16878838', 27,-1,'Default.png'     ,'Green')
+        self.add_user_settings('Annabelle',     '16878841', 22,-1,'Default.png'     ,'Purple')
+        self.add_user_settings('Austin',        '16878724', 00,-1,'Default.png'     ,'Gold')
+        self.add_user_settings('Ted',           '16878757', 00,20,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Craig',   '16818550', 4, 0,'Default.png'     ,'Green')
+        self.add_user_settings('Susan',         '16858448', 00,-1,'Default.png'     ,'Green')
+        self.add_user_settings('Ty',            '10518941', 75,75,'Tytaco.png'      ,'Orange')    
+        self.add_user_settings('Emma',          '16858354', 25,-1,'Default.png'     ,'Green')
+        self.add_user_settings('Vikas',         '16878849', 32,-1,'Default.png'     ,'Green')
+        self.add_user_settings('Coach Joe',     '10604432', 00,-1,'Default.png'     ,'Purple')
+        self.add_user_settings('Megan',         '16878711', 75,-1,'Default.png'     ,'Purple')
+        self.add_user_settings('Chris',         '16878807', 74,-1,'Default.png'     ,'Purple')
+        self.add_user_settings('Coach Robert',  '10497089', 8,-1,'Default.png'     ,'Blue')
+        self.add_user_settings('Coach Charles', '50444699', 7,-1,'Default.png'     ,'Cyan')
+        self.add_user_settings('Coach Kevin',   '44094159', 00,80,'UndercoverBrother.png','Red/Yellow/Green')
+        self.add_user_settings('Alex',          '16878715', 21,-1,'Default.png',    'Purple')
+        self.add_user_settings('Nathan',        '16878802', 00,-1,'Default.png',    'Red')
 
     def LoadSound(self):
         #region
@@ -344,6 +349,7 @@ class Monolith(App):
         self.img.pos = (-200,0)
         imageFilePath = "Images/" + imageFilePath
         self.img.source = imageFilePath
+
 
     def BuildElements(self):
         #region
@@ -589,8 +595,8 @@ class Monolith(App):
         self.add_predefined_users()
         self.Setup()
         # Start the server in a new thread
-        server_thread = threading.Thread(target=start_server)
-        server_thread.start()
+        self.server_thread = threading.Thread(target=start_server)
+        self.server_thread.start()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
         if (CheckPlatform() == 1):
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
