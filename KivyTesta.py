@@ -45,7 +45,7 @@ kivy.require('2.0.0') # replace with your current kivy version !
 FULL_SCREEN = 0
 #Change to true for deployment to touchscreen
 
-update_MPIB = True
+update_MPIB = ""
 
 def handle_client(conn):
     while True:
@@ -55,21 +55,12 @@ def handle_client(conn):
         print(f"Received data: {data.decode('utf-8')}")
         rdata = data
         print(str(rdata))
-        if (update_MPIB):
-            pass
         if rdata == b"update":
-            rnd = random.randint(1,4)
-            rndnum = random.randint(0,59)
-            if (rnd == 1):
-                response = str(rndnum)+ ",RED"
-            if (rnd == 3):
-                response = str(rndnum)+ ",GREEN"
-            if (rnd == 2):
-                response = str(rndnum)+ ",BLUE"
-            if (rnd == 4):
-                response = str(rndnum)+ ",YELLOW"
-            if (rnd == 5):
-                response = str(rndnum)+ ",PURPLE"
+            if not(update_MPIB == ""):
+                response = update_MPIB
+                update_MPIB = ""
+            else:
+                response = "No"    
             conn.send(response.encode('utf-8'))
     conn.close()
 
@@ -316,7 +307,7 @@ class Monolith(App):
     def Simulate_Checkinorout(self,ID):
         pass
 
-    def CheckInScreen(self, name, imageFilePath, soundNum, color, ID):
+    def CheckInScreen(self, name, imageFilePath, soundNum, color, ID, MPIB):
         if (CheckPlatform() == 1):
             self.ser.write(b'3')
         time.sleep(1)
@@ -351,6 +342,7 @@ class Monolith(App):
         self.img.pos = (-200,0)
         imageFilePath = "Images/" + imageFilePath
         self.img.source = imageFilePath
+        update_MPIB = str(MPIB) + ",GREEN"
 
 
     def BuildElements(self):
@@ -468,7 +460,7 @@ class Monolith(App):
                 data = int(data, 2)
                 for i in range(len(self.user_settings_df)):                 
                     if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
-                        self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'], self.user_settings_df.loc[i,'ID'])
+                        self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'], self.user_settings_df.loc[i,'ID'],self.user_settings_df.loc[i,'MPIB'])
                         #Clock.schedule_once(partial(self.SplashScreen,self), 10)
                         self.scanLock = 1
                         break
