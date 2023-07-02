@@ -56,7 +56,7 @@ def handle_client(conn):
         rdata = data
         print(str(rdata))
         if (update_MPIB):
-            
+            pass
         if rdata == b"update":
             rnd = random.randint(1,4)
             rndnum = random.randint(0,39)
