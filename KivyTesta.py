@@ -44,7 +44,7 @@ kivy.require('2.0.0') # replace with your current kivy version !
 FULL_SCREEN = 0
 #Change to true for deployment to touchscreen
 
-def start_server(host='192.168.212.108', port=8080):
+def start_server(host='192.168.213.38', port=8080):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((host, port))
     server_socket.listen(1)
