@@ -71,9 +71,7 @@ def start_server(host='192.168.213.38', port=8080):
         client_thread = threading.Thread(target=handle_client, args=(conn,))
         client_thread.start()
 
-# Start the server in a new thread
-server_thread = threading.Thread(target=start_server)
-server_thread.start()
+
 
 # The rest of your application can go here
 
@@ -580,7 +578,9 @@ class Monolith(App):
         self.BuildElements()
         self.add_predefined_users()
         self.Setup()
-        #start_server()
+        # Start the server in a new thread
+        server_thread = threading.Thread(target=start_server)
+        server_thread.start()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
         if (CheckPlatform() == 1):
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
