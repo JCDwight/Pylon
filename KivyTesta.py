@@ -58,7 +58,7 @@ def start_server(host='192.168.212.108', port=8080):
             if not data:
                 break
             print(f"Received data: {data.decode('utf-8')}")
-            response = "Message received!"
+            response = ""
             conn.send(response.encode('utf-8'))
         conn.close()
 
