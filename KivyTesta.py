@@ -47,7 +47,45 @@ FULL_SCREEN = 0
 
 update_MPIB = True
 
+def handle_client(conn):
+    while True:
+        data = conn.recv(1024)
+        if not data:
+            break
+        print(f"Received data: {data.decode('utf-8')}")
+        rdata = data
+        print(str(rdata))
+        if (update_MPIB):
+            
+        if rdata == b"update":
+            rnd = random.randint(1,4)
+            rndnum = random.randint(0,39)
+            if (rnd == 1):
+                response = str(rndnum)+ ",RED"
+            if (rnd == 3):
+                response = str(rndnum)+ ",GREEN"
+            if (rnd == 2):
+                response = str(rndnum)+ ",BLUE"
+            if (rnd == 4):
+                response = str(rndnum)+ ",YELLOW"
+            if (rnd == 5):
+                response = str(rndnum)+ ",PURPLE"
+            conn.send(response.encode('utf-8'))
+    conn.close()
 
+def start_server(host='192.168.213.38', port=8080):
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # This line enables port reusage:
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server_socket.bind((host, port))
+    server_socket.listen(1)
+    print(f"Server started!! Listening at {host}:{port}")
+
+    while True:
+        conn, address = server_socket.accept()
+        print(f"Connection from {address}")
+        client_thread = threading.Thread(target=handle_client, args=(conn,))
+        client_thread.start()
 
 
 
@@ -125,45 +163,9 @@ class Monolith(App):
     def add_rogue_user(self):
         pass
 
-def handle_client(self,conn):
-    while True:
-        data = conn.recv(1024)
-        if not data:
-            break
-        print(f"Received data: {data.decode('utf-8')}")
-        rdata = data
-        print(str(rdata))
-        if (update_MPIB):
-            pass
-        if rdata == b"update":
-            rnd = random.randint(1,4)
-            rndnum = random.randint(0,39)
-            if (rnd == 1):
-                response = str(rndnum)+ ",RED"
-            if (rnd == 3):
-                response = str(rndnum)+ ",GREEN"
-            if (rnd == 2):
-                response = str(rndnum)+ ",BLUE"
-            if (rnd == 4):
-                response = str(rndnum)+ ",YELLOW"
-            if (rnd == 5):
-                response = str(rndnum)+ ",PURPLE"
-            conn.send(response.encode('utf-8'))
-    conn.close()
-
-    def start_server(self,host='192.168.213.38', port=8080):
-        server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # This line enables port reusage:
-        server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        server_socket.bind((host, port))
-        server_socket.listen(1)
-        print(f"Server started!! Listening at {host}:{port}")
-
-        while True:
-            conn, address = server_socket.accept()
-            print(f"Connection from {address}")
-            client_thread = threading.Thread(target=handle_client, args=(conn,))
-            client_thread.start()
+    #Intercept Rogue Checkins - Ah ah ah!  You didn't say the magioc word!
+    def RogueCheckin(self):
+        pass
 
     def add_predefined_users(self): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
         self.add_user_settings('Coach Jay',     '16819214', 13, 1,'jay.png'         ,'Orange')
@@ -595,8 +597,8 @@ def handle_client(self,conn):
         self.add_predefined_users()
         self.Setup()
         # Start the server in a new thread
-        self.server_thread = threading.Thread(target=start_server)
-        self.server_thread.start()
+        server_thread = threading.Thread(target=start_server)
+        server_thread.start()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
         if (CheckPlatform() == 1):
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
