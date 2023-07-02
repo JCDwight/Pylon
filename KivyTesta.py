@@ -55,7 +55,7 @@ def handle_client(conn):
         print(str(rdata))
         if rdata == b"update":
             rnd = random.randint(1,3)
-            rndnum = random.randint(0,59)
+            rndnum = random.randint(0,49)
             if (rnd == 1):
                 response = str(rndnum)+ ",RED"
             if (rnd == 3):
