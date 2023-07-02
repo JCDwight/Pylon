@@ -39,23 +39,10 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 from google.oauth2 import service_account
 import socket
-import threading
 
 kivy.require('2.0.0') # replace with your current kivy version !
 FULL_SCREEN = 0
 #Change to true for deployment to touchscreen
-
-def handle_client(conn):
-    while True:
-        data = conn.recv(1024)
-        if not data:
-            break
-        print(f"Received data: {data.decode('utf-8')}")
-        rdata = data
-        if rdata == b"update":
-            response = "1,RED"
-            conn.send(response.encode('utf-8'))
-    conn.close()
 
 def start_server(host='192.168.213.38', port=8080):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -66,16 +53,16 @@ def start_server(host='192.168.213.38', port=8080):
     while True:
         conn, address = server_socket.accept()
         print(f"Connection from {address}")
-        client_thread = threading.Thread(target=handle_client, args=(conn,))
-        client_thread.start()
+        while True:
+            data = conn.recv(1024)
+            if not data:
+                break
+            print(f"Received data: {data.decode('utf-8')}")
+            rdata = data
+            response = "Turn leds 5 8 3 2 on"
 
-# Start the server in a new thread
-server_thread = threading.Thread(target=start_server)
-server_thread.start()
-
-# The rest of your application can go here
-
-
+            conn.send(response.encode('utf-8'))
+        conn.close()
 
 def CheckPlatform():
     #Checks the platform the program is running on.  Linux = 1, Windows = 2, everything else is 3
