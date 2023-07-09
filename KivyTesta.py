@@ -244,11 +244,11 @@ class Monolith(App):
                         fallThrough = True #If they don't match, fallthrough so we add it to the list
                 if ((fallThrough) and (flagged == False)): #Add new sound to list if fallThrough == True and Flagged(As a match) == False
                     self.soundList.append(dir_list[f])
-            self.save_list_to_csv('Databases/audioFiles.csv',self.soundList)
+            self.save_list_to_csv('DataBases/audioFiles.csv',self.soundList)
         else:
             for f in dir_list: #No file exists, so just dump the scanned directory files into a list, should happen 1x
                 self.soundList.append(f)
-            self.save_list_to_csv('Databases/audioFiles.csv',self.soundList)
+            self.save_list_to_csv('DataBases/audioFiles.csv',self.soundList)
         print("Loading Files in:'", path, "':")
         if (CheckPlatform() == 1):
             for f in self.soundList:                                  #Load the files in the soundList and print when they load(Linux)
