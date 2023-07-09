@@ -339,7 +339,6 @@ class Monolith(App):
                         tempstr = tempstr + str(temploc,",",tempcolor,"|")
             exclude = exclude.append(str(self.users_df.loc[i,'ID']))
         print("Got to before for loop")
-        
         MPIB_Status = tempstr
 
                         
@@ -383,7 +382,7 @@ class Monolith(App):
         imageFilePath = "Images/" + imageFilePath
         self.img.source = imageFilePath
         print("Got to the end of check in/out")
-        self.Set_MPIB_Status_Global()
+        #self.Set_MPIB_Status_Global()
 
     def BuildElements(self):
         #region
