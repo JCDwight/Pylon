@@ -64,6 +64,9 @@ def handle_client(conn):
             else:
                 response = "No"    
             conn.send(response.encode('utf-8'))
+        elif(rdata == b"refresh"):
+            response = "16,RED|17,BLUE|18,GREEN|19,RED|20,BLUE|21,GREEN|22,RED|23,BLUE|24,GREEN"
+            update_MPIB = ""
     conn.close()
 
 def start_server(host='10.42.0.201', port=8080):
