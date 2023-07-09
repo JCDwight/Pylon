@@ -636,6 +636,7 @@ class Monolith(App):
         self.BuildElements()
         self.add_predefined_users()
         self.Setup()
+        self.Set_MPIB_Status_Global()
         
         # Start the server in a new thread
         server_thread = threading.Thread(target=start_server)
