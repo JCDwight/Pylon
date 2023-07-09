@@ -316,9 +316,11 @@ class Monolith(App):
             self.img.source = 'Images\\FIRSTNewton2Logo-Instructions.png'
 
     def Set_MPIB_Status_Global(self):
+        global MPIB_Status
         tempstr = ""
         exclude = []
         exclude.append("00000000")
+        print("Got to before for loop")
         for i in range(len(self.users_df),-1,-1): #Iterate backwards through scheckin DB
             if exclude: #If an exclude list exists
                 for j in exclude: #For each item in the exclude list
@@ -336,6 +338,8 @@ class Monolith(App):
                             tempcolor = "RED"
                         tempstr = tempstr + str(temploc,",",tempcolor,"|")
             exclude = exclude.append(str(self.users_df.loc[i,'ID']))
+        print("Got to before for loop")
+        
         MPIB_Status = tempstr
 
                         
