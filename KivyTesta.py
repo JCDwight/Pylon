@@ -321,9 +321,11 @@ class Monolith(App):
             self.ser.flush()
         inorout = self.Add_Checkinorout(ID)
         if (soundNum > -1 and inorout == 1):
-            self.PlaySound(soundNum)
+            pass
+            #self.PlaySound(soundNum)
         elif(soundNum < 0 and inorout == 1):
-            self.PlaySound(random.randint(58,69))
+            pass
+            #self.PlaySound(random.randint(58,69))
         if (inorout == 1):
             self.label1.text = name + ' checked in!'
         else:
