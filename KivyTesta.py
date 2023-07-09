@@ -79,14 +79,11 @@ def start_server(host='10.42.0.201', port=8080):
     server_socket.bind((host, port))
     server_socket.listen(1)
     print(f"Server started!! Listening at {host}:{port}")
-
     while True:
         conn, address = server_socket.accept()
         print(f"Connection from {address}")
         client_thread = threading.Thread(target=handle_client, args=(conn,))
         client_thread.start()
-
-
 
 # The rest of your application can go here
 
