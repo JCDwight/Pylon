@@ -316,7 +316,7 @@ class Monolith(App):
             ch = time.time()
             self.ser.write(b'3')
             print(time.time() - ch, ' diff')
-        time.sleep(1)
+        time.sleep(0)
         if (CheckPlatform() == 1):
             self.ser.flush()
         inorout = self.Add_Checkinorout(ID)
