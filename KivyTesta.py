@@ -313,7 +313,9 @@ class Monolith(App):
     def CheckInScreen(self, name, imageFilePath, soundNum, color, ID, MPIB):
         global update_MPIB
         if (CheckPlatform() == 1):
+            ch = time.time_ns()
             self.ser.write(b'3')
+            print(time.time_ns() - ch, ' ns')
         time.sleep(1)
         if (CheckPlatform() == 1):
             self.ser.flush()
