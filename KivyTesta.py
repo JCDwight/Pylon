@@ -61,6 +61,7 @@ def handle_client(conn):
         if rdata == b"update":
             if not(update_MPIB == ""):
                 response = update_MPIB
+                print(str(response))
                 update_MPIB = ""
             else:
                 response = "No"    
