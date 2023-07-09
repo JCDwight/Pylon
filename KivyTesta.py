@@ -158,6 +158,17 @@ class Monolith(App):
     def RogueCheckin(self):
         pass
 
+    def save_list_to_csv(self,file_path, data):
+        with open(file_path, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(data)
+
+    def load_csv_to_list(self,file_path):
+        with open(file_path, 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            data = list(reader)[0]
+        return data
+
     def add_predefined_users(self): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
         self.add_user_settings('Coach Jay',     '16819214', 13, 1,'jay.png'         ,'Orange')
         self.add_user_settings('Chuck Testa',   '10101010', 79, 1,'ChuckTesta.png'  ,'Orange')
