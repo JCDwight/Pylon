@@ -568,6 +568,8 @@ class Monolith(App):
                         self.users_df = self.users_df.append({'ID': id_list[i], 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 2}, ignore_index=True)
                         print ('ID: ', str(id_list[i]), ' , CIOT: ', str(datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y")) , ' CIOO: OUT')
             self.clean_up = 0
+            self.Just_Save('checkins.csv')
+
 
     def CopyFile(self, source_file, destination_file):     
         # Copy the file
