@@ -472,10 +472,11 @@ class Monolith(App):
                         break
                 else:
                     if(str(data) == ('16858422')):
-                        self.PlaySound(72)
+                        pass
+                        #self.PlaySound(72)
                     elif (str(data) == ('16878687')):
                         print(str(self.user_settings_df))
-                        self.PlaySound(73)
+                        #self.PlaySound(73)
                     elif (str(data) == ('16858416')):
                         if (self.sound_on):
                             self.sound_on = False
@@ -493,7 +494,7 @@ class Monolith(App):
                         #    if(checkin['ID'] == str(data)):
                         #        unauthorizedcheckins = unauthorizedcheckins + 1
                         #if(unauthorizedcheckins > 0 and unauthorizedcheckins < 5):
-                        self.PlaySound(57)
+                        #self.PlaySound(57)
                         #elif(unauthorizedcheckins < 10):
                         #    pass
                         #elif(unauthorizedcheckins < 11):
