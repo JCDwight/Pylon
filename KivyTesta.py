@@ -309,8 +309,37 @@ class Monolith(App):
         elif (CheckPlatform() == 1):
             self.img.source = 'Images\\FIRSTNewton2Logo-Instructions.png'
 
-    def Simulate_Checkinorout(self,ID):
-        pass
+    def Simulate_Checkinorout(self):
+        ins = 0
+        outs = 0
+        inorout = 0
+        #print(len(self.users_df))
+        #print(self.users_df)
+        for i in range(len(self.users_df)):
+            if (str(self.users_df.loc[i,'ID']) == str(ID)):
+                if (self.users_df.loc[i,'CIOO'] == 1):
+                    ins = ins + 1
+                elif(self.users_df.loc[i,'CIOO']):
+                    outs = outs + 1
+        if ((ins == 0 and outs == 0)):
+            print("Added check-in")
+            self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)            
+            inorout = 1
+        else:
+            if (ins > outs):
+                self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 2}, ignore_index=True)
+                print("Added check-out")
+                inorout = 2
+                Clock.schedule_once(partial(self.SplashScreen,self), 4)
+                #Clock.schedule_once(partial(self.UnlockScan,self), self.sounds[self.playingSound].length + 1)
+            else:
+                print("Added check-in")
+                Clock.schedule_once(partial(self.SplashScreen,self), 4)
+                self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)            
+                inorout = 1
+        self.Just_Save('checkins.csv')
+        self.ser.flush()
+        return inorout
 
     def CheckInScreen(self, name, imageFilePath, soundNum, color, ID, MPIB):
         global update_MPIB
@@ -466,7 +495,7 @@ class Monolith(App):
             if (self.scanLock == 0):
                 data = self.ReadSerial()
                 data = int(data, 2)
-                for i in range(len(self.user_settings_df)):                 
+                for i in range(len(self.user_settings_df)):
                     if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
                         self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'], self.user_settings_df.loc[i,'ID'],self.user_settings_df.loc[i,'MPIB'])
                         Clock.schedule_once(partial(self.SplashScreen,self), 10)
@@ -486,7 +515,8 @@ class Monolith(App):
                             self.sound_on = True
                     elif (str(data) == ('16878770')):
                         #print(str(self.users_df))
-                        self.Print_Checkins_With_Names()
+                        #self.Print_Checkins_With_Names()
+                        self.CheckEveryoneOut()
                         #self.PlaySound(78)
                     else:
                         self.ser.write(b'4')
@@ -597,6 +627,9 @@ class Monolith(App):
         self.BuildElements()
         self.add_predefined_users()
         self.Setup()
+        for i in range(20):
+            self.Simulate_Checkinorout()
+
         # Start the server in a new thread
         server_thread = threading.Thread(target=start_server)
         server_thread.start()
