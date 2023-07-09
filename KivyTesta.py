@@ -326,8 +326,10 @@ class Monolith(App):
             #self.PlaySound(random.randint(58,69))
         if (inorout == 1):
             self.label1.text = name + ' checked in!'
+            update_MPIB = str(MPIB) + ",GREEN"
         else:
             self.label1.text = name + ' checked out!'
+            update_MPIB = str(MPIB) + ",RED"
         print('Playing: ' + str(self.soundList[soundNum]))
         self.label1.pos = (200, 150)
         self.label1.font_size = 25
@@ -347,7 +349,6 @@ class Monolith(App):
         self.img.pos = (-200,0)
         imageFilePath = "Images/" + imageFilePath
         self.img.source = imageFilePath
-        update_MPIB = str(MPIB) + ",GREEN"
         print("Got to the end of check in/out")
 
     def BuildElements(self):
