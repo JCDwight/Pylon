@@ -35,19 +35,12 @@ import serial
 import random
 import sys
 import shutil
-<<<<<<< HEAD
 import csv
-
-#from googleapiclient.discovery import build
-#from googleapiclient.http import MediaFileUpload
-#from google.oauth2 import service_account
-=======
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 from google.oauth2 import service_account
 import socket
 import threading
->>>>>>> master
 
 kivy.require('2.0.0') # replace with your current kivy version !
 FULL_SCREEN = 0
