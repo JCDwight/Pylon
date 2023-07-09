@@ -379,7 +379,7 @@ class Monolith(App):
         imageFilePath = "Images/" + imageFilePath
         self.img.source = imageFilePath
         print("Got to the end of check in/out")
-        Set_MPIB_Status_Global()
+        self.Set_MPIB_Status_Global()
 
     def BuildElements(self):
         #region
