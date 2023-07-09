@@ -75,7 +75,7 @@ def handle_client(conn):
             update_MPIB = ""
     conn.close()
 
-def start_server(host='10.42.0.201', port=8080):
+def start_server(host='192.168.1.231', port=8080):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # This line enables port reusage:
     server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
