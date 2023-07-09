@@ -151,12 +151,12 @@ class Monolith(App):
     def add_user_settings(self, name, ident, MPIBID, s, p, c):
         self.user_settings_df = self.user_settings_df.append({'Name': name, 'ID': ident,'MPIB': MPIBID, 'S': s, 'P': p, 'C': c}, ignore_index=True)
 
-    def add_rogue_user(self):
-        pass
-
-    #Intercept Rogue Checkins - Ah ah ah!  You didn't say the magioc word!
-    def RogueCheckin(self):
-        pass
+#    def add_rogue_user(self):
+#        pass
+#
+#    #Intercept Rogue Checkins - Ah ah ah!  You didn't say the magioc word!
+#    def RogueCheckin(self):
+#        pass
 
     def add_predefined_users(self): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
         self.add_user_settings('Coach Jay',     '16819214', 13, 1,'jay.png'         ,'Orange')
@@ -182,7 +182,7 @@ class Monolith(App):
         self.add_user_settings('Ted',           '16878757', 00,20,'Default.png'     ,'Green')
         self.add_user_settings('Coach Craig',   '16818550', 4, 0,'Default.png'     ,'Green')
         self.add_user_settings('Susan',         '16858448', 00,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Ty',            '10518941', 75,75,'Tytaco.png'      ,'Orange')    
+        self.add_user_settings('Ty',            '10518941', 75,75,'Tytaco.png'      ,'Orange')
         self.add_user_settings('Emma',          '16858354', 25,-1,'Default.png'     ,'Green')
         self.add_user_settings('Vikas',         '16878849', 32,-1,'Default.png'     ,'Green')
         self.add_user_settings('Coach Joe',     '10604432', 00,-1,'Default.png'     ,'Purple')
