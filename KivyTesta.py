@@ -69,6 +69,7 @@ def handle_client(conn):
             for i in range(60):
                 response = response + str(i) + ",GREEN|"
                 #response = "16,RED|17,BLUE|18,GREEN|19,RED|20,BLUE|21,GREEN|22,RED|23,BLUE|24,GREEN"
+            print(str(response))
             conn.send(response.encode('utf-8'))
             update_MPIB = ""
     conn.close()
