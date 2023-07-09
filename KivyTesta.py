@@ -35,14 +35,14 @@ import serial
 import random
 import sys
 import shutil
-from googleapiclient.discovery import build
-from googleapiclient.http import MediaFileUpload
-from google.oauth2 import service_account
-import socket
-import threading
+import csv
+
+#from googleapiclient.discovery import build
+#from googleapiclient.http import MediaFileUpload
+#from google.oauth2 import service_account
 
 kivy.require('2.0.0') # replace with your current kivy version !
-FULL_SCREEN = 0
+FULL_SCREEN = 1
 #Change to true for deployment to touchscreen
 
 update_MPIB = ""
@@ -151,12 +151,12 @@ class Monolith(App):
     def add_user_settings(self, name, ident, MPIBID, s, p, c):
         self.user_settings_df = self.user_settings_df.append({'Name': name, 'ID': ident,'MPIB': MPIBID, 'S': s, 'P': p, 'C': c}, ignore_index=True)
 
-#    def add_rogue_user(self):
-#        pass
-#
-#    #Intercept Rogue Checkins - Ah ah ah!  You didn't say the magioc word!
-#    def RogueCheckin(self):
-#        pass
+    def add_rogue_user(self):
+        pass
+
+    #Intercept Rogue Checkins - Ah ah ah!  You didn't say the magioc word!
+    def RogueCheckin(self):
+        pass
 
     def add_predefined_users(self): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
         self.add_user_settings('Coach Jay',     '16819214', 13, 1,'jay.png'         ,'Orange')
@@ -182,7 +182,7 @@ class Monolith(App):
         self.add_user_settings('Ted',           '16878757', 00,20,'Default.png'     ,'Green')
         self.add_user_settings('Coach Craig',   '16818550', 4, 0,'Default.png'     ,'Green')
         self.add_user_settings('Susan',         '16858448', 00,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Ty',            '10518941', 75,75,'Tytaco.png'      ,'Orange')
+        self.add_user_settings('Ty',            '10518941', 75,75,'Tytaco.png'      ,'Orange')    
         self.add_user_settings('Emma',          '16858354', 25,-1,'Default.png'     ,'Green')
         self.add_user_settings('Vikas',         '16878849', 32,-1,'Default.png'     ,'Green')
         self.add_user_settings('Coach Joe',     '10604432', 00,-1,'Default.png'     ,'Purple')
@@ -197,6 +197,7 @@ class Monolith(App):
     def LoadSound(self):
         #region
         #
+        loadFile = []
         noFile = False #Set noFile to false, if we can not load the file we will set this to true
         dir_list = 0
         path = "Audio\\" #Folder in the root directory that holds all our audio files
@@ -205,7 +206,7 @@ class Monolith(App):
         elif (CheckPlatform() == 2):
             dir_list = os.listdir(path) #Use the OS library to scan the directory for all files and store them in dir_list
         try: #Use exception handling in case the file does not exist
-            loadFile = pd.read_json('DataBases/audioFiles.json') #Try to load audioFiles.json
+            loadFile = self.load_csv_to_list('DataBases/audioFiles.csv') #Try to load audioFiles.csv
         except: #If no file exists, we set noFile to true and will create one with the scanned directory.  This should only happen once on first run.
             noFile = True
                                 #A file already exists, so we need to load in any new files to the end of the list
@@ -213,22 +214,17 @@ class Monolith(App):
             fallThrough = False
             newlist = []
             for g in range(len(loadFile)):
-                newlist.append(loadFile[0][g])
+                newlist.append(loadFile[g])
             for g in range(len(newlist)):
                 listItem = newlist[g]
                 listItem = str(listItem)            #g starts as a list, we need to convert it to a string
-                listItem = listItem.replace('[','') #Byproducts of converting from JSONs to Dataframes are brackets and pops ( [ ] and ' ')
-                listItem = listItem.replace(']','') #We can use the built in replace function to remove them
-                listItem = listItem.replace("'",'') #Will potentially revist as there's probably a better way to do this
                 self.soundList.append(listItem)
             for f in range(len(dir_list)):
                 flagged = False
                 for g in range(len(newlist)):
                     listItem = newlist[g]
                     listItem = str(listItem)            #g starts as a list, we need to convert it to a string
-                    listItem = listItem.replace('[','') #Byproducts of converting from JSONs to Dataframes are brackets and pops ( [ ] and ' ')
-                    listItem = listItem.replace(']','') #We can use the built in replace function to remove them
-                    listItem = listItem.replace("'",'') #Will potentially revist as there's probably a better way to do this
+
                     if ((dir_list[f] == listItem) and (flagged == False)): #If the files in the scanned dir_list match the old list, flag and skip
                         fallThrough = False
                         flagged = True
@@ -237,14 +233,11 @@ class Monolith(App):
                         fallThrough = True #If they don't match, fallthrough so we add it to the list
                 if ((fallThrough) and (flagged == False)): #Add new sound to list if fallThrough == True and Flagged(As a match) == False
                     self.soundList.append(dir_list[f])
-            #print(self.soundList)
-            dataFrame = pd.DataFrame(self.soundList)       #Convert the list into a dataframe
-            dataFrame.to_json('DataBases/audioFiles.json') #Convert the dataframe to a persistant JSON
+            self.save_list_to_csv('Databases/audioFiles.csv',self.soundList)
         else:
             for f in dir_list: #No file exists, so just dump the scanned directory files into a list, should happen 1x
                 self.soundList.append(f)
-            dataFrame = pd.DataFrame(self.soundList)        #Convert the list into a dataframe
-            dataFrame.to_json('DataBases/audioFiles.json')  #Convert the dataframe to a persistant JSON
+            self.save_list_to_csv('Databases/audioFiles.csv',self.soundList)
         print("Loading Files in:'", path, "':")
         if (CheckPlatform() == 1):
             for f in self.soundList:                                  #Load the files in the soundList and print when they load(Linux)
@@ -255,7 +248,7 @@ class Monolith(App):
                 self.sounds.append(SoundLoader.load(path + self.soundList[f]))
                 print('Loaded: ' + path + self.soundList[f])
         if (FULL_SCREEN == 1):
-            self.PlaySound(7)
+            self.PlaySound(random.randint(1,50))
         #endregion
 
     def UnlockScan(self, *largs):
