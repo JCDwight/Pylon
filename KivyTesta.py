@@ -57,7 +57,7 @@ def handle_client(conn):
             break
         print(f"Received data: {data.decode('utf-8')}")
         rdata = data
-        print(str(rdata))
+        print("radta: ",str(rdata))
         if rdata == b"update":
             if not(update_MPIB == ""):
                 response = update_MPIB
@@ -65,8 +65,9 @@ def handle_client(conn):
             else:
                 response = "No"    
             conn.send(response.encode('utf-8'))
+            print("Received update")
         elif(rdata == b"refresh"):
-            print("Received 'refresh'")
+            print("Received refresh")
             response=MPIB_Status
             print(str(response))
             conn.send(response.encode('utf-8'))
