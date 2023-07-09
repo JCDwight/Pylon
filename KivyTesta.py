@@ -183,7 +183,7 @@ class Monolith(App):
         self.add_user_settings('Coach Harrison','16818556', 00,-1,'Default.png'     ,'Green')
         self.add_user_settings('Coach Tim',     '16818556', 2,-1,'Default.png'     ,'Green')
         self.add_user_settings('Cole',          '16878693', 76,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Martin',        '16858425', 29, 6,'Chargedup.png'   ,'Cyan')
+        self.add_user_settings('Martin',        '16858425', 20, 6,'Chargedup.png'   ,'Cyan')
         self.add_user_settings('Coach Shelly',  '10497184', 12,10,'shelly.png'      ,'Gold')
         self.add_user_settings('Evan',          '16878758', 26, 2,'EvaninFTCBox.png','Red')
         self.add_user_settings('Coach Renee',   '10497178', 10, 8,'renee.png'       ,'Yellow')
@@ -313,10 +313,7 @@ class Monolith(App):
     def CheckInScreen(self, name, imageFilePath, soundNum, color, ID, MPIB):
         global update_MPIB
         if (CheckPlatform() == 1):
-            ch = time.time()
             self.ser.write(b'3')
-            print(time.time() - ch, ' diff')
-        time.sleep(0)
         if (CheckPlatform() == 1):
             self.ser.flush()
         inorout = self.Add_Checkinorout(ID)
