@@ -309,37 +309,6 @@ class Monolith(App):
         elif (CheckPlatform() == 1):
             self.img.source = 'Images\\FIRSTNewton2Logo-Instructions.png'
 
-    def Simulate_Checkinorout(self):
-        ins = 0
-        outs = 0
-        inorout = 0
-        #print(len(self.users_df))
-        #print(self.users_df)
-        for i in range(len(self.users_df)):
-            if (str(self.users_df.loc[i,'ID']) == str(ID)):
-                if (self.users_df.loc[i,'CIOO'] == 1):
-                    ins = ins + 1
-                elif(self.users_df.loc[i,'CIOO']):
-                    outs = outs + 1
-        if ((ins == 0 and outs == 0)):
-            print("Added check-in")
-            self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)            
-            inorout = 1
-        else:
-            if (ins > outs):
-                self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 2}, ignore_index=True)
-                print("Added check-out")
-                inorout = 2
-                Clock.schedule_once(partial(self.SplashScreen,self), 4)
-                #Clock.schedule_once(partial(self.UnlockScan,self), self.sounds[self.playingSound].length + 1)
-            else:
-                print("Added check-in")
-                Clock.schedule_once(partial(self.SplashScreen,self), 4)
-                self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)            
-                inorout = 1
-        self.Just_Save('checkins.csv')
-        self.ser.flush()
-        return inorout
 
     def CheckInScreen(self, name, imageFilePath, soundNum, color, ID, MPIB):
         global update_MPIB
