@@ -45,11 +45,12 @@ from google.oauth2 import service_account
 kivy.require('2.0.0') # replace with your current kivy version !
 FULL_SCREEN = 0
 #Change to true for deployment to touchscreen
-
+MPIB_Status = ""
 update_MPIB = ""
 
 def handle_client(conn):
     global update_MPIB
+    global MPIB_Status
     while True:
         data = conn.recv(1024)
         if not data:
@@ -317,6 +318,30 @@ class Monolith(App):
         elif (CheckPlatform() == 1):
             self.img.source = 'Images\\FIRSTNewton2Logo-Instructions.png'
 
+    def Set_MPIB_Status_Global(self):
+        tempstr = ""
+        exclude = []
+        exclude.append("00000000")
+        for i in range(len(self.users_df),-1,-1): #Iterate backwards through scheckin DB
+            if exclude: #If an exclude list exists
+                for j in exclude: #For each item in the exclude list
+                    if (str(self.users_df.loc[i,'ID']) == str(j)): #Check if the checkin DB matches
+                        pass                                       #an existing ID in the exclude list
+                    else:
+                        temploc = ""
+                        tempcolor = ""
+                        for l in range(len(self.user_settings_df)):#Looks through settings DB to match the ID and find the MPIB ID
+                            if (str(self.user_settings_df.loc[l,'ID']) == str(self.users_df.loc[i,'ID'])):
+                                temploc = self.user_settings_df.loc[l,'MPIB']
+                        if (self.users_d.loc[i,'CIOO'] == 1): #Check if in and assign color
+                            tempcolor = "GREEN"
+                        if (self.users_d.loc[i,'CIOO'] == 2): #Check if out and assign color
+                            tempcolor = "RED"
+                        tempstr = tempstr + str(temploc,",",tempcolor,"|")
+            exclude = exclude.append(str(self.users_df.loc[i,'ID']))
+        MPIB_Status = tempstr
+
+                        
 
     def CheckInScreen(self, name, imageFilePath, soundNum, color, ID, MPIB):
         global update_MPIB
@@ -357,6 +382,7 @@ class Monolith(App):
         imageFilePath = "Images/" + imageFilePath
         self.img.source = imageFilePath
         print("Got to the end of check in/out")
+        Set_MPIB_Status_Global()
 
     def BuildElements(self):
         #region
