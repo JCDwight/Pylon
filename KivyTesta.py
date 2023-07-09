@@ -596,9 +596,7 @@ class Monolith(App):
         self.BuildElements()
         self.add_predefined_users()
         self.Setup()
-        for i in range(20):
-            self.Simulate_Checkinorout()
-
+        
         # Start the server in a new thread
         server_thread = threading.Thread(target=start_server)
         server_thread.start()
