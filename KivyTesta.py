@@ -469,7 +469,7 @@ class Monolith(App):
                     if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
                         self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'], self.user_settings_df.loc[i,'ID'],self.user_settings_df.loc[i,'MPIB'])
                         #Clock.schedule_once(partial(self.SplashScreen,self), 10)
-                        self.scanLock = 1
+                        self.scanLock = 0
                         break
                 else:
                     if(str(data) == ('16858422')):
