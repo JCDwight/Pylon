@@ -343,6 +343,8 @@ class Monolith(App):
         print("MPIB Status before MPIB_Status = tempstr :", str(MPIB_Status))
         MPIB_Status = str(tempstr)
         print("MPIB Status after MPIB_Status = tempstr :", str(MPIB_Status))
+        if (MPIB_Status == ""):
+            MPIB_Status = "No"
 
                         
 
