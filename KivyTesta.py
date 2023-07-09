@@ -68,6 +68,7 @@ def handle_client(conn):
             print("Received update")
         elif(rdata == b"refresh"):
             print("Received refresh")
+            print("MPIB_Status: ", MPIB_Status)
             response=MPIB_Status
             print(str(response))
             conn.send(response.encode('utf-8'))
