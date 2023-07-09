@@ -317,6 +317,7 @@ class Monolith(App):
 
     def Set_MPIB_Status_Global(self):
         global MPIB_Status
+        print("MPIB Status at start: ", MPIB_Status)
         tempstr = ""
         exclude = []
         exclude.append("00000000")
@@ -339,7 +340,9 @@ class Monolith(App):
                         tempstr = tempstr + str(temploc,",",tempcolor,"|")
             exclude = exclude.append(str(self.users_df.loc[i,'ID']))
         print("Got to before for loop")
-        MPIB_Status = tempstr
+        print("MPIB Status before MPIB_Status = tempstr :", str(MPIB_Status))
+        MPIB_Status = str(tempstr)
+        print("MPIB Status after MPIB_Status = tempstr :", str(MPIB_Status))
 
                         
 
