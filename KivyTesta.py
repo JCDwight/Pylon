@@ -156,7 +156,7 @@ class Monolith(App):
         while True:
             conn, address = server_socket.accept()
             print(f"Connection from {address}")
-            client_thread = threading.Thread(target=handle_client, args=(conn,))
+            client_thread = threading.Thread(target=self.handle_client, args=(conn,))
             client_thread.start()
 
 
