@@ -334,12 +334,16 @@ class Monolith(App):
         for i in range(len(self.users_df),-1,-1): #Iterate backwards through scheckin DB
             print("Got right inside for loop")
             if exclude: #If an exclude list exists
+                print("Got right inside if exclude")
                 for j in exclude: #For each item in the exclude list
+                    print("Got right inside for exclude")
                     if (str(self.users_df.loc[i,'ID']) == str(j)): #Check if the checkin DB matches
                         pass                                       #an existing ID in the exclude list
                     else:
                         temploc = ""
                         tempcolor = ""
+                        print("Got right inside else exclude")
+
                         for l in range(len(self.user_settings_df)):#Looks through settings DB to match the ID and find the MPIB ID
                             if (str(self.user_settings_df.loc[l,'ID']) == str(self.users_df.loc[i,'ID'])):
                                 temploc = self.user_settings_df.loc[l,'MPIB']
