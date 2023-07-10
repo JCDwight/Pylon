@@ -338,6 +338,8 @@ class Monolith(App):
                 for j in exclude: #For each item in the exclude list
                     print("Got right inside for exclude")
                     if (str(self.users_df.loc[i,'ID']) == str(j)): #Check if the checkin DB matches
+                        print("Got right inside str(self.users_df.loc[i,'ID']) == str(j)")
+
                         pass                                       #an existing ID in the exclude list
                     else:
                         temploc = ""
