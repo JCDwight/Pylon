@@ -651,7 +651,7 @@ class Monolith(App):
         self.Setup()
         
         # Start the server in a new thread
-        self.server_thread = threading.Thread(target=start_server)
+        self.server_thread = threading.Thread(target=self.start_server)
         self.server_thread.start()
         #self.Set_MPIB_Status_Global()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
