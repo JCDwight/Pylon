@@ -332,6 +332,7 @@ class Monolith(App):
         exclude.append("00000000")
         print("Got to before for loop")
         for i in range(len(self.users_df),-1,-1): #Iterate backwards through scheckin DB
+            print("Got right inside for loop")
             if exclude: #If an exclude list exists
                 for j in exclude: #For each item in the exclude list
                     if (str(self.users_df.loc[i,'ID']) == str(j)): #Check if the checkin DB matches
@@ -650,7 +651,6 @@ class Monolith(App):
         # Start the server in a new thread
         self.server_thread = threading.Thread(target=self.start_server)
         self.server_thread.start()
-        self.Set_MPIB_Status_Global()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
         if (CheckPlatform() == 1):
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
