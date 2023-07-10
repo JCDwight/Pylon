@@ -337,6 +337,7 @@ class Monolith(App):
                 print("Got right inside if exclude")
                 for j in exclude: #For each item in the exclude list
                     print("Got right inside for exclude")
+                    print(str(self.users_df.loc[i,'ID']))
                     if (str(self.users_df.loc[i,'ID']) == str(j)): #Check if the checkin DB matches
                         print("Got right inside str(self.users_df.loc[i,'ID']) == str(j)")
 
