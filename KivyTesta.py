@@ -330,7 +330,7 @@ class Monolith(App):
         tempstr = ""
         exclude = []
         exclude.append("00000000")
-        print("Got to before for loop")
+        print(str(exclude))
         for i in range(len(self.users_df),-1,-1): #Iterate backwards through scheckin DB
             print("Got right inside for loop")
             if exclude: #If an exclude list exists
