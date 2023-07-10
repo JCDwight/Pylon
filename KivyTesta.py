@@ -45,8 +45,7 @@ from google.oauth2 import service_account
 kivy.require('2.0.0') # replace with your current kivy version !
 FULL_SCREEN = 0
 #Change to true for deployment to touchscreen
-MPIB_Status = ""
-update_MPIB = ""
+
 
 
 
@@ -98,6 +97,8 @@ class Monolith(App):
     debugTimer = 0
     scannedTag = 0
     scanLock = 0
+    MPIB_Status = ""
+    update_MPIB = ""
     users_df = pd.DataFrame(columns=['ID', 'CIOT', 'CIOO'])
     user_settings_df = pd.DataFrame(columns=['Name', 'ID', 'MPIB', 'S', 'P', 'C'])
     unauthorized_users_df = pd.DataFrame(columns=['ID', 'CIOT'])
@@ -119,8 +120,6 @@ class Monolith(App):
 
 
     def handle_client(self,conn):
-        global update_MPIB
-        global MPIB_Status
         while True:
             data = conn.recv(1024)
             if not data:
@@ -129,21 +128,21 @@ class Monolith(App):
             rdata = data
             print("radta: ",str(rdata))
             if rdata == b"update":
-                if not(update_MPIB == ""):
-                    response = update_MPIB
+                if not(self.update_MPIB == ""):
+                    response = self.update_MPIB
                     print(str(response))
-                    update_MPIB = ""
+                    self.update_MPIB = ""
                 else:
                     response = "No"    
                 conn.send(response.encode('utf-8'))
                 print("Received update")
             elif(rdata == b"refresh"):
                 print("Received refresh")
-                print("MPIB_Status: ", MPIB_Status)
-                response=MPIB_Status
+                print("MPIB_Status: ", self.MPIB_Status)
+                response=self.MPIB_Status
                 print(str(response))
                 conn.send(response.encode('utf-8'))
-                update_MPIB = ""
+                self.update_MPIB = ""
         conn.close()
 
     def start_server(self,host='192.168.1.231', port=8080):
@@ -327,7 +326,7 @@ class Monolith(App):
 
     def Set_MPIB_Status_Global(self):
         global MPIB_Status
-        print("MPIB Status at start: ", str(MPIB_Status))
+        print("MPIB Status at start: ", str(self.MPIB_Status))
         tempstr = ""
         exclude = []
         exclude.append("00000000")
@@ -350,17 +349,15 @@ class Monolith(App):
                         tempstr = tempstr + str(temploc,",",tempcolor,"|")
             exclude = exclude.append(str(self.users_df.loc[i,'ID']))
         print("Got to before for loop")
-        print("MPIB Status before MPIB_Status = tempstr :", str(MPIB_Status))
+        print("MPIB Status before MPIB_Status = tempstr :", str(self.MPIB_Status))
         MPIB_Status = str(tempstr)
-        print("MPIB Status after MPIB_Status = tempstr :", str(MPIB_Status))
-        if (str(MPIB_Status) == ""):
-            MPIB_Status = "No"
+        print("MPIB Status after MPIB_Status = tempstr :", str(self.MPIB_Status))
+        if (str(self.MPIB_Status) == ""):
+            self.MPIB_Status = "No"
 
                         
 
     def CheckInScreen(self, name, imageFilePath, soundNum, color, ID, MPIB):
-        global update_MPIB
-        global MPIB_Status
         if (CheckPlatform() == 1):
             self.ser.write(b'3')
         if (CheckPlatform() == 1):
@@ -374,10 +371,10 @@ class Monolith(App):
             #self.PlaySound(random.randint(58,69))
         if (inorout == 1):
             self.label1.text = name + ' checked in!'
-            update_MPIB = str(MPIB) + ",GREEN"
+            self.update_MPIB = str(MPIB) + ",GREEN"
         else:
             self.label1.text = name + ' checked out!'
-            update_MPIB = str(MPIB) + ",RED"
+            self.update_MPIB = str(MPIB) + ",RED"
         print('Playing: ' + str(self.soundList[soundNum]))
         self.label1.pos = (200, 150)
         self.label1.font_size = 25
