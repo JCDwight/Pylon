@@ -650,7 +650,7 @@ class Monolith(App):
         # Start the server in a new thread
         self.server_thread = threading.Thread(target=self.start_server)
         self.server_thread.start()
-        #self.Set_MPIB_Status_Global()
+        self.Set_MPIB_Status_Global()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
         if (CheckPlatform() == 1):
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
