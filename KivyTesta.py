@@ -48,46 +48,7 @@ FULL_SCREEN = 0
 MPIB_Status = ""
 update_MPIB = ""
 
-def handle_client(conn):
-    global update_MPIB
-    global MPIB_Status
-    while True:
-        data = conn.recv(1024)
-        if not data:
-            break
-        print(f"Received data: {data.decode('utf-8')}")
-        rdata = data
-        print("radta: ",str(rdata))
-        if rdata == b"update":
-            if not(update_MPIB == ""):
-                response = update_MPIB
-                print(str(response))
-                update_MPIB = ""
-            else:
-                response = "No"    
-            conn.send(response.encode('utf-8'))
-            print("Received update")
-        elif(rdata == b"refresh"):
-            print("Received refresh")
-            print("MPIB_Status: ", MPIB_Status)
-            response=MPIB_Status
-            print(str(response))
-            conn.send(response.encode('utf-8'))
-            update_MPIB = ""
-    conn.close()
 
-def start_server(host='192.168.1.231', port=8080):
-    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # This line enables port reusage:
-    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    server_socket.bind((host, port))
-    server_socket.listen(1)
-    print(f"Server started!! Listening at {host}:{port}")
-    while True:
-        conn, address = server_socket.accept()
-        print(f"Connection from {address}")
-        client_thread = threading.Thread(target=handle_client, args=(conn,))
-        client_thread.start()
 
 # The rest of your application can go here
 
@@ -155,6 +116,54 @@ class Monolith(App):
     if (CheckPlatform() == 2):
         print('Opening serial port...')
         #ser = serial.Serial('COM8', 500000)
+
+
+    def handle_client(self,conn):
+        global update_MPIB
+        global MPIB_Status
+        while True:
+            data = conn.recv(1024)
+            if not data:
+                break
+            print(f"Received data: {data.decode('utf-8')}")
+            rdata = data
+            print("radta: ",str(rdata))
+            if rdata == b"update":
+                if not(update_MPIB == ""):
+                    response = update_MPIB
+                    print(str(response))
+                    update_MPIB = ""
+                else:
+                    response = "No"    
+                conn.send(response.encode('utf-8'))
+                print("Received update")
+            elif(rdata == b"refresh"):
+                print("Received refresh")
+                print("MPIB_Status: ", MPIB_Status)
+                response=MPIB_Status
+                print(str(response))
+                conn.send(response.encode('utf-8'))
+                update_MPIB = ""
+        conn.close()
+
+    def start_server(self,host='192.168.1.231', port=8080):
+        server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # This line enables port reusage:
+        server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        server_socket.bind((host, port))
+        server_socket.listen(1)
+        print(f"Server started!! Listening at {host}:{port}")
+        while True:
+            conn, address = server_socket.accept()
+            print(f"Connection from {address}")
+            client_thread = threading.Thread(target=handle_client, args=(conn,))
+            client_thread.start()
+
+
+
+
+
+
 
     def add_user_settings(self, name, ident, MPIBID, s, p, c):
         self.user_settings_df = self.user_settings_df.append({'Name': name, 'ID': ident,'MPIB': MPIBID, 'S': s, 'P': p, 'C': c}, ignore_index=True)
@@ -642,8 +651,8 @@ class Monolith(App):
         self.Setup()
         
         # Start the server in a new thread
-        server_thread = threading.Thread(target=start_server)
-        server_thread.start()
+        self.server_thread = threading.Thread(target=start_server)
+        self.server_thread.start()
         #self.Set_MPIB_Status_Global()
         #self.window.add_widget(FirstSplashScreen(name='firstsplash'))
         if (CheckPlatform() == 1):
