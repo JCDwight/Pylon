@@ -318,7 +318,7 @@ class Monolith(App):
 
     def Set_MPIB_Status_Global(self):
         global MPIB_Status
-        print("MPIB Status at start: ", MPIB_Status)
+        print("MPIB Status at start: ", str(MPIB_Status))
         tempstr = ""
         exclude = []
         exclude.append("00000000")
@@ -344,7 +344,7 @@ class Monolith(App):
         print("MPIB Status before MPIB_Status = tempstr :", str(MPIB_Status))
         MPIB_Status = str(tempstr)
         print("MPIB Status after MPIB_Status = tempstr :", str(MPIB_Status))
-        if (MPIB_Status == ""):
+        if (str(MPIB_Status) == ""):
             MPIB_Status = "No"
 
                         
