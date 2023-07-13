@@ -347,12 +347,16 @@ class Monolith(App):
                                 temploc = self.user_settings_df.loc[l,'MPIB']
                                 print(str(i), "Excluded ID: ", str(self.user_settings_df.loc[l,'ID']))
                                 print(str(i), "    MPIB ID: ", str(self.user_settings_df.loc[l,'MPIB']))
-                                exclude.append(str(self.users_df.loc[i,'ID']))
-                                flagged = True
-                                if (self.users_df.loc[i,'CIOO'] == 1): #Check if in and assign color
-                                    tempcolor = "GREEN"
-                                if (self.users_df.loc[i,'CIOO'] == 2): #Check if out and assign color
-                                    tempcolor = "RED"
+                                for k in exclude:
+                                    if (str(self.users_df.loc[i,'ID']) == str(k)):
+                                        break
+                                else:
+                                    exclude.append(str(self.users_df.loc[i,'ID']))
+                                    flagged = True
+                                    if (self.users_df.loc[i,'CIOO'] == 1): #Check if in and assign color
+                                        tempcolor = "GREEN"
+                                    if (self.users_df.loc[i,'CIOO'] == 2): #Check if out and assign color
+                                        tempcolor = "RED"
                                 tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
                                 break
                         
