@@ -336,7 +336,7 @@ class Monolith(App):
             #print("Got right inside for loop.  I = " , str(i))
             if(i > 0):
                 if exclude: #If an exclude list exists
-                    print("Got right inside if exclude")
+                    #print("Got right inside if exclude")
                     for j in exclude: #For each item in the exclude list
                         #print("Exclude list: " + str(exclude))
                         #print("Got right inside for exclude")
