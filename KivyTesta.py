@@ -365,6 +365,7 @@ class Monolith(App):
                         tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
                         print("Tempstr after loops: ", str(tempstr))
                         exclude.append(str(self.users_df.loc[i,'ID']))
+                        print("Exclude list: ", str(exclude))
                         break
 
         #print("Got to before for loop")
