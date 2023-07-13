@@ -341,11 +341,11 @@ class Monolith(App):
                     #print("Got right inside for exclude")
                     #print("I: ",str(i))
                     #print(str(self.users_df.loc[i-1,'ID']))
-                    print('Excluded: ', + str(self.users_df.loc[i,'ID']))
-                    print('Str(j): ', str(j))
+                    print("Excluded: ",  str(self.users_df.loc[i,'ID']))
+                    print("Str(j): ", str(j))
                     if (str(self.users_df.loc[i,'ID']) == str(j)): #Check if the checkin DB matches
-                        print('Excluded: ', str(self.users_df.loc[i,'ID']))
-                        print('Str(j): ', str(j))
+                        print("Excluded: ", str(self.users_df.loc[i,'ID']))
+                        print("Str(j): ", str(j))
                         #print("Got right inside str(self.users_df.loc[i,'ID']) == str(j)")
 
                         pass                                       #an existing ID in the exclude list
