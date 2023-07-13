@@ -332,7 +332,7 @@ class Monolith(App):
         exclude.append("00000000")
         print(str(exclude))
         for i in range(len(self.users_df),-1,-1): #Iterate backwards through scheckin DB
-            print("Got right inside for loop")
+            print("Got right inside for loop.  I = " , str(i))
             if exclude: #If an exclude list exists
                 print("Got right inside if exclude")
                 for j in exclude: #For each item in the exclude list
