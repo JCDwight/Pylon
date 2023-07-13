@@ -336,6 +336,7 @@ class Monolith(App):
             if exclude: #If an exclude list exists
                 print("Got right inside if exclude")
                 for j in exclude: #For each item in the exclude list
+                    print("Exclude list: " + str(exclude))
                     print("Got right inside for exclude")
                     print("I: ",str(i))
                     print(str(self.users_df.loc[i-1,'ID']))
