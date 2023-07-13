@@ -357,7 +357,7 @@ class Monolith(App):
                                         tempcolor = "GREEN"
                                     if (self.users_df.loc[i,'CIOO'] == 2): #Check if out and assign color
                                         tempcolor = "RED"
-                                tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
+                                    tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
                                 break
                         
 
