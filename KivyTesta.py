@@ -333,7 +333,7 @@ class Monolith(App):
         print(str(exclude))
         for i in range(len(self.users_df),-1,-1): #Iterate backwards through scheckin DB
             if(i > 0 and i < len(self.users_df) - 1):
-                temp_ID = ""
+                flagged = False
                 for j in exclude:
                     print(str(i), " 2 Not: Users DF ID: ", str(self.users_df.loc[i,'ID']), " == ", str(j))
                     if not(str(self.users_df.loc[i,'ID']) == str(j)):
@@ -343,11 +343,12 @@ class Monolith(App):
                         temploc = ""
                         tempcolor = ""
                         for l in range(len(self.user_settings_df)):#Looks through settings DB to match the ID and find the MPIB ID
-                            if (str(self.user_settings_df.loc[l,'ID']) == str(self.users_df.loc[i,'ID'])):
+                            if (str(self.user_settings_df.loc[l,'ID']) == str(self.users_df.loc[i,'ID']) and not(flagged)):
                                 temploc = self.user_settings_df.loc[l,'MPIB']
                                 print(str(i), "Excluded ID: ", str(self.user_settings_df.loc[l,'ID']))
                                 print(str(i), "    MPIB ID: ", str(self.user_settings_df.loc[l,'MPIB']))
                                 exclude.append(str(self.users_df.loc[i,'ID']))
+                                flagged = True
                                 if (self.users_df.loc[i,'CIOO'] == 1): #Check if in and assign color
                                     tempcolor = "GREEN"
                                 if (self.users_df.loc[i,'CIOO'] == 2): #Check if out and assign color
