@@ -357,7 +357,8 @@ class Monolith(App):
                         if (self.users_df.loc[i-1,'CIOO'] == 2): #Check if out and assign color
                             tempcolor = "RED"
                         tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
-            exclude = exclude.append(str(self.users_df.loc[i-1,'ID']))
+            exclude.append(str(self.users_df.loc[i-1,'ID']))
+
         print("Got to before for loop")
         print("MPIB Status before MPIB_Status = tempstr :", str(self.MPIB_Status))
         MPIB_Status = str(tempstr)
