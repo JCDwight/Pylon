@@ -360,6 +360,7 @@ class Monolith(App):
                 exclude.append(str(self.users_df.loc[i-1,'ID']))
 
         #print("Got to before for loop")
+        print("Exclude list: ", str(exclude))
         print("MPIB Status before MPIB_Status = tempstr :", str(self.MPIB_Status))
         MPIB_Status = str(tempstr)
         print("MPIB Status after MPIB_Status = tempstr :", str(self.MPIB_Status))
