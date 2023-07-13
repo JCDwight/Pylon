@@ -333,9 +333,9 @@ class Monolith(App):
         print(str(exclude))
         for i in range(len(self.users_df),-1,-1): #Iterate backwards through scheckin DB
             print("Got right inside for loop.  I = " , str(i))
-            if exclude: #If an exclude list exists
-                print("Got right inside if exclude")
-                if(i > 0):
+            if(i > 0):
+                if exclude: #If an exclude list exists
+                    print("Got right inside if exclude")
                     for j in exclude: #For each item in the exclude list
                         print("Exclude list: " + str(exclude))
                         print("Got right inside for exclude")
@@ -358,7 +358,7 @@ class Monolith(App):
                             if (self.users_df.loc[i-1,'CIOO'] == 2): #Check if out and assign color
                                 tempcolor = "RED"
                             tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
-            exclude.append(str(self.users_df.loc[i-1,'ID']))
+                exclude.append(str(self.users_df.loc[i-1,'ID']))
 
         print("Got to before for loop")
         print("MPIB Status before MPIB_Status = tempstr :", str(self.MPIB_Status))
