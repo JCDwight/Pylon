@@ -332,6 +332,7 @@ class Monolith(App):
         exclude.append("00000000")
         nowtime = time.time()
         print(str(exclude))
+        print("range(len(self.users_df): ", str(range(len(self.users_df))))
         for i in range(len(self.users_df),-1,-1): #Iterate backwards through scheckin DB
             #print("Got right inside for loop.  I = " , str(i))
             if(i > 0):
