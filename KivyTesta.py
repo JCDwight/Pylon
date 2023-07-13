@@ -330,7 +330,7 @@ class Monolith(App):
         tempstr = " "
         exclude = []
         exclude.append("00000000")
-        nowtime = time.time_ns()
+        nowtime = time.time()
         print(str(exclude))
         for i in range(len(self.users_df),-1,-1): #Iterate backwards through scheckin DB
             #print("Got right inside for loop.  I = " , str(i))
@@ -365,7 +365,7 @@ class Monolith(App):
         print("MPIB Status after MPIB_Status = tempstr :", str(self.MPIB_Status))
         if (str(self.MPIB_Status) == ""):
             self.MPIB_Status = "0"
-        tottime = time.time_ns() - nowtime
+        tottime = time.time() - nowtime
         print("Total time in ns(?): ", str(tottime))
                         
 
