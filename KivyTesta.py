@@ -358,7 +358,7 @@ class Monolith(App):
                                     flagged = True
                                     if (self.users_df.loc[i,'CIOO'] == 1): #Check if in and assign color
                                         tempcolor = "GREEN"
-                                    if (self.users_df.loc[i,'CIOO'] == 2): #Check if out and assign color
+                                    elif (self.users_df.loc[i,'CIOO'] == 2): #Check if out and assign color
                                         tempcolor = "RED"
                                     tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
                                 break
@@ -480,8 +480,6 @@ class Monolith(App):
         ins = 0
         outs = 0
         inorout = 0
-        #print(len(self.users_df))
-        #print(self.users_df)
         for i in range(len(self.users_df)):
             if (str(self.users_df.loc[i,'ID']) == str(ID)):
                 if (self.users_df.loc[i,'CIOO'] == 1):
