@@ -365,7 +365,7 @@ class Monolith(App):
         MPIB_Status = str(tempstr)
         print("MPIB Status after MPIB_Status = tempstr :", str(self.MPIB_Status))
         if (str(self.MPIB_Status) == ""):
-            self.MPIB_Status = "No"
+            self.MPIB_Status = ""
 
                         
 
