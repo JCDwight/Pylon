@@ -364,8 +364,8 @@ class Monolith(App):
                                         tempcolor = "RED"
                                     tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
                                 break
-        for count in range(80):
-            for r in mpib_slot:
+        #for count in range(80):
+        #    for r in mpib_slot:
 
         self.MPIB_Status = str(tempstr)
 
