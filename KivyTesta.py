@@ -329,49 +329,37 @@ class Monolith(App):
         print("MPIB Status at start: ", str(self.MPIB_Status))
         tempstr = ""
         exclude = []
-        exclude.append("00000000")
         nowtime = time.time()
         print(str(exclude))
         print("range(len(self.users_df): ", str(range(len(self.users_df))))
         for i in range(len(self.users_df),-1,-1): #Iterate backwards through scheckin DB
-            #print("Got right inside for loop.  I = " , str(i))
             if(i > 0 and i < len(self.users_df) - 1):
-                for j in exclude: #For each item in the exclude list
-                    #print("Exclude list: " + str(exclude))
-                    #print("Got right inside for exclude")
-                    #print("I: ",str(i))
-                    #print(str(self.users_df.loc[i-1,'ID']))
-                    print("Excluded: ",  str(self.users_df.loc[i,'ID']))
-                    print("Str(j): ", str(j))
-                    if (str(self.users_df.loc[i,'ID']) == str(j)): #Check if the checkin DB matches
-                        print("Excluded: ", str(self.users_df.loc[i,'ID']))
-                        print("Str(j): ", str(j))
-                        #print("Got right inside str(self.users_df.loc[i,'ID']) == str(j)")
+                temp_ID = ""
+                for j in exclude:
+                    if not(str(self.users_df.loc[i,'ID']) == str(j)):
+                        print("Not: Users DF ID: ", str(self.users_df.loc[i,'ID']), " == ", str(j))
+                        temp_ID = str(self.users_df.loc[i,'ID'])
 
-                        pass                                       #an existing ID in the exclude list
-                    else:
                         temploc = ""
                         tempcolor = ""
                         for l in range(len(self.user_settings_df)):#Looks through settings DB to match the ID and find the MPIB ID
                             if (str(self.user_settings_df.loc[l,'ID']) == str(self.users_df.loc[i,'ID'])):
                                 temploc = self.user_settings_df.loc[l,'MPIB']
+                                print("Excluded ID: ", str(self.user_settings_df.loc[l,'ID']))
+                                print("    MPIB ID: ", str(self.user_settings_df.loc[l,'MPIB']))
+                                exclude.append(str(self.users_df.loc[i,'ID']))
+                                if (self.users_df.loc[i,'CIOO'] == 1): #Check if in and assign color
+                                    tempcolor = "GREEN"
+                                if (self.users_df.loc[i,'CIOO'] == 2): #Check if out and assign color
+                                    tempcolor = "RED"
+                                tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
                                 break
-                        print(str(temploc))
-                        #time.sleep(0.5)
-                        if (self.users_df.loc[i,'CIOO'] == 1): #Check if in and assign color
-                            tempcolor = "GREEN"
-                        if (self.users_df.loc[i,'CIOO'] == 2): #Check if out and assign color
-                            tempcolor = "RED"
-                        tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
-                        print("Tempstr after loops: ", str(tempstr))
-                        exclude.append(str(self.users_df.loc[i,'ID']))
-                        print("Exclude list: ", str(exclude))
-                        break
+                        
 
         #print("Got to before for loop")
         print("Exclude list: ", str(exclude))
         print("MPIB Status before MPIB_Status = tempstr :", str(self.MPIB_Status))
-        MPIB_Status = str(tempstr)
+        self.MPIB_Status = str(tempstr)
         print("MPIB Status after MPIB_Status = tempstr :", str(self.MPIB_Status))
         if (str(self.MPIB_Status) == ""):
             self.MPIB_Status = "0"
