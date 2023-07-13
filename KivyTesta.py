@@ -324,7 +324,7 @@ class Monolith(App):
         elif (CheckPlatform() == 1):
             self.img.source = 'Images\\FIRSTNewton2Logo-Instructions.png'
 
-    def Set_MPIB_Status_Global(self):
+    def Set_MPIB_Status_Global(self,*largs):
         print("MPIB Status at start: ", str(self.MPIB_Status))
         tempstr = ""
         exclude = []
