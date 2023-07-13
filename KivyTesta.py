@@ -143,9 +143,9 @@ class Monolith(App):
                     response = "No"
                 else:
                     response=self.MPIB_Status
-                print(str(response))
+                print("Response: ", str(response))
                 conn.send(response.encode('utf-8'))
-                self.update_MPIB = ""
+                #self.update_MPIB = ""
         conn.close()
 
     def start_server(self,host='192.168.1.231', port=8080):
