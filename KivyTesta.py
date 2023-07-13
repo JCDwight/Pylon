@@ -345,8 +345,8 @@ class Monolith(App):
                         for l in range(len(self.user_settings_df)):#Looks through settings DB to match the ID and find the MPIB ID
                             if (str(self.user_settings_df.loc[l,'ID']) == str(self.users_df.loc[i,'ID'])):
                                 temploc = self.user_settings_df.loc[l,'MPIB']
-                                print("Excluded ID: ", str(self.user_settings_df.loc[l,'ID']))
-                                print("    MPIB ID: ", str(self.user_settings_df.loc[l,'MPIB']))
+                                print(str(i), "Excluded ID: ", str(self.user_settings_df.loc[l,'ID']))
+                                print(str(i), "    MPIB ID: ", str(self.user_settings_df.loc[l,'MPIB']))
                                 exclude.append(str(self.users_df.loc[i,'ID']))
                                 if (self.users_df.loc[i,'CIOO'] == 1): #Check if in and assign color
                                     tempcolor = "GREEN"
