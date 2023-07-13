@@ -355,13 +355,13 @@ class Monolith(App):
                                     temploc = self.user_settings_df.loc[l,'MPIB']
                                     break
                             print(str(temploc))
-                            time.sleep(0.5)
+                            #time.sleep(0.5)
                             if (self.users_df.loc[i-1,'CIOO'] == 1): #Check if in and assign color
                                 tempcolor = "GREEN"
                             if (self.users_df.loc[i-1,'CIOO'] == 2): #Check if out and assign color
                                 tempcolor = "RED"
                             tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
-                            print(str(tempstr))
+                            print("Tempstr after loops: ", str(tempstr))
                             exclude.append(str(self.users_df.loc[i-1,'ID']))
                             break
 
