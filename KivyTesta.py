@@ -327,7 +327,7 @@ class Monolith(App):
     def Set_MPIB_Status_Global(self):
         global MPIB_Status
         print("MPIB Status at start: ", str(self.MPIB_Status))
-        tempstr = " "
+        tempstr = ""
         exclude = []
         exclude.append("00000000")
         nowtime = time.time()
@@ -357,6 +357,7 @@ class Monolith(App):
                             if (self.users_df.loc[i-1,'CIOO'] == 2): #Check if out and assign color
                                 tempcolor = "RED"
                             tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
+                            print(str(tempstr))
                 exclude.append(str(self.users_df.loc[i-1,'ID']))
 
         #print("Got to before for loop")
