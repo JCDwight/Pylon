@@ -327,7 +327,7 @@ class Monolith(App):
     def Set_MPIB_Status_Global(self):
         global MPIB_Status
         print("MPIB Status at start: ", str(self.MPIB_Status))
-        tempstr = ""
+        tempstr = " "
         exclude = []
         exclude.append("00000000")
         print(str(exclude))
