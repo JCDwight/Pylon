@@ -339,9 +339,7 @@ class Monolith(App):
             if(i > 0 and i < len(self.users_df) - 1):
                 flagged = False
                 for j in exclude:
-                    #print(str(i), " 2 Not: Users DF ID: ", str(self.users_df.loc[i,'ID']), " == ", str(j))
                     if not(str(self.users_df.loc[i,'ID']) == str(j)):
-                        #print(str(i), "Not: Users DF ID: ", str(self.users_df.loc[i,'ID']), " == ", str(j))
                         temp_ID = str(self.users_df.loc[i,'ID'])
 
                         temploc = ""
@@ -350,8 +348,6 @@ class Monolith(App):
                             if (str(self.user_settings_df.loc[l,'ID']) == str(self.users_df.loc[i,'ID']) and not(flagged)):
                                 temploc = self.user_settings_df.loc[l,'MPIB']
                                 mpib_slot.append(temploc)
-                                #print(str(i), "Excluded ID: ", str(self.user_settings_df.loc[l,'ID']))
-                                #print(str(i), "    MPIB ID: ", str(self.user_settings_df.loc[l,'MPIB']))
                                 for k in exclude:
                                     if (str(self.users_df.loc[i,'ID']) == str(k)):
                                         break
