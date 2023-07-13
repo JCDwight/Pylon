@@ -328,6 +328,7 @@ class Monolith(App):
         print("MPIB Status at start: ", str(self.MPIB_Status))
         tempstr = ""
         exclude = []
+        exclude.append("00000000")
         nowtime = time.time()
         print(str(exclude))
         for i in range(len(self.users_df),-1,-1): #Iterate backwards through scheckin DB
