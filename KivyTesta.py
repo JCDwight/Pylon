@@ -399,7 +399,7 @@ class Monolith(App):
         self.label1.font_size = 25
         self.label1.width = 400
         self.label1.halign = 'center'
-        if (name == 'Coach Jay'):
+        if (name == 'Coach Jayf'):
             self.label1.font_name = 'Aurebesh.ttf'
             self.label2.font_name = 'Aurebesh.ttf'
         else:
