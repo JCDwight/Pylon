@@ -331,6 +331,7 @@ class Monolith(App):
         print("MPIB Status at start: ", str(self.MPIB_Status))
         tempstr = ""
         exclude = []
+        mpib_slot = []
         exclude.append("00000000")
         nowtime = time.time()
         print(str(exclude))
@@ -338,9 +339,9 @@ class Monolith(App):
             if(i > 0 and i < len(self.users_df) - 1):
                 flagged = False
                 for j in exclude:
-                    print(str(i), " 2 Not: Users DF ID: ", str(self.users_df.loc[i,'ID']), " == ", str(j))
+                    #print(str(i), " 2 Not: Users DF ID: ", str(self.users_df.loc[i,'ID']), " == ", str(j))
                     if not(str(self.users_df.loc[i,'ID']) == str(j)):
-                        print(str(i), "Not: Users DF ID: ", str(self.users_df.loc[i,'ID']), " == ", str(j))
+                        #print(str(i), "Not: Users DF ID: ", str(self.users_df.loc[i,'ID']), " == ", str(j))
                         temp_ID = str(self.users_df.loc[i,'ID'])
 
                         temploc = ""
@@ -348,8 +349,9 @@ class Monolith(App):
                         for l in range(len(self.user_settings_df)):#Looks through settings DB to match the ID and find the MPIB ID
                             if (str(self.user_settings_df.loc[l,'ID']) == str(self.users_df.loc[i,'ID']) and not(flagged)):
                                 temploc = self.user_settings_df.loc[l,'MPIB']
-                                print(str(i), "Excluded ID: ", str(self.user_settings_df.loc[l,'ID']))
-                                print(str(i), "    MPIB ID: ", str(self.user_settings_df.loc[l,'MPIB']))
+                                mpib_slot.append(temploc)
+                                #print(str(i), "Excluded ID: ", str(self.user_settings_df.loc[l,'ID']))
+                                #print(str(i), "    MPIB ID: ", str(self.user_settings_df.loc[l,'MPIB']))
                                 for k in exclude:
                                     if (str(self.users_df.loc[i,'ID']) == str(k)):
                                         break
@@ -362,14 +364,11 @@ class Monolith(App):
                                         tempcolor = "RED"
                                     tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
                                 break
-                        
+        for count in range(80):
+            for r in mpib_slot:
 
-        #print("Got to before for loop")
-        print("Exclude list: ", str(exclude))
-        print("Tempstr: ", str(tempstr))
-        print("MPIB Status before MPIB_Status = tempstr :", str(self.MPIB_Status))
         self.MPIB_Status = str(tempstr)
-        print("MPIB Status after MPIB_Status = tempstr :", str(self.MPIB_Status))
+
         if (str(self.MPIB_Status) == ""):
             self.MPIB_Status = "0"
         tottime = time.time() - nowtime
@@ -672,7 +671,7 @@ class Monolith(App):
         if (CheckPlatform() == 1):
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
             Clock.schedule_interval(partial(self.CheckTime, self), 20)
-            #Clock.schedule_interval(partial(self.Set_MPIB_Status_Global, self), 20)
+            Clock.schedule_interval(partial(self.Set_MPIB_Status_Global, self), 20)
         #Clock.schedule_once(partial(self.CheckInScreen,self), 9)
         return self.window
 
