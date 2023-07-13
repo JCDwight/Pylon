@@ -325,13 +325,11 @@ class Monolith(App):
             self.img.source = 'Images\\FIRSTNewton2Logo-Instructions.png'
 
     def Set_MPIB_Status_Global(self):
-        global MPIB_Status
         print("MPIB Status at start: ", str(self.MPIB_Status))
         tempstr = ""
         exclude = []
         nowtime = time.time()
         print(str(exclude))
-        print("range(len(self.users_df): ", str(range(len(self.users_df))))
         for i in range(len(self.users_df),-1,-1): #Iterate backwards through scheckin DB
             if(i > 0 and i < len(self.users_df) - 1):
                 temp_ID = ""
@@ -358,6 +356,7 @@ class Monolith(App):
 
         #print("Got to before for loop")
         print("Exclude list: ", str(exclude))
+        print("Tempstr: ", str(tempstr))
         print("MPIB Status before MPIB_Status = tempstr :", str(self.MPIB_Status))
         self.MPIB_Status = str(tempstr)
         print("MPIB Status after MPIB_Status = tempstr :", str(self.MPIB_Status))
