@@ -334,6 +334,7 @@ class Monolith(App):
             if(i > 0 and i < len(self.users_df) - 1):
                 temp_ID = ""
                 for j in exclude:
+                    print("2Not: Users DF ID: ", str(self.users_df.loc[i,'ID']), " == ", str(j))
                     if not(str(self.users_df.loc[i,'ID']) == str(j)):
                         print("Not: Users DF ID: ", str(self.users_df.loc[i,'ID']), " == ", str(j))
                         temp_ID = str(self.users_df.loc[i,'ID'])
