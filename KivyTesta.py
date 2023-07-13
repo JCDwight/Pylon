@@ -330,26 +330,25 @@ class Monolith(App):
         tempstr = " "
         exclude = []
         exclude.append("00000000")
+        nowtime = time.time_ns()
         print(str(exclude))
         for i in range(len(self.users_df),-1,-1): #Iterate backwards through scheckin DB
-            print("Got right inside for loop.  I = " , str(i))
+            #print("Got right inside for loop.  I = " , str(i))
             if(i > 0):
                 if exclude: #If an exclude list exists
                     print("Got right inside if exclude")
                     for j in exclude: #For each item in the exclude list
-                        print("Exclude list: " + str(exclude))
-                        print("Got right inside for exclude")
-                        print("I: ",str(i))
-                        print(str(self.users_df.loc[i-1,'ID']))
+                        #print("Exclude list: " + str(exclude))
+                        #print("Got right inside for exclude")
+                        #print("I: ",str(i))
+                        #print(str(self.users_df.loc[i-1,'ID']))
                         if (str(self.users_df.loc[i-1,'ID']) == str(j)): #Check if the checkin DB matches
-                            print("Got right inside str(self.users_df.loc[i,'ID']) == str(j)")
+                            #print("Got right inside str(self.users_df.loc[i,'ID']) == str(j)")
 
                             pass                                       #an existing ID in the exclude list
                         else:
                             temploc = ""
                             tempcolor = ""
-                            print("Got right inside else exclude")
-
                             for l in range(len(self.user_settings_df)):#Looks through settings DB to match the ID and find the MPIB ID
                                 if (str(self.user_settings_df.loc[l,'ID']) == str(self.users_df.loc[i-1,'ID'])):
                                     temploc = self.user_settings_df.loc[l,'MPIB']
@@ -360,13 +359,14 @@ class Monolith(App):
                             tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
                 exclude.append(str(self.users_df.loc[i-1,'ID']))
 
-        print("Got to before for loop")
+        #print("Got to before for loop")
         print("MPIB Status before MPIB_Status = tempstr :", str(self.MPIB_Status))
         MPIB_Status = str(tempstr)
         print("MPIB Status after MPIB_Status = tempstr :", str(self.MPIB_Status))
         if (str(self.MPIB_Status) == ""):
             self.MPIB_Status = "0"
-
+        tottime = time.time_ns() - nowtime
+        print("Total time in ns(?): ", str(tottime))
                         
 
     def CheckInScreen(self, name, imageFilePath, soundNum, color, ID, MPIB):
