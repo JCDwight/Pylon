@@ -667,7 +667,7 @@ class Monolith(App):
         if (CheckPlatform() == 1):
             Clock.schedule_interval(partial(self.MainLoop, self, 0),0.01)
             Clock.schedule_interval(partial(self.CheckTime, self), 20)
-            #Clock.schedule_interval(partial(self.Set_MPIB_Status_Global, self), 20)
+            Clock.schedule_interval(partial(self.Set_MPIB_Status_Global, self), 20)
         #Clock.schedule_once(partial(self.CheckInScreen,self), 9)
         return self.window
 
