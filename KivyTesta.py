@@ -465,7 +465,7 @@ class Monolith(App):
             self.users_df = pd.read_csv(path)
         except:
             if (path == 'checkins.csv'):
-                self.users_df = self.users_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':0}, ignore_index=True)
+                self.users_df = self.users_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':int(0)}, ignore_index=True)
             elif (path == 'unauthorized.csv'):
                 self.unauthorized_users_df = self.unauthorized_users_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970"}, ignore_index=True)
 
@@ -473,31 +473,31 @@ class Monolith(App):
         #print(self.users_df)
 
     def Add_Checkinorout(self, ID):
-        ins = 0
-        outs = 0
+        ins = int(0)
+        outs = int(0)
         inorout = 0
         for i in range(len(self.users_df)):
             if (str(self.users_df.loc[i,'ID']) == str(ID)):
-                if (self.users_df.loc[i,'CIOO'] == 1):
+                if (self.users_df.loc[i,'CIOO'] == int(1)):
                     ins = ins + 1
                 elif(self.users_df.loc[i,'CIOO']):
                     outs = outs + 1
         if ((ins == 0 and outs == 0)):
             print("Added check-in")
-            self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)            
-            inorout = 1
+            self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': int(1)}, ignore_index=True)            
+            inorout = int(1)
         else:
             if (ins > outs):
-                self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 2}, ignore_index=True)
+                self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': int(2)}, ignore_index=True)
                 print("Added check-out")
-                inorout = 2
+                inorout = int(2)
                 Clock.schedule_once(partial(self.SplashScreen,self), 4)
                 #Clock.schedule_once(partial(self.UnlockScan,self), self.sounds[self.playingSound].length + 1)
             else:
                 print("Added check-in")
                 Clock.schedule_once(partial(self.SplashScreen,self), 4)
-                self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 1}, ignore_index=True)            
-                inorout = 1
+                self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': int(1)}, ignore_index=True)            
+                inorout = int(1)
         self.Just_Save('checkins.csv')
         self.ser.flush()
         return inorout
