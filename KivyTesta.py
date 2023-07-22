@@ -355,9 +355,9 @@ class Monolith(App):
                                     exclude.append(str(self.users_df.loc[i,'ID']))
                                     flagged = True
                                     print("Exclude list: ", str(exclude))
-                                    if (self.users_df.loc[i,'CIOO'] == 1): #Check if in and assign color
+                                    if (self.users_df.loc[i,'CIOO'] == True): #Check if in and assign color
                                         tempcolor = "GREEN"
-                                    elif (self.users_df.loc[i,'CIOO'] == 2): #Check if out and assign color
+                                    elif (self.users_df.loc[i,'CIOO'] == False): #Check if out and assign color
                                         tempcolor = "RED"
                                     tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
                                 break
@@ -465,7 +465,7 @@ class Monolith(App):
             self.users_df = pd.read_csv(path)
         except:
             if (path == 'checkins.csv'):
-                self.users_df = self.users_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':int(0)}, ignore_index=True)
+                self.users_df = self.users_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':False}, ignore_index=True)
 
         #print("Checkin Dataframe: ")
         #print(self.users_df)
@@ -476,17 +476,17 @@ class Monolith(App):
         inorout = 0
         for i in range(len(self.users_df)):
             if (str(self.users_df.loc[i,'ID']) == str(ID)):
-                if (self.users_df.loc[i,'CIOO'] == int(1)):
+                if (self.users_df.loc[i,'CIOO'] == True):
                     ins = ins + 1
-                elif(self.users_df.loc[i,'CIOO']):
+                elif(self.users_df.loc[i,'CIOO'] == False):
                     outs = outs + 1
         if ((ins == 0 and outs == 0)):
             print("Added check-in")
-            self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': int(1)}, ignore_index=True)            
+            self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': True}, ignore_index=True)            
             inorout = int(1)
         else:
             if (ins > outs):
-                self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': int(2)}, ignore_index=True)
+                self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': False}, ignore_index=True)
                 print("Added check-out")
                 inorout = int(2)
                 Clock.schedule_once(partial(self.SplashScreen,self), 4)
@@ -494,7 +494,7 @@ class Monolith(App):
             else:
                 print("Added check-in")
                 Clock.schedule_once(partial(self.SplashScreen,self), 4)
-                self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': int(1)}, ignore_index=True)            
+                self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': True}, ignore_index=True)            
                 inorout = int(1)
         self.Just_Save('checkins.csv')
         self.ser.flush()
@@ -511,9 +511,9 @@ class Monolith(App):
         for i in range(self.users_df.shape[0]):
             for j in range(self.user_settings_df.shape[0]):
                 if (str(self.users_df.loc[i,'ID']) == str(self.user_settings_df.loc[j,'ID'])): 
-                    if (self.users_df.loc[i,'CIOO']) == 1:
+                    if (self.users_df.loc[i,'CIOO']) == True:
                         print(str(self.user_settings_df.loc[j,'Name']) + ' - ' + str(self.users_df.loc[i,'CIOT']) + ' - ' + "In")
-                    if (self.users_df.loc[i,'CIOO']) == 2:
+                    if (self.users_df.loc[i,'CIOO']) == False:
                         print(str(self.user_settings_df.loc[j,'Name']) + ' - ' + str(self.users_df.loc[i,'CIOT']) + ' - ' + "Out")
 
     def MainLoop(self, *largs):
@@ -586,7 +586,7 @@ class Monolith(App):
             for i in range(numcolumns, -1, -1):
                 print("In loop: " + str(i) + " ID: " + str(self.users_df.loc[i,'ID']))
                 exclude = 0
-                if (self.users_df.loc[i,'CIOO'] == 1):
+                if (self.users_df.loc[i,'CIOO'] == True):
                     if (len(id_list) > 0):
                         for j in range(len(id_list)):
                             if (i == 85):
@@ -606,7 +606,7 @@ class Monolith(App):
                             if (exclude == 0):
                                 id_list.append(str(self.users_df.loc[i,'ID']))
                                 print("Appended: self.users_df.loc[i,'ID'] : " + str(self.users_df.loc[i,'ID']) + " to the id_list")
-                elif (self.users_df.loc[i,'CIOO'] == 2):
+                elif (self.users_df.loc[i,'CIOO'] == False):
                     if (len(id_list) > 0):
                         in_id_list = 0
                         for j in range(len(id_list)):
@@ -623,7 +623,7 @@ class Monolith(App):
                         for q in range(self.user_settings_df.shape[0]):
                             if(str(self.user_settings_df.loc[q,'ID']) == str(id_list[i])):
                                 name = self.user_settings_df.loc[q,'Name']       
-                        self.users_df = self.users_df.append({'ID': id_list[i], 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': 2}, ignore_index=True)
+                        self.users_df = self.users_df.append({'ID': id_list[i], 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': False}, ignore_index=True)
                         print ('ID: ', str(id_list[i]), ' , CIOT: ', str(datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y")) , ' CIOO: OUT')
             self.clean_up = 0
             self.Just_Save('checkins.csv')
@@ -644,7 +644,7 @@ class Monolith(App):
             self.CheckEveryoneOut()
         if ((hour == 23) and (min == 55) and (self.backedup == 0)):
             self.CopyFile('checkins.csv','/Backups/checkins-' + str(datetime.datetime.now().strftime("%Y-%m-%d") + ".csv"))
-            self.users_df = {'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':0}
+            self.users_df = {'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':False}
             self.Just_Save('checkins.csv')
             self.backedup = 1
         if ((hour == 1) and (min == 5)):
