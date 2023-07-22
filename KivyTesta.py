@@ -357,11 +357,11 @@ class Monolith(App):
                                     print("Exclude list: ", str(exclude))
                                     if (self.users_df.loc[i,'CIOO'] == True): #Check if in and assign color
                                         print("User ", str(self.users_df.loc[i,'ID']), " checked in")
-                                        print("CIOO = ", str(self.users_df.loc[i,'ID']))
+                                        print("CIOO = ", str(self.users_df.loc[i,'CIOO']))
                                         tempcolor = "GREEN"
                                     elif (self.users_df.loc[i,'CIOO'] == False): #Check if out and assign color
                                         print("User ", str(self.users_df.loc[i,'ID']), " checked out")
-                                        print("CIOO = ", str(self.users_df.loc[i,'ID']))
+                                        print("CIOO = ", str(self.users_df.loc[i,'CIOO']))
                                         tempcolor = "RED"
                                     tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
                                 break
