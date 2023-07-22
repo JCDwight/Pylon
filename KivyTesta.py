@@ -384,7 +384,7 @@ class Monolith(App):
         elif(soundNum < 0 and inorout == 1):
             pass
             #self.PlaySound(random.randint(58,69))
-        if (inorout == 1):
+        if (int(inorout) == 1):
             self.label1.text = name + ' checked in!'
             self.update_MPIB = str(MPIB) + ",GREEN"
         else:
@@ -466,8 +466,6 @@ class Monolith(App):
         except:
             if (path == 'checkins.csv'):
                 self.users_df = self.users_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':int(0)}, ignore_index=True)
-            elif (path == 'unauthorized.csv'):
-                self.unauthorized_users_df = self.unauthorized_users_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970"}, ignore_index=True)
 
         #print("Checkin Dataframe: ")
         #print(self.users_df)
