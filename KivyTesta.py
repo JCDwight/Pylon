@@ -354,6 +354,7 @@ class Monolith(App):
                                 else:
                                     exclude.append(str(self.users_df.loc[i,'ID']))
                                     flagged = True
+                                    print("Exclude list: ", str(exclude))
                                     if (self.users_df.loc[i,'CIOO'] == 1): #Check if in and assign color
                                         tempcolor = "GREEN"
                                     elif (self.users_df.loc[i,'CIOO'] == 2): #Check if out and assign color
