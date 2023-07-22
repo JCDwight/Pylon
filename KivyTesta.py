@@ -189,7 +189,7 @@ class Monolith(App):
         return data
 
     def add_predefined_users(self): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
-        self.add_user_settings('Coach Jay',     '16819214', 13, 1,'jay.png'         ,'Orange')
+        self.add_user_settings('Coach Jay',     '16819214', 7, 1,'jay.png'         ,'Orange')
         self.add_user_settings('Chuck Testa',   '10101010', 79, 1,'ChuckTesta.png'  ,'Orange')
         self.add_user_settings('Jackson',       '16878869', 78,-1,'Default.png'     ,'Green')
         self.add_user_settings('Liam',          '16878885', 28,-1,'Default.png'     ,'Blue')
@@ -223,6 +223,9 @@ class Monolith(App):
         self.add_user_settings('Coach Kevin',   '44094159', 00,80,'UndercoverBrother.png','Red/Yellow/Green')
         self.add_user_settings('Alex',          '16878715', 21,-1,'Default.png',    'Purple')
         self.add_user_settings('Nathan',        '16878802', 00,-1,'Default.png',    'Red')
+        self.add_user_settings('Coach Mary',    '11011011',  1,-1,'Default.png',    'Red')
+        self.add_user_settings('Coach Jesse',   '11118802',  3,-1,'Default.png',    'Red')
+
 
     def LoadSound(self):
         #region
