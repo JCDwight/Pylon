@@ -205,7 +205,7 @@ class Monolith(App):
         self.add_user_settings('Coach Shelly',  '10497184', 12,10,'shelly.png'      ,'Gold')
         self.add_user_settings('Evan',          '16878758', 26, 2,'EvaninFTCBox.png','Red')
         self.add_user_settings('Coach Renee',   '10497178', 10, 8,'renee.png'       ,'Yellow')
-        self.add_user_settings('Aryan',         '16878794', 23, 4,'thisthing.png'   ,'Blue')
+        self.add_user_settings('Aryan',         '16878770', 24, 4,'thisthing.png'   ,'Blue') #16878794 old
         self.add_user_settings('Keita',         '16878838', 27,-1,'Default.png'     ,'Green')
         self.add_user_settings('Annabelle',     '16878841', 22,-1,'Default.png'     ,'Purple')
         self.add_user_settings('Austin',        '16878724', 00,-1,'Default.png'     ,'Gold')
@@ -544,7 +544,7 @@ class Monolith(App):
                             self.sound_on = False
                         else:
                             self.sound_on = True
-                    elif (str(data) == ('16878770')):
+                    elif (str(data) == ('16878779')):
                         #print(str(self.users_df))
                         #self.Print_Checkins_With_Names()
                         self.CheckEveryoneOut()
