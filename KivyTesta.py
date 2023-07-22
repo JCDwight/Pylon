@@ -551,31 +551,9 @@ class Monolith(App):
                         self.PlaySound(78)
                     else:
                         self.ser.write(b'4')
-                        #self.unauthorized_users_df = self.unauthorized_users_df.append({'ID': str(data), 'CIOT': datetime.datetime.now().strftime("%I:%M %p\n %B %d, %Y")})
-                        #unauthorizedcheckins = 0
-                        #for checkin in self.unauthorized_users_df:
-                        #    if(checkin['ID'] == str(data)):
-                        #        unauthorizedcheckins = unauthorizedcheckins + 1
-                        #if(unauthorizedcheckins > 0 and unauthorizedcheckins < 5):
-                        #self.PlaySound(57)
-                        #elif(unauthorizedcheckins < 10):
-                        #    pass
-                        #elif(unauthorizedcheckins < 11):
-                        #    pass
-                        #elif(unauthorizedcheckins < 12):
-                        #    pass
-                        #elif(unauthorizedcheckins < 13):
-                        #    pass
-                        #elif(unauthorizedcheckins < 14):
-                        #    pass
-                        #elif(unauthorizedcheckins < 15):
-                        #    pass
-                        #elif(unauthorizedcheckins < 16):
-                        #    pass
 
     def Setup(self):
         self.Just_Load('checkins.csv')
-        #self.Just_Load('unauthorized.csv')
 
     def CheckEveryoneOut(self):
         numcolumns = self.users_df.shape[0] - 1
