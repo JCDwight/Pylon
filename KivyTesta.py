@@ -189,7 +189,9 @@ class Monolith(App):
         return data
 
     def add_pREDefined_users(self): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
-        self.add_user_settings('Coach Jay',     '16819214', 7, 1,'jay.png'         ,'ORANGE')
+        self.add_user_settings('Coach Jay',     '16819214', 7, 1,'jay.png'          ,'ORANGE')        
+        self.add_user_settings('Elvis',         '31376870', 7, 1,'Default.png'      ,'PURPLE')
+        self.add_user_settings('Jarvis',        '31378524', 7, 1,'Default.png'      ,'SKYBLUE')
         self.add_user_settings('Chuck Testa',   '10101010', 79, 1,'ChuckTesta.png'  ,'ORANGE')
         self.add_user_settings('Jackson',       '16878869', 78,-1,'Default.png'     ,'GREEN')
         self.add_user_settings('Liam',          '16878885', 28,-1,'Default.png'     ,'BLUE')
