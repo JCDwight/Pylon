@@ -527,7 +527,7 @@ class Monolith(App):
         if (self.ser.inWaiting() > 10):
             time.sleep(0.1)
             if (self.scanLock == 0):
-                data = 10 #self.ReadSerial()
+                data = "1001" #self.ReadSerial()
                 data = int(data, 2)
                 for i in range(len(self.user_settings_df)):
                     if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
