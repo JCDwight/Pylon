@@ -383,6 +383,7 @@ class Monolith(App):
     def CheckInScreen(self, name, imageFilePath, soundNum, color, ID, MPIB):
         if (CheckPlatform() == 1):
             self.ser.write(b'3')
+            self.ser.write(b'{color}')
         if (CheckPlatform() == 1):
             self.ser.flush()
         inorout = self.Add_Checkinorout(ID)
