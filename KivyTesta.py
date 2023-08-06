@@ -384,7 +384,7 @@ class Monolith(App):
         if (CheckPlatform() == 1):
             self.ser.write(b'3')
             time.sleep(50)
-            self.ser.write(b'{color}')
+            self.ser.write(bytes(color))
         if (CheckPlatform() == 1):
             self.ser.flush()
         inorout = self.Add_Checkinorout(ID)
