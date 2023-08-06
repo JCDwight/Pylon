@@ -188,43 +188,43 @@ class Monolith(App):
             data = list(reader)[0]
         return data
 
-    def add_predefined_users(self): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
-        self.add_user_settings('Coach Jay',     '16819214', 7, 1,'jay.png'         ,'Orange')
-        self.add_user_settings('Chuck Testa',   '10101010', 79, 1,'ChuckTesta.png'  ,'Orange')
-        self.add_user_settings('Jackson',       '16878869', 78,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Liam',          '16878885', 28,-1,'Default.png'     ,'Blue')
-        self.add_user_settings('Luke',          '16878745', 00,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Ibrahim',       '16878733', 77,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Ryan',          '16878705', 31,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Rebagrace',     '16878861', 30,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Coach Larry',   '16819201', 3,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Coach Harrison','16818556', 00,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Coach Tim',     '16818556', 2,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Cole',          '16878693', 76,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Martin',        '16858425', 20, 6,'Chargedup.png'   ,'Cyan')
-        self.add_user_settings('Coach Shelly',  '10497184', 12,10,'shelly.png'      ,'Gold')
-        self.add_user_settings('Evan',          '16878758', 26, 2,'EvaninFTCBox.png','Red')
+    def add_pREDefined_users(self): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
+        self.add_user_settings('Coach Jay',     '16819214', 7, 1,'jay.png'         ,'ORANGE')
+        self.add_user_settings('Chuck Testa',   '10101010', 79, 1,'ChuckTesta.png'  ,'ORANGE')
+        self.add_user_settings('Jackson',       '16878869', 78,-1,'Default.png'     ,'GREEN')
+        self.add_user_settings('Liam',          '16878885', 28,-1,'Default.png'     ,'BLUE')
+        self.add_user_settings('Luke',          '16878745', 00,-1,'Default.png'     ,'GREEN')
+        self.add_user_settings('Ibrahim',       '16878733', 77,-1,'Default.png'     ,'GREEN')
+        self.add_user_settings('Ryan',          '16878705', 31,-1,'Default.png'     ,'GREEN')
+        self.add_user_settings('Rebagrace',     '16878861', 30,-1,'Default.png'     ,'GREEN')
+        self.add_user_settings('Coach Larry',   '16819201', 3,-1,'Default.png'     ,'GREEN')
+        self.add_user_settings('Coach Harrison','16818556', 00,-1,'Default.png'     ,'GREEN')
+        self.add_user_settings('Coach Tim',     '16818556', 2,-1,'Default.png'     ,'GREEN')
+        self.add_user_settings('Cole',          '16878693', 76,-1,'Default.png'     ,'GREEN')
+        self.add_user_settings('Martin',        '16858425', 20, 6,'Chargedup.png'   ,'CYAN')
+        self.add_user_settings('Coach Shelly',  '10497184', 12,10,'shelly.png'      ,'GOLD')
+        self.add_user_settings('Evan',          '16878758', 26, 2,'EvaninFTCBox.png','RED')
         self.add_user_settings('Coach Renee',   '10497178', 10, 8,'renee.png'       ,'Yellow')
-        self.add_user_settings('Aryan',         '16878770', 24, 4,'thisthing.png'   ,'Blue') #16878794 old
-        self.add_user_settings('Keita',         '16878838', 27,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Annabelle',     '16878841', 22,-1,'Default.png'     ,'Purple')
-        self.add_user_settings('Austin',        '16878724', 00,-1,'Default.png'     ,'Gold')
-        self.add_user_settings('Ted',           '16878757', 00,20,'Default.png'     ,'Green')
-        self.add_user_settings('Coach Craig',   '16818550', 4, 0,'Default.png'     ,'Green')
-        self.add_user_settings('Susan',         '16858448', 00,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Ty',            '10518941', 75,75,'Tytaco.png'      ,'Orange')    
-        self.add_user_settings('Emma',          '16858354', 25,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Vikas',         '16878849', 32,-1,'Default.png'     ,'Green')
-        self.add_user_settings('Coach Joe',     '10604432', 00,-1,'Default.png'     ,'Purple')
-        self.add_user_settings('Megan',         '16878711', 75,-1,'Default.png'     ,'Purple')
-        self.add_user_settings('Chris',         '16878807', 74,-1,'Default.png'     ,'Purple')
-        self.add_user_settings('Coach Robert',  '10497089', 8,-1,'Default.png'     ,'Blue')
-        self.add_user_settings('Coach Charles', '50444699', 7,-1,'Default.png'     ,'Cyan')
-        self.add_user_settings('Coach Kevin',   '44094159', 00,80,'UndercoverBrother.png','Red/Yellow/Green')
-        self.add_user_settings('Alex',          '16878715', 21,-1,'Default.png',    'Purple')
-        self.add_user_settings('Nathan',        '16878802', 00,-1,'Default.png',    'Red')
-        self.add_user_settings('Coach Mary',    '11011011',  1,-1,'Default.png',    'Red')
-        self.add_user_settings('Coach Jesse',   '11118802',  3,-1,'Default.png',    'Red')
+        self.add_user_settings('Aryan',         '16878770', 24, 4,'thisthing.png'   ,'BLUE') #16878794 old
+        self.add_user_settings('Keita',         '16878838', 27,-1,'Default.png'     ,'GREEN')
+        self.add_user_settings('Annabelle',     '16878841', 22,-1,'Default.png'     ,'PURPLE')
+        self.add_user_settings('Austin',        '16878724', 00,-1,'Default.png'     ,'GOLD')
+        self.add_user_settings('Ted',           '16878757', 00,20,'Default.png'     ,'GREEN')
+        self.add_user_settings('Coach Craig',   '16818550', 4, 0,'Default.png'     ,'GREEN')
+        self.add_user_settings('Susan',         '16858448', 00,-1,'Default.png'     ,'GREEN')
+        self.add_user_settings('Ty',            '10518941', 75,75,'Tytaco.png'      ,'ORANGE')    
+        self.add_user_settings('Emma',          '16858354', 25,-1,'Default.png'     ,'GREEN')
+        self.add_user_settings('Vikas',         '16878849', 32,-1,'Default.png'     ,'GREEN')
+        self.add_user_settings('Coach Joe',     '10604432', 00,-1,'Default.png'     ,'PURPLE')
+        self.add_user_settings('Megan',         '16878711', 75,-1,'Default.png'     ,'PURPLE')
+        self.add_user_settings('Chris',         '16878807', 74,-1,'Default.png'     ,'PURPLE')
+        self.add_user_settings('Coach Robert',  '10497089', 8,-1,'Default.png'     ,'BLUE')
+        self.add_user_settings('Coach Charles', '50444699', 7,-1,'Default.png'     ,'CYAN')
+        self.add_user_settings('Coach Kevin',   '44094159', 00,80,'UndercoverBrother.png','RED')
+        self.add_user_settings('Alex',          '16878715', 21,-1,'Default.png',    'PURPLE')
+        self.add_user_settings('Nathan',        '16878802', 00,-1,'Default.png',    'RED')
+        self.add_user_settings('Coach Mary',    '11011011',  1,-1,'Default.png',    'RED')
+        self.add_user_settings('Coach Jesse',   '11118802',  3,-1,'Default.png',    'RED')
 
 
     def LoadSound(self):
@@ -447,9 +447,9 @@ class Monolith(App):
         #endregion
 
     def upload_picture_to_drive(picture_path, drive_folder_id):
-        credentials = service_account.Credentials.from_service_account_file('credentials.json', scopes=['https://www.googleapis.com/auth/drive'])
+        cREDentials = service_account.CREDentials.from_service_account_file('cREDentials.json', scopes=['https://www.googleapis.com/auth/drive'])
 
-        drive_service = build('drive', 'v3', credentials=credentials)
+        drive_service = build('drive', 'v3', cREDentials=cREDentials)
         
         file_metadata = {
             'name': 'picture.jpg',
@@ -643,7 +643,7 @@ class Monolith(App):
     def build(self):
         self.LoadSound() #Load all the sound file names into a list, in a specific order for posterity.        
         self.BuildElements()
-        self.add_predefined_users()
+        self.add_pREDefined_users()
         self.Setup()
         #self.Set_MPIB_Status_Global()
 
