@@ -310,6 +310,7 @@ class Monolith(App):
                 if (self.ser.inWaiting() > 0):
                     data_str = self.ser.read(self.ser.inWaiting()).decode('ascii')
                     print("______________________________________")
+                    print("Data 2: ", data_str)
                     print("Data:")
                     print(int(data_str, 2))
                     print("______________________________________")
