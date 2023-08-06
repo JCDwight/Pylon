@@ -400,7 +400,7 @@ class Monolith(App):
         else:
             self.label1.text = name + ' checked out!'
             self.update_MPIB = str(MPIB) + ",RED"
-        print('Playing: ' + str(self.soundList[soundNum]))
+        #print('Playing: ' + str(self.soundList[soundNum]))
         self.label1.pos = (200, 150)
         self.label1.font_size = 25
         self.label1.width = 400
