@@ -499,11 +499,11 @@ class Monolith(App):
                 self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': False}, ignore_index=True)
                 print("Added check-out")
                 inorout = int(2)
-                Clock.schedule_once(partial(self.SplashScreen,self), 4)
+                Clock.schedule_once(partial(self.SplashScreen,self), 6)
                 #Clock.schedule_once(partial(self.UnlockScan,self), self.sounds[self.playingSound].length + 1)
             else:
                 print("Added check-in")
-                Clock.schedule_once(partial(self.SplashScreen,self), 4)
+                Clock.schedule_once(partial(self.SplashScreen,self), 6)
                 self.users_df = self.users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': True}, ignore_index=True)            
                 inorout = int(1)
         self.Just_Save('checkins.csv')
