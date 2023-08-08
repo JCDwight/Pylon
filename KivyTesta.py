@@ -148,7 +148,7 @@ class Monolith(App):
                 #self.update_MPIB = ""
         conn.close()
 
-    def start_server(self,host='192.168.213.220', port=8080):
+    def start_server(self,host='192.168.215.198', port=8080):
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # This line enables port reusage:
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -190,7 +190,7 @@ class Monolith(App):
 
     def add_pREDefined_users(self): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
         self.add_user_settings('Coach Jay',     '16819214', 7, 1,'jay.png'          ,'ORANGE')        
-        self.add_user_settings('Elvis',         '31378670', 18, 1,'Default.png'      ,'BROWN')
+        self.add_user_settings('Elvis',         '31378670', 78, 1,'Default.png'      ,'BROWN')
         self.add_user_settings('Jarvis',        '31378524', 19, 1,'Default.png'      ,'SKYBLUE')
         self.add_user_settings('Chuck Testa',   '10101010', 79, 1,'ChuckTesta.png'  ,'ORANGE')
         self.add_user_settings('Jackson',       '16878869', 78,-1,'Default.png'     ,'GREEN')
@@ -206,7 +206,7 @@ class Monolith(App):
         self.add_user_settings('Martin',        '16858425', 20, 6,'Chargedup.png'   ,'CYAN')
         self.add_user_settings('Coach Shelly',  '10497184', 16,10,'shelly.png'      ,'GOLD')
         self.add_user_settings('Evan',          '16878758', 36, 2,'EvaninFTCBox.png','RED')
-        self.add_user_settings('Coach Renee',   '10497178', 0, 8,'renee.png'       ,'Yellow')
+        self.add_user_settings('Coach Renee',   '10497178', 0, 8,'renee.png'       ,'YELLOW')
         self.add_user_settings('Aryan',         '16878770', 21, 4,'thisthing.png'   ,'BLUE') #16878794 old
         self.add_user_settings('Keita',         '16878838', 27,-1,'Default.png'     ,'GREEN')
         self.add_user_settings('Annabelle',     '16878841', 22,-1,'Default.png'     ,'PURPLE')
