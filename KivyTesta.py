@@ -201,7 +201,7 @@ class Monolith(App):
         self.add_user_settings('Rebagrace',     '16878861', 37,-1,'Default.png'     ,'GREEN')
         self.add_user_settings('Coach Larry',   '16819201', 3,-1,'Default.png'     ,'GREEN')
         self.add_user_settings('Coach Harrison','16818556', 18,-1,'Default.png'     ,'GREEN')
-        self.add_user_settings('Coach Tim',     '16818556', 6,-1,'Default.png'     ,'GREEN')
+        self.add_user_settings('Coach Tim',     '17506192', 6,-1,'Default.png'     ,'GREEN') #16818556 old
         self.add_user_settings('Cole',          '16878693', 76,-1,'Default.png'     ,'GREEN')
         self.add_user_settings('Martin',        '16858425', 20, 6,'Chargedup.png'   ,'CYAN')
         self.add_user_settings('Coach Shelly',  '10497184', 16,10,'shelly.png'      ,'GOLD')
@@ -229,11 +229,13 @@ class Monolith(App):
         self.add_user_settings('Coach Jesse',   '11118802',  5,-1,'Default.png',    'RED')
         self.add_user_settings('Coach Lisa',    '88888888',  1,-1,'Default.png',    'RED')
         self.add_user_settings('Coach Paul',    '88888888',  4,-1,'Default.png',    'RED')
-        self.add_user_settings('Coach Chris',   '88888888',  8,-1,'Default.png',    'RED')
-        self.add_user_settings('Coach Sam',     '88888888',  13,-1,'Default.png',    'RED')
+        self.add_user_settings('Coach Chris',   '12744871',  8,-1,'Default.png',    'RED')
+        self.add_user_settings('Coach Sam',     '18513033',  13,-1,'Default.png',    'RED')
         self.add_user_settings('Coach Max',     '88888888',  14,-1,'Default.png',    'RED')
         self.add_user_settings('Coach Kaitlyn', '88888888',  15,-1,'Default.png',    'RED')
-        self.add_user_settings('Coach Cassie',  '88888888',  17,-1,'Default.png',    'RED')
+        self.add_user_settings('Coach Cassie',  '12714739',  17,-1,'Default.png',    'RED')
+        self.add_user_settings('Coach Brandon', '12744885',  17,-1,'Default.png',    'RED')
+        self.add_user_settings('Coach Keith',   '12744873',  17,-1,'Default.png',    'RED')
         self.add_user_settings('Juliet',        '88888888',  22,-1,'Default.png',    'PINK')
         self.add_user_settings('Madison',       '88888888',  23,-1,'Default.png',    'RED')
         self.add_user_settings('Sreeya',        '88888888',  25,-1,'Default.png',    'RED')
@@ -427,7 +429,7 @@ class Monolith(App):
         self.label1.font_size = 25
         self.label1.width = 400
         self.label1.halign = 'center'
-        if (name == 'Coach Jayf'):
+        if (name == 'Coach Jay' or name == 'Caitlyn'):
             self.label1.font_name = 'Aurebesh.ttf'
             self.label2.font_name = 'Aurebesh.ttf'
         else:
