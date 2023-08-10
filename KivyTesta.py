@@ -295,15 +295,15 @@ class Monolith(App):
             for f in dir_list: #No file exists, so just dump the scanned directory files into a list, should happen 1x
                 self.soundList.append(f)
             self.save_list_to_csv('DataBases/audioFiles.csv',self.soundList)
-        print("Loading Files in:'", path, "':")
+        #print("Loading Files in:'", path, "':")
         if (CheckPlatform() == 1):
             for f in self.soundList:                                  #Load the files in the soundList and print when they load(Linux)
                 self.sounds.append(SoundLoader.load("Audio/" + f))
-                print('Loaded: ' + f)
+                #print('Loaded: ' + f)
         else:
             for f in range(len(self.soundList)):                                  #Load the files in the soundList and print when they load
                 self.sounds.append(SoundLoader.load(path + self.soundList[f]))
-                print('Loaded: ' + path + self.soundList[f])
+                #print('Loaded: ' + path + self.soundList[f])
         if (FULL_SCREEN == 1):
             self.PlaySound(random.randint(1,50))
         #endregion
@@ -323,7 +323,7 @@ class Monolith(App):
             #ps.playsound("Audio//" + self.soundList[selector], False)
             self.playingSound = selector #Save the current selected song as our playing sound, since we made it in here, and the sound is playing
             self.scanLock = 1
-            print("Length of audio file: " + str(self.sounds[self.playingSound].length))
+            #print("Length of audio file: " + str(self.sounds[self.playingSound].length))
             Clock.schedule_once(partial(self.SplashScreen,self), self.sounds[self.playingSound].length + 1)
             self.soundTime = round(time.time() * 1000) #get the time, round it, and multiply it by 1000 to convert to milliseconds
             #endregion
@@ -356,13 +356,13 @@ class Monolith(App):
             self.img.source = 'Images\\FIRSTNewton2Logo-Instructions.png'
 
     def Set_MPIB_Status_Global(self,*largs):
-        print("MPIB Status at start: ", str(self.MPIB_Status))
+        #print("MPIB Status at start: ", str(self.MPIB_Status))
         tempstr = ""
         exclude = []
         mpib_slot = []
         exclude.append("00000000")
         nowtime = time.time()
-        print(str(exclude))
+        #print(str(exclude))
         for i in range(len(self.users_df),-1,-1): #Iterate backwards through scheckin DB
             if(i > 0 and i < len(self.users_df) - 1):
                 flagged = False
@@ -382,14 +382,14 @@ class Monolith(App):
                                 else:
                                     exclude.append(str(self.users_df.loc[i,'ID']))
                                     flagged = True
-                                    print("Exclude list: ", str(exclude))
+                                    #print("Exclude list: ", str(exclude))
                                     if (self.users_df.loc[i,'CIOO'] == True): #Check if in and assign color
-                                        print("User ", str(self.users_df.loc[i,'ID']), " checked in")
-                                        print("1CIOO = ", str(self.users_df.loc[i,'CIOO']))
+                                        #print("User ", str(self.users_df.loc[i,'ID']), " checked in")
+                                        #print("1CIOO = ", str(self.users_df.loc[i,'CIOO']))
                                         tempcolor = "GREEN"
                                     elif (self.users_df.loc[i,'CIOO'] == False): #Check if out and assign color
-                                        print("User ", str(self.users_df.loc[i,'ID']), " checked out")
-                                        print("2CIOO = ", str(self.users_df.loc[i,'CIOO']))
+                                        #print("User ", str(self.users_df.loc[i,'ID']), " checked out")
+                                        #print("2CIOO = ", str(self.users_df.loc[i,'CIOO']))
                                         tempcolor = "RED"
                                     tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
                                 break
@@ -401,7 +401,7 @@ class Monolith(App):
         if (str(self.MPIB_Status) == ""):
             self.MPIB_Status = "0"
         tottime = time.time() - nowtime
-        print("Total time in ns(?): ", str(tottime))
+        #print("Total time in ns(?): ", str(tottime))
                         
 
     def CheckInScreen(self, name, imageFilePath, soundNum, color, ID, MPIB):
@@ -443,7 +443,7 @@ class Monolith(App):
         self.img.pos = (-200,0)
         imageFilePath = "Images/" + imageFilePath
         self.img.source = imageFilePath
-        print("Got to the end of check in/out")
+        #print("Got to the end of check in/out")
         self.Set_MPIB_Status_Global()
 
     def BuildElements(self):
@@ -654,7 +654,7 @@ class Monolith(App):
         if ((hour == 23) and (min == 45)):
             print("Checking everyone out")
             self.CheckEveryoneOut()
-        if ((hour == 23) and (min == 55) and (self.backedup == 0)):
+        if ((hour == 27) and (min == 55) and (self.backedup == 0)):
             self.CopyFile('checkins.csv','/Backups/checkins-' + str(datetime.datetime.now().strftime("%Y-%m-%d") + ".csv"))
             self.users_df = {'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':False}
             self.Just_Save('checkins.csv')
