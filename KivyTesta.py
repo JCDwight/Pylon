@@ -203,11 +203,11 @@ class Monolith(App):
         self.add_user_settings('Coach Harrison','16818556', 18,-1,'Default.png'     ,'GREEN')
         self.add_user_settings('Coach Tim',     '17506192', 6,-1,'Default.png'     ,'GREEN') #16818556 old
         self.add_user_settings('Cole',          '16878693', 76,-1,'Default.png'     ,'GREEN')
-        self.add_user_settings('Martin',        '16858425', 20, 6,'Chargedup.png'   ,'CYAN')
+        self.add_user_settings('Martin',        '1639321', 20, 6,'Chargedup.png'   ,'CYAN')
         self.add_user_settings('Coach Shelly',  '10497184', 16,10,'shelly.png'      ,'GOLD')
         self.add_user_settings('Evan',          '16878758', 36, 2,'EvaninFTCBox.png','RED')
         self.add_user_settings('Coach Renee',   '10497178', 0, 8,'renee.png'       ,'YELLOW')
-        self.add_user_settings('Aryan',         '16878770', 21, 4,'thisthing.png'   ,'BLUE') #16878794 old
+        self.add_user_settings('Aryan',         '12714746', 21, 4,'thisthing.png'   ,'BLUE') #16878794 old
         self.add_user_settings('Keita',         '16878838', 27,-1,'Default.png'     ,'GREEN')
         self.add_user_settings('Annabelle',     '16878841', 22,-1,'Default.png'     ,'PURPLE')
         self.add_user_settings('Austin',        '16878724', 51,-1,'Default.png'     ,'GOLD')
@@ -225,7 +225,7 @@ class Monolith(App):
         self.add_user_settings('Coach Kevin',   '44094159', 70,80,'UndercoverBrother.png','RED')
         self.add_user_settings('Alex',          '16878715', 35,-1,'Default.png',    'PURPLE')
         self.add_user_settings('Nathan',        '16878802', 53,-1,'Default.png',    'RED')
-        self.add_user_settings('Coach Mary',    '11011011',  11,-1,'Default.png',    'RED')
+        self.add_user_settings('Coach Mary',    '17559816',  11,-1,'Default.png',    'RED')
         self.add_user_settings('Coach Jesse',   '11118802',  5,-1,'Default.png',    'RED')
         self.add_user_settings('Coach Lisa',    '88888888',  1,-1,'Default.png',    'RED')
         self.add_user_settings('Coach Paul',    '88888888',  4,-1,'Default.png',    'RED')
@@ -236,19 +236,19 @@ class Monolith(App):
         self.add_user_settings('Coach Cassie',  '12714739',  17,-1,'Default.png',    'RED')
         self.add_user_settings('Coach Brandon', '12744885',  17,-1,'Default.png',    'RED')
         self.add_user_settings('Coach Keith',   '12744873',  17,-1,'Default.png',    'RED')
-        self.add_user_settings('Juliet',        '88888888',  22,-1,'Default.png',    'PINK')
-        self.add_user_settings('Madison',       '88888888',  23,-1,'Default.png',    'RED')
-        self.add_user_settings('Sreeya',        '88888888',  25,-1,'Default.png',    'RED')
-        self.add_user_settings('Aneesh',        '88888888',  26,-1,'Default.png',    'RED')
-        self.add_user_settings('Naaisha',    '88888888',  28,-1,'Default.png',    'RED')
-        self.add_user_settings('Abraham',    '88888888',  40,-1,'Default.png',    'RED')
-        self.add_user_settings('Tejas',    '88888888',  42,-1,'Default.png',    'RED')
-        self.add_user_settings('Xavier',    '88888888',  30,-1,'Default.png',    'RED')
-        self.add_user_settings('Jared',    '88888888',  31,-1,'Default.png',    'RED')
-        self.add_user_settings('Hisham',    '88888888',  38,-1,'Default.png',    'RED')
-        self.add_user_settings('Caitlyn',    '88888888',  39,-1,'Default.png',    'RED')
-        self.add_user_settings('Manav',    '88888888',  44,-1,'Default.png',    'RED')
-        self.add_user_settings('Ada',    '88888888',  50,-1,'Default.png',    'RED')
+        self.add_user_settings('Juliet',        '1639341',  22,-1,'Default.png',    'PINK')
+        self.add_user_settings('Madison',       '1639301',  23,-1,'Default.png',    'RED')
+        self.add_user_settings('Sreeya',        '1639362',  25,-1,'Default.png',    'RED')
+        self.add_user_settings('Aneesh',        '1639360',  26,-1,'Default.png',    'RED')
+        self.add_user_settings('Naaisha',       '88888888',  28,-1,'Default.png',    'RED')
+        self.add_user_settings('Abraham',       '88888888',  40,-1,'Default.png',    'RED')
+        self.add_user_settings('Tejas',         '1639390',  42,-1,'Default.png',    'RED')
+        self.add_user_settings('Xavier',        '1639303',  30,-1,'Default.png',    'RED')
+        self.add_user_settings('Jared',         '1639339',  31,-1,'Default.png',    'RED')
+        self.add_user_settings('Hisham',        '1639371',  38,-1,'Default.png',    'RED')
+        self.add_user_settings('Caitlyn',       '1639387',  39,-1,'Default.png',    'RED')
+        self.add_user_settings('Manav',         '1639315',  44,-1,'Default.png',    'RED')
+        self.add_user_settings('Ada',           '1639326',  50,-1,'Default.png',    'RED')
 
 
     def LoadSound(self):
@@ -559,7 +559,7 @@ class Monolith(App):
                 for i in range(len(self.user_settings_df)):
                     if(str(data) == str(self.user_settings_df.loc[i,'ID'])):
                         self.CheckInScreen(self.user_settings_df.loc[i,'Name'], self.user_settings_df.loc[i,'P'], self.user_settings_df.loc[i,'S'], self.user_settings_df.loc[i,'C'], self.user_settings_df.loc[i,'ID'],self.user_settings_df.loc[i,'MPIB'])
-                        #Clock.schedule_once(partial(self.SplashScreen,self), 10)
+                        Clock.schedule_once(partial(self.SplashScreen,self), 15)
                         self.scanLock = 0
                         break
                 else:
