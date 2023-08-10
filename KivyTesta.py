@@ -130,20 +130,20 @@ class Monolith(App):
             if rdata == b"update":
                 if not(self.update_MPIB == ""):
                     response = self.update_MPIB
-                    print(str(response))
+                    #print(str(response))
                     self.update_MPIB = ""
                 else:
                     response = "No"    
                 conn.send(response.encode('utf-8'))
-                print("Received update")
+                #print("Received update")
             elif(rdata == b"refresh"):
-                print("Received refresh")
-                print("MPIB_Status: ", self.MPIB_Status)
+                #print("Received refresh")
+                #print("MPIB_Status: ", self.MPIB_Status)
                 if (self.MPIB_Status == ""):
                     response = "No"
                 else:
                     response=self.MPIB_Status
-                print("Response: ", str(response))
+                #print("Response: ", str(response))
                 conn.send(response.encode('utf-8'))
                 #self.update_MPIB = ""
         conn.close()
