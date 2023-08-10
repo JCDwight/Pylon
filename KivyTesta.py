@@ -124,9 +124,9 @@ class Monolith(App):
             data = conn.recv(1024)
             if not data:
                 break
-            print(f"Received data: {data.decode('utf-8')}")
+            #print(f"Received data: {data.decode('utf-8')}")
             rdata = data
-            print("radta: ",str(rdata))
+            #print("radta: ",str(rdata))
             if rdata == b"update":
                 if not(self.update_MPIB == ""):
                     response = self.update_MPIB
