@@ -207,7 +207,7 @@ class Monolith(App):
         self.add_user_settings('Coach Shelly',  '10497184', 16,10,'shelly.png'      ,'GOLD')
         self.add_user_settings('Evan',          '16878758', 36, 2,'EvaninFTCBox.png','RED')
         self.add_user_settings('Coach Renee',   '10497178', 0, 8,'renee.png'       ,'YELLOW')
-        self.add_user_settings('Aryan',         '12714746', 21, 4,'thisthing.png'   ,'BLUE') #16878794 old
+        self.add_user_settings('Aryan',         '16878794', 21, 4,'thisthing.png'   ,'BLUE') #16878794 old
         self.add_user_settings('Keita',         '16878838', 27,-1,'Default.png'     ,'GREEN')
         self.add_user_settings('Annabelle',     '16878841', 22,-1,'Default.png'     ,'PURPLE')
         self.add_user_settings('Austin',        '16878724', 51,-1,'Default.png'     ,'GOLD')
