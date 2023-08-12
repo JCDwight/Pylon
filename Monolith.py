@@ -199,12 +199,24 @@ def Add_Checkinorout(users_df,ID):
 def add_user_settings(user_settings_df, name, ident, MPIBID, s, p, c):
     user_settings_df = user_settings_df.append({'Name': name, 'ID': ident,'MPIB': MPIBID, 'S': s, 'P': p, 'C': c}, ignore_index=True)
 
+
+def lockScan(bool):
+    if (bool):
+        print("Locked scan")
+        return True
+    else:
+        print("Unlocked scan")
+        return False
+    scanLock = 0
+
 if __name__ == '__main__':
     #Define passable variables
     checkin_df = pd.DataFrame(columns=['ID', 'CIOT', 'CIOO'])
     user_settings_df = pd.DataFrame(columns=['Name', 'ID', 'MPIB', 'Sound', 'Picture', 'Color'])
+    scanlock = False
     #Use Checkplatform to check if we're on Linux(For production) or Windows(For testing)
     #and set parameters for each
+    
     if (CheckPlatform() == 1):
         #1 == Linux, enable serial functions
         print('Opening serial port... at 500,000 baud')
@@ -222,9 +234,11 @@ if __name__ == '__main__':
     while running:
         #Check Serial connection
         if (CheckPlatform() == 1):
-            ser_data = ReadSerial(ser)
-            if (ser_data):
-                ser_data = int(str(ser_data),2)
+            if (scanlock == False):
+                ser_data = ReadSerial(ser)
+                if (ser_data):
+                    ser_data = int(str(ser_data),2)
+                    scanlock = True
             Process_Serial_Data(ser_data)
         for event in pygame.event.get():           
             if(event.type == ID_GET):
