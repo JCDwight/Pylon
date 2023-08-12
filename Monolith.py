@@ -240,7 +240,7 @@ if __name__ == '__main__':
                     ser_data = ReadSerial(ser)
                     if (ser_data):
                         ser_data = int(str(ser_data),2)
-                        scanlock = True
+                        scanlock = False
                         Process_Serial_Data(ser_data)
         for event in pygame.event.get():           
             if(event.type == ID_GET):
