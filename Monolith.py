@@ -57,7 +57,7 @@ def PlaySound(sound):
     temp_sound.play()
 
 if __name__ == '__main__':
-    if (CheckPlatform() == 1):
+    if (CheckPlatform() == 2):
         pass
     else:
         running = True
