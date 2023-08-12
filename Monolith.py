@@ -234,12 +234,13 @@ if __name__ == '__main__':
     while running:
         #Check Serial connection
         if (CheckPlatform() == 1):
-            if (scanlock == False):
-                ser_data = ReadSerial(ser)
-                if (ser_data):
-                    ser_data = int(str(ser_data),2)
-                    scanlock = True
-                    Process_Serial_Data(ser_data)
+            if (ser.inWaiting() > 10):
+                if (scanlock == False):
+                    ser_data = ReadSerial(ser)
+                    if (ser_data):
+                        ser_data = int(str(ser_data),2)
+                        scanlock = True
+                        Process_Serial_Data(ser_data)
         for event in pygame.event.get():           
             if(event.type == ID_GET):
                 temp = event.ID_NUM
