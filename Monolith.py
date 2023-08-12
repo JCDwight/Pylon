@@ -15,7 +15,7 @@ BLACK = (0, 0, 0)
 
 # Screen dimensions
 SCREEN_WIDTH = 500
-SCREEN_HEIGHT = 500
+SCREEN_HEIGHT = 300
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Simple UI in Pygame')
