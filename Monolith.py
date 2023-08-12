@@ -236,6 +236,7 @@ if __name__ == '__main__':
         if (CheckPlatform() == 1):
             if (ser.inWaiting() > 10):
                 print(str(ser.inWaiting()))
+                time.sleep(0.1)
                 if (scanlock == False):
                     ser_data = ReadSerial(ser)
                     ser.flush()
