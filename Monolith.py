@@ -223,7 +223,8 @@ if __name__ == '__main__':
         #Check Serial connection
         if (CheckPlatform() == 1):
             ser_data = ReadSerial(ser)
-            ser_data = int(str(ser_data),2)
+            if (ser_data):
+                ser_data = int(str(ser_data),2)
             Process_Serial_Data(ser_data)
         for event in pygame.event.get():           
             if(event.type == ID_GET):
