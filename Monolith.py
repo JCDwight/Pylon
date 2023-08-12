@@ -162,7 +162,7 @@ def ReadSerial(ser):
         
 #Function to process any serial data we receive.  Should handle bad data/incomplete data
 def Process_Serial_Data(ser_data):
-    if (ser_data.len() == 8):
+    if (ser_data):
         #post a new pygame event.  Name first, then any parameters you want to pass in
         pygame.event.post(pygame.event.Event(ID_GET, ID_NUM=str(ser_data)))
 
