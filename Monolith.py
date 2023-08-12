@@ -239,7 +239,7 @@ if __name__ == '__main__':
                 if (ser_data):
                     ser_data = int(str(ser_data),2)
                     scanlock = True
-            Process_Serial_Data(ser_data)
+                    Process_Serial_Data(ser_data)
         for event in pygame.event.get():           
             if(event.type == ID_GET):
                 temp = event.ID_NUM
