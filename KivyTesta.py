@@ -164,9 +164,6 @@ class Monolith(App):
 
 
 
-
-
-
     def add_user_settings(self, name, ident, MPIBID, s, p, c):
         self.user_settings_df = self.user_settings_df.append({'Name': name, 'ID': ident,'MPIB': MPIBID, 'S': s, 'P': p, 'C': c}, ignore_index=True)
 
