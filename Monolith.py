@@ -151,7 +151,6 @@ def ReadSerial(ser):
             if (ser.inWaiting() > 0):
                 data_str = ser.read(ser.inWaiting()).decode('ascii')
                 print("______________________________________")
-                print("Data 2: ", data_str)
                 print("Data:")
                 print(int(data_str, 2))
                 print("______________________________________")
@@ -247,7 +246,7 @@ if __name__ == '__main__':
         for event in pygame.event.get():           
             if(event.type == ID_GET):
                 temp = event.ID_NUM
-                print(str(temp))
+                print('Processed event data: ',str(temp))
             elif(event.type == pygame.QUIT):
                 running = False
                 pygame.quit()
