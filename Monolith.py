@@ -238,6 +238,7 @@ if __name__ == '__main__':
                 print(str(ser.inWaiting()))
                 if (scanlock == False):
                     ser_data = ReadSerial(ser)
+                    ser.flush()
                     if (ser_data):
                         ser_data = int(str(ser_data),2)
                         scanlock = False
