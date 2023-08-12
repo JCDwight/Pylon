@@ -163,56 +163,46 @@ def ReadSerial(ser):
 def Process_Serial_Data(ser_data):
     if (ser_data):
         #post a new pygame event.  Name first, then any parameters you want to pass in
-        pygame.event.post(pygame.event.Event(ID_GET, ID_NUM=str(ser_data)))
+        pygame.event.post(pygame.event.Event(ID_GET, ID_NUM=str(ser_data),TIME_STAMP=datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y")))
 
 def Add_Checkinorout(users_df,ID):
-    ins = int(0)
-    outs = int(0)
-    inorout = 0
-    for i in range(len(users_df)):
-        if (str(users_df.loc[i,'ID']) == str(ID)):
-            if (users_df.loc[i,'CIOO'] == True):
-                ins = ins + 1
-            elif(users_df.loc[i,'CIOO'] == False):
-                outs = outs + 1
-    if ((ins == 0 and outs == 0)):
-        print("Added check-in")
-        users_df = users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': True}, ignore_index=True)            
-        inorout = int(1)
-    else:
-        if (ins > outs):
+    inorout = False
+    for i in range(len(users_df)-1, -1, -1):
+        if(users_df['CIIO'] == True):
+            inorout = False
             users_df = users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': False}, ignore_index=True)
-            print("Added check-out")
-            inorout = int(2)
-            #Clock.schedule_once(partial(self.SplashScreen,self), 5.5)
-
+            break
         else:
-            print("Added check-in")
-            #Clock.schedule_once(partial(self.SplashScreen,self), 5.5)
+            inorout = True
             users_df = users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': True}, ignore_index=True)            
-            inorout = int(1)
-    #Just_Save('checkins.csv')
+            break
+    else:
+        inorout = True
+        users_df = users_df.append({'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),'CIOO': True}, ignore_index=True)            
+
+    Just_Save('checkins2.csv')
     ser.flush()
     return inorout
+
+def Just_Save(self, path):
+    self.users_df.to_csv(path, index=False)
+
+def Just_Load(self, path):
+    try:
+        self.users_df = pd.read_csv(path)
+    except:
+        if (path == 'checkins2.csv'):
+            pass
+            #self.users_df = self.users_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':False}, ignore_index=True)
 
 def add_user_settings(user_settings_df, name, ident, MPIBID, s, p, c):
     user_settings_df = user_settings_df.append({'Name': name, 'ID': ident,'MPIB': MPIBID, 'S': s, 'P': p, 'C': c}, ignore_index=True)
 
 
-def lockScan(bool):
-    if (bool):
-        print("Locked scan")
-        return True
-    else:
-        print("Unlocked scan")
-        return False
-    scanLock = 0
-
 if __name__ == '__main__':
     #Define passable variables
     checkin_df = pd.DataFrame(columns=['ID', 'CIOT', 'CIOO'])
     user_settings_df = pd.DataFrame(columns=['Name', 'ID', 'MPIB', 'Sound', 'Picture', 'Color'])
-    scanlock = False
     #Use Checkplatform to check if we're on Linux(For production) or Windows(For testing)
     #and set parameters for each
     
@@ -230,23 +220,21 @@ if __name__ == '__main__':
     ID_GET = pygame.USEREVENT + 1
     #Set our main loop variable to true, while true the program will run forever
     running = True
+    add_Predefined_users(user_settings_df)    
     while running:
         #Check Serial connection
         if (CheckPlatform() == 1):
             if (ser.inWaiting() > 10):
                 print(str(ser.inWaiting()))
                 time.sleep(0.1)
-                if (scanlock == False):
-                    ser_data = ReadSerial(ser)
-                    ser.flush()
-                    if (ser_data):
-                        ser_data = int(str(ser_data),2)
-                        scanlock = False
-                        Process_Serial_Data(ser_data)
+                ser_data = ReadSerial(ser)
+                ser.flush()
+                if (ser_data):
+                    ser_data = int(str(ser_data),2)
+                    Process_Serial_Data(ser_data)
         for event in pygame.event.get():           
             if(event.type == ID_GET):
-                temp = event.ID_NUM
-                print('Processed event data: ',str(temp))
+                Add_Checkinorout(checkin_df,event.ID_NUM)
             elif(event.type == pygame.QUIT):
                 running = False
                 pygame.quit()
