@@ -235,7 +235,7 @@ if __name__ == '__main__':
         #Check Serial connection
         if (CheckPlatform() == 1):
             if (ser.inWaiting() > 10):
-                print(str(ser.in_waiting()))
+                print(str(ser.inWaiting()))
                 if (scanlock == False):
                     ser_data = ReadSerial(ser)
                     if (ser_data):
