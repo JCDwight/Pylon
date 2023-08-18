@@ -47,9 +47,9 @@ VIOLET = (238, 130, 238)
 WHEAT = (245, 222, 179)
 
 
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('Simple UI in Pygame')
-clock = pygame.time.Clock()
+#screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+#pygame.display.set_caption('Simple UI in Pygame')
+#clock = pygame.time.Clock()
 
 #Checks the platform the program is running on.  Returns: Linux = 1, Windows = 2, everything else is 3
 def CheckPlatform():
@@ -246,7 +246,7 @@ if __name__ == '__main__':
                 running = False
                 pygame.quit()
                 sys.exit()
-        clock.tick(60)
+        #clock.tick(60)
 
 
 
