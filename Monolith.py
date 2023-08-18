@@ -170,7 +170,7 @@ def Add_Checkinorout(checkin_df, ID):
     
     for i in range(len(checkin_df)-1, -1, -1):
         print("Got right before bug")
-        if checkin_df.at[i, 'CIIO'] == True:
+        if checkin_df.at[i, 'CIOO'] == True:
             inorout = False
             new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': False}])
         else:
