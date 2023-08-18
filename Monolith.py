@@ -165,37 +165,37 @@ def Process_Serial_Data(ser_data):
         #post a new pygame event.  Name first, then any parameters you want to pass in
         pygame.event.post(pygame.event.Event(ID_GET, ID_NUM=str(ser_data),TIME_STAMP=datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y")))
 
-def Add_Checkinorout(users_df, ID):
+def Add_Checkinorout(checkin_df, ID):
     inorout = False
     
-    for i in range(len(users_df)-1, -1, -1):
-        if users_df.at[i, 'CIIO'] == True:
+    for i in range(len(checkin_df)-1, -1, -1):
+        if checkin_df.at[i, 'CIIO'] == True:
             inorout = False
             new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': False}])
         else:
             inorout = True
             new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
         
-        users_df = pd.concat([users_df, new_data], ignore_index=True)
+        checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
         break
     else:
         inorout = True
         new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
-        users_df = pd.concat([users_df, new_data], ignore_index=True)
+        checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
     Just_Save('checkins2.csv')
     ser.flush()
-    return users_df
+    return checkin_df
 
-def Just_Save(self, path):
-    self.users_df.to_csv(path, index=False)
+def Just_Save(checkin_df, path):
+    checkin_df.to_csv(path, index=False)
 
-def Just_Load(self, path):
+def Just_Load(checkin_df, path):
     try:
-        self.users_df = pd.read_csv(path)
+        checkin_df = pd.read_csv(path)
     except:
         if (path == 'checkins2.csv'):
             pass
-            #self.users_df = self.users_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':False}, ignore_index=True)
+            #checkin_df = checkin_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':False}, ignore_index=True)
 
 def add_user_settings(user_settings_df, name, ident, MPIBID, s, p, c):
     new_data = pd.DataFrame([{'Name': name, 'ID': ident, 'MPIB': MPIBID, 'S': s, 'P': p, 'C': c}])
