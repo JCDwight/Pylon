@@ -152,7 +152,7 @@ def ReadSerial(ser):
                 data_str = ser.read(ser.inWaiting()).decode('ascii')
                 print("______________________________________")
                 print("Data:")
-                print(int(data_str, 2))
+                print(str(data_str))
                 print("______________________________________")
                 return data_str
         except UnicodeDecodeError as e:
@@ -235,8 +235,8 @@ if __name__ == '__main__':
                 ser_data = ReadSerial(ser)
                 ser.flush()
                 if (ser_data):
-                    ser_data = int(str(ser_data),2)
-                    Process_Serial_Data(ser_data)
+                    ser_data = str(ser_data)
+                    #Process_Serial_Data(ser_data)
         for event in pygame.event.get():           
             if(event.type == ID_GET):
                 checkin_df = Add_Checkinorout(checkin_df,event.ID_NUM)
