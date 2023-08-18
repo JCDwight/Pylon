@@ -225,7 +225,8 @@ if __name__ == '__main__':
     #Set our main loop variable to true, while true the program will run forever
     running = True
     checkin_df = Just_Load(checkin_df,'checkins2.csv')
-    add_Predefined_users(user_settings_df)    
+    add_Predefined_users(user_settings_df)
+    print(str(user_settings_df))
     while running:
         #Check Serial connection
         if (CheckPlatform() == 1):
@@ -237,8 +238,9 @@ if __name__ == '__main__':
                 print('Returned data', ser_data)
                 ser.flush()
                 if (ser_data):
+                    print('Got inside id(ser_data)')
                     ser_data = str(ser_data)
-                    #Process_Serial_Data(ser_data)
+                    Process_Serial_Data(ser_data)
         for event in pygame.event.get():           
             if(event.type == ID_GET):
                 checkin_df = Add_Checkinorout(checkin_df,event.ID_NUM)
