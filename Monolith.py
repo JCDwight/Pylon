@@ -199,7 +199,7 @@ def Just_Load(checkin_df, path):
             #checkin_df = checkin_df.append({'ID': "00000000", 'CIOT': "00:00:00 AM January 1, 1970", 'CIOO':False}, ignore_index=True)
 
 def add_user_settings(user_settings_df, name, ident, MPIBID, s, p, c):
-    new_data = pd.DataFrame([{'Name': name, 'ID': ident, 'MPIB': MPIBID, 'S': s, 'P': p, 'C': c}])
+    new_data = pd.DataFrame([{'Name': name, 'ID': ident, 'MPIB': MPIBID, 'Sound': s, 'Picture': p, 'Color': c}])
     user_settings_df = pd.concat([user_settings_df, new_data], ignore_index=True)
     return user_settings_df
 
