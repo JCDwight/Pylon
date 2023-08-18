@@ -229,6 +229,7 @@ if __name__ == '__main__':
     while running:
         #Check Serial connection
         if (CheckPlatform() == 1):
+            print('Bits waiting: ', str(ser.in_waiting()))
             if (ser.inWaiting() > 10):
                 print(str(ser.inWaiting()))
                 time.sleep(0.1)
