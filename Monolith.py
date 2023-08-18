@@ -164,23 +164,25 @@ def Process_Serial_Data(ser_data):
     if (ser_data):
         #post a new pygame event.  Name first, then any parameters you want to pass in
         print('Got into Process_Serial_Data')
-        pygame.event.post(pygame.event.Event(ID_GET, ID_NUM=str(ser_data),TIME_STAMP=datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y")))
+        pygame.event.post(pygame.event.Event(ID_GET, ID_NUM=ser_data,TIME_STAMP=datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y")))
 
 def Add_Checkinorout(checkin_df, ID):
     inorout = False
-    
     for i in range(len(checkin_df)-1, -1, -1):
         if checkin_df.at[i, 'CIOO'] == True:
             inorout = False
+            print(ID, ' has checked out')
             new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': False}])
         else:
             inorout = True
+            print(ID, ' has checked in')
             new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
         
         checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
         break
     else:
         inorout = True
+        print(ID, ' has checked in')
         new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
         checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
     Just_Save(checkin_df,'checkins2.csv')
