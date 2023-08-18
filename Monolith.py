@@ -123,7 +123,7 @@ def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn 
     user_settings_df = add_user_settings(user_settings_df,'Caitlyn',       '1639387',  39,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Manav',         '1639315',  44,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Ada',           '1639326',  50,-1,'Default.png',    'RED')
-
+    return user_settings_df
 
 
 #Displays text on the screen
@@ -225,7 +225,7 @@ if __name__ == '__main__':
     #Set our main loop variable to true, while true the program will run forever
     running = True
     checkin_df = Just_Load(checkin_df,'checkins2.csv')
-    add_Predefined_users(user_settings_df)
+    user_settings_df = add_Predefined_users(user_settings_df)
     print(str(user_settings_df))
     while running:
         #Check Serial connection
