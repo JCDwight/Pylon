@@ -230,7 +230,7 @@ if __name__ == '__main__':
         #Check Serial connection
         if (CheckPlatform() == 1):
             print('Bits waiting: ', str(ser.inWaiting()))
-            if (ser.inWaiting() > 10):
+            if (ser.inWaiting() > 3):
                 print(str(ser.inWaiting()))
                 time.sleep(0.1)
                 ser_data = ReadSerial(ser)
