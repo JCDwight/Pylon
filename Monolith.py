@@ -182,7 +182,7 @@ def Add_Checkinorout(checkin_df, ID):
         inorout = True
         new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
         checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
-    Just_Save('checkins2.csv')
+    Just_Save(checkin_df,'checkins2.csv')
     ser.flush()
     return checkin_df
 
