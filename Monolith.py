@@ -234,6 +234,7 @@ if __name__ == '__main__':
                 print(str(ser.inWaiting()))
                 time.sleep(0.1)
                 ser_data = ReadSerial(ser)
+                print('Returned data', ser_data)
                 ser.flush()
                 if (ser_data):
                     ser_data = str(ser_data)
