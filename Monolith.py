@@ -66,7 +66,7 @@ def PlaySound(sound):
     temp_sound.play()
 
 def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
-    user_settings_df = add_user_settings(user_settings_df,'Coach Jay',     '16819214', 7, 1,'jay.png'          ,'ORANGE')        
+    user_settings_df = add_user_settings(user_settings_df,'Coach Jay',     '44536', 7, 1,'jay.png'          ,'ORANGE')        
     user_settings_df = add_user_settings(user_settings_df,'Jackson',       '16878869', 78,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Liam',          '16878885', 32,-1,'Default.png'     ,'BLUE')
     user_settings_df = add_user_settings(user_settings_df,'Luke',          '16878745', 52,-1,'Default.png'     ,'GREEN')
