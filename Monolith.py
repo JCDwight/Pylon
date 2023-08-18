@@ -163,6 +163,7 @@ def ReadSerial(ser):
 def Process_Serial_Data(ser_data):
     if (ser_data):
         #post a new pygame event.  Name first, then any parameters you want to pass in
+        print('Got into Process_Serial_Data')
         pygame.event.post(pygame.event.Event(ID_GET, ID_NUM=str(ser_data),TIME_STAMP=datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y")))
 
 def Add_Checkinorout(checkin_df, ID):
@@ -243,6 +244,7 @@ if __name__ == '__main__':
                     Process_Serial_Data(ser_data)
         for event in pygame.event.get():           
             if(event.type == ID_GET):
+                print('Got into ID_GET cutom event')
                 checkin_df = Add_Checkinorout(checkin_df,event.ID_NUM)
             elif(event.type == pygame.QUIT):
                 running = False
