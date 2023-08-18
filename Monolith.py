@@ -193,6 +193,7 @@ def Just_Save(checkin_df, path):
 def Just_Load(checkin_df, path):
     try:
         checkin_df = pd.read_csv(path)
+        return checkin_df
     except:
         if (path == 'checkins2.csv'):
             pass
@@ -224,6 +225,7 @@ if __name__ == '__main__':
     ID_GET = pygame.USEREVENT + 1
     #Set our main loop variable to true, while true the program will run forever
     running = True
+    checkin_df = Just_Load(checkin_df,'checkins2.csv')
     add_Predefined_users(user_settings_df)    
     while running:
         #Check Serial connection
