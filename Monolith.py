@@ -67,38 +67,16 @@ def PlaySound(sound):
 
 def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
     user_settings_df = add_user_settings(user_settings_df,'Coach Jay',     '44536', 7, 1,'jay.png'          ,'ORANGE')        
-    user_settings_df = add_user_settings(user_settings_df,'Jackson',       '16878869', 78,-1,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Liam',          '16878885', 32,-1,'Default.png'     ,'BLUE')
-    user_settings_df = add_user_settings(user_settings_df,'Luke',          '16878745', 52,-1,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Ibrahim',       '16878733', 77,-1,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Ryan',          '16878705', 41,-1,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Rebagrace',     '16878861', 37,-1,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Coach Ibrahim', '16878733', 2,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Larry',   '16819201', 3,-1,'Default.png'      ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Coach Harrison','16818556', 18,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Tim',     '17506192', 6,-1,'Default.png'      ,'GREEN') #16818556 old
-    user_settings_df = add_user_settings(user_settings_df,'Cole',          '16878693', 76,-1,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Martin',        '31378636', 20, 6,'Chargedup.png'   ,'CYAN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Shelly',  '10497184', 16,10,'shelly.png'      ,'GOLD')
-    user_settings_df = add_user_settings(user_settings_df,'Evan',          '16878758', 36, 2,'EvaninFTCBox.png','RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Renee',   '10497178', 0, 8,'renee.png'       ,'YELLOW')
-    user_settings_df = add_user_settings(user_settings_df,'Aryan',         '16878794', 21, 4,'thisthing.png'   ,'BLUE') #16878794 old
-    user_settings_df = add_user_settings(user_settings_df,'Keita',         '16878838', 27,-1,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Annabelle',     '16878841', 22,-1,'Default.png'     ,'PURPLE')
-    user_settings_df = add_user_settings(user_settings_df,'Austin',        '16878724', 51,-1,'Default.png'     ,'GOLD')
-    user_settings_df = add_user_settings(user_settings_df,'Ted',           '16878757', 00,20,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Craig',   '16818550', 2, 0,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Susan',         '16858448', 00,-1,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Ty',            '10518941', 75,75,'Tytaco.png'      ,'ORANGE')    
-    user_settings_df = add_user_settings(user_settings_df,'Emma',          '16858354', 43,-1,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Vikas',         '16878849', 29,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Joe',     '10604432', 10,-1,'Default.png'     ,'PURPLE')
-    user_settings_df = add_user_settings(user_settings_df,'Megan',         '16878711', 75,-1,'Default.png'     ,'PURPLE')
-    user_settings_df = add_user_settings(user_settings_df,'Chris',         '16878807', 74,-1,'Default.png'     ,'PURPLE')
     user_settings_df = add_user_settings(user_settings_df,'Coach Robert',  '10497089', 12,-1,'Default.png'     ,'BLUE')
     user_settings_df = add_user_settings(user_settings_df,'Coach Charles', '50444699', 9,-1,'Default.png'     ,'CYAN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Kevin',   '44094159', 70,80,'UndercoverBrother.png','RED')
-    user_settings_df = add_user_settings(user_settings_df,'Alex',          '16878715', 35,-1,'Default.png',    'PURPLE')
-    user_settings_df = add_user_settings(user_settings_df,'Nathan',        '16878802', 53,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Mary',    '10497199',  11,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Jesse',   '11118802',  5,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Lisa',    '33637371',  1,-1,'Default.png',    'RED')
@@ -110,19 +88,33 @@ def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn 
     user_settings_df = add_user_settings(user_settings_df,'Coach Cassie',  '12714739',  17,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Brandon', '12744885',  17,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Keith',   '12744873',  17,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Juliet',        '1639341',  22,-1,'Default.png',    'PINK')
-    user_settings_df = add_user_settings(user_settings_df,'Madison',       '1639301',  23,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Sreeya',        '1639362',  25,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Aneesh',        '1639360',  26,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Liam',          '16878885', 32,-1,'Default.png'     ,'BLUE')
+    user_settings_df = add_user_settings(user_settings_df,'Luke',          '16878745', 52,-1,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Ryan',          '16878705', 41,-1,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Rebagrace',     '16878861', 37,-1,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Martin',        '31378636', 20, 6,'Chargedup.png'   ,'CYAN')
+    user_settings_df = add_user_settings(user_settings_df,'Evan',          '16878758', 36, 2,'EvaninFTCBox.png','RED')
+    user_settings_df = add_user_settings(user_settings_df,'Aryan',         '16878794', 21, 4,'thisthing.png'   ,'BLUE') #16878794 old
+    user_settings_df = add_user_settings(user_settings_df,'Keita',         '16878838', 27,-1,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Austin',        '16878724', 51,-1,'Default.png'     ,'GOLD')
+    user_settings_df = add_user_settings(user_settings_df,'Ted',           '16878757', 00,20,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Emma',          '16858354', 43,-1,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Vikas',         '16878849', 29,-1,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Alex',          '16878715', 35,-1,'Default.png',    'PURPLE')
+    user_settings_df = add_user_settings(user_settings_df,'Nathan',        '16878802', 53,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Juliet',        '39341',  22,-1,'Default.png',    'PINK')
+    user_settings_df = add_user_settings(user_settings_df,'Madison',       '39301',  23,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Sreeya',        '39362',  25,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Aneesh',        '39360',  26,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Naaisha',       '88888888',  28,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Abraham',       '88888888',  40,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Tejas',         '1639390',  42,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Xavier',        '1639303',  30,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Jared',         '1639339',  31,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Hisham',        '1639371',  38,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Caitlyn',       '1639387',  39,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Manav',         '1639315',  44,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Ada',           '1639326',  50,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Tejas',         '39390',  42,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Xavier',        '39303',  30,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Jared',         '39339',  31,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Hisham',        '39371',  38,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Caitlyn',       '39387',  39,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Manav',         '39315',  44,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Ada',           '39382',  50,-1,'Default.png',    'RED')
     return user_settings_df
 
 
@@ -165,7 +157,6 @@ def ReadSerial(ser):
 def Process_Serial_Data(ser_data):
     if (ser_data):
         #post a new pygame event.  Name first, then any parameters you want to pass in
-        print('Got into Process_Serial_Data')
         pygame.event.post(pygame.event.Event(ID_GET, ID_NUM=ser_data,TIME_STAMP=datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y")))
 
 def Add_Checkinorout(checkin_df, ID):
@@ -231,7 +222,6 @@ if __name__ == '__main__':
     running = True
     checkin_df = Just_Load(checkin_df,'checkins2.csv')
     user_settings_df = add_Predefined_users(user_settings_df)
-    print(str(user_settings_df))
     while running:
         #Check Serial connection
         if (CheckPlatform() == 1):
@@ -240,15 +230,12 @@ if __name__ == '__main__':
                 print(str(ser.inWaiting()))
                 time.sleep(0.1)
                 ser_data = ReadSerial(ser)
-                print('Returned data', ser_data)
                 ser.flush()
                 if (ser_data):
-                    print('Got inside id(ser_data)')
                     #ser_data = str(ser_data)
                     Process_Serial_Data(ser_data)
         for event in pygame.event.get():           
             if(event.type == ID_GET):
-                print('Got into ID_GET cutom event. ID_NUM = ', event.ID_NUM)
                 checkin_df = Add_Checkinorout(checkin_df,event.ID_NUM)
             elif(event.type == pygame.QUIT):
                 running = False
