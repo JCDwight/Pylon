@@ -154,6 +154,7 @@ def ReadSerial(ser):
                 print("Data:")
                 print(str(data_str))
                 print("______________________________________")
+                cleaned_num_str = data_str.strip("\r")
                 return data_str
         except UnicodeDecodeError as e:
             print(e)
