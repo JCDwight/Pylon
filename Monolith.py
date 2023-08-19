@@ -152,7 +152,7 @@ def ReadSerial(ser):
                 data_str = ser.read(ser.inWaiting()).decode('ascii')
                 print("______________________________________")
                 print("Data:")
-                print(str(data_str))
+                print((data_str))
                 print("______________________________________")
                 cleaned_num_str = data_str.strip("\r")
                 return cleaned_num_str
