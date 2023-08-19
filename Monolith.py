@@ -161,7 +161,7 @@ def Process_Serial_Data(ser_data,user_settings_df, screen):
     if (ser_data):
         for i in range(len(user_settings_df)):
             if(str(ser_data) == str(user_settings_df.loc[i,'ID'])):
-                CheckInScreen(screen, user_settings_df.loc[i,'Name'], user_settings_df.loc[i,'P'], user_settings_df.loc[i,'S'], user_settings_df.loc[i,'C'], user_settings_df.loc[i,'ID'],user_settings_df.loc[i,'MPIB'])
+                CheckInScreen(screen, user_settings_df.loc[i,'Name'], user_settings_df.loc[i,'Picture'], user_settings_df.loc[i,'Sound'], user_settings_df.loc[i,'Color'], user_settings_df.loc[i,'ID'],user_settings_df.loc[i,'MPIB'])
                 break
         else:
             if(str(ser_data) == ('16858422')):
