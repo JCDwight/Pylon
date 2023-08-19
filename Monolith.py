@@ -242,11 +242,11 @@ if __name__ == '__main__':
                 ser.flush()
                 if (ser_data):
                     print('Got inside id(ser_data)')
-                    ser_data = str(ser_data)
+                    #ser_data = str(ser_data)
                     Process_Serial_Data(ser_data)
         for event in pygame.event.get():           
             if(event.type == ID_GET):
-                print('Got into ID_GET cutom event')
+                print('Got into ID_GET cutom event. ID_NUM = ', event.ID_NUM)
                 checkin_df = Add_Checkinorout(checkin_df,event.ID_NUM)
             elif(event.type == pygame.QUIT):
                 running = False
