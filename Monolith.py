@@ -74,11 +74,11 @@ def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn 
     user_settings_df = add_user_settings(user_settings_df,'Coach Jay',     '44536', 7, 60,'jay.png'          ,'ORANGE')        
     user_settings_df = add_user_settings(user_settings_df,'Coach Ibrahim', '16878733', 2,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Larry',   '16819201', 21,-1,'Default.png'      ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Coach Tim',     '17506192', 52,-1,'Default.png'      ,'GREEN') #16818556 old
+    user_settings_df = add_user_settings(user_settings_df,'Coach Tim',     '6192', 52,-1,'Default.png'      ,'GREEN') #16818556 old
     user_settings_df = add_user_settings(user_settings_df,'Coach Shelly',  '10497184', 72,10,'shelly.png'      ,'GOLD')
     user_settings_df = add_user_settings(user_settings_df,'Coach Renee',   '10497178', 0, 8,'renee.png'       ,'YELLOW')
     user_settings_df = add_user_settings(user_settings_df,'Coach Craig',   '16818550', 20, 0,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Coach Joe',     '06199', 10,-1,'Default.png'     ,'PURPLE')
+    user_settings_df = add_user_settings(user_settings_df,'Coach Joe',     '6199', 10,-1,'Default.png'     ,'PURPLE')
     user_settings_df = add_user_settings(user_settings_df,'Coach Robert',  '10497089', 41,-1,'Default.png'     ,'BLUE')
     user_settings_df = add_user_settings(user_settings_df,'Coach Charles', '50444699', 22,-1,'Default.png'     ,'CYAN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Kevin',   '44094159', 79,80,'UndercoverBrother.png','RED')
@@ -100,7 +100,7 @@ def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn 
     user_settings_df = add_user_settings(user_settings_df,'Aryan',         '16878794', 9, 4,'thisthing.png'   ,'BLUE') #16878794 old
     user_settings_df = add_user_settings(user_settings_df,'Austin',        '16878724', 15,-1,'Default.png'     ,'GOLD')
     user_settings_df = add_user_settings(user_settings_df,'Caitlyn',       '39387',  16,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Emma',          '16858354', 17,-1,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Emma',          '24966', 17,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Evan',          '16878758', 18, 2,'EvaninFTCBox.png','RED')
     user_settings_df = add_user_settings(user_settings_df,'Hisham',        '39371',  19,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Jared',         '39339',  25,-1,'Default.png',    'RED')
@@ -114,7 +114,7 @@ def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn 
     user_settings_df = add_user_settings(user_settings_df,'Naaisha',       '88888888',  38,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Nathan',        '16878802', 39,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Rebagrace',     '16878861', 45,-1,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Roshan',        '88888888', 46,-1,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Roshan',        '44806', 46,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Ryan',          '16878705', 47,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Sreeya',        '39362',  48,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Tejas',         '39390',  49,-1,'Default.png',    'RED')
@@ -281,12 +281,12 @@ def handle_client(conn):
         if rdata == b"update":
             if not(update_MPIB == ""):
                 response = update_MPIB
-                #print(str(response))
+                print(str(response))
                 update_MPIB = ""
             else:
                 response = "No"    
             conn.send(response.encode('utf-8'))
-            #print("Received update")
+            print("Received update")
         elif(rdata == b"refresh"):
             pass
             #print("Received refresh")
