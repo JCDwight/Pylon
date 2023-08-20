@@ -267,7 +267,7 @@ if __name__ == '__main__':
                     Process_Serial_Data(ser_data, user_settings_df,screen)
         for event in pygame.event.get():           
             if(event.type == ID_GET):
-                checkin_df = Add_Checkinorout(screen, checkin_df,event.ID_NUM)
+                checkin_df = Add_Checkinorout(screen, checkin_df,user_settings_df,event.ID_NUM)
             elif(event.type == pygame.QUIT):
                 running = False
                 pygame.quit()
