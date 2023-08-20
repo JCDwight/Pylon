@@ -340,6 +340,11 @@ if __name__ == '__main__':
     splashimage = pygame.image.load("Images/FIRSTNewton2Logo-Instructions.png")
     update_MPIB = ""
     refresh_MPIB = ""
+
+    # Start the server in a new thread
+    server_thread = threading.Thread(target=start_server)
+    server_thread.start()
+
     while running:
         #Check Serial connection
         if (CheckPlatform() == 1):
