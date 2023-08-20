@@ -305,10 +305,10 @@ def handle_client(conn):
         rdata = data
         #print("radta: ",str(rdata))
         if rdata == b"update":
-            if (refresh_MPIB == ""):
+            if (update_MPIB == ""):
                 response = "No"
             else:
-                response=refresh_MPIB      
+                response=update_MPIB      
                 print('Sent: ', str(response))          
             conn.send(response.encode('utf-8'))
             #print("Received update")
