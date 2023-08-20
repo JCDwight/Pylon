@@ -349,7 +349,7 @@ if __name__ == '__main__':
     user_settings_df = pd.DataFrame(columns=['Name', 'ID', 'MPIB', 'Sound', 'Picture', 'Color'])
     #Use Checkplatform to check if we're on Linux(For production) or Windows(For testing)
     #and set parameters for each
-    
+    pygame.mixer.pre_init(frequency=48000, buffer=2048)
     if (CheckPlatform() == 1):
         #1 == Linux, enable serial functions
         print('Opening serial port... at 500,000 baud')
