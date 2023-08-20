@@ -105,7 +105,7 @@ def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn 
     user_settings_df = add_user_settings(user_settings_df,'Luke',          '16878745', 29,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Madison',       '39301',  35,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Manav',         '39315',  36,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Martin',        '31378636', 37, 6,'Chargedup.png'   ,'CYAN')
+    user_settings_df = add_user_settings(user_settings_df,'Martin',        '39321', 37, 6,'Chargedup.png'   ,'CYAN')
     user_settings_df = add_user_settings(user_settings_df,'Naaisha',       '88888888',  38,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Nathan',        '16878802', 39,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Rebagrace',     '16878861', 45,-1,'Default.png'     ,'GREEN')
@@ -215,7 +215,7 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
             inorout = False
             print(tempname, ' has checked out')
             new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': False}])
-            CheckInOutScreen(screen, inorout, tempname, user_settings_df.loc[i,'Picture'], user_settings_df.loc[i,'Sound'], user_settings_df.loc[i,'Color'], user_settings_df.loc[i,'ID'],user_settings_df.loc[i,'MPIB'])
+            CheckInOutScreen(screen, inorout, tempname,"","","","","")
             print('Name: ', )
         else:
             tempname = "Error"
@@ -226,7 +226,7 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
             inorout = True
             print(ID, ' has checked in')
             new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
-            CheckInOutScreen(screen, inorout, tempname, user_settings_df.loc[i,'Picture'], user_settings_df.loc[i,'Sound'], user_settings_df.loc[i,'Color'], user_settings_df.loc[i,'ID'],user_settings_df.loc[i,'MPIB'])
+            CheckInOutScreen(screen, inorout, tempname, "", "", "", "","")
         checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
         break
     else:
@@ -239,7 +239,7 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
         print(ID, ' has checked in')
         new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
         checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
-        CheckInOutScreen(screen, inorout, tempname, user_settings_df.loc[i,'Picture'], user_settings_df.loc[i,'Sound'], user_settings_df.loc[i,'Color'], user_settings_df.loc[i,'ID'],user_settings_df.loc[i,'MPIB'])
+        CheckInOutScreen(screen, inorout, tempname,"","","","","")
 
     Just_Save(checkin_df,'checkins2.csv')
     ser.flush()
