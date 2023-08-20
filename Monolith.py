@@ -136,6 +136,25 @@ def display_text(screen, text, position=(0, 0), size=36, color=(255, 255, 255), 
     text_surface = font.render(text, True, color)
     screen.blit(text_surface, position)
 
+def display_centered_text(screen, message, x, y, font_size=36, color=(255, 255, 255), font_name=None):
+    """
+    Display a message centered at (x, y) on the screen.
+
+    Parameters:
+    - message (str): The text to be displayed.
+    - x, y (int): The center coordinates where the text should be displayed.
+    - font_size (int): Size of the font to be used.
+    - color (tuple): RGB tuple for the color of the text.
+    - font_name (str, optional): Name of the font or path to the font file. If None, a default font will be used.
+    """
+    font = pygame.font.Font(font_name, font_size)  # Use None for pygame's default font
+    text_surface = font.render(message, True, color)
+    
+    # Compute the top-left corner of the text to ensure (x, y) is at the center
+    text_rect = text_surface.get_rect(center=(x, y))
+    
+    screen.blit(text_surface, text_rect)
+
 #Checks ser for nre data then returns it
 def ReadSerial(ser):
     if ser.isOpen():
@@ -157,9 +176,9 @@ def CheckInOutScreen(screen,inorout, name, imageFilePath, soundNum, color, ID, M
     screen.fill((0,0,0))
     display_text(screen,name,(100,100),72,RED,None)
     if (inorout):
-        display_text(screen,'Checked in at: ' + datetime.datetime.now().strftime("%I:%M:%S %p"),(100,200),72,RED,None)
+        display_centered_text(screen,'Checked in at: ' + datetime.datetime.now().strftime("%I:%M:%S %p"),(100,200),72,RED,None)
     else:
-        display_text(screen,'Checked out at: ' + datetime.datetime.now().strftime("%I:%M:%S %p"),(100,200),72,RED,None)
+        display_centered_text(screen,'Checked out at: ' + datetime.datetime.now().strftime("%I:%M:%S %p"),(100,200),72,RED,None)
     pygame.display.flip()    
     pass
 
