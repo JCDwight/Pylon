@@ -300,9 +300,11 @@ if __name__ == '__main__':
                     #ser_data = str(ser_data)
                     Process_Serial_Data(ser_data, user_settings_df,screen)
         elapsed_time = time.perf_counter() - idle
-        if (elapsed_time > 5):
+        if (elapsed_time > 5 and elapsed_time < 7):
             screen.fill((0,0,0))
             screen.blit(splashimage, (0, 0))
+            pygame.display.flip()
+
         for event in pygame.event.get():           
             if(event.type == ID_GET):
                 checkin_df = Add_Checkinorout(screen, checkin_df,user_settings_df,event.ID_NUM)
