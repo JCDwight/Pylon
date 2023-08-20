@@ -284,14 +284,15 @@ def handle_client(conn):
             conn.send(response.encode('utf-8'))
             #print("Received update")
         elif(rdata == b"refresh"):
+            pass
             #print("Received refresh")
             #print("MPIB_Status: ", self.MPIB_Status)
-            if (MPIB_Status == ""):
-                response = "No"
-            else:
-                response=MPIB_Status
+            #if (MPIB_Status == ""):
+            #    response = "No"
+            #else:
+            #    response=MPIB_Status
             #print("Response: ", str(response))
-            conn.send(response.encode('utf-8'))
+            #conn.send(response.encode('utf-8'))
             #self.update_MPIB = ""
     conn.close()
 
