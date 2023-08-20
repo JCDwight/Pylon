@@ -309,10 +309,12 @@ def handle_client(conn):
         if rdata == b"update":
             if(first_run == 0):
                 first_run = 1
+                print('Got in first run')
                 if (refresh_MPIB == ""):
                     response = "No"
                 else:
-                    response=refresh_MPIB                
+                    response=refresh_MPIB      
+                    print('Sent: ', str(response))          
             else:                
                 if not(update_MPIB == ""):
                     response = update_MPIB
