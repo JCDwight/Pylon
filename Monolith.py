@@ -286,7 +286,7 @@ if __name__ == '__main__':
     checkin_df = Just_Load(checkin_df,'checkins2.csv')
     user_settings_df = add_Predefined_users(user_settings_df)
     idle = time.perf_counter() - 6
-    splashimage = pygame.image.load("FIRSTNewton2Logo-Instructions.png")
+    splashimage = pygame.image.load("Images/FIRSTNewton2Logo-Instructions.png")
     while running:
         #Check Serial connection
         if (CheckPlatform() == 1):
