@@ -186,7 +186,7 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
             tempname = "Error"
             for j in range(len(user_settings_df)):
                 if(str(ID) == str(user_settings_df.loc[j,'ID'])):
-                    tempname = user_settings_df.loc[j,'ID']
+                    tempname = user_settings_df.loc[j,'Name']
                     break
 
 
@@ -200,7 +200,7 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
             inorout = True
             print(ID, ' has checked in')
             new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
-            CheckInOutScreen(screen, inorout, user_settings_df.loc[i,'Name'], user_settings_df.loc[i,'Picture'], user_settings_df.loc[i,'Sound'], user_settings_df.loc[i,'Color'], user_settings_df.loc[i,'ID'],user_settings_df.loc[i,'MPIB'])
+            CheckInOutScreen(screen, inorout, tempname, user_settings_df.loc[i,'Picture'], user_settings_df.loc[i,'Sound'], user_settings_df.loc[i,'Color'], user_settings_df.loc[i,'ID'],user_settings_df.loc[i,'MPIB'])
         checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
         break
     else:
@@ -208,7 +208,7 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
         print(ID, ' has checked in')
         new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
         checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
-        CheckInOutScreen(screen, inorout, user_settings_df.loc[i,'Name'], user_settings_df.loc[i,'Picture'], user_settings_df.loc[i,'Sound'], user_settings_df.loc[i,'Color'], user_settings_df.loc[i,'ID'],user_settings_df.loc[i,'MPIB'])
+        CheckInOutScreen(screen, inorout, tempname, user_settings_df.loc[i,'Picture'], user_settings_df.loc[i,'Sound'], user_settings_df.loc[i,'Color'], user_settings_df.loc[i,'ID'],user_settings_df.loc[i,'MPIB'])
     Just_Save(checkin_df,'checkins2.csv')
     ser.flush()
     return checkin_df
