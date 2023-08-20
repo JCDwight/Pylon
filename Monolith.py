@@ -155,6 +155,7 @@ def ReadSerial(ser):
         
 def CheckInScreen(screen, name, imageFilePath, soundNum, color, ID, MPIB):
     display_text(screen,"Test Text",(100,100),36,RED,None)
+    pygame.display.flip()    
     print('Got past display_text')
     pass    
 #Function to process any serial data we receive.  Should handle bad data/incomplete data
