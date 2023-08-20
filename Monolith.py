@@ -6,6 +6,7 @@ import serial
 import datetime
 import pandas as pd
 import socket
+import threading
 
 pygame.init()
 pygame.mixer.init()
@@ -207,6 +208,7 @@ def Process_Serial_Data(ser_data,user_settings_df, screen):
 
 
 def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
+    global update_MPIB
     inorout = False
     for i in range(len(checkin_df)-1, -1, -1):
         if checkin_df.at[i, 'CIOO'] == True:
@@ -214,6 +216,7 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
             for j in range(len(user_settings_df)):
                 if(str(ID) == str(user_settings_df.loc[j,'ID'])):
                     tempname = user_settings_df.loc[j,'Name']
+                    update_MPIB = str(user_settings_df.loc[j,'MPIB']) + ",RED"
                     break
             inorout = False
             print(tempname, ' has checked out')
@@ -225,6 +228,7 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
             for j in range(len(user_settings_df)):
                 if(str(ID) == str(user_settings_df.loc[j,'ID'])):
                     tempname = user_settings_df.loc[j,'Name']
+                    update_MPIB = str(user_settings_df.loc[j,'MPIB']) + ",GREEN"
                     break
             inorout = True
             print(ID, ' has checked in')
@@ -237,6 +241,7 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
         for j in range(len(user_settings_df)):
             if(str(ID) == str(user_settings_df.loc[j,'ID'])):
                 tempname = user_settings_df.loc[j,'Name']
+                update_MPIB = str(user_settings_df.loc[j,'MPIB']) + ",GREEN"
                 break
         inorout = True
         print(ID, ' has checked in')
@@ -248,7 +253,7 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
     ser.flush()
     return checkin_df
 
-def start_server(self,host='192.168.215.198', port=8080):
+def start_server(host='192.168.214.223', port=8080):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # This line enables port reusage:
     server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -258,8 +263,38 @@ def start_server(self,host='192.168.215.198', port=8080):
     while True:
         conn, address = server_socket.accept()
         print(f"Connection from {address}")
-        client_thread = threading.Thread(target=self.handle_client, args=(conn,))
+        client_thread = threading.Thread(target=handle_client, args=(conn,))
         client_thread.start()
+
+def handle_client(conn):
+    while True:
+        data = conn.recv(1024)
+        if not data:
+            break
+        #print(f"Received data: {data.decode('utf-8')}")
+        rdata = data
+        #print("radta: ",str(rdata))
+        if rdata == b"update":
+            if not(update_MPIB == ""):
+                response = update_MPIB
+                #print(str(response))
+                update_MPIB = ""
+            else:
+                response = "No"    
+            conn.send(response.encode('utf-8'))
+            #print("Received update")
+        elif(rdata == b"refresh"):
+            #print("Received refresh")
+            #print("MPIB_Status: ", self.MPIB_Status)
+            if (MPIB_Status == ""):
+                response = "No"
+            else:
+                response=MPIB_Status
+            #print("Response: ", str(response))
+            conn.send(response.encode('utf-8'))
+            #self.update_MPIB = ""
+    conn.close()
+
 
 def Just_Save(checkin_df, path):
     checkin_df.to_csv(path, index=False)
@@ -303,6 +338,8 @@ if __name__ == '__main__':
     user_settings_df = add_Predefined_users(user_settings_df)
     idle = time.perf_counter() - 6
     splashimage = pygame.image.load("Images/FIRSTNewton2Logo-Instructions.png")
+    update_MPIB = ""
+    refresh_MPIB = ""
     while running:
         #Check Serial connection
         if (CheckPlatform() == 1):
