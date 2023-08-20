@@ -154,7 +154,7 @@ def ReadSerial(ser):
             return "0"  
         
 def CheckInScreen(screen, name, imageFilePath, soundNum, color, ID, MPIB):
-    display_text(screen,"Test Text",(100,100),36,RED,None)
+    display_text(screen,name,(100,100),72,RED,None)
     pygame.display.flip()    
     print('Got past display_text')
     pass    
