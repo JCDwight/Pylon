@@ -15,6 +15,9 @@ pygame.mixer.init()
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 480
 
+update_MPIB = ""
+refresh_MPIB = ""
+
 # Basic Colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -315,8 +318,6 @@ def add_user_settings(user_settings_df, name, ident, MPIBID, s, p, c):
     return user_settings_df
 
 if __name__ == '__main__':
-    update_MPIB = ""
-    refresh_MPIB = ""
     #Define passable variables
     checkin_df = pd.DataFrame(columns=['ID', 'CIOT', 'CIOO'])
     user_settings_df = pd.DataFrame(columns=['Name', 'ID', 'MPIB', 'Sound', 'Picture', 'Color'])
