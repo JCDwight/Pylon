@@ -5,6 +5,7 @@ import time
 import serial
 import datetime
 import pandas as pd
+import socket
 
 pygame.init()
 pygame.mixer.init()
@@ -73,7 +74,7 @@ def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn 
     user_settings_df = add_user_settings(user_settings_df,'Coach Shelly',  '10497184', 72,10,'shelly.png'      ,'GOLD')
     user_settings_df = add_user_settings(user_settings_df,'Coach Renee',   '10497178', 0, 8,'renee.png'       ,'YELLOW')
     user_settings_df = add_user_settings(user_settings_df,'Coach Craig',   '16818550', 20, 0,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Coach Joe',     '10604432', 10,-1,'Default.png'     ,'PURPLE')
+    user_settings_df = add_user_settings(user_settings_df,'Coach Joe',     '06199', 10,-1,'Default.png'     ,'PURPLE')
     user_settings_df = add_user_settings(user_settings_df,'Coach Robert',  '10497089', 41,-1,'Default.png'     ,'BLUE')
     user_settings_df = add_user_settings(user_settings_df,'Coach Charles', '50444699', 22,-1,'Default.png'     ,'CYAN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Kevin',   '44094159', 79,80,'UndercoverBrother.png','RED')
@@ -182,6 +183,8 @@ def CheckInOutScreen(screen,inorout, name, imageFilePath, soundNum, color, ID, M
     pygame.display.flip()    
     pass
 
+
+
 #Function to process any serial data we receive.  Should handle bad data/incomplete data
 def Process_Serial_Data(ser_data,user_settings_df, screen):
     if (ser_data):
@@ -244,6 +247,19 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
     Just_Save(checkin_df,'checkins2.csv')
     ser.flush()
     return checkin_df
+
+def start_server(self,host='192.168.215.198', port=8080):
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # This line enables port reusage:
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server_socket.bind((host, port))
+    server_socket.listen(1)
+    print(f"Server started!! Listening at {host}:{port}")
+    while True:
+        conn, address = server_socket.accept()
+        print(f"Connection from {address}")
+        client_thread = threading.Thread(target=self.handle_client, args=(conn,))
+        client_thread.start()
 
 def Just_Save(checkin_df, path):
     checkin_df.to_csv(path, index=False)
