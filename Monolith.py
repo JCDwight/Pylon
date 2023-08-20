@@ -48,7 +48,7 @@ WHEAT = (245, 222, 179)
 
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('Simple UI in Pygame')
+pygame.display.set_caption('Monolith')
 clock = pygame.time.Clock()
 
 #Checks the platform the program is running on.  Returns: Linux = 1, Windows = 2, everything else is 3
