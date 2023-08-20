@@ -307,12 +307,12 @@ def handle_client(conn):
         if rdata == b"update":
             if not(update_MPIB == ""):
                 response = update_MPIB
-                print(str(response))
+                #print(str(response))
                 update_MPIB = ""
             else:
                 response = "No"    
             conn.send(response.encode('utf-8'))
-            print("Received update")
+            #print("Received update")
         elif(rdata == b"refresh"):
             pass
             print("Received refresh")
