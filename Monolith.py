@@ -157,9 +157,9 @@ def CheckInOutScreen(screen,inorout, name, imageFilePath, soundNum, color, ID, M
     screen.fill((0,0,0))
     display_text(screen,name,(100,100),72,RED,None)
     if (inorout):
-        display_text(screen,'Checked in at: ', datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),(100,200),72,RED,None)
+        display_text(screen,'Checked in at: ' + datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),(100,200),72,RED,None)
     else:
-        display_text(screen,'Checked out at: ', datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),(100,200),72,RED,None)
+        display_text(screen,'Checked out at: ' + datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),(100,200),72,RED,None)
     pygame.display.flip()    
     pass
 
