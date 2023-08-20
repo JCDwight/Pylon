@@ -47,7 +47,7 @@ VIOLET = (238, 130, 238)
 WHEAT = (245, 222, 179)
 
 
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT,pygame.FULLSCREEN))
 pygame.display.set_caption('Monolith')
 clock = pygame.time.Clock()
 
