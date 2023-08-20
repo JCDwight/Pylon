@@ -75,83 +75,63 @@ def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn 
     user_settings_df = add_user_settings(user_settings_df,'Coach Ibrahim', '16878733', 2,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Larry',   '16819201', 21,-1,'Default.png'      ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Tim',     '6192', 52,-1,'Default.png'      ,'GREEN') #16818556 old
-    user_settings_df = add_user_settings(user_settings_df,'Coach Shelly',  '10497184', 72,10,'shelly.png'      ,'GOLD')
+    user_settings_df = add_user_settings(user_settings_df,'Coach Shelly',  '59823', 72,10,'shelly.png'      ,'GOLD')
     user_settings_df = add_user_settings(user_settings_df,'Coach Renee',   '10497178', 0, 8,'renee.png'       ,'YELLOW')
     user_settings_df = add_user_settings(user_settings_df,'Coach Craig',   '44868', 20, 0,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Joe',     '6199', 10,-1,'Default.png'     ,'PURPLE')
     user_settings_df = add_user_settings(user_settings_df,'Coach Robert',  '10497089', 41,-1,'Default.png'     ,'BLUE')
-    user_settings_df = add_user_settings(user_settings_df,'Coach Charles', '50444699', 22,-1,'Default.png'     ,'CYAN')
+    user_settings_df = add_user_settings(user_settings_df,'Coach Charles', '9010', 22,-1,'Default.png'     ,'CYAN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Kevin',   '44094159', 79,80,'UndercoverBrother.png','RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Mary',    '10497199', 11,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Jesse',   '11118802', 50,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Coach Lisa',    '33637371',  1,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Coach Lisa',    '44801',  1,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Paul',    '88888888', 40,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Chris',   '16818544',  61,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Coach Sam',     '9280044',  30,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Coach Max',     '88888888',  70,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Coach Kaitlyn', '88888888',  31,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Coach Sam',     '13033',  30,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Coach Max',     '48997',  70,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Coach Kaitlyn', '39366',  31,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Cassie',  '12714739',  72,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Brandon', '12744885',  32,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Keith',   '12744873',  62,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Abraham',       '88888888',  5,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Ada',           '39382',  6,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Alex',          '16878715', 7,-1,'Default.png',    'PURPLE')
+    user_settings_df = add_user_settings(user_settings_df,'Alex',          '14786', 7,-1,'Default.png',    'PURPLE')
     user_settings_df = add_user_settings(user_settings_df,'Aneesh',        '39360',  8,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Aryan',         '16878794', 9, 4,'thisthing.png'   ,'BLUE') #16878794 old
-    user_settings_df = add_user_settings(user_settings_df,'Austin',        '16878724', 15,-1,'Default.png'     ,'GOLD')
+    user_settings_df = add_user_settings(user_settings_df,'Austin',        '14781', 15,-1,'Default.png'     ,'GOLD')
     user_settings_df = add_user_settings(user_settings_df,'Caitlyn',       '39387',  16,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Emma',          '24966', 17,-1,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Evan',          '16878758', 18, 2,'EvaninFTCBox.png','RED')
+    user_settings_df = add_user_settings(user_settings_df,'Evan',          '14764', 18, 2,'EvaninFTCBox.png','RED')
     user_settings_df = add_user_settings(user_settings_df,'Hisham',        '39371',  19,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Jared',         '39339',  25,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Juliet',        '39341',  26,-1,'Default.png',    'PINK')
-    user_settings_df = add_user_settings(user_settings_df,'Keita',         '16878838', 27,-1,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Liam',          '16878885', 28,-1,'Default.png'     ,'BLUE')
+    user_settings_df = add_user_settings(user_settings_df,'Keita',         '14724', 27,-1,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Liam',          '14701', 28,-1,'Default.png'     ,'BLUE')
     user_settings_df = add_user_settings(user_settings_df,'Luke',          '16878745', 29,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Madison',       '39301',  35,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Manav',         '39315',  36,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Martin',        '39321', 37, 6,'Chargedup.png'   ,'CYAN')
-    user_settings_df = add_user_settings(user_settings_df,'Naaisha',       '88888888',  38,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Naaisha',       '39352',  38,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Nathan',        '16878802', 39,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Rebagrace',     '16878861', 45,-1,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Rebagrace',     '14713', 45,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Roshan',        '44806', 46,-1,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Ryan',          '16878705', 47,-1,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Ryan',          '14791', 47,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Sreeya',        '39362',  48,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Tejas',         '39390',  49,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Vikas',         '16878849', 55,-1,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Vikas',         '14719', 55,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Xavier',        '39303',  56,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Kent',          '39303',  57,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Adarsh',        '39303',  58,-1,'Default.png',    'RED')
     return user_settings_df
 
 
 #Displays text on the screen
 def display_text(screen, text, position=(0, 0), size=36, color=(255, 255, 255), font_name=None):
-    """
-    Display text on the pygame screen.
-
-    Parameters:
-    - screen: The pygame surface where the text will be displayed.
-    - text: The text string to display.
-    - position: A tuple (x, y) representing the position on the screen to start displaying the text. Default is (0, 0).
-    - size: Font size. Default is 36.
-    - color: A tuple (R, G, B) representing the color of the text. Default is white.
-    - font_name: Name or path of the font to use. If None, pygame's default font will be used. Default is None.
-    """
-    
     font = pygame.font.Font(font_name, size)
     text_surface = font.render(text, True, color)
     screen.blit(text_surface, position)
 
 def display_centered_text(screen, message, position=(0, 0), font_size=36, color=(255, 255, 255), font_name=None):
-    """
-    Display a message centered at (x, y) on the screen.
-
-    Parameters:
-    - message (str): The text to be displayed.
-    - x, y (int): The center coordinates where the text should be displayed.
-    - font_size (int): Size of the font to be used.
-    - color (tuple): RGB tuple for the color of the text.
-    - font_name (str, optional): Name of the font or path to the font file. If None, a default font will be used.
-    """
     font = pygame.font.Font(font_name, font_size)  # Use None for pygame's default font
     text_surface = font.render(message, True, color)
     
@@ -159,6 +139,53 @@ def display_centered_text(screen, message, position=(0, 0), font_size=36, color=
     text_rect = text_surface.get_rect(center=position)
     
     screen.blit(text_surface, text_rect)
+
+def Set_MPIB_Status_Global(users_df,user_settings_df):
+    #print("MPIB Status at start: ", str(self.MPIB_Status))
+    tempstr = ""
+    exclude = []
+    mpib_slot = []
+    exclude.append("00000000")
+    #print(str(exclude))
+    for i in range(len(users_df),-1,-1): #Iterate backwards through scheckin DB
+        if(i > 0 and i < len(users_df) - 1):
+            flagged = False
+            for j in exclude:
+                if not(str(users_df.loc[i,'ID']) == str(j)):
+                    temp_ID = str(users_df.loc[i,'ID'])
+
+                    temploc = ""
+                    tempcolor = ""
+                    for l in range(len(user_settings_df)):#Looks through settings DB to match the ID and find the MPIB ID
+                        if (str(user_settings_df.loc[l,'ID']) == str(users_df.loc[i,'ID']) and not(flagged)):
+                            temploc = user_settings_df.loc[l,'MPIB']
+                            mpib_slot.append(temploc)
+                            for k in exclude:
+                                if (str(users_df.loc[i,'ID']) == str(k)):
+                                    break
+                            else:
+                                exclude.append(str(users_df.loc[i,'ID']))
+                                flagged = True
+                                #print("Exclude list: ", str(exclude))
+                                if (users_df.loc[i,'CIOO'] == True): #Check if in and assign color
+                                    #print("User ", str(self.users_df.loc[i,'ID']), " checked in")
+                                    #print("1CIOO = ", str(self.users_df.loc[i,'CIOO']))
+                                    tempcolor = "GREEN"
+                                elif (users_df.loc[i,'CIOO'] == False): #Check if out and assign color
+                                    #print("User ", str(self.users_df.loc[i,'ID']), " checked out")
+                                    #print("2CIOO = ", str(self.users_df.loc[i,'CIOO']))
+                                    tempcolor = "RED"
+                                tempstr = tempstr + str(temploc) + "," + str(tempcolor) + "|"
+                            break
+    #for count in range(80):
+    #    for r in mpib_slot:
+
+    MPIB_Status = str(tempstr)
+
+    if (str(MPIB_Status) == ""):
+        MPIB_Status = "0"
+    return MPIB_Status
+
 
 #Checks ser for nre data then returns it
 def ReadSerial(ser):
@@ -186,8 +213,6 @@ def CheckInOutScreen(screen,inorout, name, imageFilePath, soundNum, color, ID, M
         display_centered_text(screen,'Checked out at: ' + datetime.datetime.now().strftime("%I:%M:%S %p"),(400,200),72,RED,None)
     pygame.display.flip()    
     pass
-
-
 
 #Function to process any serial data we receive.  Should handle bad data/incomplete data
 def Process_Serial_Data(ser_data,user_settings_df, screen):
@@ -271,6 +296,7 @@ def start_server(host='192.168.214.223', port=8080):
 
 def handle_client(conn):
     global update_MPIB
+    global refresh_MPIB
     while True:
         data = conn.recv(1024)
         if not data:
@@ -289,15 +315,15 @@ def handle_client(conn):
             print("Received update")
         elif(rdata == b"refresh"):
             pass
-            #print("Received refresh")
-            #print("MPIB_Status: ", self.MPIB_Status)
-            #if (MPIB_Status == ""):
-            #    response = "No"
-            #else:
-            #    response=MPIB_Status
-            #print("Response: ", str(response))
-            #conn.send(response.encode('utf-8'))
-            #self.update_MPIB = ""
+            print("Received refresh")
+            print("MPIB_Status: ", refresh_MPIB)
+            if (refresh_MPIB == ""):
+                response = "No"
+            else:
+                response=refresh_MPIB
+            print("Response: ", str(response))
+            conn.send(response.encode('utf-8'))
+            update_MPIB = ""
     conn.close()
 
 
@@ -362,6 +388,8 @@ if __name__ == '__main__':
                     Process_Serial_Data(ser_data, user_settings_df,screen)
         elapsed_time = time.perf_counter() - idle
         if (elapsed_time > 5 and elapsed_time < 7):
+            refresh_MPIB = Set_MPIB_Status_Global(checkin_df,user_settings_df)
+            print(str(refresh_MPIB))
             screen.fill((0,0,0))
             screen.blit(splashimage, (0, 0))
             pygame.display.flip()
