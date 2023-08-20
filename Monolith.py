@@ -136,7 +136,7 @@ def display_text(screen, text, position=(0, 0), size=36, color=(255, 255, 255), 
     text_surface = font.render(text, True, color)
     screen.blit(text_surface, position)
 
-def display_centered_text(screen, message, x, y, font_size=36, color=(255, 255, 255), font_name=None):
+def display_centered_text(screen, message, position=(0, 0), font_size=36, color=(255, 255, 255), font_name=None):
     """
     Display a message centered at (x, y) on the screen.
 
@@ -151,7 +151,7 @@ def display_centered_text(screen, message, x, y, font_size=36, color=(255, 255, 
     text_surface = font.render(message, True, color)
     
     # Compute the top-left corner of the text to ensure (x, y) is at the center
-    text_rect = text_surface.get_rect(center=(x, y))
+    text_rect = text_surface.get_rect(center=position)
     
     screen.blit(text_surface, text_rect)
 
