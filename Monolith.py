@@ -17,7 +17,6 @@ SCREEN_HEIGHT = 480
 
 update_MPIB = ""
 refresh_MPIB = ""
-first_run = 0
 
 # Basic Colors
 BLACK = (0, 0, 0)
@@ -298,7 +297,6 @@ def start_server(host='192.168.214.223', port=8080):
 def handle_client(conn):
     global update_MPIB
     global refresh_MPIB
-    global first_run
     while True:
         data = conn.recv(1024)
         if not data:
@@ -307,21 +305,11 @@ def handle_client(conn):
         rdata = data
         #print("radta: ",str(rdata))
         if rdata == b"update":
-            if(first_run == 0):
-                first_run = 1
-                print('Got in first run')
-                if (refresh_MPIB == ""):
-                    response = "No"
-                else:
-                    response=refresh_MPIB      
-                    print('Sent: ', str(response))          
-            else:                
-                if not(update_MPIB == ""):
-                    response = update_MPIB
-                    #print(str(response))
-                    update_MPIB = ""
-                else:
-                    response = "No"    
+            if (refresh_MPIB == ""):
+                response = "No"
+            else:
+                response=refresh_MPIB      
+                print('Sent: ', str(response))          
             conn.send(response.encode('utf-8'))
             #print("Received update")
         elif(rdata == b"refresh"):
