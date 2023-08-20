@@ -77,7 +77,7 @@ def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn 
     user_settings_df = add_user_settings(user_settings_df,'Coach Tim',     '6192', 52,-1,'Default.png'      ,'GREEN') #16818556 old
     user_settings_df = add_user_settings(user_settings_df,'Coach Shelly',  '10497184', 72,10,'shelly.png'      ,'GOLD')
     user_settings_df = add_user_settings(user_settings_df,'Coach Renee',   '10497178', 0, 8,'renee.png'       ,'YELLOW')
-    user_settings_df = add_user_settings(user_settings_df,'Coach Craig',   '16818550', 20, 0,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Coach Craig',   '44868', 20, 0,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Joe',     '6199', 10,-1,'Default.png'     ,'PURPLE')
     user_settings_df = add_user_settings(user_settings_df,'Coach Robert',  '10497089', 41,-1,'Default.png'     ,'BLUE')
     user_settings_df = add_user_settings(user_settings_df,'Coach Charles', '50444699', 22,-1,'Default.png'     ,'CYAN')
