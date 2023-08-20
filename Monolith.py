@@ -189,7 +189,7 @@ def Process_Serial_Data(ser_data,user_settings_df, screen):
             if(str(ser_data) == str(user_settings_df.loc[i,'ID'])):
                 print('Got to before check in screen')
                 #post a new pygame event.  Name first, then any parameters you want to pass in
-                PlaySound('Audio/arpeggio-467.mp3')
+                PlaySound('Audio/Success.mp3')
                 pygame.event.post(pygame.event.Event(ID_GET, ID_NUM=ser_data,TIME_STAMP=datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y")))
                 break
         else:
@@ -199,7 +199,7 @@ def Process_Serial_Data(ser_data,user_settings_df, screen):
             elif (str(ser_data) == ('16878687')):
                 pass
             else:
-                PlaySound('Audio/i-saw-you-374.mp3')
+                PlaySound('Audio/Failure.mp3')
 
 
 
