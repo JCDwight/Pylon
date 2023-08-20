@@ -270,6 +270,7 @@ def start_server(host='192.168.214.223', port=8080):
         client_thread.start()
 
 def handle_client(conn):
+    global update_MPIB
     while True:
         data = conn.recv(1024)
         if not data:
