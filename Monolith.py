@@ -285,6 +285,8 @@ if __name__ == '__main__':
     running = True
     checkin_df = Just_Load(checkin_df,'checkins2.csv')
     user_settings_df = add_Predefined_users(user_settings_df)
+    idle = time.localtime()
+    print (str(idle))
     while running:
         #Check Serial connection
         if (CheckPlatform() == 1):
