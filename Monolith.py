@@ -308,6 +308,7 @@ if __name__ == '__main__':
         for event in pygame.event.get():           
             if(event.type == ID_GET):
                 checkin_df = Add_Checkinorout(screen, checkin_df,user_settings_df,event.ID_NUM)
+                idle = time.perf_counter()
             elif(event.type == pygame.QUIT):
                 running = False
                 pygame.quit()
