@@ -62,9 +62,9 @@ def CheckPlatform():
 
 #Loads and plays a sound via pygame mixer   
 def PlaySound(sound):
-    temp_sound = pygame.mixer.Sound(sound)
-    temp_sound.play()
-
+    #temp_sound = pygame.mixer.Sound(sound)
+    #temp_sound.play()
+    pass
 def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
     user_settings_df = add_user_settings(user_settings_df,'Coach Jay',     '44536', 7, 60,'jay.png'          ,'ORANGE')        
     user_settings_df = add_user_settings(user_settings_df,'Coach Ibrahim', '16878733', 2,-1,'Default.png'     ,'GREEN')
