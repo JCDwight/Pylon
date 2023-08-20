@@ -315,6 +315,8 @@ def add_user_settings(user_settings_df, name, ident, MPIBID, s, p, c):
     return user_settings_df
 
 if __name__ == '__main__':
+    update_MPIB = ""
+    refresh_MPIB = ""
     #Define passable variables
     checkin_df = pd.DataFrame(columns=['ID', 'CIOT', 'CIOO'])
     user_settings_df = pd.DataFrame(columns=['Name', 'ID', 'MPIB', 'Sound', 'Picture', 'Color'])
@@ -339,8 +341,6 @@ if __name__ == '__main__':
     user_settings_df = add_Predefined_users(user_settings_df)
     idle = time.perf_counter() - 6
     splashimage = pygame.image.load("Images/FIRSTNewton2Logo-Instructions.png")
-    update_MPIB = ""
-    refresh_MPIB = ""
 
     # Start the server in a new thread
     server_thread = threading.Thread(target=start_server)
