@@ -71,7 +71,7 @@ def PlaySound(sound):
     temp_sound.play()
 
 def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
-    user_settings_df = add_user_settings(user_settings_df,'Coach Jay',     '44536', 70, 60,'jay.png'          ,'ORANGE')        
+    user_settings_df = add_user_settings(user_settings_df,'Coach Jay',     '44536', 60, 60,'jay.png'          ,'ORANGE')        
     user_settings_df = add_user_settings(user_settings_df,'Coach Ibrahim', '16878733', 2,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Larry',   '16819201', 21,-1,'Default.png'      ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Tim',     '6192', 52,-1,'Default.png'      ,'GREEN') #16818556 old
@@ -88,7 +88,7 @@ def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn 
     user_settings_df = add_user_settings(user_settings_df,'Coach Paul',    '88888888', 40,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Chris',   '16818544',  61,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Sam',     '13033',  30,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Coach Max',     '48997',  70,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Coach Max',     '48997',  75,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Kaitlyn', '39366',  31,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Cassie',  '12714739',  72,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Brandon', '12744885',  32,-1,'Default.png',    'RED')
