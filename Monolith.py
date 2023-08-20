@@ -311,6 +311,7 @@ def handle_client(conn):
                 response=update_MPIB      
                 print('Sent: ', str(response))          
             conn.send(response.encode('utf-8'))
+            update_MPIB = "No"
             #print("Received update")
         elif(rdata == b"refresh"):
             pass
