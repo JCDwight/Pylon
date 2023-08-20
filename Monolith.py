@@ -153,18 +153,22 @@ def ReadSerial(ser):
             print(e)
             return "0"  
         
-def CheckInScreen(screen, name, imageFilePath, soundNum, color, ID, MPIB):
+def CheckInOutScreen(screen,inorout, name, imageFilePath, soundNum, color, ID, MPIB):
+    screen.fill((0,0,0))
     display_text(screen,name,(100,100),72,RED,None)
+    if (inorout):
+        display_text(screen,'Checked in at: ', datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),(100,200),72,RED,None)
+    else:
+        display_text(screen,'Checked out at: ', datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"),(100,200),72,RED,None)
     pygame.display.flip()    
-    print('Got past display_text')
-    pass    
+    pass
+
 #Function to process any serial data we receive.  Should handle bad data/incomplete data
 def Process_Serial_Data(ser_data,user_settings_df, screen):
     if (ser_data):
         for i in range(len(user_settings_df)):
             if(str(ser_data) == str(user_settings_df.loc[i,'ID'])):
                 print('Got to before check in screen')
-                CheckInScreen(screen, user_settings_df.loc[i,'Name'], user_settings_df.loc[i,'Picture'], user_settings_df.loc[i,'Sound'], user_settings_df.loc[i,'Color'], user_settings_df.loc[i,'ID'],user_settings_df.loc[i,'MPIB'])
                 #post a new pygame event.  Name first, then any parameters you want to pass in
                 pygame.event.post(pygame.event.Event(ID_GET, ID_NUM=ser_data,TIME_STAMP=datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y")))
                 break
@@ -175,18 +179,19 @@ def Process_Serial_Data(ser_data,user_settings_df, screen):
                 pass
 
 
-def Add_Checkinorout(checkin_df, ID):
+def Add_Checkinorout(screen, checkin_df, ID):
     inorout = False
     for i in range(len(checkin_df)-1, -1, -1):
         if checkin_df.at[i, 'CIOO'] == True:
             inorout = False
             print(ID, ' has checked out')
             new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': False}])
+            CheckInOutScreen(screen, inorout, user_settings_df.loc[i,'Name'], user_settings_df.loc[i,'Picture'], user_settings_df.loc[i,'Sound'], user_settings_df.loc[i,'Color'], user_settings_df.loc[i,'ID'],user_settings_df.loc[i,'MPIB'])
         else:
             inorout = True
             print(ID, ' has checked in')
             new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
-        
+            CheckInOutScreen(screen, inorout, user_settings_df.loc[i,'Name'], user_settings_df.loc[i,'Picture'], user_settings_df.loc[i,'Sound'], user_settings_df.loc[i,'Color'], user_settings_df.loc[i,'ID'],user_settings_df.loc[i,'MPIB'])
         checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
         break
     else:
@@ -194,6 +199,7 @@ def Add_Checkinorout(checkin_df, ID):
         print(ID, ' has checked in')
         new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
         checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
+        CheckInOutScreen(screen, inorout, user_settings_df.loc[i,'Name'], user_settings_df.loc[i,'Picture'], user_settings_df.loc[i,'Sound'], user_settings_df.loc[i,'Color'], user_settings_df.loc[i,'ID'],user_settings_df.loc[i,'MPIB'])
     Just_Save(checkin_df,'checkins2.csv')
     ser.flush()
     return checkin_df
@@ -252,7 +258,7 @@ if __name__ == '__main__':
                     Process_Serial_Data(ser_data, user_settings_df,screen)
         for event in pygame.event.get():           
             if(event.type == ID_GET):
-                checkin_df = Add_Checkinorout(checkin_df,event.ID_NUM)
+                checkin_df = Add_Checkinorout(screen, checkin_df,event.ID_NUM)
             elif(event.type == pygame.QUIT):
                 running = False
                 pygame.quit()
