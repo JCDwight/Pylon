@@ -85,7 +85,7 @@ def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn 
     user_settings_df = add_user_settings(user_settings_df,'Coach Mary',    '59816', 11,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Jesse',   '11118802', 50,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Lisa',    '44801',  1,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Coach Paul',    '88888888', 40,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Coach Paul',    '39347', 40,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Chris',   '16818544',  61,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Sam',     '13033',  30,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Max',     '48997',  70,-1,'Default.png',    'RED')
@@ -120,8 +120,8 @@ def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn 
     user_settings_df = add_user_settings(user_settings_df,'Tejas',         '39390',  49,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Vikas',         '14719', 55,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Xavier',        '39303',  56,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Kent',          '39303',  57,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Adarsh',        '39303',  58,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Kent',          '39325',  57,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Adarsh',        '39361',  58,-1,'Default.png',    'RED')
     return user_settings_df
 
 
