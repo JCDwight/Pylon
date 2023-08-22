@@ -232,6 +232,7 @@ def Process_Serial_Data(ser_data,user_settings_df, screen):
                 pass
             else:
                 #PlaySound('Audio/Fail.mp3')
+                pass
 
 
 
