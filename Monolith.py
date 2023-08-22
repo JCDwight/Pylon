@@ -367,7 +367,7 @@ if __name__ == '__main__':
     running = True
     checkin_df = Just_Load(checkin_df,'checkins2.csv')
     user_settings_df = add_Predefined_users(user_settings_df)
-    #idle = time.perf_counter() - 6
+    idle = time.perf_counter() - 6
     splashimage = pygame.image.load("Images/FIRSTNewton2Logo-Instructions.png")
 
     # Start the server in a new thread
@@ -386,23 +386,23 @@ if __name__ == '__main__':
                 if (ser_data):
                     #ser_data = str(ser_data)
                     Process_Serial_Data(ser_data, user_settings_df,screen)
-       # elapsed_time = time.perf_counter() - idle
-       # if (elapsed_time > 5 and elapsed_time < 7):
-       #     refresh_MPIB = Set_MPIB_Status_Global(checkin_df,user_settings_df)
-       #     print(str(refresh_MPIB))
-       #     screen.fill((0,0,0))
-       #     screen.blit(splashimage, (0, 0))
-       #     pygame.display.flip()
+        elapsed_time = time.perf_counter() - idle
+        if (elapsed_time > 5 and elapsed_time < 7):
+            refresh_MPIB = Set_MPIB_Status_Global(checkin_df,user_settings_df)
+            print(str(refresh_MPIB))
+            screen.fill((0,0,0))
+            screen.blit(splashimage, (0, 0))
+            pygame.display.flip()
 
         for event in pygame.event.get():           
             if(event.type == ID_GET):
                 checkin_df = Add_Checkinorout(screen, checkin_df,user_settings_df,event.ID_NUM)
-                ##idle = time.perf_counter()
+                idle = time.perf_counter()
             elif(event.type == pygame.QUIT):
                 running = False
                 pygame.quit()
                 sys.exit()
-        #clock.tick(60)
+        clock.tick(60)
 
 
 
