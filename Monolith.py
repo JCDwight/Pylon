@@ -9,7 +9,7 @@ import socket
 import threading
 
 pygame.init()
-#pygame.mixer.init()
+pygame.mixer.init()
 
 # Screen dimensions
 SCREEN_WIDTH = 800
