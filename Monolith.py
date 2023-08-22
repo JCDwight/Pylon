@@ -400,6 +400,7 @@ if __name__ == '__main__':
                 idle = time.perf_counter()
             elif(event.type == pygame.QUIT):
                 running = False
+                #
                 pygame.quit()
                 sys.exit()
         clock.tick(60)
