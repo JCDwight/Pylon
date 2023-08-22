@@ -221,7 +221,7 @@ def Process_Serial_Data(ser_data,user_settings_df, screen):
             if(str(ser_data) == str(user_settings_df.loc[i,'ID'])):
                 print('Got to before check in screen')
                 #post a new pygame event.  Name first, then any parameters you want to pass in
-                #PlaySound('Audio/Success.mp3')
+                PlaySound('Audio/Success.mp3')
                 pygame.event.post(pygame.event.Event(ID_GET, ID_NUM=ser_data,TIME_STAMP=datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y")))
                 break
         else:
@@ -231,7 +231,7 @@ def Process_Serial_Data(ser_data,user_settings_df, screen):
             elif (str(ser_data) == ('16878687')):
                 pass
             else:
-                #PlaySound('Audio/Fail.mp3')
+                PlaySound('Audio/Fail.mp3')
                 pass
 
 
@@ -376,16 +376,16 @@ if __name__ == '__main__':
 
     while running:
         #Check Serial connection
-        if (CheckPlatform() == 1):
+        #if (CheckPlatform() == 1):
             #print('Bits waiting: ', str(ser.inWaiting()))
-            if (ser.inWaiting() >= 3):
-                print(str(ser.inWaiting()))
-                time.sleep(0.1)
-                ser_data = ReadSerial(ser)
-                ser.flush()
-                if (ser_data):
-                    #ser_data = str(ser_data)
-                    Process_Serial_Data(ser_data, user_settings_df,screen)
+        if (ser.inWaiting() >= 3):
+            print(str(ser.inWaiting()))
+            time.sleep(0.1)
+            ser_data = ReadSerial(ser)
+            ser.flush()
+            if (ser_data):
+                #ser_data = str(ser_data)
+                Process_Serial_Data(ser_data, user_settings_df,screen)
         elapsed_time = time.perf_counter() - idle
         if (elapsed_time > 5 and elapsed_time < 7):
             refresh_MPIB = Set_MPIB_Status_Global(checkin_df,user_settings_df)
