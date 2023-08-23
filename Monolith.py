@@ -298,6 +298,7 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
     global update_MPIB
     inorout = False
     for i in range(len(checkin_df)-1, -1, -1):
+        print (str(checkin_df.at[i, 'ID']) + ' == ' + str(ID))
         if (checkin_df.at[i, 'ID'] == str(ID)):
             if checkin_df.at[i, 'CIOO'] == True:
                 tempname = "Error"
