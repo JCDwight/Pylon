@@ -443,7 +443,7 @@ if __name__ == '__main__':
                 #ser_data = str(ser_data)
                 Process_Serial_Data(ser_data, user_settings_df,screen)
         elapsed_time = time.perf_counter() - idle
-        if (elapsed_time > 5 and elapsed_time < 5.1):
+        if (elapsed_time > 5 and elapsed_time < 5.05):
             refresh_MPIB = Set_MPIB_Status_Global(checkin_df,user_settings_df)
             print(str(refresh_MPIB))
             screen.fill((0,0,0))
