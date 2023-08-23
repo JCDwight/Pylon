@@ -318,6 +318,7 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
                         update_MPIB = str(user_settings_df.loc[j,'MPIB']) + ",GREEN"
                         break
                 inorout = True
+                print(tempname, ' has checked in')
                 new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
                 CheckInOutScreen(screen, inorout, tempname, "", "", "", "","")
             checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
@@ -330,7 +331,7 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
                 update_MPIB = str(user_settings_df.loc[j,'MPIB']) + ",GREEN"
                 break
         inorout = True
-        print(ID, ' has checked in')
+        print(tempname, ' has checked in dallthrough')
         new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
         checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
         CheckInOutScreen(screen, inorout, tempname,"","","","","")
