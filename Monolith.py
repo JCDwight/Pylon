@@ -308,7 +308,7 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
             print(tempname, ' has checked out')
             new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': False}])
             CheckInOutScreen(screen, inorout, tempname,"","","","","")
-        else:
+        elif(checkin_df.at[i, 'CIOO'] == False):
             tempname = "Error"
             for j in range(len(user_settings_df)):
                 if(str(ID) == str(user_settings_df.loc[j,'ID'])):
