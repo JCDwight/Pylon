@@ -93,6 +93,7 @@ def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn 
     user_settings_df = add_user_settings(user_settings_df,'Coach Cassie',  '12714739',  72,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Brandon', '12744885',  32,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Coach Keith',   '12744873',  62,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Coach Kelsey',   '44508',  12,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Abraham',       '88888888',  5,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Ada',           '39382',  6,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Alex',          '14786', 7,-1,'Default.png',    'PURPLE')
@@ -112,7 +113,7 @@ def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn 
     user_settings_df = add_user_settings(user_settings_df,'Manav',         '39315',  36,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Martin',        '39321', 37, 6,'Chargedup.png'   ,'CYAN')
     user_settings_df = add_user_settings(user_settings_df,'Naaisha',       '39352',  38,-1,'Default.png',    'RED')
-    user_settings_df = add_user_settings(user_settings_df,'Nathan',        '16878802', 39,-1,'Default.png',    'RED')
+    user_settings_df = add_user_settings(user_settings_df,'Nathan',        '14742', 39,-1,'Default.png',    'RED')
     user_settings_df = add_user_settings(user_settings_df,'Rebagrace',     '14713', 45,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Roshan',        '44806', 46,-1,'Default.png'     ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Ryan',          '14791', 47,-1,'Default.png'     ,'GREEN')
@@ -297,29 +298,30 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
     global update_MPIB
     inorout = False
     for i in range(len(checkin_df)-1, -1, -1):
-        if checkin_df.at[i, 'CIOO'] == True:
-            tempname = "Error"
-            for j in range(len(user_settings_df)):
-                if(str(ID) == str(user_settings_df.loc[j,'ID'])):
-                    tempname = user_settings_df.loc[j,'Name']
-                    update_MPIB = str(user_settings_df.loc[j,'MPIB']) + ",RED"
-                    break
-            inorout = False
-            print(tempname, ' has checked out')
-            new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': False}])
-            CheckInOutScreen(screen, inorout, tempname,"","","","","")
-        elif(checkin_df.at[i, 'CIOO'] == False):
-            tempname = "Error"
-            for j in range(len(user_settings_df)):
-                if(str(ID) == str(user_settings_df.loc[j,'ID'])):
-                    tempname = user_settings_df.loc[j,'Name']
-                    update_MPIB = str(user_settings_df.loc[j,'MPIB']) + ",GREEN"
-                    break
-            inorout = True
-            new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
-            CheckInOutScreen(screen, inorout, tempname, "", "", "", "","")
-        checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
-        break
+        if (checkin_df.at[i, 'ID'] == str(ID)):
+            if checkin_df.at[i, 'CIOO'] == True:
+                tempname = "Error"
+                for j in range(len(user_settings_df)):
+                    if(str(ID) == str(user_settings_df.loc[j,'ID'])):
+                        tempname = user_settings_df.loc[j,'Name']
+                        update_MPIB = str(user_settings_df.loc[j,'MPIB']) + ",RED"
+                        break
+                inorout = False
+                print(tempname, ' has checked out')
+                new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': False}])
+                CheckInOutScreen(screen, inorout, tempname,"","","","","")
+            elif(checkin_df.at[i, 'CIOO'] == False):
+                tempname = "Error"
+                for j in range(len(user_settings_df)):
+                    if(str(ID) == str(user_settings_df.loc[j,'ID'])):
+                        tempname = user_settings_df.loc[j,'Name']
+                        update_MPIB = str(user_settings_df.loc[j,'MPIB']) + ",GREEN"
+                        break
+                inorout = True
+                new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
+                CheckInOutScreen(screen, inorout, tempname, "", "", "", "","")
+            checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
+            break
     else:
         tempname = "Error"
         for j in range(len(user_settings_df)):
