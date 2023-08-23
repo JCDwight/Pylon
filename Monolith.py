@@ -388,7 +388,7 @@ if __name__ == '__main__':
                 Process_Serial_Data(ser_data, user_settings_df,screen)
         elapsed_time = time.perf_counter() - idle
         if (elapsed_time > 5 and elapsed_time < 7):
-            refresh_MPIB = Set_MPIB_Status_Global(checkin_df,user_settings_df)
+            #refresh_MPIB = Set_MPIB_Status_Global(checkin_df,user_settings_df)
             print(str(refresh_MPIB))
             screen.fill((0,0,0))
             screen.blit(splashimage, (0, 0))
