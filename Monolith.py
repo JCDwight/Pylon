@@ -72,8 +72,8 @@ def PlaySound(sound):
 
 def add_Predefined_users(user_settings_df): #Adds pre-defined users.  Will turn this into a file once I get a new user registration screen goin
     user_settings_df = add_user_settings(user_settings_df,'Coach Jay',     '44536', 60, 60,'jay.png'          ,'ORANGE')        
-    user_settings_df = add_user_settings(user_settings_df,'Coach Ibrahim', '16878733', 2,-1,'Default.png'     ,'GREEN')
-    user_settings_df = add_user_settings(user_settings_df,'Coach Larry',   '16819201', 21,-1,'Default.png'      ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Coach Ibrahim', '39377', 2,-1,'Default.png'     ,'GREEN')
+    user_settings_df = add_user_settings(user_settings_df,'Coach Larry',   '88888888', 21,-1,'Default.png'      ,'GREEN')
     user_settings_df = add_user_settings(user_settings_df,'Coach Tim',     '6192', 52,-1,'Default.png'      ,'GREEN') #16818556 old
     user_settings_df = add_user_settings(user_settings_df,'Coach Shelly',  '59823', 72,10,'shelly.png'      ,'GOLD')
     user_settings_df = add_user_settings(user_settings_df,'Coach Renee',   '59826', 0, 8,'renee.png'       ,'YELLOW')
@@ -332,7 +332,7 @@ def Add_Checkinorout(screen, checkin_df,user_settings_df, ID):
                 update_MPIB = str(user_settings_df.loc[j,'MPIB']) + ",GREEN"
                 break
         inorout = True
-        print(tempname, ' has checked in dallthrough')
+        print(tempname, ' has checked in fallthrough')
         new_data = pd.DataFrame([{'ID': ID, 'CIOT': datetime.datetime.now().strftime("%I:%M:%S %p %B %d, %Y"), 'CIOO': True}])
         checkin_df = pd.concat([checkin_df, new_data], ignore_index=True)
         CheckInOutScreen(screen, inorout, tempname,"","","","","")
